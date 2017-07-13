@@ -1,0 +1,317 @@
+#app {
+    margin-left: 16%;
+    margin-right: 16%;
+}
+#nav {
+    left: 16%;
+    right: 16%;
+    background: white;
+}
+
+#save {
+    position: fixed;
+    top: 5px;
+    right: 16%;
+    z-index: 100;
+}
+
+.table {
+    max-width: 800px;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+    min-width: 100%;
+}
+
+tr {
+    border-bottom: 1px solid #bbb;
+}
+
+th {
+    border-top: 1px solid navy;
+    border-bottom: 1px solid navy;
+}
+
+th, td {
+            text-align: left;
+            vertical-align: top;
+            padding: 2px;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        th > a { color: white; }
+        th > input { 
+            color: black; 
+            font-weight: normal;
+            width: 100%;
+        }
+      
+        tr:hover {background-color: #f5f5f5}
+        tr:nth-child(even) {background-color: #f2f2f2
+}      
+
+
+.vue-box, .joukkuelista {
+    display: inline-block; /* vain se leveys, minkä sisältö vaatii */
+    padding: 5px;
+    border-radius: 8px;
+    border: 2px solid #bb7;
+    vertical-align: top;
+}
+
+.joukkuelista .panel-body, .joukkuelista .panel-heading, .vue-box .panel-body, .vue-box .panel-heading {
+    background: white;
+    height: 20px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    border: none;
+}
+
+.kapea-editori {
+    width: 200px;
+    display: inline;
+}
+
+.number-input {
+    font-size: smaller;
+    width: 55px;
+}
+
+@media screen and (max-width: 800px){
+    #app {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    #nav {
+        left: 5px;
+        right: 5px;
+    }
+
+    .nav>li>a {
+        font-size: small;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    #save {
+        right: 5px;
+    }
+}
+
+.match {
+    margin: 2px;
+}
+
+.double-booking {
+    padding: 7px;
+    margin-bottom: 7px; 
+    border: 2px solid red;
+    border-radius: 8px;
+}
+
+.referee-label {
+    cursor: pointer;
+    background: red;
+    color: white;
+    padding: 2px;
+    border-radius: 4px;
+    margin-right: 5px;
+}
+
+.referee-list-label {
+    cursor: pointer;
+    background: #7f7;
+    color: black;
+    padding: 2px;
+    border-radius: 4px;
+    margin-right: 5px;
+}
+
+.lohko-label {
+    cursor: pointer;
+    background: #f7f7f7;
+    padding: 2px;
+    border-radius: 4px;
+    margin-right: 5px;
+}
+.pelipaikka-label {
+    cursor: pointer;
+    background: #f3fff3;
+    padding: 2px;
+    border-radius: 4px;
+    margin-right: 5px;
+}
+.ajankohta-label {
+    background: #fff3ff;
+    padding: 2px;
+    border-radius: 4px;
+    margin-right: 5px;
+}
+.sarja-label {
+    cursor: pointer;
+    background: lightgray;
+    color: black;
+    padding: 2px;
+    border-radius: 4px;
+    margin-right: 5px;
+}
+.workload-label {
+    cursor: pointer;
+    background: lightgray;
+    color: black;
+    padding: 2px;
+    border-radius: 3px;
+    margin-right: 1px;
+    min-width: 21px;
+    font-size: 9pt;
+}
+
+.checkbox-label {
+    cursor: pointer;
+    background: #ddd;
+    color: black;
+    border-radius: 3px;
+    margin: 1px;
+    min-width: 21px;
+    font-size: 10pt;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 9px;
+    padding-right: 9px;
+    border: 1px solid #aaa;    
+}
+
+.workload-month {
+    border-left: 2px solid black;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.ML {
+    background: yellow;
+    color: black;
+}
+.NL {
+    background: black;
+    color: white;
+}
+.N1 {
+    background: red;
+    color: white;
+}
+.M1 {
+    background: blue;
+    color: white;
+}
+.N2 {
+    background: #f99;
+    color: white;
+}
+.M2 {
+    background: #99f;
+    color: white;
+}
+.M3 {
+    background: #aaf;
+    color: white;
+}
+
+#overlay { 
+    z-index: 800; 
+    position: fixed;
+    top: 0px; 
+    left: 0px; 
+    height: 100%; 
+    width: 100%; 
+    background: #555; 
+    opacity: 0.5;    
+}
+
+.match_popup {
+    font-size: 14px;
+    position: absolute;
+    z-index: 999; 
+    background: #fff; 
+    border: 2px solid #383; 
+    padding: 20px; 
+    display: none;
+    color: black;
+}
+
+.played {
+    background: #faa;
+}
+
+.match_label_highlight {
+    border: 3px double #a3a;
+    padding: 3px;
+}
+
+.box {
+    white-space: nowrap;
+    display: inline-block !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.monthActive {
+    color: white;
+}
+
+.monthInactive {
+    color: #ddd;
+    font-weight: normal;
+    font-size: 9pt;
+}
+
+/* *************  Button  *************** */
+
+.myButton {
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf));
+	background:-moz-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+	background:-webkit-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+	background:-o-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+	background:-ms-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+	background:linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf',GradientType=0);
+	background-color:#ededed;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#444;
+	font-family:Arial;
+	font-size:14px;
+	padding:6px 24px;
+	text-decoration:none;
+    margin-top: 2px;
+}
+.myButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed));
+	background:-moz-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+	background:-webkit-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+	background:-o-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+	background:-ms-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+	background:linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed',GradientType=0);
+	background-color:#dfdfdf;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+.myInput {
+    border: 1px solid #dcdcdc;
+    border-radius: 6px;
+    width: 60px;
+    padding: 4px 8px;
+}

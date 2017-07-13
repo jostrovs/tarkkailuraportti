@@ -1,0 +1,77 @@
+<!doctype html>
+
+<html lang="fi">
+
+<head>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Tarkkailuraportit</title>
+    <meta name="description" content="Tarkkailuraportit">
+    <meta name="author" content="Jori Ostrovskij">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/jquery-3.1.1.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/moment.js"></script>
+    <script src="js/lockr.js"></script>
+    <script src="js/vue-components.js"></script>
+    <script src="js/script.js"></script>
+</head>
+
+<body>
+    <div onclick="$('#loader').hide();" style="display: none; padding: 40px; font-size: 20px; height:80%; position: fixed; top: 10%; left: 10%; width: 80%; 
+                                               background: linear-gradient(to top, #fefcea 0%,#efdd69 100%); 
+                                               border: 3px solid #a00;" id="loader">
+        Ladataan tietoja...
+    </div>
+    
+    <div id="app">
+        <ul id="navbar" class="nav nav-tabs">
+			<li class="active"><a data-toggle="tab" href="#etusivu">Etusivu</a>  </li>
+			<li>
+                <a data-toggle="tab" href="#sivu1">
+                    Sivu 1
+                </a>
+            </li>
+			<li>
+                <a data-toggle="tab" href="#sivu2">
+                    Sivu2
+                </a>
+            </li>
+		</ul>
+
+		<div class="tab-content">
+			<div id="etusivu" class="tab-pane fade in active">
+                <h1>Tarkkailuraportti</h1>
+
+                <h3>Tuomarit</h3>
+                <p v-for="tuomari in tuomarit">Tuomari: {{tuomari.etunimi}} {{tuomari.sukunimi}}, id: {{tuomari.id}}</p>
+
+                <h3>Aiheet</h3>
+                <p v-for="aihe in aiheet">{{aihe.no}} {{aihe.nimi}}, id: {{aihe.id}}</p>
+
+                <h3>Raportit</h3>
+                <p v-for="raportti in raportit">Id: {{raportti.id}}  {{raportti.pvm}} {{raportti.koti}}-{{raportti.vieras}} @{{raportti.paikka}}, pt: {{raportti.pt_id}}, vt: {{raportti.vt_id}}, tark: {{raportti.tark_id}}</p>
+
+                <h3>Rivit</h3>
+                <p v-for="rivi in rivit">Id: {{rivi.id}}  raportti: {{rivi.raportti_id}}  aihe: {{rivi.aihe_id}} arvosana: {{rivi.arvosana}}  huom: {{rivi.huom}}</p>
+			</div>
+			<div id="sivu1" class="tab-pane fade">
+                <h1>Sivu 1</h1>
+
+			</div>
+			<div id="sivu2" class="tab-pane fade">
+                <h1>Sivu 2</h1>
+			</div>
+        </div>        
+
+    </div>
+</body>
+
+</html>

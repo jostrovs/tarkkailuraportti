@@ -23,7 +23,7 @@ switch($cmd){
         $sql = "SELECT * FROM raportti";
         break;
     case API_HAE_RIVIT:
-        $sql = "SELECT * FROM rivi";
+        $sql = "SELECT * FROM rivi r JOIN aihe a ON r.aihe_id = a.id";
         break;
     case API_HAE_AIHEET:
         $sql = "SELECT * FROM aihe";

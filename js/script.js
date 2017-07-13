@@ -39,6 +39,9 @@ class Rivi {
         this.arvosana = data_item.arvosana;
         this.huom = data_item.huom;
         this.raportti_id = data_item.raportti_id;
+
+        this.aihe_nimi = data_item.nimi;
+        this.aihe_no = data_item.no;
     }
 }
 
@@ -77,6 +80,8 @@ $(document).ready(function () {
             aiheet: [],
             rivit: [],
             raportit: [],
+
+            selectedReport: null,
         },
         
         created: function () {
@@ -127,6 +132,15 @@ $(document).ready(function () {
                     }
                 })
             },
+
+            reportSelected: function(){
+                if(this.selectedReport == undefined) return;
+                alert("Valittu raportti: " + this.selectedReport);
+            },
+
+            testcb: function(a){
+                alert(a);
+            }
         }
     });
 });

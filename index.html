@@ -50,6 +50,22 @@
 			<div id="etusivu" class="tab-pane fade in active">
                 <h1>Tarkkailuraportti</h1>
 
+                <select v-model="selectedReport" @change="reportSelected()">
+                    <option disabled value="0">Valitse raportti</option>
+                    <option v-for="raportti in raportit" :value="raportti.id">{{raportti.koti}}-{{raportti.vieras}}</option>
+                </select>
+
+                Valittu: {{selectedReport}}
+
+			</div>
+			<div id="sivu1" class="tab-pane fade">
+                <h1>Uusi raportti</h1>
+
+                <vue-rivi v-for="rivi in rivit" :rivi="rivi"></vue-rivi> 
+
+			</div>
+			<div id="sivu2" class="tab-pane fade">
+                <h1>Sivu 2</h1>
                 <h3>Tuomarit</h3>
                 <p v-for="tuomari in tuomarit">Tuomari: {{tuomari.etunimi}} {{tuomari.sukunimi}}, id: {{tuomari.id}}</p>
 
@@ -60,14 +76,7 @@
                 <p v-for="raportti in raportit">Id: {{raportti.id}}  {{raportti.pvm}} {{raportti.koti}}-{{raportti.vieras}} @{{raportti.paikka}}, pt: {{raportti.pt_id}}, vt: {{raportti.vt_id}}, tark: {{raportti.tark_id}}</p>
 
                 <h3>Rivit</h3>
-                <p v-for="rivi in rivit">Id: {{rivi.id}}  raportti: {{rivi.raportti_id}}  aihe: {{rivi.aihe_id}} arvosana: {{rivi.arvosana}}  huom: {{rivi.huom}}</p>
-			</div>
-			<div id="sivu1" class="tab-pane fade">
-                <h1>Sivu 1</h1>
-
-			</div>
-			<div id="sivu2" class="tab-pane fade">
-                <h1>Sivu 2</h1>
+                <p v-for="rivi in rivit">Id: {{rivi.id}}  raportti: {{rivi.raportti_id}}  aihe: {{rivi.aihe_nimi}}   arvosana: {{rivi.arvosana}}  huom: {{rivi.huom}}</p>
 			</div>
         </div>        
 

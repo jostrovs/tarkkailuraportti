@@ -26,5 +26,17 @@ Vue.component('vue-rivi', {
                         this.valittu = val;
                     }
                 },
+                created: function(){
+                    let self=this;
+                    setTimeout(function(){
+                        let $radios = $(`input[name=${self.radioname}]`);
+                        let radios = $.makeArray($radios);
+                        for(let radio of radios){
+                            if(radio.value == self.initialRivi.arvosana){
+                                $(radio).prop("checked", true);
+                            }
+                        }
+                    }, 0);
+                }
 });
 

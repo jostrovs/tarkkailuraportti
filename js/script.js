@@ -3,6 +3,7 @@ const API_HAE_TUOMARIT = 1;
 const API_HAE_RAPORTIT = 2;
 const API_HAE_RIVIT = 3;
 const API_HAE_AIHEET = 4;
+const API_HAE_RAPORTIN_RIVIT = 5;
 
 class Referee {
       constructor(torneoReferee){
@@ -47,22 +48,56 @@ class Rivi {
 
 class Raportti {
     constructor(data_item){
-        this.id = data_item.id;
-        this.koti = data_item.koti;
-        this.vieras = data_item.vieras;
-        this.paikka = data_item.paikka;
-        this.pvm = data_item.pvm;
-        this.pt_id = data_item.pt_id;
-        this.vt_id = data_item.vt_id;
-        this.tark_id = data_item.tark_id;
+        if(data_item != null){
+            this.id = data_item.id;
+            this.koti = data_item.koti;
+            this.vieras = data_item.vieras;
+            this.paikka = data_item.paikka;
+            this.pvm = data_item.pvm;
+            
+            this.pt_id = data_item.pt_id;
+            this.pt_nimi = `${data_item.pt_etunimi} ${data_item.pt_sukunimi}`;
+
+            this.vt_id = data_item.vt_id;
+            this.vt_nimi = `${data_item.vt_etunimi} ${data_item.vt_sukunimi}`;
+
+            this.tark_id = data_item.tark_id;
+            this.tark_nimi = `${data_item.tark_etunimi} ${data_item.tark_sukunimi}`;
+        } else {
+            this.id = "0";
+            this.koti = "";
+            this.vieras = "";
+            this.paikka = "";
+            this.pvm = "";
+            
+            this.pt_id = "0";
+            this.pt_nimi = "";
+
+            this.vt_id = "0";
+            this.vt_nimi = '';
+
+            this.tark_id = "0";
+            this.tark_nimi = '';
+        }
+        this.rivit = [];
+    }
+
+    getRivit(){
+        let self = this;
+        getData(API_HAE_RAPORTIN_RIVIT, function(data){
+            self.rivit = [];
+            for(let rivi of data.data){
+                self.rivit.push(new Rivi(rivi));
+            }
+        }, self.id);
     }
 }
 
-var getData = function(cmd, callback) {
+var getData = function(cmd, callback, arg1) {
     $.ajax({
         dataType: 'json',
         url: './../api/getData.php',
-        data: {cmd:cmd}
+        data: {cmd:cmd, arg1:arg1}
     }).done(function(data){
         if(callback != undefined){
             callback(data);
@@ -82,6 +117,7 @@ $(document).ready(function () {
             raportit: [],
 
             selectedReport: null,
+            raportti: new Raportti(),
         },
         
         created: function () {
@@ -135,7 +171,13 @@ $(document).ready(function () {
 
             reportSelected: function(){
                 if(this.selectedReport == undefined) return;
-                alert("Valittu raportti: " + this.selectedReport);
+                
+                for(let raportti of this.raportit){
+                    if(raportti.id == this.selectedReport){
+                        this.raportti = raportti;
+                        this.raportti.getRivit();
+                    }
+                }
             },
 
             testcb: function(a){

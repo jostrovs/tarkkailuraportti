@@ -59,9 +59,11 @@
 
 			</div>
 			<div id="sivu1" class="tab-pane fade">
-                <h1>Uusi raportti</h1>
+                <h1>Uusi/valittu raportti</h1>
 
-                <vue-rivi v-for="rivi in rivit" :rivi="rivi"></vue-rivi> 
+                <p>Id: {{raportti.id}}</p>
+
+                <vue-rivi v-for="rivi in raportti.rivit" :rivi="rivi"></vue-rivi> 
 
 			</div>
 			<div id="sivu2" class="tab-pane fade">
@@ -73,7 +75,7 @@
                 <p v-for="aihe in aiheet">{{aihe.no}} {{aihe.nimi}}, id: {{aihe.id}}</p>
 
                 <h3>Raportit</h3>
-                <p v-for="raportti in raportit">Id: {{raportti.id}}  {{raportti.pvm}} {{raportti.koti}}-{{raportti.vieras}} @{{raportti.paikka}}, pt: {{raportti.pt_id}}, vt: {{raportti.vt_id}}, tark: {{raportti.tark_id}}</p>
+                <p v-for="raportti in raportit">Id: {{raportti.id}}  {{raportti.pvm}} {{raportti.koti}}-{{raportti.vieras}} @{{raportti.paikka}}, pt: {{raportti.pt_nimi}}, vt: {{raportti.vt_nimi}}, tark: {{raportti.tark_nimi}}</p>
 
                 <h3>Rivit</h3>
                 <p v-for="rivi in rivit">Id: {{rivi.id}}  raportti: {{rivi.raportti_id}}  aihe: {{rivi.aihe_nimi}}   arvosana: {{rivi.arvosana}}  huom: {{rivi.huom}}</p>

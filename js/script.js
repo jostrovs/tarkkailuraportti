@@ -220,18 +220,22 @@ $(document).ready(function () {
                     vt_id: self.uusi_raportti.vt_id,
                     tark_id: self.uusi_raportti.tark_id,
 
+                    aihe_1_id: self.uusi_raportti.rivit[0].aihe_id,
                     aihe_1_arvosana: self.uusi_raportti.rivit[0].arvosana,
+
+                    aihe_2_id: self.uusi_raportti.rivit[1].aihe_id,
                     aihe_2_arvosana: self.uusi_raportti.rivit[1].arvosana,
                 };
                 $.ajax({
                     type: "POST",
                     dataType: 'json',
-                    url: './../api/setData.php',
+                    //url: './../api/setData.php',
+                    url: './../api/insertReport.php',
                     data: {data: JSON.stringify(formdata)},
-                })
-                .done(function(data){
-                    self.postResponse = data;
                 });
+                // .done(function(data){
+                //     self.postResponse = data;
+                // });
             }
         }
     });

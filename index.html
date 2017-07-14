@@ -94,7 +94,7 @@
 
                 <form id="formi" action="javascript:0" @submit="postData()">
                     <h3>Ottelu:</h3>
-                    <p> Pvm: <input type="datetime" required v-model="uusi_raportti.pvm"><br>
+                    <p> Pvm: <input type="datetime-local" required v-model="uusi_raportti.pvm"><br>
                         Paikka: <input type="text" required v-model="uusi_raportti.paikka"><br>
                         Ottelu: <input type="text" required v-model="uusi_raportti.koti">-<input required type="text" v-model="uusi_raportti.vieras">
                     </p>

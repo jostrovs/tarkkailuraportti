@@ -36,7 +36,7 @@ Vue.component('vue-rivi', {
                                 $(radio).prop("checked", true);
                             }
                         }
-                    }, 0);
+                    }, 10);
                 }
 });
 

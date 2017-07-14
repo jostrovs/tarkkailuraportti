@@ -36,7 +36,12 @@
 			<li class="active"><a data-toggle="tab" href="#etusivu">Etusivu</a>  </li>
 			<li>
                 <a data-toggle="tab" href="#sivu1">
-                    Sivu 1
+                    Sivu1
+                </a>
+            </li>
+			<li>
+                <a data-toggle="tab" href="#uusi">
+                    Uusi
                 </a>
             </li>
 			<li>
@@ -50,20 +55,81 @@
 			<div id="etusivu" class="tab-pane fade in active">
                 <h1>Tarkkailuraportti</h1>
 
+                <div>
+                    <button @click="newReport()" class="btn">Uusi raportti</button>
+                </div>
+
                 <select v-model="selectedReport" @change="reportSelected()">
-                    <option disabled value="0">Valitse raportti</option>
+                    <option disabled value="-1">Valitse raportti</option>
                     <option v-for="raportti in raportit" :value="raportti.id">{{raportti.koti}}-{{raportti.vieras}}</option>
                 </select>
 
                 Valittu: {{selectedReport}}
 
+
+                <div v-if="parseInt(selectedReport,10) > 0">
+                    <hr>
+                    <h1>Valittu raportti</h1> Id: {{raportti.id}}
+                    
+                    <h3>Ottelu:</h3>
+                    <p>Pvm: {{raportti.pvm}}<br>
+                       Paikka: {{raportti.paikka}}<br>
+                       Ottelu: {{raportti.koti}}-{{raportti.vieras}}
+                    </p>
+
+                    <h3>Tuomarit:</h3>
+                    <p>PT: {{raportti.pt_nimi}}<br>
+                    VT: {{raportti.vt_nimi}}<br>
+                    Tarkkailija: {{raportti.tark_nimi}}</p>
+
+                    <h3>Arvostelukohdat:</h3>
+                    <vue-rivi v-for="rivi in raportti.rivit" :rivi="rivi"></vue-rivi> 
+                    
+                </div>
+
+                
 			</div>
 			<div id="sivu1" class="tab-pane fade">
-                <h1>Uusi/valittu raportti</h1>
+                <h1>Sivu 1</h1>
 
-                <p>Id: {{raportti.id}}</p>
+			</div>
+			<div id="uusi" class="tab-pane fade">
+                <h1>Uusi raportti</h1>
 
-                <vue-rivi v-for="rivi in raportti.rivit" :rivi="rivi"></vue-rivi> 
+                <h3>Ottelu:</h3>
+                <p> Pvm: <input type="datetime" v-model="uusi_raportti.pvm"><br>
+                    Paikka: <input type="text" v-model="uusi_raportti.paikka"><br>
+                    Ottelu: <input type="text" v-model="uusi_raportti.koti">-<input type="text" v-model="uusi_raportti.vieras">
+                </p>
+
+                <h3>Tuomarit:</h3>
+                <p>PT:
+                    <select v-model="uusi_raportti.pt_id">
+                        <option disabled value="-1">Valitse PT</option>
+                        <option v-for="tuomari in tuomarit" :value="tuomari.id">{{tuomari.etunimi}} {{tuomari.sukunimi}}</option>
+                    </select>
+                    Valittu: {{uusi_raportti.pt_id}}
+                    <br>
+                   
+                   VT:
+                    <select v-model="uusi_raportti.pt_id">
+                        <option disabled value="-1">Valitse VT</option>
+                        <option v-for="tuomari in tuomarit" :value="tuomari.id">{{tuomari.etunimi}} {{tuomari.sukunimi}}</option>
+                    </select>
+                    Valittu: {{uusi_raportti.vt_id}}
+                    <br>
+
+                    Tarkkailija:
+                    <select v-model="uusi_raportti.pt_id">
+                        <option disabled value="-1">Valitse Tarkkailija</option>
+                        <option v-for="tuomari in tuomarit" :value="tuomari.id">{{tuomari.etunimi}} {{tuomari.sukunimi}}</option>
+                    </select>
+                    Valittu: {{uusi_raportti.vt_id}}
+                    
+                </p>
+
+                <h3>Arvostelukohdat:</h3>
+                <vue-rivi v-for="rivi in uusi_raportti.rivit" :rivi="rivi"></vue-rivi> 
 
 			</div>
 			<div id="sivu2" class="tab-pane fade">

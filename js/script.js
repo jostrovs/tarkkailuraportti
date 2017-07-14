@@ -35,14 +35,25 @@ class Aihe {
 
 class Rivi {
     constructor(data_item){
-        this.id = data_item.id;
-        this.aihe_id = data_item.aihe_id;
-        this.arvosana = data_item.arvosana;
-        this.huom = data_item.huom;
-        this.raportti_id = data_item.raportti_id;
+        if(data_item != null){
+            this.id = data_item.id;
+            this.aihe_id = data_item.aihe_id;
+            this.arvosana = data_item.arvosana;
+            this.huom = data_item.huom;
+            this.raportti_id = data_item.raportti_id;
 
-        this.aihe_nimi = data_item.nimi;
-        this.aihe_no = data_item.no;
+            this.aihe_nimi = data_item.nimi;
+            this.aihe_no = data_item.no;
+        } else {
+            this.id = 0;
+            this.aihe_id = data_item.aihe_id;
+            this.arvosana = data_item.arvosana;
+            this.huom = data_item.huom;
+            this.raportti_id = data_item.raportti_id;
+
+            this.aihe_nimi = data_item.nimi;
+            this.aihe_no = data_item.no;
+        }
     }
 }
 
@@ -65,10 +76,10 @@ class Raportti {
             this.tark_nimi = `${data_item.tark_etunimi} ${data_item.tark_sukunimi}`;
         } else {
             this.id = "0";
-            this.koti = "";
-            this.vieras = "";
-            this.paikka = "";
-            this.pvm = "";
+            this.koti = "koti";
+            this.vieras = "vieras";
+            this.paikka = "ottelupaikka";
+            this.pvm = "pvm";
             
             this.pt_id = "0";
             this.pt_nimi = "";
@@ -118,6 +129,7 @@ $(document).ready(function () {
 
             selectedReport: null,
             raportti: new Raportti(),
+            uusi_raportti: new Raportti(),
         },
         
         created: function () {
@@ -125,6 +137,7 @@ $(document).ready(function () {
             this.loadAiheet();
             this.loadRivit();
             this.loadRaportit();
+            this.newReport();
         },
         computed: {
         },
@@ -146,6 +159,7 @@ $(document).ready(function () {
                     for(let aihe of data.data){
                         self.aiheet.push(new Aihe(aihe));
                     }
+                    self.newReport();
                 })
             },
 
@@ -180,8 +194,16 @@ $(document).ready(function () {
                 }
             },
 
-            testcb: function(a){
-                alert(a);
+            newReport: function(){
+                this.uusi_raportti = new Raportti();
+                this.uusi_raportti.rivit = [];
+                
+                for(let aihe of this.aiheet){
+                    this.uusi_raportti.rivit.push(new Rivi({
+                        aihe_id: aihe.id,
+                        nimi: aihe.nimi
+                    }))
+                }
             }
         }
     });

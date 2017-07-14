@@ -2,11 +2,11 @@ Vue.component('vue-rivi', {
                 template: `
                     <div class="form-group">
                         <label>{{initialRivi.aihe_nimi}}</label>
-                        <label class="radio-inline"><input @change="onInput()" type="radio" :name="radioname" value="1">1</label>
-                        <label class="radio-inline"><input @change="onInput()" type="radio" :name="radioname" value="2">2</label>
-                        <label class="radio-inline"><input @change="onInput()" type="radio" :name="radioname" value="3">3</label>
-                        <label class="radio-inline"><input @change="onInput()" type="radio" :name="radioname" value="4">4</label>
-                        <label class="radio-inline"><input @change="onInput()" type="radio" :name="radioname" value="5">5</label>
+                        <label class="radio-inline"><input @change="onInput()" required type="radio" :name="radioname" value="1">1</label>
+                        <label class="radio-inline"><input @change="onInput()" required type="radio" :name="radioname" value="2">2</label>
+                        <label class="radio-inline"><input @change="onInput()" required type="radio" :name="radioname" value="3">3</label>
+                        <label class="radio-inline"><input @change="onInput()" required type="radio" :name="radioname" value="4">4</label>
+                        <label class="radio-inline"><input @change="onInput()" required type="radio" :name="radioname" value="5">5</label>
                         valittu: {{valittu}}
                     </div>
                 `,

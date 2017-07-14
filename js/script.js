@@ -130,6 +130,8 @@ $(document).ready(function () {
             selectedReport: null,
             raportti: new Raportti(),
             uusi_raportti: new Raportti(),
+
+            postResponse: "Tänne tulee response",
         },
         
         created: function () {
@@ -201,9 +203,35 @@ $(document).ready(function () {
                 for(let aihe of this.aiheet){
                     this.uusi_raportti.rivit.push(new Rivi({
                         aihe_id: aihe.id,
-                        nimi: aihe.nimi
+                        nimi: aihe.nimi,
+                        no: aihe.no,
                     }))
                 }
+            },
+
+            postData: function(){
+                let self = this;
+                let formdata= {
+                    pvm: self.uusi_raportti.pvm,
+                    paikka: self.uusi_raportti.paikka,
+                    koti: self.uusi_raportti.koti,
+                    vieras: self.uusi_raportti.vieras,
+                    pt_id: self.uusi_raportti.pt_id,
+                    vt_id: self.uusi_raportti.vt_id,
+                    tark_id: self.uusi_raportti.tark_id,
+
+                    aihe_1_arvosana: self.uusi_raportti.rivit[0].arvosana,
+                    aihe_2_arvosana: self.uusi_raportti.rivit[1].arvosana,
+                };
+                $.ajax({
+                    type: "POST",
+                    dataType: 'json',
+                    url: './../api/setData.php',
+                    data: {data: JSON.stringify(formdata)},
+                })
+                .done(function(data){
+                    self.postResponse = data;
+                });
             }
         }
     });

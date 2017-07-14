@@ -55,10 +55,6 @@
 			<div id="etusivu" class="tab-pane fade in active">
                 <h1>Tarkkailuraportti</h1>
 
-                <div>
-                    <button @click="newReport()" class="btn">Uusi raportti</button>
-                </div>
-
                 <select v-model="selectedReport" @change="reportSelected()">
                     <option disabled value="-1">Valitse raportti</option>
                     <option v-for="raportti in raportit" :value="raportti.id">{{raportti.koti}}-{{raportti.vieras}}</option>
@@ -84,52 +80,62 @@
 
                     <h3>Arvostelukohdat:</h3>
                     <vue-rivi v-for="rivi in raportti.rivit" :rivi="rivi"></vue-rivi> 
-                    
                 </div>
-
-                
+                    
 			</div>
 			<div id="sivu1" class="tab-pane fade">
-                <h1>Sivu 1</h1>
+                <h1>Talletus</h1>
+
+
 
 			</div>
 			<div id="uusi" class="tab-pane fade">
                 <h1>Uusi raportti</h1>
 
-                <h3>Ottelu:</h3>
-                <p> Pvm: <input type="datetime" v-model="uusi_raportti.pvm"><br>
-                    Paikka: <input type="text" v-model="uusi_raportti.paikka"><br>
-                    Ottelu: <input type="text" v-model="uusi_raportti.koti">-<input type="text" v-model="uusi_raportti.vieras">
-                </p>
+                <form id="formi" action="javascript:0" @submit="postData()">
+                    <h3>Ottelu:</h3>
+                    <p> Pvm: <input type="datetime" required v-model="uusi_raportti.pvm"><br>
+                        Paikka: <input type="text" required v-model="uusi_raportti.paikka"><br>
+                        Ottelu: <input type="text" required v-model="uusi_raportti.koti">-<input required type="text" v-model="uusi_raportti.vieras">
+                    </p>
 
-                <h3>Tuomarit:</h3>
-                <p>PT:
-                    <select v-model="uusi_raportti.pt_id">
-                        <option disabled value="-1">Valitse PT</option>
-                        <option v-for="tuomari in tuomarit" :value="tuomari.id">{{tuomari.etunimi}} {{tuomari.sukunimi}}</option>
-                    </select>
-                    Valittu: {{uusi_raportti.pt_id}}
-                    <br>
-                   
-                   VT:
-                    <select v-model="uusi_raportti.pt_id">
-                        <option disabled value="-1">Valitse VT</option>
-                        <option v-for="tuomari in tuomarit" :value="tuomari.id">{{tuomari.etunimi}} {{tuomari.sukunimi}}</option>
-                    </select>
-                    Valittu: {{uusi_raportti.vt_id}}
-                    <br>
-
-                    Tarkkailija:
-                    <select v-model="uusi_raportti.pt_id">
-                        <option disabled value="-1">Valitse Tarkkailija</option>
-                        <option v-for="tuomari in tuomarit" :value="tuomari.id">{{tuomari.etunimi}} {{tuomari.sukunimi}}</option>
-                    </select>
-                    Valittu: {{uusi_raportti.vt_id}}
+                    <h3>Tuomarit:</h3>
+                    <p>PT:
+                        <select v-model="uusi_raportti.pt_id">
+                            <option disabled value="-1">Valitse PT</option>
+                            <option v-for="tuomari in tuomarit" :value="tuomari.id">{{tuomari.etunimi}} {{tuomari.sukunimi}}</option>
+                        </select>
+                        Valittu: {{uusi_raportti.pt_id}}
+                        <br>
                     
-                </p>
+                    VT:
+                        <select v-model="uusi_raportti.vt_id">
+                            <option disabled value="-1">Valitse VT</option>
+                            <option v-for="tuomari in tuomarit" :value="tuomari.id">{{tuomari.etunimi}} {{tuomari.sukunimi}}</option>
+                        </select>
+                        Valittu: {{uusi_raportti.vt_id}}
+                        <br>
 
-                <h3>Arvostelukohdat:</h3>
-                <vue-rivi v-for="rivi in uusi_raportti.rivit" :rivi="rivi"></vue-rivi> 
+                        Tarkkailija:
+                        <select v-model="uusi_raportti.tark_id">
+                            <option disabled value="-1">Valitse Tarkkailija</option>
+                            <option v-for="tuomari in tuomarit" :value="tuomari.id">{{tuomari.etunimi}} {{tuomari.sukunimi}}</option>
+                        </select>
+                        Valittu: {{uusi_raportti.tark_id}}
+                        
+                    </p>
+
+                    <h3>Arvostelukohdat:</h3>
+                    <vue-rivi v-for="rivi in uusi_raportti.rivit" :rivi="rivi"></vue-rivi> 
+
+                    <div>
+                        <button type="submit">PostData</button>
+                    </div>
+                </form>
+
+                <div>
+                    {{postResponse}}
+                </div>
 
 			</div>
 			<div id="sivu2" class="tab-pane fade">

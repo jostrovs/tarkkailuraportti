@@ -11,7 +11,9 @@
 
         $sql = "INSERT INTO rivi (aihe_id, arvosana, raportti_id, huom)
                 VALUES (".$obj['aihe_1_id'].", ".$obj['aihe_1_arvosana'].", ".$report_id.", ''),
-                       (".$obj['aihe_2_id'].", ".$obj['aihe_2_arvosana'].", ".$report_id.", '')
+                       (".$obj['aihe_2_id'].", ".$obj['aihe_2_arvosana'].", ".$report_id.", ''),
+                       (".$obj['aihe_3_id'].", ".$obj['aihe_3_arvosana'].", ".$report_id.", ''),
+                       (".$obj['aihe_4_id'].", ".$obj['aihe_4_arvosana'].", ".$report_id.", '')
                 ";
         $mysqli->query($sql);
         echo json_encode($obj);

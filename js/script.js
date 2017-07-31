@@ -209,6 +209,26 @@ $(document).ready(function () {
                 }
             },
 
+            test_fill: function(){
+                let now = moment(Date.now());
+                let pvm = now.format("YYYY-MM-DD") + "T" + now.format("hh:mm");
+                console.log(pvm);
+                $("#pvm").val(pvm);
+                $("#pt").val("1");
+                $("#vt").val("1");
+                $("#tark").val("1");
+                
+                let as = 1;
+                for(let i=1;i<118;++i){
+                    let id = i.toString() + "_" + as++;
+                    if(as > 5) as = 1;
+                    $("#" + id).trigger("click");
+                    if(i == 17) i = 100;
+                }
+
+
+            },
+
             postData: function(){
                 let self = this;
                 let formdata= {
@@ -225,6 +245,12 @@ $(document).ready(function () {
 
                     aihe_2_id: self.uusi_raportti.rivit[1].aihe_id,
                     aihe_2_arvosana: self.uusi_raportti.rivit[1].arvosana,
+
+                    aihe_3_id: self.uusi_raportti.rivit[1].aihe_id,
+                    aihe_3_arvosana: self.uusi_raportti.rivit[1].arvosana,
+
+                    aihe_4_id: self.uusi_raportti.rivit[1].aihe_id,
+                    aihe_4_arvosana: self.uusi_raportti.rivit[1].arvosana,
                 };
                 $.ajax({
                     type: "POST",

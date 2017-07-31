@@ -92,16 +92,18 @@
 			<div id="uusi" class="tab-pane fade">
                 <h1>Uusi raportti</h1>
 
+                <button id="test_fill" @click="test_fill()">Täytä</button>
+
                 <form id="formi" action="javascript:0" @submit="postData()">
                     <h3>Ottelu:</h3>
-                    <p> Pvm: <input type="datetime-local" required v-model="uusi_raportti.pvm"><br>
-                        Paikka: <input type="text" required v-model="uusi_raportti.paikka"><br>
-                        Ottelu: <input type="text" required v-model="uusi_raportti.koti">-<input required type="text" v-model="uusi_raportti.vieras">
+                    <p> Pvm: <input id="pvm" type="datetime-local" required v-model="uusi_raportti.pvm"><br>
+                        Paikka: <input id="paikka" type="text" required v-model="uusi_raportti.paikka"><br>
+                        Ottelu: <input id="koti" type="text" required v-model="uusi_raportti.koti">-<input id="vieras" required type="text" v-model="uusi_raportti.vieras">
                     </p>
 
                     <h3>Tuomarit:</h3>
                     <p>PT:
-                        <select v-model="uusi_raportti.pt_id">
+                        <select id="pt" v-model="uusi_raportti.pt_id">
                             <option disabled value="-1">Valitse PT</option>
                             <option v-for="tuomari in tuomarit" :value="tuomari.id">{{tuomari.etunimi}} {{tuomari.sukunimi}}</option>
                         </select>
@@ -109,7 +111,7 @@
                         <br>
                     
                     VT:
-                        <select v-model="uusi_raportti.vt_id">
+                        <select id="vt" v-model="uusi_raportti.vt_id">
                             <option disabled value="-1">Valitse VT</option>
                             <option v-for="tuomari in tuomarit" :value="tuomari.id">{{tuomari.etunimi}} {{tuomari.sukunimi}}</option>
                         </select>
@@ -117,7 +119,7 @@
                         <br>
 
                         Tarkkailija:
-                        <select v-model="uusi_raportti.tark_id">
+                        <select id="tark" v-model="uusi_raportti.tark_id">
                             <option disabled value="-1">Valitse Tarkkailija</option>
                             <option v-for="tuomari in tuomarit" :value="tuomari.id">{{tuomari.etunimi}} {{tuomari.sukunimi}}</option>
                         </select>

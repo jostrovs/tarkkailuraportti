@@ -2,11 +2,11 @@ Vue.component('vue-rivi', {
                 template: `
                     <div class="form-group">
                         <label>{{initialRivi.aihe_nimi}}</label>
-                        <label class="radio-inline"><input @change="onInput()" required type="radio" :name="radioname" value="1">1</label>
-                        <label class="radio-inline"><input @change="onInput()" required type="radio" :name="radioname" value="2">2</label>
-                        <label class="radio-inline"><input @change="onInput()" required type="radio" :name="radioname" value="3">3</label>
-                        <label class="radio-inline"><input @change="onInput()" required type="radio" :name="radioname" value="4">4</label>
-                        <label class="radio-inline"><input @change="onInput()" required type="radio" :name="radioname" value="5">5</label>
+                        <label class="radio-inline"><input :id="inputId('1')" @change="onInput()" required type="radio" :name="radioname" value="1">1</label>
+                        <label class="radio-inline"><input :id="inputId('2')" @change="onInput()" required type="radio" :name="radioname" value="2">2</label>
+                        <label class="radio-inline"><input :id="inputId('3')" @change="onInput()" required type="radio" :name="radioname" value="3">3</label>
+                        <label class="radio-inline"><input :id="inputId('4')" @change="onInput()" required type="radio" :name="radioname" value="4">4</label>
+                        <label class="radio-inline"><input :id="inputId('5')" @change="onInput()" required type="radio" :name="radioname" value="5">5</label>
                         valittu: {{valittu}}
                     </div>
                 `,
@@ -24,6 +24,9 @@ Vue.component('vue-rivi', {
                         let val = $(`input[name=${this.radioname}]:checked`).val();
                         this.rivi.arvosana = val;
                         this.valittu = val;
+                    },
+                    inputId: function(no){
+                        return this.rivi.aihe_no + '_' + no;
                     }
                 },
                 created: function(){

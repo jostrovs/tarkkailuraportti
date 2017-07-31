@@ -240,18 +240,30 @@ $(document).ready(function () {
                     vt_id: self.uusi_raportti.vt_id,
                     tark_id: self.uusi_raportti.tark_id,
 
-                    aihe_1_id: self.uusi_raportti.rivit[0].aihe_id,
-                    aihe_1_arvosana: self.uusi_raportti.rivit[0].arvosana,
+                    // aihe_1_id: self.uusi_raportti.rivit[0].aihe_id,
+                    // aihe_1_arvosana: self.uusi_raportti.rivit[0].arvosana,
 
-                    aihe_2_id: self.uusi_raportti.rivit[1].aihe_id,
-                    aihe_2_arvosana: self.uusi_raportti.rivit[1].arvosana,
+                    // aihe_2_id: self.uusi_raportti.rivit[1].aihe_id,
+                    // aihe_2_arvosana: self.uusi_raportti.rivit[1].arvosana,
 
-                    aihe_3_id: self.uusi_raportti.rivit[1].aihe_id,
-                    aihe_3_arvosana: self.uusi_raportti.rivit[1].arvosana,
+                    // aihe_3_id: self.uusi_raportti.rivit[1].aihe_id,
+                    // aihe_3_arvosana: self.uusi_raportti.rivit[1].arvosana,
 
-                    aihe_4_id: self.uusi_raportti.rivit[1].aihe_id,
-                    aihe_4_arvosana: self.uusi_raportti.rivit[1].arvosana,
+                    // aihe_4_id: self.uusi_raportti.rivit[1].aihe_id,
+                    // aihe_4_arvosana: self.uusi_raportti.rivit[1].arvosana,
                 };
+
+                let i_rivi=0;
+
+                for(let i=1;i<118;++i){
+                    let key = "aihe_" + i.toString();
+                    console.log(key);
+                    formdata[key+"_id"] = self.uusi_raportti.rivit[i_rivi].aihe_id;
+                    formdata[key+"_arvosana"] = self.uusi_raportti.rivit[i_rivi].arvosana;
+                    ++i_rivi;
+                    if(i==17) i=100;
+                }
+
                 $.ajax({
                     type: "POST",
                     dataType: 'json',

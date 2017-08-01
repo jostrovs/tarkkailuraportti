@@ -30,6 +30,8 @@ class Aihe {
         this.id = data_item.id;
         this.nimi = data_item.nimi;
         this.no = data_item.no;
+        this.otsikko = data_item.otsikko;
+        this.teksti = data_item.teksti;
     }
 }
 
@@ -41,6 +43,8 @@ class Rivi {
             this.arvosana = data_item.arvosana;
             this.huom = data_item.huom;
             this.raportti_id = data_item.raportti_id;
+            this.otsikko = data_item.otsikko;
+            this.teksti = data_item.teksti;
 
             this.aihe_nimi = data_item.nimi;
             this.aihe_no = data_item.no;
@@ -50,6 +54,8 @@ class Rivi {
             this.arvosana = data_item.arvosana;
             this.huom = data_item.huom;
             this.raportti_id = data_item.raportti_id;
+            this.otsikko = data_item.otsikko;
+            this.teksti = data_item.teksti;
 
             this.aihe_nimi = data_item.nimi;
             this.aihe_no = data_item.no;
@@ -132,6 +138,8 @@ $(document).ready(function () {
             uusi_raportti: new Raportti(),
 
             postResponse: "Tänne tulee response",
+
+            jos: true, // debug-flägi
         },
         
         created: function () {
@@ -205,6 +213,8 @@ $(document).ready(function () {
                         aihe_id: aihe.id,
                         nimi: aihe.nimi,
                         no: aihe.no,
+                        otsikko: aihe.otsikko,
+                        teksti: aihe.teksti,
                     }))
                 }
             },
@@ -270,10 +280,9 @@ $(document).ready(function () {
                     //url: './../api/setData.php',
                     url: './../api/insertReport.php',
                     data: {data: JSON.stringify(formdata)},
+                }).done(function(data){
+                     self.postResponse = data;
                 });
-                // .done(function(data){
-                //     self.postResponse = data;
-                // });
             }
         }
     });

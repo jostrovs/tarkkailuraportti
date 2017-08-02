@@ -164,6 +164,12 @@
 			</div>
 			<div id="sivu2" class="tab-pane fade">
                 <h1>Sivu 2</h1>
+
+                <h3>Debug</h3>
+                <textarea rows="10" cols="100">
+                    {{debug}}
+                </textarea>
+
                 <h3>Tuomarit</h3>
                 <p v-for="tuomari in tuomarit">Tuomari: {{tuomari.etunimi}} {{tuomari.sukunimi}}, id: {{tuomari.id}}</p>
 
@@ -175,6 +181,7 @@
 
                 <h3>Rivit</h3>
                 <p v-for="rivi in rivit">Id: {{rivi.id}}  raportti: {{rivi.raportti_id}}  aihe: {{rivi.aihe_nimi}}   arvosana: {{rivi.arvosana}}  huom: {{rivi.huom}}</p>
+
 			</div>
         </div>        
 

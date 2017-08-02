@@ -3,6 +3,10 @@
 
     $obj = json_decode($_POST["data"], true);
 
+    $debug = array();
+    $debug["obj"] = $obj;
+    $debug["phpFile"] = "insertReport.php";
+
     $sql = "INSERT INTO raportti (koti, vieras, paikka, pvm, pt_id, vt_id, tark_id)
             VALUES ('".$obj['koti']."', '".$obj['vieras']."', '".$obj['paikka']."', '".$obj['pvm']."', '".$obj['pt_id']."', '".$obj['vt_id']."', '".$obj['tark_id']."')";
 
@@ -47,10 +51,13 @@
                        (".$obj['aihe_117_id'].", ".$obj['aihe_117_arvosana'].", ".$report_id.", '')
                 ";
         $mysqli->query($sql);
-        echo json_encode($obj);
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
 
     $mysqli->close();
+
+    $data = array();
+    $data["debug"] = $debug;
+    echo json_encode($data);
 ?>

@@ -10,7 +10,9 @@ require 'dbConfig.php';
 	
 // Tänne argumenttien mukaan datan hakua eri tauluista ja eri tarkoituksiin jne.
 
-
+$debug = array();
+$debug["phpFile"] = "getData.php";
+//$debug["nimi"] = "jori";
 
 if (isset($_GET["cmd"])) { $cmd  = $_GET["cmd"]; } else { $cmd=API_HAE_TUOMARIT; };
 if (isset($_GET["arg1"])) { $arg1  = $_GET["arg1"]; } else { $arg1=0; };
@@ -58,7 +60,8 @@ $result = $mysqli->query($sql);
 $result =  mysqli_query($mysqli,$sqlTotal);
 
 $data['total'] = mysqli_num_rows($result);
-
+$data['debug'] = $debug;
 echo json_encode($data);
 
+file_put_contents('c:\\d\\omagit\\tark\\phpdebug\\my_debug_file.txt', json_encode($data));
 ?>

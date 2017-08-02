@@ -101,26 +101,13 @@ class Raportti {
 
     getRivit(){
         let self = this;
-        getData(API_HAE_RAPORTIN_RIVIT, function(data){
+        this.getData(API_HAE_RAPORTIN_RIVIT, function(data){
             self.rivit = [];
             for(let rivi of data.data){
                 self.rivit.push(new Rivi(rivi));
             }
         }, self.id);
     }
-}
-
-var getData = function(cmd, callback, arg1) {
-    $.ajax({
-        dataType: 'json',
-        url: './../api/getData.php',
-        data: {cmd:cmd, arg1:arg1}
-    }).done(function(data){
-        if(callback != undefined){
-            callback(data);
-        }
-    });
-
 }
 
 $(document).ready(function () {
@@ -140,6 +127,7 @@ $(document).ready(function () {
             postResponse: "Tänne tulee response",
 
             jos: true, // debug-flägi
+            debug: "Ei debuggia",
         },
         
         created: function () {
@@ -152,9 +140,23 @@ $(document).ready(function () {
         computed: {
         },
         methods: {
+            getData: function(cmd, callback, arg1) {
+                let self=this;
+                $.ajax({
+                    dataType: 'json',
+                    url: './../api/getData.php',
+                    data: {cmd:cmd, arg1:arg1}
+                }).done(function(data){
+                    self.debug = JSON.stringify(data.debug, undefined, 2);
+                    if(callback != undefined){
+                        callback(data);
+                    }
+                });
+            },
+
             loadTuomarit: function(){
                 let self=this;
-                getData(API_HAE_TUOMARIT, function(data){
+                this.getData(API_HAE_TUOMARIT, function(data){
                     self.tuomarit = [];
                     for(let tuomari of data.data){
                         self.tuomarit.push(new Tuomari(tuomari));
@@ -164,7 +166,7 @@ $(document).ready(function () {
 
             loadAiheet: function(){
                 let self=this;
-                getData(API_HAE_AIHEET, function(data){
+                this.getData(API_HAE_AIHEET, function(data){
                     self.aiheet = [];
                     for(let aihe of data.data){
                         self.aiheet.push(new Aihe(aihe));
@@ -175,7 +177,7 @@ $(document).ready(function () {
 
             loadRaportit: function(){
                 let self=this;
-                getData(API_HAE_RAPORTIT, function(data){
+                this.getData(API_HAE_RAPORTIT, function(data){
                     self.raportit = [];
                     for(let raportti of data.data){
                         self.raportit.push(new Raportti(raportti));
@@ -185,7 +187,7 @@ $(document).ready(function () {
 
             loadRivit: function(){
                 let self=this;
-                getData(API_HAE_RIVIT, function(data){
+                this.getData(API_HAE_RIVIT, function(data){
                     self.rivit = [];
                     for(let rivi of data.data){
                         self.rivit.push(new Rivi(rivi));
@@ -281,7 +283,8 @@ $(document).ready(function () {
                     url: './../api/insertReport.php',
                     data: {data: JSON.stringify(formdata)},
                 }).done(function(data){
-                     self.postResponse = data;
+                    self.debug = JSON.stringify(data.debug, undefined, 2);
+                    self.postResponse = data;
                 });
             }
         }

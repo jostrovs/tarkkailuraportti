@@ -226,6 +226,7 @@ $(document).ready(function () {
                     for(let rivi of data.data){
                         self.ptRivit.push(new Rivi(rivi));
                     }
+                    self.asetaVanhatRivit();
                 }, self.uusi_raportti.pt_id);
             },
 
@@ -238,11 +239,21 @@ $(document).ready(function () {
                     for(let rivi of data.data){
                         self.vtRivit.push(new Rivi(rivi));
                     }
+                    self.asetaVanhatRivit();
                 }, self.uusi_raportti.vt_id);
             },
 
             asetaVanhatRivit: function(){
-                
+                // ptRivit- ja vtRivit-muuttujissa on nyt tiedot tuomareiden vanhoista peleistä.
+                // Asetetaan rrden raportin rivit-muuttujille näiden vanhojen arvot
+                for(let rivi of this.uusi_raportti.rivit){
+                    if(rivi.aihe_no < 100){
+                        rivi.vanhat_rivit = this.ptRivit.filter(r => r.aihe_no == rivi.aihe_no);
+                    }
+                    else {
+                        rivi.vanhat_rivit = this.vtRivit.filter(r => r.aihe_no == rivi.aihe_no);
+                    }
+                }
             },
 
             reportSelected: function(){

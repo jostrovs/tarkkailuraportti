@@ -7,15 +7,20 @@ require 'dbConfig.php';
 	define (API_HAE_AIHEET, 4);
 	
     define (API_HAE_RAPORTIN_RIVIT, 5);
+   
+    define (API_HAE_PT_RAPORTIT, 6);
+    define (API_HAE_VT_RAPORTIT, 7);
 	
 // Tänne argumenttien mukaan datan hakua eri tauluista ja eri tarkoituksiin jne.
 
 $debug = array();
 $debug["phpFile"] = "getData.php";
-//$debug["nimi"] = "jori";
 
 if (isset($_GET["cmd"])) { $cmd  = $_GET["cmd"]; } else { $cmd=API_HAE_TUOMARIT; };
 if (isset($_GET["arg1"])) { $arg1  = $_GET["arg1"]; } else { $arg1=0; };
+
+$debug["komento"] = $cmd;
+$debug["arg1"] = $arg1;
 
 $sqlTotal = "SELECT * FROM tuomari";
 $sql = "SELECT * FROM tuomari"; 
@@ -45,7 +50,23 @@ switch($cmd){
     case API_HAE_RAPORTIN_RIVIT:
         $sql = "SELECT * FROM rivi r JOIN aihe a ON r.aihe_id = a.id WHERE r.raportti_id=" . $arg1;
         break;
+    case API_HAE_PT_RAPORTIT:
+        $sql = "SELECT  ra.id as raportti_id, ra.koti, ra.vieras, ra.pvm, ra.pt_id, ra.vt_id, r.arvosana, r.aihe_id, a.no
+                FROM raportti ra
+                JOIN rivi r ON r.raportti_id = ra.id
+                JOIN aihe a ON r.aihe_id = a.id
+                WHERE pt_id = $arg1";
+        break;
+    case API_HAE_VT_RAPORTIT:
+        $sql = "SELECT  ra.id as raportti_id, ra.koti, ra.vieras, ra.pvm, ra.pt_id, ra.vt_id, r.arvosana, r.aihe_id, a.no
+                FROM raportti ra
+                JOIN rivi r ON r.raportti_id = ra.id
+                JOIN aihe a ON r.aihe_id = a.id
+                WHERE vt_id = $arg1";
+        break;
 }
+
+$debug["sql"] = $sql;
 
 $result = $mysqli->query($sql);
 

@@ -32,6 +32,8 @@
     </div>
     
     <div id="app">
+
+
         <ul id="navbar" class="nav nav-tabs">
 			<li class="active"><a data-toggle="tab" href="#etusivu">Etusivu</a>  </li>
 			<li>
@@ -45,8 +47,8 @@
                 </a>
             </li>
 			<li>
-                <a data-toggle="tab" href="#sivu2">
-                    Sivu2
+                <a v-if="jos" data-toggle="tab" href="#sivu2">
+                    Debug
                 </a>
             </li>
 		</ul>
@@ -55,12 +57,20 @@
 			<div id="etusivu" class="tab-pane fade in active">
                 <h1>Tarkkailuraportti</h1>
 
-                <select v-model="selectedReport" @change="reportSelected()">
-                    <option disabled value="-1">Valitse raportti</option>
-                    <option v-for="raportti in raportit" :value="raportti.id">{{raportti.koti}}-{{raportti.vieras}}</option>
-                </select>
+                <form>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <label for="raportti">Raportti</label>
+                            <select class="form-control" v-model="selectedReport" @change="reportSelected()">
+                                <option disabled value="-1">Valitse raportti</option>
+                                <option v-for="raportti in raportit" :value="raportti.id">{{raportti.koti}}-{{raportti.vieras}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
 
-                Valittu: {{selectedReport}}
+
+                <div v-if="jos"> Valittu: {{selectedReport}}</div>
 
 
                 <div v-if="parseInt(selectedReport,10) > 0">
@@ -92,6 +102,30 @@
 			<div id="uusi" class="tab-pane fade">
                 <h1>Uusi raportti</h1>
 
+                <!-- Trigger the modal with a button -->
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+                <!-- Modal -->
+                <div id="myModal" class="modal fade modeless" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Modal Header</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Some text in the modal.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                        </div>
+
+                    </div>
+                </div>
+
                 <button class="btn btn-default" v-if="jos" id="test_fill" @click="test_fill()">Täytä</button>
 
                 <form id="formi" action="javascript:0" @submit="postData()">
@@ -122,7 +156,7 @@
                     <div class="row">
                         <div class="col-xs-4">
                             <label for="pt">Päätuomari</label> <template v-if="jos">(valittu: {{uusi_raportti.pt_id}})</template>
-                            <select class="form-control" id="pt" v-model="uusi_raportti.pt_id">
+                            <select class="form-control" id="pt" v-model="uusi_raportti.pt_id" @change="ptChanged()">
                                 <option disabled value="-1">Valitse PT</option>
                                 <option v-for="tuomari in tuomarit" :value="tuomari.id">{{tuomari.etunimi}} {{tuomari.sukunimi}}</option>
                             </select>
@@ -132,7 +166,7 @@
                     <div class="row">
                         <div class="col-xs-4">
                             <label for="vt">Verkkotuomari</label> <template v-if="jos">(valittu: {{uusi_raportti.vt_id}})</template>
-                            <select class="form-control" id="vt" v-model="uusi_raportti.vt_id">
+                            <select class="form-control" id="vt" v-model="uusi_raportti.vt_id" @change="vtChanged()">
                                 <option disabled value="-1">Valitse VT</option>
                                 <option v-for="tuomari in tuomarit" :value="tuomari.id">{{tuomari.etunimi}} {{tuomari.sukunimi}}</option>
                             </select>
@@ -149,8 +183,84 @@
                         </div>
                     </div>
 
-                    <h3>Arvostelukohdat:</h3>
-                    <vue-rivi v-for="rivi in uusi_raportti.rivit" :rivi="rivi" :jos="jos"></vue-rivi> 
+                    <button type="button" class="btn" @click="haeTuomarienRivit()">Tuomarit valittu</button>
+
+                    
+                    <h2>Päätuomari</h2>
+                    <div class="panel-group">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">Tuomaritekniikka ja suoritustaito</div>
+                            <div class="panel-body">
+                                <vue-rivi v-for="rivi in uudenRivit(1,5)" :rivi="rivi" :jos="jos"></vue-rivi>
+                            </div>
+                        </div>
+                        
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">Sääntöjen sekä ohjeiden ja tulkintojen soveltaminen</div>
+                            <div class="panel-body">
+                                <vue-rivi v-for="rivi in uudenRivit(6,10)" :rivi="rivi" :jos="jos"></vue-rivi>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">Vuorovaikutus joukkueiden kanssa</div>
+                            <div class="panel-body">
+                                <vue-rivi v-for="rivi in uudenRivit(11,13)" :rivi="rivi" :jos="jos"></vue-rivi>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">Ottelun johtaminen ja persoonallisuus</div>
+                            <div class="panel-body">
+                                <vue-rivi v-for="rivi in uudenRivit(14,17)" :rivi="rivi" :jos="jos"></vue-rivi>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">Loppupisteet</div>
+                            <div class="panel-body">
+                                Tänne tulee pisteitä...
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2>Verkkotuomari</h2>
+                    <div class="panel-group">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">Tuomaritekniikka ja suoritustaito</div>
+                            <div class="panel-body">
+                                <vue-rivi v-for="rivi in uudenRivit(101,106)" :rivi="rivi" :jos="jos"></vue-rivi>
+                            </div>
+                        </div>
+                        
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">x</div>
+                            <div class="panel-body">
+                                <vue-rivi v-for="rivi in uudenRivit(107,111)" :rivi="rivi" :jos="jos"></vue-rivi>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">Vuorovaikutus joukkueiden kanssa</div>
+                            <div class="panel-body">
+                                <vue-rivi v-for="rivi in uudenRivit(112,113)" :rivi="rivi" :jos="jos"></vue-rivi>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">Ottelun johtaminen ja persoonallisuus</div>
+                            <div class="panel-body">
+                                <vue-rivi v-for="rivi in uudenRivit(114,117)" :rivi="rivi" :jos="jos"></vue-rivi>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">Loppupisteet</div>
+                            <div class="panel-body">
+                                Tänne tulee pisteitä...
+                            </div>
+                        </div>
+                    </div>
 
                     <div>
                         <button type="submit" class="btn btn-default">PostData</button>
@@ -162,8 +272,8 @@
                 </div>
 
 			</div>
-			<div id="sivu2" class="tab-pane fade">
-                <h1>Sivu 2</h1>
+			<div id="sivu2" class="tab-pane fade"> 
+                <h1>Debug</h1>
 
                 <h3>Debug</h3>
                 <textarea rows="10" cols="100">
@@ -182,7 +292,16 @@
                 <h3>Rivit</h3>
                 <p v-for="rivi in rivit">Id: {{rivi.id}}  raportti: {{rivi.raportti_id}}  aihe: {{rivi.aihe_nimi}}   arvosana: {{rivi.arvosana}}  huom: {{rivi.huom}}</p>
 
-			</div>
+                <hr>
+
+                <div>
+                    PT-rivit: {{ptRivit.length}}
+                </div>
+                <div>
+                    VT-rivit: {{vtRivit.length}}
+                </div>
+                    
+            </div>
         </div>        
 
     </div>

@@ -4,6 +4,20 @@ const API_HAE_RAPORTIT = 2;
 const API_HAE_RIVIT = 3;
 const API_HAE_AIHEET = 4;
 const API_HAE_RAPORTIN_RIVIT = 5;
+const API_HAE_PT_RAPORTIT = 6;
+const API_HAE_VT_RAPORTIT = 7;
+
+var localGetData=function(cmd, callback, arg1) {
+    $.ajax({
+        dataType: 'json',
+        url: './../api/getData.php',
+        data: {cmd:cmd, arg1:arg1}
+    }).done(function(data){
+        if(callback != undefined){
+            callback(data);
+        }
+    });
+}
 
 class Referee {
       constructor(torneoReferee){
@@ -37,6 +51,7 @@ class Aihe {
 
 class Rivi {
     constructor(data_item){
+        this.vanhat_rivit=[];
         if(data_item != null){
             this.id = data_item.id;
             this.aihe_id = data_item.aihe_id;
@@ -48,6 +63,7 @@ class Rivi {
 
             this.aihe_nimi = data_item.nimi;
             this.aihe_no = data_item.no;
+
         } else {
             this.id = 0;
             this.aihe_id = data_item.aihe_id;
@@ -101,7 +117,7 @@ class Raportti {
 
     getRivit(){
         let self = this;
-        this.getData(API_HAE_RAPORTIN_RIVIT, function(data){
+        localGetData(API_HAE_RAPORTIN_RIVIT, function(data){
             self.rivit = [];
             for(let rivi of data.data){
                 self.rivit.push(new Rivi(rivi));
@@ -117,6 +133,8 @@ $(document).ready(function () {
             dummy: [1, 2, 3, 4, 5],
             tuomarit: [],
             aiheet: [],
+            ptRivit: [],
+            vtRivit: [],
             rivit: [],
             raportit: [],
 
@@ -152,6 +170,10 @@ $(document).ready(function () {
                         callback(data);
                     }
                 });
+            },
+
+            uudenRivit: function(firstNo, lastNo){
+                return this.uusi_raportti.rivit.filter(rivi => rivi.aihe_no >= firstNo && rivi.aihe_no <= lastNo);
             },
 
             loadTuomarit: function(){
@@ -193,6 +215,34 @@ $(document).ready(function () {
                         self.rivit.push(new Rivi(rivi));
                     }
                 })
+            },
+
+            ptChanged: function(){
+                let self=this;
+                if(self.uusi_raportti == undefined || self.uusi_raportti.pt_id == undefined) return;
+                this.getData(API_HAE_PT_RAPORTIT, function(data){
+                    self.ptRivit = [];
+                    if(data.data == null) return;
+                    for(let rivi of data.data){
+                        self.ptRivit.push(new Rivi(rivi));
+                    }
+                }, self.uusi_raportti.pt_id);
+            },
+
+            vtChanged: function(){
+                let self=this;
+                if(self.uusi_raportti == undefined || self.uusi_raportti.vt_id == undefined) return;
+                this.getData(API_HAE_VT_RAPORTIT, function(data){
+                    self.vtRivit = [];
+                    if(data.data == null) return;
+                    for(let rivi of data.data){
+                        self.vtRivit.push(new Rivi(rivi));
+                    }
+                }, self.uusi_raportti.vt_id);
+            },
+
+            asetaVanhatRivit: function(){
+                
             },
 
             reportSelected: function(){

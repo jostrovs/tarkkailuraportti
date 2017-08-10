@@ -144,7 +144,7 @@ $(document).ready(function () {
 
             postResponse: "Tänne tulee response",
 
-            jos: true, // debug-flägi
+            jos: false, // debug-flägi
             debug: "Ei debuggia",
         },
         

@@ -28,6 +28,23 @@ h4 {
     padding: 4px;
 }
 
+#debugDiv{
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: inline-block;
+	min-width: 60;
+	min-height: 40;
+	padding: 10px;
+}
+
+#debugDiv > button {
+	display: none;
+}
+
+#debugDiv:hover > button {
+	display: inline;
+}
 
 /* *************  Button  *************** */
 

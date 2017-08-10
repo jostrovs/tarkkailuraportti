@@ -32,8 +32,6 @@
     </div>
     
     <div id="app">
-
-
         <ul id="navbar" class="nav nav-tabs">
 			<li class="active"><a data-toggle="tab" href="#etusivu">Etusivu</a>  </li>
 			<li>
@@ -52,6 +50,10 @@
                 </a>
             </li>
 		</ul>
+
+        <div id="debugDiv">
+            <button class="btn" @click="jos=!jos">Toggle debug</button>
+        </div>
 
 		<div class="tab-content">
 			<div id="etusivu" class="tab-pane fade in active">

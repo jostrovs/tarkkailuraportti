@@ -1,17 +1,17 @@
 #app {
-    margin-left: 16%;
-    margin-right: 16%;
+    margin-left: 12%;
+    margin-right: 12%;
 }
 #nav {
-    left: 16%;
-    right: 16%;
+    left: 12%;
+    right: 12%;
     background: white;
 }
 
 #save {
     position: fixed;
     top: 5px;
-    right: 16%;
+    right: 12%;
     z-index: 100;
 }
 

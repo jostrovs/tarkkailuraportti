@@ -1,17 +1,17 @@
 #app {
-    margin-left: 12%;
-    margin-right: 12%;
+    margin-left: 8%;
+    margin-right: 8%;
 }
 #nav {
-    left: 12%;
-    right: 12%;
+    left: 8%;
+    right: 8%;
     background: white;
 }
 
 #save {
     position: fixed;
     top: 5px;
-    right: 12%;
+    right: 8%;
     z-index: 100;
 }
 
@@ -44,6 +44,52 @@ h4 {
 
 #debugDiv:hover > button {
 	display: inline;
+}
+
+.label {
+	display: inline-block;
+	text-align: center;
+	margin-right: 3px;
+    font-size: 14px;
+
+}
+
+.label span {
+	padding: 3px;
+	display: inline-block;
+	width: 26px;
+	border-radius: 4px;
+}
+
+.label-red {
+	color: black;
+	background-color: #fbb;
+	border: 1px solid #f88;
+}
+.label-orange {
+	color: black;
+	background-color: #fdb;
+	border: 1px solid #fa8;
+}
+.label-blue {
+	color: white;
+	background-color: #bbf;
+	border: 1px solid #88f;
+}
+.label-green {
+	color: black;
+	background-color: #cfc;
+	border: 1px solid #8f8;
+}
+.label-yellow {
+	color: #222;
+	background-color: #ffb;
+	border: 1px solid yellow;
+}
+.label-white {
+	color: #222;
+	background-color: white;
+	border: 1px solid #aaa;
 }
 
 /* *************  Button  *************** */
@@ -93,4 +139,58 @@ h4 {
     border-radius: 6px;
     width: 60px;
     padding: 4px 8px;
+}
+
+@media screen and (max-width: 1200px){
+    #app {
+        margin-left: 3px;
+        margin-right: 3px;
+    }
+
+    #nav {
+        left: 3px;
+        right: 3px;
+    }
+
+    .nav>li>a {
+        font-size: small;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    #save {
+        right: 5px;
+    }
+}
+
+
+/* Tooltipit */
+
+/* Tooltip */
+.test + .tooltip > .tooltip-inner {
+    background-color: #73AD21; 
+    color: #FFFFFF; 
+    border: 1px solid green;
+    padding: 15px;
+    font-size: 20px;
+}
+
+/* Tooltip on top */
+.test + .tooltip.top > .tooltip-arrow {
+    border-top: 5px solid green;
+}
+
+/* Tooltip on bottom */
+.test + .tooltip.bottom > .tooltip-arrow {
+    border-bottom: 5px solid blue;
+}
+
+/* Tooltip on left */
+.test + .tooltip.left > .tooltip-arrow {
+    border-left: 5px solid red;
+}
+
+/* Tooltip on right */
+.test + .tooltip.right > .tooltip-arrow {
+    border-right: 5px solid black;
 }

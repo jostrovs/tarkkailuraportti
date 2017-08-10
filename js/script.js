@@ -63,7 +63,6 @@ class Rivi {
 
             this.aihe_nimi = data_item.nimi;
             this.aihe_no = data_item.no;
-
         } else {
             this.id = 0;
             this.aihe_id = data_item.aihe_id;
@@ -278,6 +277,7 @@ $(document).ready(function () {
                         no: aihe.no,
                         otsikko: aihe.otsikko,
                         teksti: aihe.teksti,
+                        huom: "",
                     }))
                 }
             },

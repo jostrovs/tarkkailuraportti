@@ -1,8 +1,30 @@
+Vue.component('vue-edellinen-label', {
+                template: `
+                    <div :id="randomId" class="label" data-toggle="tooltip" :title="rivi.huom">
+                        <span v-if="initialRivi.arvosana=='5'" class="label-red">{{rivi.arvosana}}</span>
+                        <span v-if="initialRivi.arvosana=='4'" class="label-orange">{{rivi.arvosana}}</span>
+                        <span v-if="initialRivi.arvosana=='3'" class="label-yellow">{{rivi.arvosana}}</span>
+                        <span v-if="initialRivi.arvosana=='2'" class="label-white">{{rivi.arvosana}}</span>
+                        <span v-if="initialRivi.arvosana=='1'" class="label-green">{{rivi.arvosana}}</span>
+                    </div>
+                `,
+                props: ['rivi', 'jos'],
+                data: function () {
+                    return {
+                        randomId: "label" + this._uid,
+                        initialRivi: this.rivi,
+                    }
+                },
+                created: function(){
+                    $(".label").tooltip();
+                }
+});
+
 Vue.component('vue-rivi', {
                 template: `
                     <div class="form-group row">
                         <label class="col-xs-3">{{initialRivi.otsikko}}</label>
-                        <div class="col-xs-3" style="max-width: 230px;">
+                        <div class="col-xs-3" style="max-width: 230px; min-width: 230px;">
                             <label class="radio-inline"><input :id="inputId('1')" @change="onInput()" required type="radio" :name="radioname" value="1">1</label>
                             <label class="radio-inline"><input :id="inputId('2')" @change="onInput()" required type="radio" :name="radioname" value="2">2</label>
                             <label class="radio-inline"><input :id="inputId('3')" @change="onInput()" required type="radio" :name="radioname" value="3">3</label>
@@ -13,8 +35,8 @@ Vue.component('vue-rivi', {
                             <input class="form-control" v-model="rivi.huom" type="text">
                         </div>
 
-                        <div class="col-xs-1">
-                            Edelliset: <span v-for="vanha_rivi in rivi.vanhat_rivit">{{vanha_rivi.arvosana}} </span>
+                        <div class="col-xs-2">
+                            <vue-edellinen-label v-for="vanha_rivi in rivi.vanhat_rivit" :rivi="vanha_rivi" :jos="jos" :key="vanha_rivi.id"></vue-edellinen-label>
                         </div>
                         <span v-if="jos" style="margin-left: 23px;"> (valittu: {{valittu}})</span>
                     </div>

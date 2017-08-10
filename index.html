@@ -91,7 +91,7 @@
                     Tarkkailija: {{raportti.tark_nimi}}</p>
 
                     <h3>Arvostelukohdat:</h3>
-                    <vue-rivi v-for="rivi in raportti.rivit" :rivi="rivi"></vue-rivi> 
+                    <vue-rivi v-for="rivi in raportti.rivit" :key="rivi.id" :rivi="rivi"></vue-rivi> 
                 </div>
                     
 			</div>
@@ -193,28 +193,28 @@
                         <div class="panel panel-primary">
                             <div class="panel-heading">Tuomaritekniikka ja suoritustaito</div>
                             <div class="panel-body">
-                                <vue-rivi v-for="rivi in uudenRivit(1,5)" :rivi="rivi" :jos="jos"></vue-rivi>
+                                <vue-rivi v-for="rivi in uudenRivit(1,5)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
                             </div>
                         </div>
                         
                         <div class="panel panel-primary">
                             <div class="panel-heading">Sääntöjen sekä ohjeiden ja tulkintojen soveltaminen</div>
                             <div class="panel-body">
-                                <vue-rivi v-for="rivi in uudenRivit(6,10)" :rivi="rivi" :jos="jos"></vue-rivi>
+                                <vue-rivi v-for="rivi in uudenRivit(6,10)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
                             </div>
                         </div>
 
                         <div class="panel panel-primary">
                             <div class="panel-heading">Vuorovaikutus joukkueiden kanssa</div>
                             <div class="panel-body">
-                                <vue-rivi v-for="rivi in uudenRivit(11,13)" :rivi="rivi" :jos="jos"></vue-rivi>
+                                <vue-rivi v-for="rivi in uudenRivit(11,13)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
                             </div>
                         </div>
 
                         <div class="panel panel-primary">
                             <div class="panel-heading">Ottelun johtaminen ja persoonallisuus</div>
                             <div class="panel-body">
-                                <vue-rivi v-for="rivi in uudenRivit(14,17)" :rivi="rivi" :jos="jos"></vue-rivi>
+                                <vue-rivi v-for="rivi in uudenRivit(14,17)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
                             </div>
                         </div>
 
@@ -231,28 +231,28 @@
                         <div class="panel panel-primary">
                             <div class="panel-heading">Tuomaritekniikka ja suoritustaito</div>
                             <div class="panel-body">
-                                <vue-rivi v-for="rivi in uudenRivit(101,106)" :rivi="rivi" :jos="jos"></vue-rivi>
+                                <vue-rivi v-for="rivi in uudenRivit(101,106)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
                             </div>
                         </div>
                         
                         <div class="panel panel-primary">
                             <div class="panel-heading">x</div>
                             <div class="panel-body">
-                                <vue-rivi v-for="rivi in uudenRivit(107,111)" :rivi="rivi" :jos="jos"></vue-rivi>
+                                <vue-rivi v-for="rivi in uudenRivit(107,111)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
                             </div>
                         </div>
 
                         <div class="panel panel-primary">
                             <div class="panel-heading">Vuorovaikutus joukkueiden kanssa</div>
                             <div class="panel-body">
-                                <vue-rivi v-for="rivi in uudenRivit(112,113)" :rivi="rivi" :jos="jos"></vue-rivi>
+                                <vue-rivi v-for="rivi in uudenRivit(112,113)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
                             </div>
                         </div>
 
                         <div class="panel panel-primary">
                             <div class="panel-heading">Ottelun johtaminen ja persoonallisuus</div>
                             <div class="panel-body">
-                                <vue-rivi v-for="rivi in uudenRivit(114,117)" :rivi="rivi" :jos="jos"></vue-rivi>
+                                <vue-rivi v-for="rivi in uudenRivit(114,117)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
                             </div>
                         </div>
 

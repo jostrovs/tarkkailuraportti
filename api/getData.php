@@ -51,14 +51,18 @@ switch($cmd){
         $sql = "SELECT * FROM rivi r JOIN aihe a ON r.aihe_id = a.id WHERE r.raportti_id=" . $arg1;
         break;
     case API_HAE_PT_RAPORTIT:
-        $sql = "SELECT  ra.id as raportti_id, ra.koti, ra.vieras, ra.pvm, ra.pt_id, ra.vt_id, r.id, r.arvosana, r.aihe_id, r.huom, a.no
+        $sql = "SELECT  ra.id as raportti_id, ra.koti, ra.vieras, ra.pvm, ra.pt_id, ra.vt_id, 
+                        r.id, r.arvosana, r.aihe_id, r.huom, 
+                        a.no
                 FROM raportti ra
                 JOIN rivi r ON r.raportti_id = ra.id
                 JOIN aihe a ON r.aihe_id = a.id
                 WHERE pt_id = $arg1";
         break;
     case API_HAE_VT_RAPORTIT:
-        $sql = "SELECT  ra.id as raportti_id, ra.koti, ra.vieras, ra.pvm, ra.pt_id, ra.vt_id, r.id, r.arvosana, r.aihe_id, r.huom, a.no
+        $sql = "SELECT  ra.id as raportti_id, ra.koti, ra.vieras, ra.pvm, ra.pt_id, ra.vt_id, 
+                        r.id, r.arvosana, r.aihe_id, r.huom, 
+                        a.no
                 FROM raportti ra
                 JOIN rivi r ON r.raportti_id = ra.id
                 JOIN aihe a ON r.aihe_id = a.id

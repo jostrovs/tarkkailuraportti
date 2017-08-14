@@ -25,7 +25,7 @@ Vue.component('vue-edellinen-label', {
                 }
 });
 
-Vue.component('vue-rivi', {
+Vue.component('vue-rivi-edit', {
                 template: `
                     <div class="form-group row" :style="{'border-left': leftBorder}">
                         <label class="col-xs-3">{{initialRivi.otsikko}}</label>
@@ -96,5 +96,35 @@ Vue.component('vue-rivi', {
                         }
                     }, 10);
                 }
+});
+
+
+Vue.component('vue-rivi', {
+                template: `
+                    <div class="form-group row"">
+                        <label class="col-xs-3">{{initialRivi.otsikko}}</label>
+                        <div class="col-xs-2">
+                            <div class="ruutu ruutu1"> <span v-if="initialRivi.arvosana=='1'">X</span> <span v-else>&nbsp;</span></div>
+                            <div class="ruutu ruutu2"> <span v-if="initialRivi.arvosana=='2'">X</span> <span v-else>&nbsp;</span> </div>
+                            <div class="ruutu ruutu3"> <span v-if="initialRivi.arvosana=='3'">X</span> <span v-else>&nbsp;</span> </div>
+                            <div class="ruutu ruutu4"> <span v-if="initialRivi.arvosana=='4'">X</span> <span v-else>&nbsp;</span> </div>
+                            <div class="ruutu ruutu5"> <span v-if="initialRivi.arvosana=='5'">X</span> <span v-else>&nbsp;</span> </div>
+                        </div>
+
+                        <div class="col-xs-4">
+                            {{rivi.huom}}
+                        </div>
+                    </div>
+                `,
+                props: ['rivi', 'jos'],
+                data: function () {
+                    return {
+                        randomId: this._uid,
+                        initialRivi: this.rivi,
+                        valittu: 0,
+                        radioname: "opt" + this.rivi.aihe_no,
+                        inputPlaceholder: "",
+                    }
+                },
 });
 

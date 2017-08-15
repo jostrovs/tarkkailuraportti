@@ -19,8 +19,13 @@ $debug["phpFile"] = "getData.php";
 if (isset($_GET["cmd"])) { $cmd  = $_GET["cmd"]; } else { $cmd=API_HAE_TUOMARIT; };
 if (isset($_GET["arg1"])) { $arg1  = $_GET["arg1"]; } else { $arg1=0; };
 
+$cmd = $mysqli->real_escape_string($cmd);
+$arg1 = $mysqli->real_escape_string($arg1);
+
 $debug["komento"] = $cmd;
 $debug["arg1"] = $arg1;
+
+
 
 $sqlTotal = "SELECT * FROM tuomari";
 $sql = "SELECT * FROM tuomari"; 

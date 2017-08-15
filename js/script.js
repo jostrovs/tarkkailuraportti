@@ -124,6 +124,10 @@ class Raportti {
         let self = this;
         localGetData(API_HAE_RAPORTIN_RIVIT, function(data){
             self.rivit = [];
+            if(data.data == undefined){
+                    console.log("getRivit: data.data = null");
+                    return;
+            }
             for(let rivi of data.data){
                 self.rivit.push(new Rivi(rivi));
             }
@@ -189,6 +193,10 @@ $(document).ready(function () {
                 let self=this;
                 this.getData(API_HAE_TUOMARIT, function(data){
                     self.tuomarit = [];
+                    if(data.data == undefined){
+                         console.log("loadTuomarit: data.data = null");
+                         return;
+                    }
                     for(let tuomari of data.data){
                         self.tuomarit.push(new Tuomari(tuomari));
                     }
@@ -199,6 +207,10 @@ $(document).ready(function () {
                 let self=this;
                 this.getData(API_HAE_AIHEET, function(data){
                     self.aiheet = [];
+                    if(data.data == undefined){
+                         console.log("loadAiheet: data.data = null");
+                         return;
+                    }
                     for(let aihe of data.data){
                         self.aiheet.push(new Aihe(aihe));
                     }
@@ -210,6 +222,10 @@ $(document).ready(function () {
                 let self=this;
                 this.getData(API_HAE_RAPORTIT, function(data){
                     self.raportit = [];
+                    if(data.data == undefined){
+                         console.log("loadRaportit: data.data = null");
+                         return;
+                    }
                     for(let raportti of data.data){
                         self.raportit.push(new Raportti(raportti));
                     }
@@ -220,6 +236,10 @@ $(document).ready(function () {
                 let self=this;
                 this.getData(API_HAE_RIVIT, function(data){
                     self.rivit = [];
+                    if(data.data == undefined){
+                         console.log("loadRivit: data.data = null");
+                         return;
+                    }
                     for(let rivi of data.data){
                         self.rivit.push(new Rivi(rivi));
                     }

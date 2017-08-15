@@ -28,13 +28,16 @@ Vue.component('vue-edellinen-label', {
 Vue.component('vue-rivi-edit', {
                 template: `
                     <div class="form-group row" :style="{'border-left': leftBorder}">
-                        <label class="col-xs-3">{{initialRivi.otsikko}}</label>
+                        <div class="col-xs-3">
+                            <span class="rivi-label">{{initialRivi.otsikko}}</span>
+                            <template v-if="initialRivi.tekstiDisplayed()"><br>{{initialRivi.teksti}}</template>
+                        </div>
                         <div class="col-xs-3" style="max-width: 230px; min-width: 230px;">
-                            <label class="radio-inline"><input :id="inputId('1')" @change="onInput()" required type="radio" :name="radioname" value="1">1</label>
-                            <label class="radio-inline"><input :id="inputId('2')" @change="onInput()" required type="radio" :name="radioname" value="2">2</label>
-                            <label class="radio-inline"><input :id="inputId('3')" @change="onInput()" required type="radio" :name="radioname" value="3">3</label>
-                            <label class="radio-inline"><input :id="inputId('4')" @change="onInput()" required type="radio" :name="radioname" value="4">4</label>
-                            <label class="radio-inline"><input :id="inputId('5')" @change="onInput()" required type="radio" :name="radioname" value="5">5</label>
+                            <div class="radio-div ruutu1">   <label class="radio-inline"><input :id="inputId('1')" @change="onInput()" required type="radio" :name="radioname" value="1">1</label>   </div>
+                            <div class="radio-div ruutu2">   <label class="radio-inline"><input :id="inputId('2')" @change="onInput()" required type="radio" :name="radioname" value="2">2</label>   </div>
+                            <div class="radio-div ruutu3">   <label class="radio-inline"><input :id="inputId('3')" @change="onInput()" required type="radio" :name="radioname" value="3">3</label>   </div>
+                            <div class="radio-div ruutu4">   <label class="radio-inline"><input :id="inputId('4')" @change="onInput()" required type="radio" :name="radioname" value="4">4</label>   </div>
+                            <div class="radio-div ruutu5" style="border-right: 0;">   <label class="radio-inline"><input :id="inputId('5')" @change="onInput()" required type="radio" :name="radioname" value="5">5</label>   </div>
                         </div>
                         <div class="col-xs-4">
                             <input class="form-control" 
@@ -102,7 +105,10 @@ Vue.component('vue-rivi-edit', {
 Vue.component('vue-rivi', {
                 template: `
                     <div class="form-group row"">
-                        <label class="col-xs-3">{{initialRivi.otsikko}}</label>
+                        <div class="col-xs-3">
+                            <span class="rivi-label">{{initialRivi.otsikko}}</span>
+                            <template v-if="initialRivi.tekstiDisplayed()"><br>{{initialRivi.teksti}}</template>
+                        </div>
                         <div class="col-xs-2">
                             <div class="ruutu ruutu1"> <span v-if="initialRivi.arvosana=='1'">X</span> <span v-else>&nbsp;</span></div>
                             <div class="ruutu ruutu2"> <span v-if="initialRivi.arvosana=='2'">X</span> <span v-else>&nbsp;</span> </div>
@@ -111,8 +117,8 @@ Vue.component('vue-rivi', {
                             <div class="ruutu ruutu5"> <span v-if="initialRivi.arvosana=='5'">X</span> <span v-else>&nbsp;</span> </div>
                         </div>
 
-                        <div class="col-xs-4">
-                            {{rivi.huom}}
+                        <div class="col-xs-4" v-if="initialRivi.huomDisplayed()">
+                            <span class="rivi-label">Huom{{rivi.aihe_no}}: </span> {{rivi.huom}}
                         </div>
                     </div>
                 `,

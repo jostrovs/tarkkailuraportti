@@ -76,6 +76,12 @@ class Rivi {
             this.aihe_no = data_item.no;
         }
     }
+    tekstiDisplayed(){
+        return this.teksti != undefined && this.teksti.length>0;
+    }
+    huomDisplayed(){
+        return this.huom != undefined && this.huom.length>0;
+    }
 }
 
 class Raportti {
@@ -173,6 +179,10 @@ $(document).ready(function () {
 
             uudenRivit: function(firstNo, lastNo){
                 return this.uusi_raportti.rivit.filter(rivi => rivi.aihe_no >= firstNo && rivi.aihe_no <= lastNo);
+            },
+
+            valitunRivit: function(firstNo, lastNo){
+                return this.raportti.rivit.filter(rivi => rivi.aihe_no >= firstNo && rivi.aihe_no <= lastNo);
             },
 
             loadTuomarit: function(){
@@ -333,6 +343,7 @@ $(document).ready(function () {
                     console.log(key);
                     formdata[key+"_id"] = self.uusi_raportti.rivit[i_rivi].aihe_id;
                     formdata[key+"_arvosana"] = self.uusi_raportti.rivit[i_rivi].arvosana;
+                    formdata[key+"_huom"] = self.uusi_raportti.rivit[i_rivi].huom;
                     ++i_rivi;
                     if(i==17) i=100;
                 }

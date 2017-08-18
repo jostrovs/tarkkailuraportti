@@ -63,6 +63,10 @@ class Rivi {
 
             this.aihe_nimi = data_item.nimi;
             this.aihe_no = data_item.no;
+
+            this.raportti_pvm = data_item.pvm;
+            this.raportti_koti = data_item.koti;
+            this.raportti_vieras = data_item.vieras;
         } else {
             this.id = 0;
             this.aihe_id = data_item.aihe_id;
@@ -74,6 +78,10 @@ class Rivi {
 
             this.aihe_nimi = data_item.nimi;
             this.aihe_no = data_item.no;
+
+            this.raportti_pvm = data_item.pvm;
+            this.raportti_koti = data_item.koti;
+            this.raportti_vieras = data_item.vieras;
         }
     }
     tekstiDisplayed(){
@@ -81,6 +89,11 @@ class Rivi {
     }
     huomDisplayed(){
         return this.huom != undefined && this.huom.length>0;
+    }
+    getOttelu(){
+        let pvm = "&lt;ei pvm&gt;";
+        if(this.raportti_pvm != undefined) pvm = this.raportti_pvm.split(" ")[0];
+        return `${pvm} ${this.raportti_koti}-${this.raportti_vieras}`;
     }
 }
 

@@ -17,7 +17,9 @@ Vue.component('vue-edellinen-label', {
                 },
                 computed: {
                     html: function(){
-                        return this.rivi.huom;
+                        let huom = "&lt;ei huomautusta&gt;";
+                        if(this.rivi.huom != undefined && this.rivi.huom.length > 0) huom = this.rivi.huom;
+                        return `${this.rivi.getOttelu()}: ${huom}`;
                     }
                 },
                 created: function(){

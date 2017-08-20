@@ -133,6 +133,11 @@ class Raportti {
         this.rivit = [];
     }
 
+    palautaRivit(firstNo, lastNo){
+        return this.rivit.filter(rivi => rivi.aihe_no >= firstNo && rivi.aihe_no <= lastNo);
+    }
+
+
     getRivit(){
         let self = this;
         localGetData(API_HAE_RAPORTIN_RIVIT, function(data){

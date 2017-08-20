@@ -76,95 +76,9 @@
 
 
                 <div v-if="parseInt(selectedReport,10) > 0">
-                    <hr>
-                    <h1>Valittu raportti</h1> Id: {{raportti.id}}
                     
-                    <h3>Ottelu:</h3>
-                    <p>Pvm: {{raportti.pvm}}<br>
-                       Paikka: {{raportti.paikka}}<br>
-                       Ottelu: {{raportti.koti}}-{{raportti.vieras}}
-                    </p>
+                    <vue-raportti :raportti="raportti"></vue-raportti>
 
-                    <h3>Tuomarit:</h3>
-                    <p>PT: {{raportti.pt_nimi}}<br>
-                    VT: {{raportti.vt_nimi}}<br>
-                    Tarkkailija: {{raportti.tark_nimi}}</p>
-
-                    <h2>Päätuomari</h2>
-                    <div class="panel-group">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Tuomaritekniikka ja suoritustaito</div>
-                            <div class="panel-body">
-                                <vue-rivi v-for="rivi in valitunRivit(1,5)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
-                            </div>
-                        </div>
-                        
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Sääntöjen sekä ohjeiden ja tulkintojen soveltaminen</div>
-                            <div class="panel-body">
-                                <vue-rivi v-for="rivi in valitunRivit(6,10)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
-                            </div>
-                        </div>
-
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Vuorovaikutus joukkueiden kanssa</div>
-                            <div class="panel-body">
-                                <vue-rivi v-for="rivi in valitunRivit(11,13)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
-                            </div>
-                        </div>
-
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Ottelun johtaminen ja persoonallisuus</div>
-                            <div class="panel-body">
-                                <vue-rivi v-for="rivi in valitunRivit(14,17)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
-                            </div>
-                        </div>
-
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Loppupisteet</div>
-                            <div class="panel-body">
-                                Tänne tulee pisteitä...
-                            </div>
-                        </div>
-                    </div>
-
-                    <h2>Verkkotuomari</h2>
-                    <div class="panel-group">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Tuomaritekniikka ja suoritustaito</div>
-                            <div class="panel-body">
-                                <vue-rivi v-for="rivi in valitunRivit(101,106)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
-                            </div>
-                        </div>
-                        
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">x</div>
-                            <div class="panel-body">
-                                <vue-rivi v-for="rivi in valitunRivit(107,111)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
-                            </div>
-                        </div>
-
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Vuorovaikutus joukkueiden kanssa</div>
-                            <div class="panel-body">
-                                <vue-rivi v-for="rivi in valitunRivit(112,113)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
-                            </div>
-                        </div>
-
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Ottelun johtaminen ja persoonallisuus</div>
-                            <div class="panel-body">
-                                <vue-rivi v-for="rivi in valitunRivit(114,117)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
-                            </div>
-                        </div>
-
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Loppupisteet</div>
-                            <div class="panel-body">
-                                Tänne tulee pisteitä...
-                            </div>
-                        </div>
-                    </div>
  
                 </div>
                     
@@ -192,7 +106,7 @@
                             <h4 class="modal-title">Modal Header</h4>
                         </div>
                         <div class="modal-body">
-                            <p>Some text in the modal.</p>
+                            <vue-raportti :raportti="raportti"></vue-raportti>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -136,3 +136,106 @@ Vue.component('vue-rivi', {
                 },
 });
 
+
+Vue.component('vue-raportti', {
+                template: `
+                    <div>
+                        <h1>Valittu raportti</h1> Id: {{raportti.id}}
+                    
+                        <h3>Ottelu:</h3>
+                        <p>Pvm: {{raportti.pvm}}<br>
+                            Paikka: {{raportti.paikka}}<br>
+                            Ottelu: {{raportti.koti}}-{{raportti.vieras}}
+                        </p>
+                        <h3>Tuomarit:</h3>
+                        <p>PT: {{raportti.pt_nimi}}<br>
+                        VT: {{raportti.vt_nimi}}<br>
+                        Tarkkailija: {{raportti.tark_nimi}}</p>
+
+                        <h2>Päätuomari</h2>
+                        <div class="panel-group">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Tuomaritekniikka ja suoritustaito</div>
+                                <div class="panel-body">
+                                    <vue-rivi v-for="rivi in raportti.palautaRivit(1,5)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
+                                </div>
+                            </div>
+                        
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Sääntöjen sekä ohjeiden ja tulkintojen soveltaminen</div>
+                                <div class="panel-body">
+                                    <vue-rivi v-for="rivi in raportti.palautaRivit(6,10)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Vuorovaikutus joukkueiden kanssa</div>
+                                <div class="panel-body">
+                                    <vue-rivi v-for="rivi in raportti.palautaRivit(11,13)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Ottelun johtaminen ja persoonallisuus</div>
+                                <div class="panel-body">
+                                    <vue-rivi v-for="rivi in raportti.palautaRivit(14,17)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Loppupisteet</div>
+                                <div class="panel-body">
+                                    Tänne tulee pisteitä...
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2>Verkkotuomari</h2>
+                        <div class="panel-group">
+
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Tuomaritekniikka ja suoritustaito</div>
+                                <div class="panel-body">
+                                    <vue-rivi v-for="rivi in raportti.palautaRivit(101,106)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
+                                </div>
+                            </div>
+                            
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">x</div>
+                                <div class="panel-body">
+                                    <vue-rivi v-for="rivi in raportti.palautaRivit(107,111)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Vuorovaikutus joukkueiden kanssa</div>
+                                <div class="panel-body">
+                                    <vue-rivi v-for="rivi in raportti.palautaRivit(112,113)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Ottelun johtaminen ja persoonallisuus</div>
+                                <div class="panel-body">
+                                    <vue-rivi v-for="rivi in raportti.palautaRivit(114,117)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Loppupisteet</div>
+                                <div class="panel-body">
+                                    Tänne tulee pisteitä...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                props: ['raportti', 'jos'],
+                data: function () {
+                    return {
+                        randomId: this._uid,
+                        initialRaportti: this.raportti,
+                    }
+                },
+});
+

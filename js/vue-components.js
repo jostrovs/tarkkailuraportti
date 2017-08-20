@@ -107,11 +107,11 @@ Vue.component('vue-rivi-edit', {
 Vue.component('vue-rivi', {
                 template: `
                     <div class="form-group row"">
-                        <div class="col-xs-3">
+                        <div class="col-xs-4">
                             <span class="rivi-label">{{initialRivi.otsikko}}</span>
-                            <template v-if="initialRivi.tekstiDisplayed()"><br>{{initialRivi.teksti}}</template>
+                            <template v-if="tila!='pieni' && initialRivi.tekstiDisplayed()"><br>{{initialRivi.teksti}}</template>
                         </div>
-                        <div class="col-xs-2">
+                        <div class="col-xs-3">
                             <div class="ruutu ruutu1"> <span v-if="initialRivi.arvosana=='1'">X</span> <span v-else>&nbsp;</span></div>
                             <div class="ruutu ruutu2"> <span v-if="initialRivi.arvosana=='2'">X</span> <span v-else>&nbsp;</span> </div>
                             <div class="ruutu ruutu3"> <span v-if="initialRivi.arvosana=='3'">X</span> <span v-else>&nbsp;</span> </div>
@@ -119,12 +119,12 @@ Vue.component('vue-rivi', {
                             <div class="ruutu ruutu5"> <span v-if="initialRivi.arvosana=='5'">X</span> <span v-else>&nbsp;</span> </div>
                         </div>
 
-                        <div class="col-xs-4" v-if="initialRivi.huomDisplayed()">
+                        <div class="col-xs-3" v-if="initialRivi.huomDisplayed()">
                             <span class="rivi-label">Huom{{rivi.aihe_no}}: </span> {{rivi.huom}}
                         </div>
                     </div>
                 `,
-                props: ['rivi', 'jos'],
+                props: ['rivi', 'tila', 'jos'],
                 data: function () {
                     return {
                         randomId: this._uid,
@@ -157,28 +157,28 @@ Vue.component('vue-raportti', {
                             <div class="panel panel-primary">
                                 <div class="panel-heading">Tuomaritekniikka ja suoritustaito</div>
                                 <div class="panel-body">
-                                    <vue-rivi v-for="rivi in raportti.palautaRivit(1,5)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
+                                    <vue-rivi v-for="rivi in raportti.palautaRivit(1,5)" :key="rivi.id" :rivi="rivi" :jos="jos" :tila="'pieni'"></vue-rivi>
                                 </div>
                             </div>
                         
                             <div class="panel panel-primary">
                                 <div class="panel-heading">Sääntöjen sekä ohjeiden ja tulkintojen soveltaminen</div>
                                 <div class="panel-body">
-                                    <vue-rivi v-for="rivi in raportti.palautaRivit(6,10)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
+                                    <vue-rivi v-for="rivi in raportti.palautaRivit(6,10)" :key="rivi.id" :rivi="rivi" :tila="'pieni'" :jos="jos"></vue-rivi>
                                 </div>
                             </div>
 
                             <div class="panel panel-primary">
                                 <div class="panel-heading">Vuorovaikutus joukkueiden kanssa</div>
                                 <div class="panel-body">
-                                    <vue-rivi v-for="rivi in raportti.palautaRivit(11,13)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
+                                    <vue-rivi v-for="rivi in raportti.palautaRivit(11,13)" :key="rivi.id" :rivi="rivi" :tila="'pieni'" :jos="jos"></vue-rivi>
                                 </div>
                             </div>
 
                             <div class="panel panel-primary">
                                 <div class="panel-heading">Ottelun johtaminen ja persoonallisuus</div>
                                 <div class="panel-body">
-                                    <vue-rivi v-for="rivi in raportti.palautaRivit(14,17)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
+                                    <vue-rivi v-for="rivi in raportti.palautaRivit(14,17)" :key="rivi.id" :rivi="rivi" :tila="'pieni'" :jos="jos"></vue-rivi>
                                 </div>
                             </div>
 
@@ -196,28 +196,28 @@ Vue.component('vue-raportti', {
                             <div class="panel panel-primary">
                                 <div class="panel-heading">Tuomaritekniikka ja suoritustaito</div>
                                 <div class="panel-body">
-                                    <vue-rivi v-for="rivi in raportti.palautaRivit(101,106)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
+                                    <vue-rivi v-for="rivi in raportti.palautaRivit(101,106)" :key="rivi.id" :rivi="rivi" :tila="'pieni'" :jos="jos"></vue-rivi>
                                 </div>
                             </div>
                             
                             <div class="panel panel-primary">
                                 <div class="panel-heading">x</div>
                                 <div class="panel-body">
-                                    <vue-rivi v-for="rivi in raportti.palautaRivit(107,111)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
+                                    <vue-rivi v-for="rivi in raportti.palautaRivit(107,111)" :key="rivi.id" :rivi="rivi" :tila="'pieni'" :jos="jos"></vue-rivi>
                                 </div>
                             </div>
 
                             <div class="panel panel-primary">
                                 <div class="panel-heading">Vuorovaikutus joukkueiden kanssa</div>
                                 <div class="panel-body">
-                                    <vue-rivi v-for="rivi in raportti.palautaRivit(112,113)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
+                                    <vue-rivi v-for="rivi in raportti.palautaRivit(112,113)" :key="rivi.id" :rivi="rivi" :tila="'pieni'" :jos="jos"></vue-rivi>
                                 </div>
                             </div>
 
                             <div class="panel panel-primary">
                                 <div class="panel-heading">Ottelun johtaminen ja persoonallisuus</div>
                                 <div class="panel-body">
-                                    <vue-rivi v-for="rivi in raportti.palautaRivit(114,117)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
+                                    <vue-rivi v-for="rivi in raportti.palautaRivit(114,117)" :key="rivi.id" :rivi="rivi" :tila="'pieni'" :jos="jos"></vue-rivi>
                                 </div>
                             </div>
 

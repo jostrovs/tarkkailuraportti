@@ -25,6 +25,8 @@
 </head>
 
 <body>
+
+    
     <div onclick="$('#loader').hide();" style="display: none; padding: 40px; font-size: 20px; height:80%; position: fixed; top: 10%; left: 10%; width: 80%; 
                                                background: linear-gradient(to top, #fefcea 0%,#efdd69 100%); 
                                                border: 3px solid #a00;" id="loader">
@@ -177,32 +179,33 @@
 
                     
                     <h2>Päätuomari</h2>
+                    <p>Pisteet: {{uusi_raportti.pt_score}}</p>
                     <div class="panel-group">
                         <div class="panel panel-primary">
                             <div class="panel-heading">Tuomaritekniikka ja suoritustaito</div>
                             <div class="panel-body">
-                                <vue-rivi-edit v-for="rivi in uudenRivit(1,5)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
+                                <vue-rivi-edit v-for="rivi in uudenRivit(1,5)" :key="rivi.id" :raportti="uusi_raportti" :rivi="rivi" :jos="jos"></vue-rivi>
                             </div>
                         </div>
                         
                         <div class="panel panel-primary">
                             <div class="panel-heading">Sääntöjen sekä ohjeiden ja tulkintojen soveltaminen</div>
                             <div class="panel-body">
-                                <vue-rivi-edit v-for="rivi in uudenRivit(6,10)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi-edit>
+                                <vue-rivi-edit v-for="rivi in uudenRivit(6,10)" :key="rivi.id" :raportti="uusi_raportti" :rivi="rivi" :jos="jos"></vue-rivi-edit>
                             </div>
                         </div>
 
                         <div class="panel panel-primary">
                             <div class="panel-heading">Vuorovaikutus joukkueiden kanssa</div>
                             <div class="panel-body">
-                                <vue-rivi-edit v-for="rivi in uudenRivit(11,13)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi-edit>
+                                <vue-rivi-edit v-for="rivi in uudenRivit(11,13)" :key="rivi.id" :raportti="uusi_raportti" :rivi="rivi" :jos="jos"></vue-rivi-edit>
                             </div>
                         </div>
 
                         <div class="panel panel-primary">
                             <div class="panel-heading">Ottelun johtaminen ja persoonallisuus</div>
                             <div class="panel-body">
-                                <vue-rivi-edit v-for="rivi in uudenRivit(14,17)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
+                                <vue-rivi-edit v-for="rivi in uudenRivit(14,17)" :key="rivi.id" :raportti="uusi_raportti" :rivi="rivi" :jos="jos"></vue-rivi>
                             </div>
                         </div>
 
@@ -215,32 +218,33 @@
                     </div>
 
                     <h2>Verkkotuomari</h2>
+                    <p>Pisteet: {{uusi_raportti.vt_score}}</p>
                     <div class="panel-group">
                         <div class="panel panel-primary">
                             <div class="panel-heading">Tuomaritekniikka ja suoritustaito</div>
                             <div class="panel-body">
-                                <vue-rivi-edit v-for="rivi in uudenRivit(101,106)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi-edit>
+                                <vue-rivi-edit v-for="rivi in uudenRivit(101,106)" :key="rivi.id" :raportti="uusi_raportti" :rivi="rivi" :jos="jos"></vue-rivi-edit>
                             </div>
                         </div>
                         
                         <div class="panel panel-primary">
                             <div class="panel-heading">x</div>
                             <div class="panel-body">
-                                <vue-rivi-edit v-for="rivi in uudenRivit(107,111)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
+                                <vue-rivi-edit v-for="rivi in uudenRivit(107,111)" :key="rivi.id" :raportti="uusi_raportti" :rivi="rivi" :jos="jos"></vue-rivi>
                             </div>
                         </div>
 
                         <div class="panel panel-primary">
                             <div class="panel-heading">Vuorovaikutus joukkueiden kanssa</div>
                             <div class="panel-body">
-                                <vue-rivi-edit v-for="rivi in uudenRivit(112,113)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi>
+                                <vue-rivi-edit v-for="rivi in uudenRivit(112,113)" :key="rivi.id" :raportti="uusi_raportti" :rivi="rivi" :jos="jos"></vue-rivi>
                             </div>
                         </div>
 
                         <div class="panel panel-primary">
                             <div class="panel-heading">Ottelun johtaminen ja persoonallisuus</div>
                             <div class="panel-body">
-                                <vue-rivi-edit v-for="rivi in uudenRivit(114,117)" :key="rivi.id" :rivi="rivi" :jos="jos"></vue-rivi-edit>
+                                <vue-rivi-edit v-for="rivi in uudenRivit(114,117)" :key="rivi.id" :raportti="uusi_raportti" :rivi="rivi" :jos="jos"></vue-rivi-edit>
                             </div>
                         </div>
 

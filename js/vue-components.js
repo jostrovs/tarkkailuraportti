@@ -18,9 +18,25 @@ Vue.component('vue-edellinen-label', {
                 },
                 computed: {
                     html: function(){
+                        let ottelu = this.rivi.getOttelu();
+                        let ret = `<p>${ottelu.pvm}</p>`;
+                        ret += `<p>${ottelu.koti}-${ottelu.vieras}</p>`;
+                        if(this.rivi.aihe_no < 100){
+                            ret += `<p>PT pisteet: ${ottelu.pt_score}</p>`;
+                        } else {
+                            ret += `<p>VT pisteet: ${ottelu.vt_score}</p>`;
+                        }
+
                         let huom = "&lt;ei huomautusta&gt;";
-                        if(this.rivi.huom != undefined && this.rivi.huom.length > 0) huom = this.rivi.huom;
-                        return `${this.rivi.getOttelu()}: ${huom}`;
+                        if(this.rivi.huom != undefined && this.rivi.huom.length > 0){
+                            huom = this.rivi.huom;
+                            
+                            let no = this.rivi.aihe_no;
+                            if(no > 100) no -= 100;
+                            ret += `<p>${no} Huomautus: ${huom}</p>`;
+                        }
+
+                        return ret;
                     }
                 },
                 created: function(){
@@ -31,6 +47,9 @@ Vue.component('vue-edellinen-label', {
 Vue.component('vue-rivi-edit', {
                 template: `
                     <div class="form-group row" :style="{'border-left': leftBorder}">
+                        <div class="col-xs-1" style="max-width: 20px;">
+                            {{initialRivi.aihe_no>100?initialRivi.aihe_no-100:initialRivi.aihe_no}}
+                        </div>
                         <div class="col-xs-3">
                             <span class="rivi-label">{{initialRivi.otsikko}}</span>
                             <template v-if="initialRivi.tekstiDisplayed()"><br>{{initialRivi.teksti}}</template>
@@ -43,7 +62,7 @@ Vue.component('vue-rivi-edit', {
                             <div class="radio-div ruutu5">   <label class="radio-inline"><input :id="inputId('5')" @change="onInput()" required type="radio" :name="radioname" value="5">5</label>   </div>
                             <div class="radio-div ruutu6" style="border-right: 0;">   <label class="radio-inline"><input :id="inputId('6')" @change="onInput()" required type="radio" :name="radioname" value="6">6</label>   </div>
                         </div>
-                        <div class="col-xs-4">
+                        <div class="col-xs-3">
                             <input class="form-control" 
                                   :placeholder="inputPlaceholder" 
                                   :style="{'background-color': inputBG}" 

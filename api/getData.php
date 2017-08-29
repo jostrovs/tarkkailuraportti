@@ -36,7 +36,7 @@ switch($cmd){
         break;
     case API_HAE_RAPORTIT:
         $sql = "SELECT 
-                  r.id, r.koti, r.vieras, r.paikka, r.pvm, r.pt_id, r.vt_id, r.tark_id,
+                  r.id, r.koti, r.vieras, r.paikka, r.pvm, r.pt_id, r.vt_id, r.tark_id, r.pt_score, r.vt_score,
                   pt.etunimi as pt_etunimi, pt.sukunimi as pt_sukunimi,
                   vt.etunimi as vt_etunimi, vt.sukunimi as vt_sukunimi,
                   tark.etunimi as tark_etunimi, tark.sukunimi as tark_sukunimi
@@ -59,7 +59,7 @@ switch($cmd){
                 WHERE r.raportti_id=" . $arg1;
         break;
     case API_HAE_PT_RAPORTIT:
-        $sql = "SELECT  ra.id as raportti_id, ra.koti, ra.vieras, ra.pvm, ra.pt_id, ra.vt_id, 
+        $sql = "SELECT  ra.id as raportti_id, ra.koti, ra.vieras, ra.pvm, ra.pt_id, ra.vt_id, ra.pt_score, ra.vt_score,
                         r.id, r.arvosana, r.aihe_id, r.huom, 
                         a.no
                 FROM raportti ra
@@ -68,7 +68,7 @@ switch($cmd){
                 WHERE pt_id = $arg1";
         break;
     case API_HAE_VT_RAPORTIT:
-        $sql = "SELECT  ra.id as raportti_id, ra.koti, ra.vieras, ra.pvm, ra.pt_id, ra.vt_id, 
+        $sql = "SELECT  ra.id as raportti_id, ra.koti, ra.vieras, ra.pvm, ra.pt_id, ra.vt_id, ra.pt_score, ra.vt_score,
                         r.id, r.arvosana, r.aihe_id, r.huom, 
                         a.no
                 FROM raportti ra

@@ -23,8 +23,8 @@
     //$debug["obj"] = $obj;
     $debug["phpFile"] = "insertReport.php";
     
-    $sql = "INSERT INTO raportti (koti, vieras, paikka, pvm, pt_id, vt_id, tark_id)
-            VALUES ('".obj('koti')."', '".obj('vieras')."', '".obj('paikka')."', '".obj('pvm')."', '".obj('pt_id')."', '".obj('vt_id')."', '".obj('tark_id')."')";
+    $sql = "INSERT INTO raportti (koti, vieras, paikka, pvm, pt_id, vt_id, tark_id, pt_score, vt_score)
+            VALUES ('".obj('koti')."', '".obj('vieras')."', '".obj('paikka')."', '".obj('pvm')."', '".obj('pt_id')."', '".obj('vt_id')."', '".obj('tark_id')."', '".obj('pt_score')."', '".obj('vt_score')."')";
 
     if ($mysqli->query($sql) === TRUE) {
         $report_id = $mysqli->insert_id;

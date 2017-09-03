@@ -129,6 +129,9 @@ Vue.component('vue-rivi-edit', {
 Vue.component('vue-rivi', {
                 template: `
                     <div class="form-group row"">
+                        <div class="col-xs-1" style="max-width: 20px;">
+                            {{initialRivi.aihe_no>100?initialRivi.aihe_no-100:initialRivi.aihe_no}}
+                        </div>
                         <div class="col-xs-4">
                             <span class="rivi-label">{{initialRivi.otsikko}}</span>
                             <template v-if="tila!='pieni' && initialRivi.tekstiDisplayed()"><br>{{initialRivi.teksti}}</template>

@@ -169,9 +169,15 @@ Vue.component('vue-raportti', {
                         <h1>Valittu raportti</h1> Id: {{raportti.id}}
                     
                         <h3>Ottelu:</h3>
-                        <p>Pvm: {{raportti.pvm}}<br>
+                        <p  >Pvm: {{raportti.pvm}}<br>
                             Paikka: {{raportti.paikka}}<br>
-                            Ottelu: {{raportti.koti}}-{{raportti.vieras}}
+                            Ottelu: {{raportti.koti}}-{{raportti.vieras}}, 
+                            <span v-if="raportti.miehet">Miehet</span><br>
+                            <span v-if="!raportti.miehet">Naiset</span><br>
+                            Kesto: {{raportti.kesto_h}} h {{raportti.kesto_min}} min<br>
+                            Vaikeusaste: <span v-if="raportti.vaikeus==1">Helppo</span>
+                                         <span v-if="raportti.vaikeus==2">Normaali</span>
+                                         <span v-if="raportti.vaikeus==4">Vaikea</span>
                         </p>
                         <h3>Tuomarit:</h3>
                         <p>PT: {{raportti.pt_nimi}}<br>

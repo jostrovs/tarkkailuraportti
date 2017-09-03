@@ -44,6 +44,10 @@ kertoimet["115"] = [20000, 10, 0, -10, -20, -50, -400];
 kertoimet["116"] = [20000, 10, 0,  -5, -20, -40, -100];
 kertoimet["117"] = [20000, 10, 0, -10, -20, -40, -100];
 
+const HELPPO = 1;
+const NORMAALI = 2;
+const VAIKEA = 3;
+
 var localGetData=function(cmd, callback, arg1) {
     $.ajax({
         dataType: 'json',
@@ -149,6 +153,12 @@ class Raportti {
 
             this.tark_id = data_item.tark_id;
             this.tark_nimi = `${data_item.tark_etunimi} ${data_item.tark_sukunimi}`;
+
+            this.miehet = data_item.miehet;
+            this.tulos = data_item.tulos;
+            this.kesto_h = data_item.kesto_h;
+            this.kesto_min = data_item.kesto_min;
+            this.vaikeus = data_item.vaikeus;
         } else {
             this.id = "0";
             this.koti = "koti";
@@ -164,6 +174,12 @@ class Raportti {
 
             this.tark_id = "0";
             this.tark_nimi = '';
+
+            this.miehet = true;
+            this.tulos = "";
+            this.kesto_h = 0;
+            this.kesto_min = 0;
+            this.vaikeus = NORMAALI;
         }
         this.rivit = [];
         this.laske();
@@ -209,6 +225,7 @@ class Raportti {
             for(let rivi of data.data){
                 self.rivit.push(new Rivi(rivi));
             }
+            self.laske();
         }, self.id);
     }
 }

@@ -23,8 +23,10 @@
     //$debug["obj"] = $obj;
     $debug["phpFile"] = "insertReport.php";
     
-    $sql = "INSERT INTO raportti (koti, vieras, paikka, pvm, pt_id, vt_id, tark_id, pt_score, vt_score)
-            VALUES ('".obj('koti')."', '".obj('vieras')."', '".obj('paikka')."', '".obj('pvm')."', '".obj('pt_id')."', '".obj('vt_id')."', '".obj('tark_id')."', '".obj('pt_score')."', '".obj('vt_score')."')";
+    $sql = "INSERT INTO raportti (koti, vieras, paikka, pvm, miehet, tulos, kesto_h, kesto_min, vaikeus, pt_id, vt_id, tark_id, pt_score, vt_score)
+            VALUES ('".obj('koti')."', '".obj('vieras')."', '".obj('paikka')."', '".obj('pvm')."', '"
+                      .obj('miehet')."', '".obj('tulos')."', '".obj('kesto_h')."', '".obj('kesto_min')."', '".obj('vaikeus')."', '"
+                      .obj('pt_id')."', '".obj('vt_id')."', '".obj('tark_id')."', '".obj('pt_score')."', '".obj('vt_score')."')";
 
     if ($mysqli->query($sql) === TRUE) {
         $report_id = $mysqli->insert_id;

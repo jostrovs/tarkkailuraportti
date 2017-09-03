@@ -126,7 +126,7 @@
                     <div class="row">
                         <div class="col-xs-3">
                             <label for="pvm">Pvm</label>
-                            <input id="pvm" class="form-control" type="datetime-local" required v-model="uusi_raportti.pvm">
+                            <input id="pvm" class="form-control" type="date" required v-model="uusi_raportti.pvm">
                         </div>
                         <div class="col-xs-3">
                             <label for="paikka">Paikka</label>
@@ -141,6 +141,21 @@
                         <div class="col-xs-3">
                             <label for="vieras">Vieras</label>
                             <input id="vieras" class="form-control" type="text" required v-model="uusi_raportti.vieras">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <br>
+                            <label class="radio-inline"><input type="radio" required type="radio" name="miehet" value="true">Miehet</label>
+                            <label class="radio-inline"><input type="radio" required type="radio" name="miehet" value="false">Naiset</label>
+                        </div>
+                        <div class="col-xs-1">
+                            <label for="kesto_h">Kesto h</label>
+                            <input id="kesto_h" class="form-control" type="number" required v-model="uusi_raportti.kesto_h">
+                        </div>
+                        <div class="col-xs-1">
+                            <label for="kesto_min">min</label>
+                            <input id="kesto_min" class="form-control" type="number" required v-model="uusi_raportti.kesto_min">
                         </div>
                     </div>
 
@@ -176,7 +191,14 @@
                         </div>
                     </div>
 
-                    
+                    <h3>Ottelun vaikeusaste</h3>
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <label class="radio-inline"><input type="radio" required type="radio" name="vaikeus" value="1">Helppo</label>
+                            <label class="radio-inline"><input type="radio" required type="radio" name="vaikeus" value="2">Normaali</label>
+                            <label class="radio-inline"><input type="radio" required type="radio" name="vaikeus" value="3">Vaikea</label>
+                        </div>
+                    </div>                    
 
                     
                     <h2>Päätuomari</h2>
@@ -210,13 +232,7 @@
                             </div>
                         </div>
 
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Loppupisteet</div>
-                            <div class="panel-body">
-                                Tänne tulee pisteitä...
-                            </div>
-                        </div>
-                    </div>
+                     </div>
 
                     <h2>Verkkotuomari</h2>
                     <p>Pisteet: {{uusi_raportti.vt_score}}</p>
@@ -249,12 +265,6 @@
                             </div>
                         </div>
 
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Loppupisteet</div>
-                            <div class="panel-body">
-                                Tänne tulee pisteitä...
-                            </div>
-                        </div>
                     </div>
 
                     <div>

@@ -209,6 +209,11 @@ $(document).ready(function () {
                     tark_id: self.uusi_raportti.tark_id,
                     pt_score: self.uusi_raportti.pt_score,
                     vt_score: self.uusi_raportti.vt_score,
+                    miehet: self.uusi_raportti.miehet,
+                    tulos: self.uusi_raportti.tulos,
+                    kesto_h: self.uusi_raportti.kesto_h,
+                    kesto_min: self.uusi_raportti.kesto_min,
+                    vaikeus: self.uusi_raportti.vaikeus,
                 };
 
                 let i_rivi=0;

@@ -38,11 +38,6 @@
         <ul id="navbar" class="nav nav-tabs">
 			<li class="active"><a data-toggle="tab" href="#etusivu">Etusivu</a>  </li>
 			<li>
-                <a data-toggle="tab" href="#sivu1">
-                    Sivu1
-                </a>
-            </li>
-			<li>
                 <a data-toggle="tab" href="#uusi">
                     Uusi
                 </a>
@@ -86,12 +81,7 @@
                 </div>
                     
 			</div>
-			<div id="sivu1" class="tab-pane fade">
-                <h1>Talletus</h1>
 
-
-
-			</div>
 			<div id="uusi" class="tab-pane fade">
                 <h1>Uusi raportti</h1>
 
@@ -109,7 +99,7 @@
                             <h4 class="modal-title">Modal Header</h4>
                         </div>
                         <div class="modal-body">
-                            <vue-raportti :raportti="raportti"></vue-raportti>
+                            <vue-raportti :raportti="modal_raportti"></vue-raportti>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -266,6 +256,8 @@
                         </div>
 
                     </div>
+
+                    <vue-kokonaisarvio :raportti="uusi_raportti" :jos="jos"></vue-kokonaisarvio>
 
                     <div>
                         <button type="submit" class="btn btn-default">PostData</button>

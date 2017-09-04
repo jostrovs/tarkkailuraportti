@@ -1,6 +1,36 @@
+
+Vue.component('vue-kokonaisarvio', {
+    template: `
+        <div class="panel-group">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Lopullinen tuomariarvio</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-4">Päätuomari</div>
+                        <div class="col-xs-4">Verkkotuomari</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2">Pisteet</div>
+                        <div class="col-xs-4" style="text-align: center">{{raportti.pt_score}}</div>
+                        <div class="col-xs-4" style="text-align: center">{{raportti.vt_score}}</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    `,
+    props: ['raportti', 'jos'],
+    data: function(){
+        return {
+            initRaporti: this.raportti,
+        }
+    }
+});
+
 Vue.component('vue-edellinen-label', {
                 template: `
-                    <div :id="randomId" class="label" data-toggle="tooltip" :title="html">
+                    <div :id="randomId" class="label" @click="onClick()" data-toggle="tooltip" :title="html">
                         <span v-if="initialRivi.arvosana=='6'" class="label-dark-red">{{rivi.arvosana}}</span>
                         <span v-if="initialRivi.arvosana=='5'" class="label-red">{{rivi.arvosana}}</span>
                         <span v-if="initialRivi.arvosana=='4'" class="label-orange">{{rivi.arvosana}}</span>
@@ -14,6 +44,11 @@ Vue.component('vue-edellinen-label', {
                     return {
                         randomId: "label" + this._uid,
                         initialRivi: this.rivi,
+                    }
+                },
+                methods: {
+                    onClick: function(){
+                        bus.emit(EVENT_AVAA_RAPORTTI, this.initialRivi.raportti_id);
                     }
                 },
                 computed: {

@@ -1,4 +1,13 @@
-
+var bus = new Vue({
+    methods: {
+        on: function(event, callback){
+            this.$on(event, callback);
+        },
+        emit: function(event, payload){
+            this.$emit(event, payload);
+        }
+    }
+});
 
 $(document).ready(function () {
     var app = new Vue({
@@ -13,6 +22,7 @@ $(document).ready(function () {
             raportit: [],
 
             selectedReport: null,
+            modal_raportti: null,
             raportti: new Raportti(),
             uusi_raportti: new Raportti(),
 
@@ -28,10 +38,21 @@ $(document).ready(function () {
             this.loadRivit();
             this.loadRaportit();
             this.newReport();
+
+            bus.on(EVENT_AVAA_RAPORTTI, this.modalReport);
         },
         computed: {
         },
         methods: {
+            modalReport: function(raportti_id){
+                for(let raportti of this.raportit){
+                    if(raportti.id == raportti_id){
+                        this.modal_raportti = raportti;
+                        this.modal_raportti.getRivit();
+                    }
+                }
+                $("#myModal").modal();
+            },
             getData: function(cmd, callback, arg1) {
                 let self=this;
                 $.ajax({

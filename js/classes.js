@@ -1,6 +1,9 @@
 
 const EVENT_AVAA_RAPORTTI = "EVENT_AVAA_RAPORTTI";
 
+const ROOLI_TUOMARI = 1;
+const ROOLI_TARKKAILIJA = 0;
+
 const API_HAE_TUOMARIT = 1;
 const API_HAE_RAPORTIT = 2;
 const API_HAE_RIVIT = 3;
@@ -79,6 +82,7 @@ class Tuomari {
         this.id = data_item.id;
         this.etunimi = data_item.etunimi;
         this.sukunimi = data_item.sukunimi;
+        this.rooli = data_item.rooli;
     }
 }
 

@@ -14,7 +14,7 @@ $(document).ready(function () {
         el: '#app',
         data: {
             dummy: [1, 2, 3, 4, 5],
-            tuomarit: [],
+            kaikki_tuomarit: [],
             aiheet: [],
             ptRivit: [],
             vtRivit: [],
@@ -22,7 +22,7 @@ $(document).ready(function () {
             raportit: [],
 
             selectedReport: null,
-            modal_raportti: null,
+            modal_raportti: new Raportti(),
             raportti: new Raportti(),
             uusi_raportti: new Raportti(),
 
@@ -42,6 +42,16 @@ $(document).ready(function () {
             bus.on(EVENT_AVAA_RAPORTTI, this.modalReport);
         },
         computed: {
+            tuomarit: function(){
+                return this.kaikki_tuomarit.filter(function(tuomari){
+                    return tuomari.rooli == ROOLI_TUOMARI;
+                });
+            },
+            tarkkailijat: function(){
+                return this.kaikki_tuomarit.filter(function(tuomari){
+                    return tuomari.rooli == ROOLI_TARKKAILIJA;
+                });
+            }
         },
         methods: {
             modalReport: function(raportti_id){
@@ -78,14 +88,23 @@ $(document).ready(function () {
             loadTuomarit: function(){
                 let self=this;
                 this.getData(API_HAE_TUOMARIT, function(data){
-                    self.tuomarit = [];
+                    self.kaikki_tuomarit = [];
                     if(data.data == undefined){
                          console.log("loadTuomarit: data.data = null");
                          return;
                     }
                     for(let tuomari of data.data){
-                        self.tuomarit.push(new Tuomari(tuomari));
+                        self.kaikki_tuomarit.push(new Tuomari(tuomari));
                     }
+                    self.kaikki_tuomarit.sort(function(t1, t2){ 
+                        if(t1.sukunimi < t2.sukunimi) return -1;
+                        if(t1.sukunimi > t2.sukunimi) return 1;
+
+                        if(t1.etunimi < t2.etunimi) return -1;
+                        if(t1.etunimi > t2.etunimi) return 1;
+                    
+                        return 0;
+                    }) 
                 })
             },
 

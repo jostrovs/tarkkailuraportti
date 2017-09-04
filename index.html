@@ -156,7 +156,7 @@
                             <label for="pt">Päätuomari</label> <template v-if="jos">(valittu: {{uusi_raportti.pt_id}})</template>
                             <select class="form-control" id="pt" v-model="uusi_raportti.pt_id" @change="ptChanged()">
                                 <option disabled value="-1">Valitse PT</option>
-                                <option v-for="tuomari in tuomarit" :value="tuomari.id">{{tuomari.etunimi}} {{tuomari.sukunimi}}</option>
+                                <option v-for="tuomari in tuomarit" :value="tuomari.id">{{tuomari.sukunimi}} {{tuomari.etunimi}}</option>
                             </select>
                         </div>
                     </div>
@@ -166,7 +166,7 @@
                             <label for="vt">Verkkotuomari</label> <template v-if="jos">(valittu: {{uusi_raportti.vt_id}})</template>
                             <select class="form-control" id="vt" v-model="uusi_raportti.vt_id" @change="vtChanged()">
                                 <option disabled value="-1">Valitse VT</option>
-                                <option v-for="tuomari in tuomarit" :value="tuomari.id">{{tuomari.etunimi}} {{tuomari.sukunimi}}</option>
+                                <option v-for="tuomari in tuomarit" :value="tuomari.id">{{tuomari.sukunimi}} {{tuomari.etunimi}}</option>
                             </select>
                         </div>
                     </div>
@@ -176,7 +176,7 @@
                             <label for="tark">Tarkkailija</label> <template v-if="jos">(valittu: {{uusi_raportti.tark_id}})</template>
                             <select class="form-control" id="tark" v-model="uusi_raportti.tark_id">
                                 <option disabled value="-1">Valitse Tarkkailija</option>
-                                <option v-for="tuomari in tuomarit" :value="tuomari.id">{{tuomari.etunimi}} {{tuomari.sukunimi}}</option>
+                                <option v-for="tuomari in tarkkailijat" :value="tuomari.id">{{tuomari.sukunimi}} {{tuomari.etunimi}}</option>
                             </select>
                         </div>
                     </div>

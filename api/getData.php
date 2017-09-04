@@ -25,8 +25,6 @@ $arg1 = $mysqli->real_escape_string($arg1);
 $debug["komento"] = $cmd;
 $debug["arg1"] = $arg1;
 
-
-
 $sqlTotal = "SELECT * FROM tuomari";
 $sql = "SELECT * FROM tuomari"; 
 
@@ -48,7 +46,7 @@ switch($cmd){
                 ";
         break;
     case API_HAE_RIVIT:
-        $sql = "SELECT * FROM rivi r JOIN aihe a ON r.aihe_id = a.id";
+        $sql = "SELECT * FROM rivi r JOIN aihe a ON r.aihe_id = a.id where r.id = 280";
         break;
     case API_HAE_AIHEET:
         $sql = "SELECT * FROM aihe";
@@ -95,7 +93,10 @@ $result =  mysqli_query($mysqli,$sqlTotal);
 
 $data['total'] = mysqli_num_rows($result);
 $data['debug'] = $debug;
-echo json_encode($data);
+
+$enc = json_encode($data, JSON_UNESCAPED_UNICODE);
+if(!$enc) echo "Enkoodaus feilasi, ";
+else echo $enc;
 
 file_put_contents('c:\\d\\omagit\\tark\\phpdebug\\my_debug_file.txt', json_encode($data));
 ?>

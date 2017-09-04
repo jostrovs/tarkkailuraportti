@@ -1,3 +1,5 @@
+
+
 var bus = new Vue({
     methods: {
         on: function(event, callback){
@@ -67,7 +69,7 @@ $(document).ready(function () {
                 let self=this;
                 $.ajax({
                     dataType: 'json',
-                    url: './../api/getData.php',
+                    url: GET_DATA,
                     data: {cmd:cmd, arg1:arg1}
                 }).done(function(data){
                     self.debug = JSON.stringify(data.debug, undefined, 2);
@@ -272,7 +274,7 @@ $(document).ready(function () {
                     type: "POST",
                     dataType: 'json',
                     //url: './../api/setData.php',
-                    url: './../api/insertReport.php',
+                    url: INSERT_REPORT,
                     data: {data: JSON.stringify(formdata)},
                 }).done(function(data){
                     self.debug = JSON.stringify(data.debug, undefined, 2);

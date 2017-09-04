@@ -1,3 +1,7 @@
+const GET_DATA = 'http://www.lentopalloerotuomarit.fi/tark2343/tark/api/getData.php';
+const INSERT_REPORT = 'http://www.lentopalloerotuomarit.fi/tark2343/tark/api/insertReport.php';
+//const GET_DATA = './../api/getData.php';
+//const INSERT_REPORT = './../api/insertReport.php';
 
 const EVENT_AVAA_RAPORTTI = "EVENT_AVAA_RAPORTTI";
 
@@ -56,7 +60,7 @@ const VAIKEA = 3;
 var localGetData=function(cmd, callback, arg1) {
     $.ajax({
         dataType: 'json',
-        url: './../api/getData.php',
+        url: GET_DATA,
         data: {cmd:cmd, arg1:arg1}
     }).done(function(data){
         if(callback != undefined){

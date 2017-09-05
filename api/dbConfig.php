@@ -1,6 +1,6 @@
 <?php
-	mb_internal_encoding("UTF-8");
-	mysql_query("set names 'utf8'");
+    mb_internal_encoding("UTF-8");
+	//mysql_query("set names 'utf8'");
 	
 	define (DB_USER, "lentopallo_tark");
 	define (DB_PASSWORD, "lentopallo_tark");

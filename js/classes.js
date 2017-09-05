@@ -1,7 +1,7 @@
-const GET_DATA = 'http://www.lentopalloerotuomarit.fi/tark2343/tark/api/getData.php';
-const INSERT_REPORT = 'http://www.lentopalloerotuomarit.fi/tark2343/tark/api/insertReport.php';
-//const GET_DATA = './../api/getData.php';
-//const INSERT_REPORT = './../api/insertReport.php';
+//const GET_DATA = 'http://www.lentopalloerotuomarit.fi/tark2343/tark/api/getData.php';
+//const INSERT_REPORT = 'http://www.lentopalloerotuomarit.fi/tark2343/tark/api/insertReport.php';
+const GET_DATA = './../api/getData.php';
+const INSERT_REPORT = './../api/insertReport.php';
 
 const EVENT_AVAA_RAPORTTI = "EVENT_AVAA_RAPORTTI";
 
@@ -66,6 +66,8 @@ var localGetData=function(cmd, callback, arg1) {
         if(callback != undefined){
             callback(data);
         }
+    }).fail(function(){
+        toastr.error("Tietojen haku kannasta epäonnistui.")
     });
 }
 
@@ -171,9 +173,9 @@ class Raportti {
             this.vaikeus = data_item.vaikeus;
         } else {
             this.id = "0";
-            this.koti = "koti";
-            this.vieras = "vieras";
-            this.paikka = "ottelupaikka";
+            this.koti = "";
+            this.vieras = "";
+            this.paikka = "";
             this.pvm = "pvm";
             
             this.pt_id = "0";

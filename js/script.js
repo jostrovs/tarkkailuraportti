@@ -1,5 +1,3 @@
-
-
 var bus = new Vue({
     methods: {
         on: function(event, callback){
@@ -10,6 +8,9 @@ var bus = new Vue({
         }
     }
 });
+
+NAISET = ["HPK", "LP Kangasala", "LP Viesti", "LP-Vampula", "LiigaPloki", "Nurmon Jymy", "Oriveden Ponnistus", "Pölkky Kuusamo", "WoVo Rovaniemi"];
+MIEHET = ["Akaa-Volley", "Etta", "Hurrikaani Loimaa", "Kokkolan Tiikerit", "LEKA Volley", "Raision Loimu", "Rantaperkiön Isku", "Sampo Volley", "Team Lakkapää", "VaLePa", "Vantaa Ducks"];
 
 $(document).ready(function () {
     var app = new Vue({
@@ -22,7 +23,7 @@ $(document).ready(function () {
             vtRivit: [],
             rivit: [],
             raportit: [],
-
+            
             selectedReport: null,
             modal_raportti: new Raportti(),
             raportti: new Raportti(),
@@ -53,6 +54,10 @@ $(document).ready(function () {
                 return this.kaikki_tuomarit.filter(function(tuomari){
                     return tuomari.rooli == ROOLI_TARKKAILIJA;
                 });
+            },
+            joukkueet: function(){
+                if(this.uusi_raportti.miehet) return MIEHET;
+                return NAISET;
             }
         },
         methods: {
@@ -76,6 +81,8 @@ $(document).ready(function () {
                     if(callback != undefined){
                         callback(data);
                     }
+                }).fail(function(){
+                    toastr.error("Tietojen haku tietokannasta epäonnistui.");  
                 });
             },
 
@@ -93,6 +100,7 @@ $(document).ready(function () {
                     self.kaikki_tuomarit = [];
                     if(data.data == undefined){
                          console.log("loadTuomarit: data.data = null");
+                         toastr.error("Tuomarien lataus epäonnistui.");
                          return;
                     }
                     for(let tuomari of data.data){
@@ -106,7 +114,7 @@ $(document).ready(function () {
                         if(t1.etunimi > t2.etunimi) return 1;
                     
                         return 0;
-                    }) 
+                    }) ;
                 })
             },
 
@@ -278,7 +286,9 @@ $(document).ready(function () {
                     data: {data: JSON.stringify(formdata)},
                 }).done(function(data){
                     self.debug = JSON.stringify(data.debug, undefined, 2);
-                    self.postResponse = data;
+                    toastr.success("Raportin on talletettu tietokantaan.");
+                }).fail(function(){
+                    toastr.error("Raportin talletus tietokantaan epäonnistui.");
                 });
             }
         }

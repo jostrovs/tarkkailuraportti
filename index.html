@@ -13,10 +13,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/toastr.min.css">
     <link rel="stylesheet" href="css/style.css">
 
     <script src="js/jquery-3.1.1.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script src="js/toastr.min.js"></script>
     <script src="js/vue.js"></script>
     <script src="js/moment.js"></script>
     <script src="js/lockr.js"></script>
@@ -116,36 +118,43 @@
                     <div class="row">
                         <div class="col-xs-3">
                             <label for="pvm">Pvm</label>
-                            <input id="pvm" class="form-control" type="date" required v-model="uusi_raportti.pvm">
+                            <input id="pvm" class="form-control" type="date" placeholder="pvm" required v-model="uusi_raportti.pvm">
                         </div>
                         <div class="col-xs-3">
                             <label for="paikka">Paikka</label>
-                            <input id="paikka" class="form-control" type="text" required v-model="uusi_raportti.paikka">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <label for="koti">Kotijoukkue</label>
-                            <input id="koti" class="form-control" type="text" required v-model="uusi_raportti.koti">
-                        </div>
-                        <div class="col-xs-3">
-                            <label for="vieras">Vierasjoukkue</label>
-                            <input id="vieras" class="form-control" type="text" required v-model="uusi_raportti.vieras">
+                            <input id="paikka" class="form-control" type="text" placeholder="Pelipaikka" required v-model="uusi_raportti.paikka">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-3">
                             <br>
-                            <label class="radio-inline"><input type="radio" required type="radio" name="miehet" value="true">Miehet</label>
-                            <label class="radio-inline"><input type="radio" required type="radio" name="miehet" value="false">Naiset</label>
+                            <vue-radio-miehet :raportti="uusi_raportti" :jos="jos"></vue-radio-miehet>
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <label for="koti">Kotijoukkue</label>
+                            <select class="form-control" id="koti" v-model="uusi_raportti.koti">
+                                <option disabled value="-1">Valitse kotijoukkue</option>
+                                <option v-for="joukkue in joukkueet" :value="joukkue">{{joukkue}}</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-3">
+                            <label for="koti">Vierasjoukkue</label>
+                            <select class="form-control" id="koti" v-model="uusi_raportti.vieras">
+                                <option disabled value="-1">Valitse vierasjoukkue</option>
+                                <option v-for="joukkue in joukkueet" :value="joukkue">{{joukkue}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-xs-1">
                             <label for="kesto_h">Kesto h</label>
-                            <input id="kesto_h" class="form-control" type="number" required v-model="uusi_raportti.kesto_h">
+                            <input id="kesto_h" class="form-control" type="number" min=0 max=9 required v-model="uusi_raportti.kesto_h">
                         </div>
                         <div class="col-xs-1">
                             <label for="kesto_min">min</label>
-                            <input id="kesto_min" class="form-control" type="number" required v-model="uusi_raportti.kesto_min">
+                            <input id="kesto_min" class="form-control" type="number" min=0 max=59 required v-model="uusi_raportti.kesto_min">
                         </div>
                     </div>
 

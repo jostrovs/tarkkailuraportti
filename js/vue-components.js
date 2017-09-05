@@ -79,6 +79,47 @@ Vue.component('vue-edellinen-label', {
                 }
 });
 
+Vue.component('vue-radio-miehet', {
+    template: `
+        <div>
+                <div> <label class="radio-inline"><input id="miehet" @change="onInput()" required type="radio" :name="radioname" value="true">Miehet</label>   </div>
+                <div> <label class="radio-inline"><input id="naiset" @change="onInput()" required type="radio" :name="radioname" value="false">Naiset</label>   </div>
+        </div>
+    `,
+    props: ['raportti', 'jos'],
+    data: function () {
+        return {
+            randomId: this._uid,
+            initialRaportti: this.raportti,
+            valittu: 0,
+            radioname: "optMiehet",
+            inputPlaceholder: "",
+        }
+    },
+    methods: {
+        onInput: function () {
+            let val = $(`input[name=${this.radioname}]:checked`).val();
+            this.raportti.miehet = (val=="true");
+            this.valittu = val;
+        },
+    },
+    created: function(){
+        let self=this;
+        setTimeout(function(){
+            let $radios = $(`input[name=${self.radioname}]`);
+            let radios = $.makeArray($radios);
+            for(let radio of radios){
+                if(radio.value == "true" && self.initialRaportti.miehet){
+                    $(radio).prop("checked", true);
+                }
+                if(radio.value == "false" && !self.initialRaportti.miehet){
+                    $(radio).prop("checked", true);
+                }
+            }
+        }, 10);
+    }
+});
+
 Vue.component('vue-rivi-edit', {
                 template: `
                     <div class="form-group row" :style="{'border-left': leftBorder}">

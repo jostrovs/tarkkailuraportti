@@ -12,7 +12,6 @@ require 'dbConfig.php';
     define (API_HAE_VT_RAPORTIT, 7);
 	
 // Tänne argumenttien mukaan datan hakua eri tauluista ja eri tarkoituksiin jne.
-
 $debug = array();
 $debug["phpFile"] = "getData.php";
 

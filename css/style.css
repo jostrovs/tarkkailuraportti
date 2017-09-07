@@ -242,3 +242,23 @@ h4 {
 .test + .tooltip.right > .tooltip-arrow {
     border-right: 5px solid black;
 }
+
+#luonnos {
+	top: 30%;
+	left: 30%;
+    color: #fee;
+	font-size: 8em;
+	font-weight: bold;
+	text-align: center;
+	position: fixed;
+	display: inline-block;
+	border: 12px solid #fee;
+	padding: 28px;
+	border-radius: 36px;
+	-webkit-transform: rotate(-25deg);
+	-moz-transform: rotate(-25deg);
+	-o-transform: rotate(-25deg);
+	-ms-transform: rotate(-25deg);
+	transform: rotate(-25deg);
+	z-index: -1;
+  }

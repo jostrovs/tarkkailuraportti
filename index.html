@@ -273,7 +273,7 @@
                     </div>
                 </form>
 
-                <div>
+                <div v-if="jos">
                     {{postResponse}}
                 </div>
 
@@ -311,6 +311,8 @@
         </div>        
 
     </div>
+
+    <div id="luonnos" onclick="$('#luonnos').hide()">Luonnos</div>
 </body>
 
 </html>

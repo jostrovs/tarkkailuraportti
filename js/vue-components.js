@@ -242,7 +242,9 @@ Vue.component('vue-rivi', {
 Vue.component('vue-raportti', {
                 template: `
                     <div>
-                        <h1>Valittu raportti</h1> Id: {{raportti.id}}
+                        <hr>
+                        <h1>Valittu raportti</h1> 
+                        <span v-if="jos">Id: {{raportti.id}}</span>
                     
                         <h3>Ottelu:</h3>
                         <p  >Pvm: {{raportti.pvm}}<br>
@@ -294,7 +296,7 @@ Vue.component('vue-raportti', {
                             <div class="panel panel-primary">
                                 <div class="panel-heading">Loppupisteet</div>
                                 <div class="panel-body">
-                                    Tänne tulee pisteitä...
+                                    <p style="font-size: larger;">Päätuomarin pisteet: {{raportti.pt_score}}</p>
                                 </div>
                             </div>
                         </div>
@@ -334,7 +336,7 @@ Vue.component('vue-raportti', {
                             <div class="panel panel-primary">
                                 <div class="panel-heading">Loppupisteet</div>
                                 <div class="panel-body">
-                                    Tänne tulee pisteitä...
+                                    <p style="font-size: larger;">Verkkotuomarin pisteet: {{raportti.vt_score}}</p>
                                 </div>
                             </div>
                         </div>

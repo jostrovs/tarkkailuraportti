@@ -229,13 +229,16 @@ $(document).ready(function () {
 
             test_fill: function(){
                 let now = moment(Date.now());
-                let pvm = now.format("YYYY-MM-DD") + "T" + now.format("hh:mm");
-                console.log(pvm);
-                $("#pvm").val(pvm);
-                $("#pt").val("1");
-                $("#vt").val("1");
-                $("#tark").val("1");
-                
+                let pvm = now.format("YYYY-MM-DD");
+
+                this.uusi_raportti.pvm = pvm;
+                this.uusi_raportti.paikka = "Pelipaikka";
+                this.uusi_raportti.koti = "Etta";
+                this.uusi_raportti.vieras = "Etta";
+                this.uusi_raportti.pt_id = "1";
+                this.uusi_raportti.vt_id = "4";
+                this.uusi_raportti.tark_id = "3";
+
                 let as = 1;
                 for(let i=1;i<118;++i){
                     let id = i.toString() + "_" + as++;
@@ -286,11 +289,21 @@ $(document).ready(function () {
                     data: {data: JSON.stringify(formdata)},
                 }).done(function(data){
                     self.debug = JSON.stringify(data.debug, undefined, 2);
-                    toastr.success("Raportin on talletettu tietokantaan.");
+                    self.newReport();
+                    toastr.success("Raportti on talletettu tietokantaan.");
+                    setTimeout(function(){location.reload();}, 2000);
+
                 }).fail(function(){
                     toastr.error("Raportin talletus tietokantaan epäonnistui.");
                 });
-            }
+            },
+
+            koklaa: function(){
+                // this.newReport();
+                // toastr.success("Raportti on talletettu tietokantaan.");
+                // $("#etusivuLink").trigger('click');
+                // selectLastReport();
+            },
         }
     });
 });

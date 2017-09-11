@@ -240,4 +240,8 @@ class Raportti {
             self.laske();
         }, self.id);
     }
+
+    title(){
+        return this.koti + " - " + this.vieras + "   " + this.pvm;
+    }
 }

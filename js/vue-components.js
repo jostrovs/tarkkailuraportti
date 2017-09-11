@@ -349,5 +349,10 @@ Vue.component('vue-raportti', {
                         initialRaportti: this.raportti,
                     }
                 },
+                updated: function(){
+                    let title = this.raportti.title();
+                    console.log(title);
+                    $("#modal-title").text(title);
+                }
 });
 

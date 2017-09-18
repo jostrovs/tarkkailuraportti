@@ -36,9 +36,9 @@ $(document).ready(function () {
                 columns: [
                     { title: 'Ottelu', key: 'ottelu', template: function(row){ return row['koti'] + " - " + row['vieras']; } },
                     { title: 'Päivämäärä', key: 'pvm'},
-                    { title: 'Päätuomari', key: 'pt_nimi'},
-                    { title: 'Verkkotuomari', key: 'vt_nimi'},
+                    { title: 'Tuomarit', key: 'tuomarit', template: (row)=>{ return row['pt_nimi'] + " - " + row['vt_nimi']} },
                     { title: 'Tarkkailija', key: 'tark_nimi'},
+                    { title: 'id', key: 'id', hidden: true },
                 ], 
             }, 
 
@@ -54,6 +54,7 @@ $(document).ready(function () {
             this.newReport();
 
             bus.on(EVENT_AVAA_RAPORTTI, this.modalReport);
+            bus.on(EVENT_RAPORTTI_VALITTU, this.reportSelected);
         },
         computed: {
             tuomarit: function(){
@@ -156,7 +157,7 @@ $(document).ready(function () {
                         self.raportit.push(new Raportti(raportti));
                     }
 
-                    bus.emit("RAPORTIT_UPDATE", self.raportit);
+                    bus.emit(EVENT_RAPORTIT_UPDATE, self.raportit);
                 })
             },
 
@@ -213,7 +214,8 @@ $(document).ready(function () {
                 }
             },
 
-            reportSelected: function(){
+            reportSelected: function(raportti_id){
+                this.selectedReport = raportti_id;
                 if(this.selectedReport == undefined) return;
                 
                 for(let raportti of this.raportit){

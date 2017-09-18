@@ -6,7 +6,7 @@ Vue.component('vue-jos-grid', {
         <table :class="options.luokka" style="max-width: 500;">
             <thead>
                 <tr>
-                    <th v-for="column in columns" :class="{active: sortCol == column.key}">
+                    <th v-for="column in shownColumns" :class="{active: sortCol == column.key}">
                         <span @click="column.sortable != false && sortBy(column.key)">{{column.title}}</span>
                         <span v-if="sortIndicators[column.key]==1">Up</span>
                         <span v-if="sortIndicators[column.key]==-1">Down</span>
@@ -18,8 +18,8 @@ Vue.component('vue-jos-grid', {
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="entry in filteredSortedData" :key="entry.josOrder">
-                    <td v-for="column in columns">
+                <tr v-for="entry in filteredSortedData" :key="entry.josOrder" @click="rowClick(entry.id)">
+                    <td v-for="column in shownColumns">
                         <template v-if="column.type == 'text'">
                             {{entry[column.key]}}
                         </template>
@@ -45,6 +45,7 @@ Vue.component('vue-jos-grid', {
     // }
 
     data: function () {
+        let localData = [];
         this.options.luokka = {
             'table': false,
             'table-striped': false,
@@ -69,16 +70,14 @@ Vue.component('vue-jos-grid', {
             });
         }
 
-        let localData = [];
         let c=1;
         if(this.data){
             this.data.forEach(function(item){
                 item['josOrder'] = c++;
 
-                var col = 0;
                 this.options.columns.forEach(function (column) {
                     if(column.template != undefined){
-                        item[col++] = column.template(item);
+                        item[column.key] = column.template(item);
                     }
                 });
                 localData.push(item);
@@ -86,7 +85,7 @@ Vue.component('vue-jos-grid', {
         }
 
         let self = this;
-        bus.on("RAPORTIT_UPDATE", function(data){
+        bus.on(EVENT_RAPORTIT_UPDATE, function(data){
             self.setData(data);
         })
 
@@ -101,6 +100,10 @@ Vue.component('vue-jos-grid', {
     },
 
     computed: {
+        shownColumns: function(){
+            return this.columns.filter(item =>{ return item.hidden != true});
+        },
+        
         filteredSortedData: function(){
             let self = this;
             let ret = this.localData;
@@ -132,21 +135,28 @@ Vue.component('vue-jos-grid', {
         },
     },
     methods: {
+        rowClick: function(raportti_id){
+            bus.emit(EVENT_RAPORTTI_VALITTU, raportti_id)
+        },
+        
         setData: function(data){
             let self=this;
             let localData = [];
             let c=1;
             if(data){
                 data.forEach(function(item){
-                    item['josOrder'] = c++;
+                    let ni = {};
+                    ni['josOrder'] = c++;
     
                     var col = 0;
                     self.options.columns.forEach(function (column) {
                         if(column.template != undefined){
-                            item[column.key] = column.template(item);
+                            ni[column.key] = column.template(item);
+                        } else {
+                            ni[column.key] = item[column.key];
                         }
                     });
-                    localData.push(item);
+                    localData.push(ni);
                 });
             }
     

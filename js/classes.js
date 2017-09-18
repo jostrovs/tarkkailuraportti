@@ -4,6 +4,8 @@ const GET_DATA = './../api/getData.php';
 const INSERT_REPORT = './../api/insertReport.php';
 
 const EVENT_AVAA_RAPORTTI = "EVENT_AVAA_RAPORTTI";
+const EVENT_RAPORTTI_VALITTU = "EVENT_RAPORTTI_VALITTU";
+const EVENT_RAPORTIT_UPDATE = "EVENT_RAPORTIT_UPDATE";
 
 const ROOLI_TUOMARI = 1;
 const ROOLI_TARKKAILIJA = 0;

@@ -201,18 +201,55 @@ Vue.component('vue-kokonaisarvio', {
         <div class="panel-group">
             <div class="panel panel-primary">
                 <div class="panel-heading">Lopullinen tuomariarvio</div>
-                <div class="panel-body">
+                <div class="panel-body" style="font-size: 18px;">
                     <div class="row">
                         <div class="col-xs-2"></div>
-                        <div class="col-xs-4">Päätuomari</div>
-                        <div class="col-xs-4">Verkkotuomari</div>
+                        <div class="col-xs-4" style="text-align: center; font-size: 24px;">Päätuomari</div>
+                        <div class="col-xs-4" style="text-align: center; font-size: 24px;">Verkkotuomari</div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-2">Pisteet</div>
-                        <div class="col-xs-4" style="text-align: center">{{raportti.pt_score}}</div>
-                        <div class="col-xs-4" style="text-align: center">{{raportti.vt_score}}</div>
+                        <div class="col-xs-2" style="text-align: right;">Pisteet</div>
+                        <div class="col-xs-4" style="text-align: center">
+                            <div v-show="raportti.pt_score!='<puuttuu>'" class="ruutuIsoAla ruutuVika">{{raportti.pt_score}}</div>
+                        </div>
+                        <div class="col-xs-4" style="text-align: center">
+                            <div v-show="raportti.pt_score!='<puuttuu>'" class="ruutuIsoAla ruutuVika">{{raportti.vt_score}}</div>
+                        </div>
                     </div>
-
+                    <div class="row">
+                        <div class="col-xs-2" style="text-align: right;">&nbsp;</div>
+                        <div class="col-xs-4" style="text-align: center">
+                            <div class="ruutuIsoYla"> Erinomainen</div>
+                            <div class="ruutuIsoYla"> Erittäin hyvä</div>
+                            <div class="ruutuIsoYla"> Hyvä</div>
+                            <div class="ruutuIsoYla"> Välttävä</div>
+                            <div class="ruutuIsoYla"> Huono</div>
+                        </div>
+                        <div class="col-xs-4" style="text-align: center">
+                            <div class="ruutuIsoYla"> Erinaomainen</div>
+                            <div class="ruutuIsoYla"> Erittäin hyvä</div>
+                            <div class="ruutuIsoYla"> Hyvä</div>
+                            <div class="ruutuIsoYla"> Välttävä</div>
+                            <div class="ruutuIsoYla"> Huono</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2" style="text-align: right;">Lopullinen arvio</div>
+                        <div class="col-xs-4" style="text-align: center">
+                            <div class="ruutuIsoAla ruutu1"> <span v-if="pt1">X</span> <span v-else>&nbsp;</span></div>
+                            <div class="ruutuIsoAla ruutu2"> <span v-if="pt2">X</span> <span v-else>&nbsp;</span></div>
+                            <div class="ruutuIsoAla ruutu3"> <span v-if="pt3">X</span> <span v-else>&nbsp;</span></div>
+                            <div class="ruutuIsoAla ruutu4"> <span v-if="pt4">X</span> <span v-else>&nbsp;</span></div>
+                            <div class="ruutuIsoAla ruutu5 ruutuVika"> <span v-if="pt5">X</span> <span v-else>&nbsp;</span></div>
+                        </div>
+                        <div class="col-xs-4" style="text-align: center">
+                            <div class="ruutuIsoAla ruutu1"> <span v-if="vt1">X</span> <span v-else>&nbsp;</span></div>
+                            <div class="ruutuIsoAla ruutu2"> <span v-if="vt2">X</span> <span v-else>&nbsp;</span></div>
+                            <div class="ruutuIsoAla ruutu3"> <span v-if="vt3">X</span> <span v-else>&nbsp;</span></div>
+                            <div class="ruutuIsoAla ruutu4"> <span v-if="vt4">X</span> <span v-else>&nbsp;</span></div>
+                            <div class="ruutuIsoAla ruutu5 ruutuVika"> <span v-if="vt5">X</span> <span v-else>&nbsp;</span></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -221,8 +258,22 @@ Vue.component('vue-kokonaisarvio', {
     data: function(){
         return {
             initRaporti: this.raportti,
+
         }
-    }
+    },
+    computed: {
+         pt1: function(){return this.raportti.pt_score >= 97; },
+         pt2: function(){return this.raportti.pt_score >= 90 && this.raportti.pt_score < 97; },
+         pt3: function(){return this.raportti.pt_score >= 75 && this.raportti.pt_score < 90; },
+         pt4: function(){return this.raportti.pt_score >= 60 && this.raportti.pt_score < 75; },
+         pt5: function(){return this.raportti.pt_score < 60},
+
+         vt1: function(){return this.raportti.vt_score >= 97; },
+         vt2: function(){return this.raportti.vt_score >= 90 && this.raportti.vt_score < 97; },
+         vt3: function(){return this.raportti.vt_score >= 75 && this.raportti.vt_score < 90; },
+         vt4: function(){return this.raportti.vt_score >= 60 && this.raportti.vt_score < 75; },
+         vt5: function(){return this.raportti.vt_score < 60},
+    }        
 });
 
 Vue.component('vue-edellinen-label', {
@@ -459,7 +510,9 @@ Vue.component('vue-raportti', {
                         VT: {{raportti.vt_nimi}}<br>
                         Tarkkailija: {{raportti.tark_nimi}}</p>
 
-                        <h2>Päätuomari</h2>
+                        <vue-kokonaisarvio :raportti="raportti"></vue-kokonaisarvio>
+
+                        <h2>Päätuomari {{raportti.pt_nimi}}</h2>
                         <p>Pisteet: {{raportti.pt_score}}</p>
                         <div class="panel-group">
                             <div class="panel panel-primary">
@@ -498,7 +551,7 @@ Vue.component('vue-raportti', {
                             </div>
                         </div>
 
-                        <h2>Verkkotuomari</h2>
+                        <h2>Verkkotuomari {{raportti.vt_nimi}}</h2>
                         <p>Pisteet: {{raportti.vt_score}}</p>
                         <div class="panel-group">
 
@@ -527,13 +580,6 @@ Vue.component('vue-raportti', {
                                 <div class="panel-heading">Ottelun johtaminen ja persoonallisuus</div>
                                 <div class="panel-body">
                                     <vue-rivi v-for="rivi in raportti.palautaRivit(114,117)" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :tila="'pieni'" :jos="jos"></vue-rivi>
-                                </div>
-                            </div>
-
-                            <div class="panel panel-primary">
-                                <div class="panel-heading">Loppupisteet</div>
-                                <div class="panel-body">
-                                    <p style="font-size: larger;">Verkkotuomarin pisteet: {{raportti.vt_score}}</p>
                                 </div>
                             </div>
                         </div>

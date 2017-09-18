@@ -224,8 +224,8 @@ class Raportti {
 
         this.pt_score = pt_score/10;
         this.vt_score = vt_score/10;
-        if(this.rivit.length < 1 || this.pt_score > 100) this.pt_score = "<puuttuu>";
-        if(this.rivit.length < 1 || this.vt_score > 100) this.vt_score = "<puuttuu>";
+        if(this.rivit.length < 1 || this.pt_score > 200) this.pt_score = "<puuttuu>";
+        if(this.rivit.length < 1 || this.vt_score > 200) this.vt_score = "<puuttuu>";
     }
 
     getRivit(){

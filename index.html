@@ -60,7 +60,7 @@
 			<div id="etusivu" class="tab-pane fade in active">
                 <h1>Tarkkailuraportti</h1>
 
-                <form>
+                <form v-if="jos">
                     <div class="row">
                         <div class="col-xs-4">
                             <label for="raportti">Raportti</label>
@@ -72,7 +72,9 @@
                     </div>
                 </form>
 
-                <vue-jos-grid :options="raportit_options" :data="raportit" :jos="jos"></vue-jos-grid>
+                <div style="max-height: 180px; overflow-y: auto;">
+                    <vue-jos-grid :options="raportit_options" :data="raportit" :jos="jos"></vue-jos-grid>
+                </div>
 
                 <div v-if="jos"> Valittu: {{selectedReport}}</div>
 

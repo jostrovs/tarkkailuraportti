@@ -45,6 +45,7 @@ Vue.component('vue-jos-grid', {
     // }
 
     data: function () {
+        let self = this;
         let localData = [];
         this.options.luokka = {
             'table': false,
@@ -75,7 +76,7 @@ Vue.component('vue-jos-grid', {
             this.data.forEach(function(item){
                 item['josOrder'] = c++;
 
-                this.options.columns.forEach(function (column) {
+                self.options.columns.forEach(function (column) {
                     if(column.template != undefined){
                         item[column.key] = column.template(item);
                     }
@@ -84,7 +85,6 @@ Vue.component('vue-jos-grid', {
             });
         }
 
-        let self = this;
         bus.on(EVENT_RAPORTIT_UPDATE, function(data){
             self.setData(data);
         })

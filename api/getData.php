@@ -45,7 +45,7 @@ switch($cmd){
                 ";
         break;
     case API_HAE_RIVIT:
-        $sql = "SELECT * FROM rivi r JOIN aihe a ON r.aihe_id = a.id where r.id = 280";
+        $sql = "SELECT * FROM rivi r JOIN aihe a ON r.aihe_id = a.id where r.id = ".$arg1;
         break;
     case API_HAE_AIHEET:
         $sql = "SELECT * FROM aihe";

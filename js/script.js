@@ -31,6 +31,17 @@ $(document).ready(function () {
 
             postResponse: "Tänne tulee response",
 
+            raportit_options: 
+            { 
+                columns: [
+                    { title: 'Ottelu', key: 'ottelu', template: function(row){ return row['koti'] + " - " + row['vieras']; } },
+                    { title: 'Päivämäärä', key: 'pvm'},
+                    { title: 'Päätuomari', key: 'pt_nimi'},
+                    { title: 'Verkkotuomari', key: 'vt_nimi'},
+                    { title: 'Tarkkailija', key: 'tark_nimi'},
+                ], 
+            }, 
+
             jos: false, // debug-flägi
             debug: "Ei debuggia",
         },
@@ -38,7 +49,7 @@ $(document).ready(function () {
         created: function () {
             this.loadTuomarit();
             this.loadAiheet();
-            this.loadRivit();
+            //this.loadRivit();
             this.loadRaportit();
             this.newReport();
 
@@ -144,6 +155,8 @@ $(document).ready(function () {
                     for(let raportti of data.data){
                         self.raportit.push(new Raportti(raportti));
                     }
+
+                    bus.emit("RAPORTIT_UPDATE", self.raportit);
                 })
             },
 

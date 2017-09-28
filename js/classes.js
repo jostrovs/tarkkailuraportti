@@ -1,7 +1,7 @@
-//const GET_DATA = 'http://www.lentopalloerotuomarit.fi/tark2343/tark/api/getData.php';
-//const INSERT_REPORT = 'http://www.lentopalloerotuomarit.fi/tark2343/tark/api/insertReport.php';
-const GET_DATA = './../api/getData.php';
-const INSERT_REPORT = './../api/insertReport.php';
+const GET_DATA = 'http://www.lentopalloerotuomarit.fi/tark2343/tark/api/getData.php';
+const INSERT_REPORT = 'http://www.lentopalloerotuomarit.fi/tark2343/tark/api/insertReport.php';
+//const GET_DATA = './../api/getData.php';
+//const INSERT_REPORT = './../api/insertReport.php';
 
 const EVENT_AVAA_RAPORTTI = "EVENT_AVAA_RAPORTTI";
 const EVENT_RAPORTTI_VALITTU = "EVENT_RAPORTTI_VALITTU";
@@ -148,6 +148,14 @@ class Rivi {
     }
 }
 
+class Huomautus {
+    constructor(rivi){
+        this.id = rivi.aihe_no;
+        this.aihe = rivi.otsikko;
+        this.teksti = rivi.huom;
+    }
+}
+
 class Raportti {
     constructor(data_item){
         this.pt_score = -1;
@@ -164,6 +172,9 @@ class Raportti {
 
             this.vt_id = data_item.vt_id;
             this.vt_nimi = `${data_item.vt_etunimi} ${data_item.vt_sukunimi}`;
+
+            this.pt_huom = data_item.pt_huom;
+            this.vt_huom = data_item.vt_huom;
 
             this.tark_id = data_item.tark_id;
             this.tark_nimi = `${data_item.tark_etunimi} ${data_item.tark_sukunimi}`;
@@ -186,6 +197,9 @@ class Raportti {
             this.vt_id = "0";
             this.vt_nimi = '';
 
+            this.pt_huom = '',
+            this.vt_huom = '',
+
             this.tark_id = "0";
             this.tark_nimi = '';
 
@@ -202,6 +216,28 @@ class Raportti {
     palautaRivit(firstNo, lastNo){
         return this.rivit.filter(rivi => rivi.aihe_no >= firstNo && rivi.aihe_no <= lastNo);
     }
+
+    palauta_pt_huomautukset(){
+        let ret = [];
+        for(let rivi of this.palautaRivit(1, 17))
+        {
+            if(rivi.huomDisplayed()){
+                ret.push(new Huomautus(rivi));
+            }
+        }
+        return ret;
+    }
+    palauta_vt_huomautukset(){
+        let ret = [];
+        for(let rivi of this.palautaRivit(101, 117))
+        {
+            if(rivi.huomDisplayed()){
+                ret.push(new Huomautus(rivi));
+            }
+        }
+        return ret;
+    }
+
 
     laske(){
         let pt_score = 950;

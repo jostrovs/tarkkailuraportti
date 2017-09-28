@@ -35,6 +35,7 @@ switch($cmd){
         $sql = "SELECT 
                   r.id, r.koti, r.vieras, r.paikka, r.pvm, r.pt_id, r.vt_id, r.tark_id, r.pt_score, r.vt_score,
                   r.miehet, r.tulos, r.kesto_h, r.kesto_min, r.vaikeus,
+                  r.pt_huom, r.vt_huom,
                   pt.etunimi as pt_etunimi, pt.sukunimi as pt_sukunimi,
                   vt.etunimi as vt_etunimi, vt.sukunimi as vt_sukunimi,
                   tark.etunimi as tark_etunimi, tark.sukunimi as tark_sukunimi

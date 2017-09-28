@@ -72,7 +72,7 @@
                     </div>
                 </form>
 
-                <div style="max-height: 180px; overflow-y: auto;">
+                <div style="max-height: 250px; overflow-y: auto;">
                     <vue-jos-grid :options="raportit_options" :data="raportit" :jos="jos"></vue-jos-grid>
                 </div>
 
@@ -82,7 +82,6 @@
                 <div v-if="parseInt(selectedReport,10) > 0">
                     
                     <vue-raportti :raportti="raportti"></vue-raportti>
-
  
                 </div>
                     
@@ -211,6 +210,9 @@
                     
                     <h2>Päätuomari</h2>
                     <p>Pisteet: {{uusi_raportti.pt_score}}</p>
+
+                    <vue-kokonaishuomautus :raportti="uusi_raportti" :jos="jos" pt_tai_vt="pt"> </vue-kokonaishuomautus>
+
                     <div class="panel-group">
                         <div class="panel panel-primary">
                             <div class="panel-heading">Tuomaritekniikka ja suoritustaito</div>
@@ -240,10 +242,19 @@
                             </div>
                         </div>
 
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">Yksittäiset kommentit</div>
+                            <div class="panel-body">
+                                <vue-koontihuomautus v-for="huomautus in uusi_raportti.palauta_pt_huomautukset()" :key="huomautus.id" :huomautus="huomautus" :jos="jos"></vue-koontihuomautus>
+                            </div>
+                        </div>
                      </div>
 
                     <h2>Verkkotuomari</h2>
                     <p>Pisteet: {{uusi_raportti.vt_score}}</p>
+
+                    <vue-kokonaishuomautus :raportti="uusi_raportti" :jos="jos" pt_tai_vt="vt"> </vue-kokonaishuomautus>
+                    
                     <div class="panel-group">
                         <div class="panel panel-primary">
                             <div class="panel-heading">Tuomaritekniikka ja suoritustaito</div>
@@ -273,6 +284,12 @@
                             </div>
                         </div>
 
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">Yksittäiset kommentit</div>
+                            <div class="panel-body">
+                                <vue-koontihuomautus v-for="huomautus in uusi_raportti.palauta_vt_huomautukset()" :key="huomautus.id" :huomautus="huomautus" :jos="jos"></vue-koontihuomautus>
+                            </div>
+                        </div>
                     </div>
 
                     <vue-kokonaisarvio :raportti="uusi_raportti" :jos="jos"></vue-kokonaisarvio>
@@ -321,7 +338,7 @@
 
     </div>
 
-    <div id="luonnos" onclick="$('#luonnos').hide()">Luonnos</div>
+    <!--div id="luonnos" onclick="$('#luonnos').hide()">Luonnos</div-->
 </body>
 
 </html>

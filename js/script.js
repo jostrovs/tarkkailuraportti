@@ -282,6 +282,8 @@ $(document).ready(function () {
                     kesto_h: self.uusi_raportti.kesto_h,
                     kesto_min: self.uusi_raportti.kesto_min,
                     vaikeus: self.uusi_raportti.vaikeus,
+                    pt_huom: self.uusi_raportti.pt_huom,
+                    vt_huom: self.uusi_raportti.vt_huom,
                 };
 
                 let i_rivi=0;

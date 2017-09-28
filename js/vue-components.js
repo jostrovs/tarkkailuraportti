@@ -195,6 +195,27 @@ Vue.component('vue-jos-grid', {
     },
 });
 
+Vue.component('vue-kokonaishuomautus', {
+    template: `
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading" v-if="isPT">Päätuomarin huomautukset</div>
+            <div class="panel-heading" v-else>Verkkotuomarin huomautukset</div>
+            <div class="panel-body" style="font-size: 18px;">        
+                <textarea class="form-control" v-if="isPT" v-model="raportti.pt_huom"></textarea>
+                <textarea class="form-control" v-else v-model="raportti.vt_huom"></textarea>
+            </div>
+        </div>
+    </div>
+    `,
+    props: ['pt_tai_vt', 'raportti', 'jos'],
+    data: function(){
+        return {
+            initRaporti: this.raportti,
+            isPT: this.pt_tai_vt.toLowerCase() == 'pt',
+        }
+    },
+});
 
 Vue.component('vue-kokonaisarvio', {
     template: `
@@ -249,6 +270,12 @@ Vue.component('vue-kokonaisarvio', {
                             <div class="ruutuIsoAla ruutu4"> <span v-if="vt4">X</span> <span v-else>&nbsp;</span></div>
                             <div class="ruutuIsoAla ruutu5 ruutuVika"> <span v-if="vt5">X</span> <span v-else>&nbsp;</span></div>
                         </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-2" style="width: 160px; text-align: right; margin-top: 20px;">Kehityssuositukset</div>
+                        <pre class="col-xs-4" style="font-family: Helvetica,Arial,sans-serif; text-align: left; min-height: 30px; font-size: 16px; border: 1px solid black; margin: 20px; width: 414px; left: 18px">{{raportti.pt_huom}}</pre>
+                        <pre class="col-xs-4" style="font-family: Helvetica,Arial,sans-serif; text-align: left; min-height: 30px; font-size: 16px; border: 1px solid black; margin: 20px; width: 414px; left: 51px">{{raportti.pt_huom}}</pre>
                     </div>
                 </div>
             </div>
@@ -450,6 +477,21 @@ Vue.component('vue-rivi-edit', {
 });
 
 
+Vue.component('vue-koontihuomautus', {
+    template: `
+        <div class="row" style="margin-bottom: 10px;">
+            <div class="col-xs-1" style="max-width: 20px;">{{huomautus.id}}</div>
+            <div class="col-xs-4 rivi-label">{{huomautus.aihe}}</div>
+            <div class="col-xs-7">{{huomautus.teksti}}</div>
+        </div>    
+    `,
+    props: ['huomautus', 'jos'],
+    data: function () {
+        return {
+            initial_huomautus: this.huomautus,
+        }
+    },
+});
 Vue.component('vue-rivi', {
                 template: `
                     <div class="form-group row"">
@@ -504,7 +546,7 @@ Vue.component('vue-raportti', {
                             Vaikeusaste: <span v-if="raportti.vaikeus==1">Helppo</span>
                                          <span v-if="raportti.vaikeus==2">Normaali</span>
                                          <span v-if="raportti.vaikeus==4">Vaikea</span>
-                        </p>
+                        </pre>
                         <h3>Tuomarit:</h3>
                         <p>PT: {{raportti.pt_nimi}}<br>
                         VT: {{raportti.vt_nimi}}<br>
@@ -544,9 +586,9 @@ Vue.component('vue-raportti', {
                             </div>
 
                             <div class="panel panel-primary">
-                                <div class="panel-heading">Loppupisteet</div>
+                                <div class="panel-heading">Yksittäiset kommentit</div>
                                 <div class="panel-body">
-                                    <p style="font-size: larger;">Päätuomarin pisteet: {{raportti.pt_score}}</p>
+                                    <vue-koontihuomautus v-for="huomautus in raportti.palauta_pt_huomautukset()" :key="huomautus.id" :huomautus="huomautus" :jos="jos"></vue-koontihuomautus>
                                 </div>
                             </div>
                         </div>
@@ -580,6 +622,13 @@ Vue.component('vue-raportti', {
                                 <div class="panel-heading">Ottelun johtaminen ja persoonallisuus</div>
                                 <div class="panel-body">
                                     <vue-rivi v-for="rivi in raportti.palautaRivit(114,117)" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :tila="'pieni'" :jos="jos"></vue-rivi>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Yksittäiset kommentit</div>
+                                <div class="panel-body">
+                                    <vue-koontihuomautus v-for="huomautus in raportti.palauta_vt_huomautukset()" :key="huomautus.id" :huomautus="huomautus" :jos="jos"></vue-koontihuomautus>
                                 </div>
                             </div>
                         </div>

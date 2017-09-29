@@ -275,7 +275,7 @@ Vue.component('vue-kokonaisarvio', {
                     <div class="row">
                         <div class="col-xs-2" style="width: 160px; text-align: right; margin-top: 20px;">Kehityssuositukset</div>
                         <pre class="col-xs-4" style="font-family: Helvetica,Arial,sans-serif; text-align: left; min-height: 30px; font-size: 16px; border: 1px solid black; margin: 20px; width: 414px; left: 18px">{{raportti.pt_huom}}</pre>
-                        <pre class="col-xs-4" style="font-family: Helvetica,Arial,sans-serif; text-align: left; min-height: 30px; font-size: 16px; border: 1px solid black; margin: 20px; width: 414px; left: 51px">{{raportti.pt_huom}}</pre>
+                        <pre class="col-xs-4" style="font-family: Helvetica,Arial,sans-serif; text-align: left; min-height: 30px; font-size: 16px; border: 1px solid black; margin: 20px; width: 414px; left: 51px">{{raportti.vt_huom}}</pre>
                     </div>
                 </div>
             </div>

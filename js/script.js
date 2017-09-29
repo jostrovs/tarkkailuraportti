@@ -24,6 +24,8 @@ $(document).ready(function () {
             rivit: [],
             raportit: [],
             
+            token: getUserToken(),
+
             selectedReport: null,
             modal_raportti: new Raportti(),
             raportti: new Raportti(),
@@ -87,8 +89,13 @@ $(document).ready(function () {
                 $.ajax({
                     dataType: 'json',
                     url: GET_DATA,
-                    data: {cmd:cmd, arg1:arg1}
+                    data: {cmd:cmd, arg1:arg1, token: self.token}
                 }).done(function(data){
+                    if(data.error == 1){
+                        toastr.error("Käyttäjää ei ole autentikoitu. (2)");
+                        return;
+                    }
+
                     self.debug = JSON.stringify(data.debug, undefined, 2);
                     if(callback != undefined){
                         callback(data);
@@ -303,8 +310,12 @@ $(document).ready(function () {
                     dataType: 'json',
                     //url: './../api/setData.php',
                     url: INSERT_REPORT,
-                    data: {data: JSON.stringify(formdata)},
+                    data: {data: JSON.stringify(formdata), token: self.token},
                 }).done(function(data){
+                    if(data.error == 1){
+                        toastr.error("Käyttäjää ei ole autentikoitu. (3)");
+                        return;
+                    }
                     self.debug = JSON.stringify(data.debug, undefined, 2);
                     self.newReport();
                     toastr.success("Raportti on talletettu tietokantaan.");
@@ -316,6 +327,7 @@ $(document).ready(function () {
             },
 
             koklaa: function(){
+                location.reload()
                 // this.newReport();
                 // toastr.success("Raportti on talletettu tietokantaan.");
                 // $("#etusivuLink").trigger('click');

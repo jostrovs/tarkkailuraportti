@@ -1,7 +1,7 @@
-const GET_DATA = 'http://www.lentopalloerotuomarit.fi/tark2343/tark/api/getData.php';
-const INSERT_REPORT = 'http://www.lentopalloerotuomarit.fi/tark2343/tark/api/insertReport.php';
-//const GET_DATA = './../api/getData.php';
-//const INSERT_REPORT = './../api/insertReport.php';
+//const GET_DATA = 'http://www.lentopalloerotuomarit.fi/tark2343/tark/api/getData.php';
+//const INSERT_REPORT = 'http://www.lentopalloerotuomarit.fi/tark2343/tark/api/insertReport.php';
+const GET_DATA = './../api/getData.php';
+const INSERT_REPORT = './../api/insertReport.php';
 
 const EVENT_AVAA_RAPORTTI = "EVENT_AVAA_RAPORTTI";
 const EVENT_RAPORTTI_VALITTU = "EVENT_RAPORTTI_VALITTU";
@@ -59,12 +59,38 @@ const HELPPO = 1;
 const NORMAALI = 2;
 const VAIKEA = 3;
 
-var localGetData=function(cmd, callback, arg1) {
+function getQueryString() {
+    var result = {}, queryString = location.search.slice(1),
+        re = /([^&=]+)=([^&]*)/g, m;
+  
+    while (m = re.exec(queryString)) {
+      result[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+    }
+  
+    return result;
+}
+
+function getUserToken(){
+    let token = getQueryString()['token'];
+    if(token == undefined || token == null || token.length < 1){
+        if(localStorage.lentopalloerotuomarit_tarkUserToken){
+            return localStorage.lentopalloerotuomarit_tarkUserToken;
+        }
+    }
+    localStorage.lentopalloerotuomarit_tarkUserToken = token;
+    return token;
+}
+
+var localGetData=function(cmd, callback, arg1, token) {
     $.ajax({
         dataType: 'json',
         url: GET_DATA,
-        data: {cmd:cmd, arg1:arg1}
+        data: {cmd:cmd, arg1:arg1, token:getUserToken()}
     }).done(function(data){
+        if(data.error == 1){
+            toastr.error("Käyttäjää ei ole autentikoitu. (1)");
+            return;
+        }
         if(callback != undefined){
             callback(data);
         }

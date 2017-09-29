@@ -718,14 +718,27 @@ Vue.component('vue-user', {
 Vue.component('vue-login', {
     template: `
         <div>
-        <h2>Kirjaudu sisään</h2>
-        <p>Sisäänkirjautuminen tapahtuu kunkin tuomarin tai tarkkailijan henkilökohtaisella linkillä.</p>
+            <h2>Kirjaudu sisään</h2>
+            <p>Sisäänkirjautuminen tapahtuu kunkin tuomarin tai tarkkailijan henkilökohtaisella linkillä.</p>
+
+            <p>Tässä voit tilata uuden linkin. Syötä oheiseen kenttään sähköpostiosoitteesi. Jos osoite on liitetty käyttäjälle, niin ko. osoitteeseen lähetetään kirjautumislinkki.</p>
+            <p>
+                <b>Email:</b>
+                <input style="width: 250px; display: inline-block;" class="form-control" type="email" v-model="email"">
+                <button class="btn" @click="requestLink">Tilaa linkki</button>
+            </p>
         </div>
     `,
     props: ['jos'],
+    data: function(){
+        return {
+            email: "",
+        }
+    },
     methods: {
-        logout: function(){
-            bus.emit(EVENT_LOGOUT);
+        requestLink: function(){
+            toastr.info("Tilataan linkkiä...");
+            bus.emit(EVENT_REQUEST_LINK, this.email);
         }
     }
 });

@@ -1,7 +1,9 @@
-//const GET_DATA = 'http://www.lentopalloerotuomarit.fi/tark2343/tark/api/getData.php';
-//const INSERT_REPORT = 'http://www.lentopalloerotuomarit.fi/tark2343/tark/api/insertReport.php';
-const GET_DATA = './../api/getData.php';
-const INSERT_REPORT = './../api/insertReport.php';
+const GET_DATA = 'http://www.lentopalloerotuomarit.fi/tark2343/tark/api/getData.php';
+const INSERT_REPORT = 'http://www.lentopalloerotuomarit.fi/tark2343/tark/api/insertReport.php';
+const REQUEST_LINK = 'http://www.lentopalloerotuomarit.fi/tark2343/tark/api/requestLink.php';
+//const GET_DATA = './../api/getData.php';
+//const INSERT_REPORT = './../api/insertReport.php';
+//const REQUEST_LINK = './../api/requestLink.php';
 
 const EVENT_AVAA_RAPORTTI = "EVENT_AVAA_RAPORTTI";
 const EVENT_RAPORTTI_VALITTU = "EVENT_RAPORTTI_VALITTU";
@@ -9,6 +11,7 @@ const EVENT_RAPORTIT_UPDATE = "EVENT_RAPORTIT_UPDATE";
 const EVENT_LOGOUT = "EVENT_LOGOUT";
 const EVENT_SAVE_EMAIL = "EVENT_SAVE_EMAIL";
 const EVENT_EMAIL_SAVED = "EVENT_EMAIL_SAVED";
+const EVENT_REQUEST_LINK = "EVENT_REQUEST_LINK";
 
 const ROOLI_ADMIN = 2;
 const ROOLI_TUOMARI = 1;

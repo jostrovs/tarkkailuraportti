@@ -59,6 +59,7 @@ $(document).ready(function () {
             bus.on(EVENT_RAPORTTI_VALITTU, this.reportSelected);
             bus.on(EVENT_LOGOUT, this.logout);
             bus.on(EVENT_SAVE_EMAIL, this.saveEmail);
+            bus.on(EVENT_REQUEST_LINK, this.requestLink);
         },
         computed: {
             tuomarit: function(){
@@ -126,9 +127,9 @@ $(document).ready(function () {
             },
 
             login: function(){
-                toastr.info("Kirjaudutaan sisään...");
                 let self=this;
                 if(this.token == undefined || this.token == 'undefined' || this.token == null || this.token.length < 1) return;
+                toastr.info("Kirjaudutaan sisään...");
                 this.getData(API_LOGIN, function(data){
                     toastr.clear();
                     if(data.error == 1){
@@ -180,6 +181,24 @@ $(document).ready(function () {
                     toastr.success("Sähköpostiosoite on vaihdettu.");  
                 }).fail(function(){
                     toastr.error("Sähköpostin talletus tietokantaan epäonnistui.");  
+                });
+            },
+
+            requestLink: function(email){
+                $.ajax({
+                    dataType: 'json',
+                    url: REQUEST_LINK,
+                    data: {email:email}
+                }).done(function(data){
+                    toastr.clear();
+                    if(data.error == 1){
+                        toastr.error("Linkin tilaaminen epäonnistui; käyttäjää ei löytynyt.");
+                        return;
+                    }
+                    toastr.success("Linkin sisältävä viesti on lähetetty.");  
+                }).fail(function(){
+                    toastr.clear();
+                    toastr.error("Linkin tilaaminen epäonnistui.");  
                 });
             },
 

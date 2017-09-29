@@ -12,9 +12,9 @@
         exit();
     }
 
-    if (isset($_GET["token"])) { $token  = $_GET["token"]; } else { $token=0; };
+    $token = $_GET["token"];
     
-    if($token == 0) exitWithError();
+    if($token == "0") exitWithError();
     
     // Autentikoidaan
     $sql = "SELECT rooli FROM tuomari WHERE token = '" . $token . "'"; 

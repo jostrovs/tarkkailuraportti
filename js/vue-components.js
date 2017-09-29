@@ -668,7 +668,8 @@ Vue.component('vue-user', {
             <div style="display: inline-block; width: 150px;">
                 <b>Email:</b>
             </div> 
-            {{user.email}}
+            <input style="width: 250px; display: inline-block;" class="form-control" type="email" v-model="user.email" @change="emailChanged()">
+            <button v-if="changed" class="btn" @click="saveEmail">Talleta sähköposti</button>
         </p>
         <p>
             <button class="btn" @click="logout()">Kirjaudu ulos</button>
@@ -676,16 +677,31 @@ Vue.component('vue-user', {
     </div>
     `,
     props: ['user', 'jos'],
+    created: function(){
+        let self=this;
+        bus.on(EVENT_EMAIL_SAVED, function(){
+            self.changed = false;
+        });
+    },
     data: function () {
         let href="";
         if(this.user != undefined) href= "http://www.lentopalloerotuomarit.fi/tark2343/tark/?token=" + this.user.token;
         return {
+            changed: false,
             href: href,  
         }
     },
     methods: {
         logout: function(){
             bus.emit(EVENT_LOGOUT);
+        },
+        saveEmail: function(){
+            toastr.clear();
+            toastr.info("Talletetaan sähköpostiosoitetta...");
+            bus.emit(EVENT_SAVE_EMAIL, this.user);
+        },
+        emailChanged: function(){
+            this.changed=true;
         }
     },
     computed: {

@@ -58,6 +58,7 @@ $(document).ready(function () {
             bus.on(EVENT_AVAA_RAPORTTI, this.modalReport);
             bus.on(EVENT_RAPORTTI_VALITTU, this.reportSelected);
             bus.on(EVENT_LOGOUT, this.logout);
+            bus.on(EVENT_SAVE_EMAIL, this.saveEmail);
         },
         computed: {
             tuomarit: function(){
@@ -77,11 +78,13 @@ $(document).ready(function () {
         },
         methods: {
             afterLogin: function(){
+                toastr.info("Haetaan tietoja...");
                 this.loadTuomarit();
                 this.loadAiheet();
                 //this.loadRivit();
                 this.loadRaportit();
                 this.newReport();
+                toastr.clear();
             },
             
             modalReport: function(raportti_id){
@@ -123,9 +126,11 @@ $(document).ready(function () {
             },
 
             login: function(){
+                toastr.info("Kirjaudutaan sisään...");
                 let self=this;
                 if(this.token == undefined || this.token == 'undefined' || this.token == null || this.token.length < 1) return;
                 this.getData(API_LOGIN, function(data){
+                    toastr.clear();
                     if(data.error == 1){
                          toastr.error("Kirjautuminen epäonnistui.");
                          return;
@@ -157,12 +162,34 @@ $(document).ready(function () {
                 location.reload();
             },
 
+            saveEmail: function(user){
+                let self = this;
+
+                $.ajax({
+                    dataType: 'json',
+                    url: GET_DATA,
+                    data: {cmd:API_SAVE_EMAIL, arg1:user.email, token: self.token}
+                }).done(function(data){
+                    if(data.error == 1){
+                        toastr.error("Käyttäjää ei ole autentikoitu. (2)");
+                        return;
+                    }
+
+                    bus.emit(EVENT_EMAIL_SAVED);
+                    toastr.clear();
+                    toastr.success("Sähköpostiosoite on vaihdettu.");  
+                }).fail(function(){
+                    toastr.error("Sähköpostin talletus tietokantaan epäonnistui.");  
+                });
+            },
+
             loadTuomarit: function(){
                 let self=this;
                 this.getData(API_HAE_TUOMARIT, function(data){
                     self.kaikki_tuomarit = [];
                     if(data.data == undefined){
                          console.log("loadTuomarit: data.data = null");
+                         toastr.clear();
                          toastr.error("Tuomarien lataus epäonnistui.");
                          return;
                     }
@@ -317,6 +344,7 @@ $(document).ready(function () {
             },
 
             postData: function(){
+                toastr.info("Talletetaan raporttia...");
                 let self = this;
                 let formdata= {
                     pvm: self.uusi_raportti.pvm,
@@ -356,6 +384,7 @@ $(document).ready(function () {
                     url: INSERT_REPORT,
                     data: {data: JSON.stringify(formdata), token: self.token},
                 }).done(function(data){
+                    toastr.clear();
                     if(data.error == 1){
                         toastr.error("Käyttäjää ei ole autentikoitu. (3)");
                         return;

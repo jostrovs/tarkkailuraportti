@@ -12,6 +12,7 @@ require 'dbAuthenticateGet.php';
     define (API_HAE_VT_RAPORTIT, 7);
     
     define (API_LOGIN, 8);
+    define (API_SAVE_EMAIL, 9);
 	
 // Tänne argumenttien mukaan datan hakua eri tauluista ja eri tarkoituksiin jne.
 $debug = array();
@@ -89,6 +90,10 @@ switch($cmd){
     case API_LOGIN:
         $sql = "SELECT etunimi, sukunimi, email, token, rooli FROM tuomari WHERE token='" . $token . "'";
         break;
+    case API_SAVE_EMAIL:
+        $sql = "UPDATE tuomari SET email='" . $arg1 . "' WHERE token='" . $token . "'";
+        $data = 1;
+        break;
     default:
         $sql = "Ei mitään, väärä komento annettu.";
 }
@@ -97,13 +102,13 @@ $debug["sql"] = $sql;
 
 $result = $mysqli->query($sql);
 
-  while($row = $result->fetch_assoc()){
+if($cmd != API_SAVE_EMAIL){
+    while($row = $result->fetch_assoc()){
+        $json[] = $row;
+    }
+}
 
-     $json[] = $row;
-
-  }
-
-  $data['data'] = $json;
+$data['data'] = $json;
 
 $result =  mysqli_query($mysqli,$sqlTotal);
 

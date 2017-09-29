@@ -1,7 +1,6 @@
 <?php
     require 'dbConfig.php';
-
-    $obj = json_decode($_POST["data"], true);
+    require 'dbAuthenticatePost.php';
 
     function obj($key){
         global $obj, $mysqli;
@@ -18,6 +17,10 @@
 
         return "(".$id.", ".$arvosana.", ".$report_id.", '".$huom."')";
     }
+
+    // Sitten tehdään oikeita hommia
+
+    $obj = json_decode($_POST["data"], true);
 
     $debug = array();
     //$debug["obj"] = $obj;

@@ -1,5 +1,7 @@
 <?php
-require 'dbConfig.php';
+//require 'dbConfig.php';
+require 'dbAuthenticateGet.php';
+
 
 	define (API_HAE_TUOMARIT, 1);
 	define (API_HAE_RAPORTIT, 2);
@@ -17,6 +19,15 @@ $debug["phpFile"] = "getData.php";
 
 if (isset($_GET["cmd"])) { $cmd  = $_GET["cmd"]; } else { $cmd=API_HAE_TUOMARIT; };
 if (isset($_GET["arg1"])) { $arg1  = $_GET["arg1"]; } else { $arg1=0; };
+if (isset($_GET["token"])) { $token  = $_GET["token"]; } else { $token=0; };
+
+if($token == 0) {
+    $data["error"] = 1;
+    $enc = json_encode($data, JSON_UNESCAPED_UNICODE);
+    if(!$enc) echo "Enkoodaus feilasi, ";
+    else echo $enc;
+    exit();    
+}
 
 $cmd = $mysqli->real_escape_string($cmd);
 $arg1 = $mysqli->real_escape_string($arg1);

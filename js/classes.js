@@ -6,7 +6,9 @@ const INSERT_REPORT = './../api/insertReport.php';
 const EVENT_AVAA_RAPORTTI = "EVENT_AVAA_RAPORTTI";
 const EVENT_RAPORTTI_VALITTU = "EVENT_RAPORTTI_VALITTU";
 const EVENT_RAPORTIT_UPDATE = "EVENT_RAPORTIT_UPDATE";
+const EVENT_LOGOUT = "EVENT_LOGOUT";
 
+const ROOLI_ADMIN = 2;
 const ROOLI_TUOMARI = 1;
 const ROOLI_TARKKAILIJA = 0;
 
@@ -17,6 +19,7 @@ const API_HAE_AIHEET = 4;
 const API_HAE_RAPORTIN_RIVIT = 5;
 const API_HAE_PT_RAPORTIT = 6;
 const API_HAE_VT_RAPORTIT = 7;
+const API_LOGIN = 8;
 
 var kertoimet = [];
 kertoimet["1"]  = [20000, 5,  0,  -5, -10, -20, -100];

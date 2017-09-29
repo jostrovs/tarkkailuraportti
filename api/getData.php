@@ -1,8 +1,6 @@
 <?php
 //require 'dbConfig.php';
 require 'dbAuthenticateGet.php';
-
-
 	define (API_HAE_TUOMARIT, 1);
 	define (API_HAE_RAPORTIT, 2);
 	define (API_HAE_RIVIT, 3);
@@ -12,6 +10,8 @@ require 'dbAuthenticateGet.php';
    
     define (API_HAE_PT_RAPORTIT, 6);
     define (API_HAE_VT_RAPORTIT, 7);
+    
+    define (API_LOGIN, 8);
 	
 // Tänne argumenttien mukaan datan hakua eri tauluista ja eri tarkoituksiin jne.
 $debug = array();
@@ -86,6 +86,11 @@ switch($cmd){
                 JOIN aihe a ON r.aihe_id = a.id
                 WHERE vt_id = $arg1";
         break;
+    case API_LOGIN:
+        $sql = "SELECT etunimi, sukunimi, email, token, rooli FROM tuomari WHERE token='" . $token . "'";
+        break;
+    default:
+        $sql = "Ei mitään, väärä komento annettu.";
 }
 
 $debug["sql"] = $sql;

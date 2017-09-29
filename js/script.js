@@ -24,6 +24,10 @@ $(document).ready(function () {
             rivit: [],
             raportit: [],
             
+            user: {
+                name: "Ei kirjauduttu",
+                email: "",
+            },
             token: getUserToken(),
 
             selectedReport: null,
@@ -49,14 +53,11 @@ $(document).ready(function () {
         },
         
         created: function () {
-            this.loadTuomarit();
-            this.loadAiheet();
-            //this.loadRivit();
-            this.loadRaportit();
-            this.newReport();
+            this.login();
 
             bus.on(EVENT_AVAA_RAPORTTI, this.modalReport);
             bus.on(EVENT_RAPORTTI_VALITTU, this.reportSelected);
+            bus.on(EVENT_LOGOUT, this.logout);
         },
         computed: {
             tuomarit: function(){
@@ -75,6 +76,14 @@ $(document).ready(function () {
             }
         },
         methods: {
+            afterLogin: function(){
+                this.loadTuomarit();
+                this.loadAiheet();
+                //this.loadRivit();
+                this.loadRaportit();
+                this.newReport();
+            },
+            
             modalReport: function(raportti_id){
                 for(let raportti of this.raportit){
                     if(raportti.id == raportti_id){
@@ -111,6 +120,41 @@ $(document).ready(function () {
 
             valitunRivit: function(firstNo, lastNo){
                 return this.raportti.rivit.filter(rivi => rivi.aihe_no >= firstNo && rivi.aihe_no <= lastNo);
+            },
+
+            login: function(){
+                let self=this;
+                if(this.token == undefined || this.token == 'undefined' || this.token == null || this.token.length < 1) return;
+                this.getData(API_LOGIN, function(data){
+                    if(data.error == 1){
+                         toastr.error("Kirjautuminen epäonnistui.");
+                         return;
+                    }
+                    let d = data.data[0];
+                    self.user = { 
+                        name: d.etunimi + " " + d.sukunimi,
+                        email: d.email,
+                        token: d.token,
+                        rooli: d.rooli,
+                        login: true,
+                    };
+
+                    self.afterLogin();
+                })
+            },
+
+            logout: function(){
+                localStorage.lentopalloerotuomarit_tarkUserToken = undefined;
+                this.user.login = false;
+
+                let href = location.href;
+                let pos = href.indexOf("?");
+                if(pos > 0){
+                    href=href.split("?")[0];
+                    location.assign(href);
+                    return;
+                }
+                location.reload();
             },
 
             loadTuomarit: function(){

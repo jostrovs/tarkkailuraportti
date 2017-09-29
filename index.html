@@ -39,7 +39,7 @@
     <div id="app">
         <ul id="navbar" class="nav nav-tabs">
 			<li class="active"><a data-toggle="tab" href="#etusivu" id="etusivuLink">Etusivu</a>  </li>
-			<li>
+			<li v-if="user.login">
                 <a data-toggle="tab" href="#uusi">
                     Uusi
                 </a>
@@ -47,6 +47,11 @@
 			<li>
                 <a v-if="jos" data-toggle="tab" href="#sivu2">
                     Debug
+                </a>
+            </li>
+			<li style="float: right;">
+                <a data-toggle="tab" href="#user">
+                    {{user.name}}
                 </a>
             </li>
 		</ul>
@@ -57,34 +62,43 @@
         </div>
 
 		<div class="tab-content">
-			<div id="etusivu" class="tab-pane fade in active">
-                <h1>Tarkkailuraportti</h1>
+            <div id="user" class="tab-pane fade in">
+                <vue-user :user="user" :jos="jos"></vue-user>
+                
+            </div>
 
-                <form v-if="jos">
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <label for="raportti">Raportti</label>
-                            <select id="raportDropdown" class="form-control" v-model="selectedReport" @change="reportSelected()">
-                                <option disabled value="-1">Valitse raportti</option>
-                                <option v-for="raportti in raportit" :value="raportti.id">{{raportti.koti}}-{{raportti.vieras}} {{raportti.pvm}}</option>
-                            </select>
+            <div id="etusivu" class="tab-pane fade in active">
+                <div v-if="!user.login">
+                    <vue-login></vue-login>
+                </div>
+                <div v-else>
+                    <h1>Tarkkailuraportti</h1>
+
+                    <form v-if="jos">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <label for="raportti">Raportti</label>
+                                <select id="raportDropdown" class="form-control" v-model="selectedReport" @change="reportSelected()">
+                                    <option disabled value="-1">Valitse raportti</option>
+                                    <option v-for="raportti in raportit" :value="raportti.id">{{raportti.koti}}-{{raportti.vieras}} {{raportti.pvm}}</option>
+                                </select>
+                            </div>
                         </div>
+                    </form>
+
+                    <div style="max-height: 250px; overflow-y: auto;">
+                        <vue-jos-grid :options="raportit_options" :data="raportit" :jos="jos"></vue-jos-grid>
                     </div>
-                </form>
 
-                <div style="max-height: 250px; overflow-y: auto;">
-                    <vue-jos-grid :options="raportit_options" :data="raportit" :jos="jos"></vue-jos-grid>
-                </div>
-
-                <div v-if="jos"> Valittu: {{selectedReport}}</div>
+                    <div v-if="jos"> Valittu: {{selectedReport}}</div>
 
 
-                <div v-if="parseInt(selectedReport,10) > 0">
-                    
-                    <vue-raportti :raportti="raportti"></vue-raportti>
- 
-                </div>
-                    
+                    <div v-if="parseInt(selectedReport,10) > 0">
+                        
+                        <vue-raportti :raportti="raportti"></vue-raportti>
+    
+                    </div>
+                </div>                    
 			</div>
 
 			<div id="uusi" class="tab-pane fade">

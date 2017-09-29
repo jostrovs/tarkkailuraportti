@@ -648,4 +648,68 @@ Vue.component('vue-raportti', {
                 }
 });
 
+Vue.component('vue-user', {
+    template: `
+    <div>
+        <h2>Käyttäjä: <small>{{user.name}}</small></h2>
+        <p v-if="user.login">
+            <div style="display: inline-block; width: 150px;">
+                <b>Rooli:</b>
+            </div>
+            {{rooli}}
+        </p>
+        <p v-if="user.login">
+            <div style="display: inline-block; width: 150px;">
+                <b>Kirjautumislinkki:</b>
+            </div> 
+            <a :href="href">www.lentopalloerotuomarit.fi/tark2343/tark/?token={{user.token}}</a>
+        </p>
+        <p>
+            <div style="display: inline-block; width: 150px;">
+                <b>Email:</b>
+            </div> 
+            {{user.email}}
+        </p>
+        <p>
+            <button class="btn" @click="logout()">Kirjaudu ulos</button>
+        </p>
+    </div>
+    `,
+    props: ['user', 'jos'],
+    data: function () {
+        let href="";
+        if(this.user != undefined) href= "http://www.lentopalloerotuomarit.fi/tark2343/tark/?token=" + this.user.token;
+        return {
+            href: href,  
+        }
+    },
+    methods: {
+        logout: function(){
+            bus.emit(EVENT_LOGOUT);
+        }
+    },
+    computed: {
+        rooli: function(){
+            let rooli = "EI MITÄÄN";
+            if(this.user.rooli == ROOLI_TARKKAILIJA.toString()) rooli = "Tarkkailija";
+            if(this.user.rooli == ROOLI_TUOMARI.toString()) rooli = "Tuomari";
+            if(this.user.rooli == ROOLI_ADMIN.toString()) rooli = "Admin";
+            return rooli;
+        },
+    }
+});
 
+Vue.component('vue-login', {
+    template: `
+        <div>
+        <h2>Kirjaudu sisään</h2>
+        <p>Sisäänkirjautuminen tapahtuu kunkin tuomarin tai tarkkailijan henkilökohtaisella linkillä.</p>
+        </div>
+    `,
+    props: ['jos'],
+    methods: {
+        logout: function(){
+            bus.emit(EVENT_LOGOUT);
+        }
+    }
+});

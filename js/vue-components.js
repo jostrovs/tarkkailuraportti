@@ -3,10 +3,10 @@
 Vue.component('vue-jos-grid', {
     template: `
         <div class="jos-table-container">
-        <table :class="options.luokka" style="max-width: 500;">
+        <table :class="options.luokka">
             <thead>
                 <tr>
-                    <th v-for="column in shownColumns" :class="{active: sortCol == column.key}">
+                    <th v-for="column in shownColumns" :class="{active: sortCol == column.key}" :width="column.width">
                         <span @click="column.sortable != false && sortBy(column.key)">{{column.title}}</span>
                         <span v-if="sortIndicators[column.key]==1">Up</span>
                         <span v-if="sortIndicators[column.key]==-1">Down</span>
@@ -199,8 +199,8 @@ Vue.component('vue-kokonaishuomautus', {
     template: `
     <div class="panel-group">
         <div class="panel panel-primary">
-            <div class="panel-heading" v-if="isPT">Päätuomarin huomautukset</div>
-            <div class="panel-heading" v-else>Verkkotuomarin huomautukset</div>
+            <div class="panel-heading" v-if="isPT">Kehityssuositukset (PT)</div>
+            <div class="panel-heading" v-else>Kehityssuositukset (VT)</div>
             <div class="panel-body" style="font-size: 18px;">        
                 <textarea class="form-control" v-if="isPT" v-model="raportti.pt_huom"></textarea>
                 <textarea class="form-control" v-else v-model="raportti.vt_huom"></textarea>
@@ -217,6 +217,26 @@ Vue.component('vue-kokonaishuomautus', {
     },
 });
 
+Vue.component('vue-otteluhuomautus', {
+    template: `
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Muita huomioita ottelusta</div>
+            <div class="panel-body" style="font-size: 18px;">        
+                <textarea class="form-control" v-model="raportti.raportti_huom"></textarea>
+            </div>
+        </div>
+    </div>
+    `,
+    props: ['raportti', 'jos'],
+    data: function(){
+        return {
+            initRaporti: this.raportti,
+        }
+    },
+});
+
+
 Vue.component('vue-kokonaisarvio', {
     template: `
         <div class="panel-group">
@@ -231,10 +251,10 @@ Vue.component('vue-kokonaisarvio', {
                     <div class="row">
                         <div class="col-xs-2" style="text-align: right;">Pisteet</div>
                         <div class="col-xs-4" style="text-align: center">
-                            <div v-show="raportti.pt_score!='<puuttuu>'" class="ruutuIsoAla ruutuVika">{{raportti.pt_score}}</div>
+                            <div v-show="raportti.pt_score!='<puuttuu>'" style="min-width: 65px;" class="ruutuIsoAla ruutuVika">{{raportti.pt_score}}</div>
                         </div>
                         <div class="col-xs-4" style="text-align: center">
-                            <div v-show="raportti.pt_score!='<puuttuu>'" class="ruutuIsoAla ruutuVika">{{raportti.vt_score}}</div>
+                            <div v-show="raportti.pt_score!='<puuttuu>'" style="min-width: 65px;" class="ruutuIsoAla ruutuVika">{{raportti.vt_score}}</div>
                         </div>
                     </div>
                     <div class="row">
@@ -247,7 +267,7 @@ Vue.component('vue-kokonaisarvio', {
                             <div class="ruutuIsoYla"> Huono</div>
                         </div>
                         <div class="col-xs-4" style="text-align: center">
-                            <div class="ruutuIsoYla"> Erinaomainen</div>
+                            <div class="ruutuIsoYla"> Erinomainen</div>
                             <div class="ruutuIsoYla"> Erittäin hyvä</div>
                             <div class="ruutuIsoYla"> Hyvä</div>
                             <div class="ruutuIsoYla"> Välttävä</div>
@@ -273,9 +293,14 @@ Vue.component('vue-kokonaisarvio', {
                     </div>
 
                     <div class="row">
-                        <div class="col-xs-2" style="width: 160px; text-align: right; margin-top: 20px;">Kehityssuositukset</div>
-                        <pre class="col-xs-4" style="font-family: Helvetica,Arial,sans-serif; text-align: left; min-height: 30px; font-size: 16px; border: 1px solid black; margin: 20px; width: 414px; left: 18px">{{raportti.pt_huom}}</pre>
-                        <pre class="col-xs-4" style="font-family: Helvetica,Arial,sans-serif; text-align: left; min-height: 30px; font-size: 16px; border: 1px solid black; margin: 20px; width: 414px; left: 51px">{{raportti.vt_huom}}</pre>
+                        <div class="col-xs-2" style="text-align: right; margin-top: 20px;">Kehityssuositukset</div>
+                        <pre class="col-xs-4" style="font-family: Arial,sans-serif; text-align: left; min-height: 30px; font-size: 16px; border: 1px solid black; margin: 20px;">{{raportti.pt_huom}}</pre>
+                        <pre class="col-xs-4" style="font-family: Arial,sans-serif; text-align: left; min-height: 30px; font-size: 16px; border: 1px solid black; margin: 20px;">{{raportti.vt_huom}}</pre>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-2" style="text-align: right; margin-top: 20px;">Muita huomioita</div>
+                        <pre class="col-xs-8" style="font-family: Arial,sans-serif; text-align: left; min-height: 30px; font-size: 16px; border: 1px solid black; margin: 20px;">{{raportti.huom}}</pre>
                     </div>
                 </div>
             </div>

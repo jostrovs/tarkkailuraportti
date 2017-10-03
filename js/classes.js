@@ -211,6 +211,8 @@ class Raportti {
             this.pt_huom = data_item.pt_huom;
             this.vt_huom = data_item.vt_huom;
 
+            this.raportti_huom = data_item.raportti_huom;
+
             this.tark_id = data_item.tark_id;
             this.tark_nimi = `${data_item.tark_etunimi} ${data_item.tark_sukunimi}`;
 
@@ -234,6 +236,7 @@ class Raportti {
 
             this.pt_huom = '',
             this.vt_huom = '',
+            this.raportti_huom = '',
 
             this.tark_id = "0";
             this.tark_nimi = '';

@@ -1,4 +1,5 @@
 <?php
+    require_once('log.php');
     require 'dbConfig.php';
 	$sqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
     $sqli->set_charset("utf8");
@@ -17,13 +18,21 @@
     if($token == "0") exitWithError();
     
     // Autentikoidaan
-    $sql = "SELECT rooli FROM tuomari WHERE token = '" . $token . "'"; 
+    $sql = "SELECT rooli, etunimi, sukunimi FROM tuomari WHERE token = '" . $token . "'"; 
     $result = $sqli->query($sql);
     $rooli = -1;
+    $etunimi = "";
+    $sukunimi = "";
     while($row = $result->fetch_assoc()){
-        $rooli = $row;
+        $rooli = $row['rooli'];
+        $etunimi = $row['etunimi'];
+        $sukunimi = $row['sukunimi'];
     }
     $sqli->close();
-    if($rooli < 0) exitWithError(); // Hyväksytään kaikki roolit, kunhan käyttäjä ylipäätään löytyy.
+    if($rooli < 0){
+        jos_log($etunimi . " " . $sukunimi . " ei autentikoitu GET, rooli: " . $rooli);
+        exitWithError(); // Hyväksytään kaikki roolit, kunhan käyttäjä ylipäätään löytyy.
+    } 
 
+    jos_log($etunimi . " " . $sukunimi . " autentikoitu GET, rooli: " . $rooli);
 ?>

@@ -1,7 +1,8 @@
 <?php
+    require_once('log.php');
     require 'dbConfig.php';
 	$sqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
-    $sqli->set_charset("utf8");    
+    $sqli->set_charset("utf8");
     
     function exitWithError(){
         $data["error"] = 1;
@@ -9,24 +10,33 @@
         $enc = json_encode($data, JSON_UNESCAPED_UNICODE);
         if(!$enc) echo "Enkoodaus feilasi, ";
         else echo $enc;
-        exit();    
+        exit();
     }
 
-    //if (isset($_GET["token"])) { $token  = $_GET["token"]; } else { $token=0; };
-    $token  = $_POST["token"];
+    $token = $_POST["token"];
     
     if($token == "0") exitWithError();
     
     // Autentikoidaan
-    $sql = "SELECT rooli FROM tuomari WHERE token = '" . $token . "'"; 
+    $sql = "SELECT rooli, etunimi, sukunimi FROM tuomari WHERE token = '" . $token . "'"; 
     $result = $sqli->query($sql);
     $rooli = -1;
+    $etunimi = "";
+    $sukunimi = "";
     while($row = $result->fetch_assoc()){
         $rooli = $row['rooli'];
+        $etunimi = $row['etunimi'];
+        $sukunimi = $row['sukunimi'];
     }
     $sqli->close();
-    // echo "SQL: " . $sql . "<br>";
-    // echo "Rooli: " . $rooli . "<br>";
-    if($rooli != 0 && $rooli != 2) exitWithError(); // Hyväksytään vain roolit 0 ja 2, eli tarkkailija ja admin.
+    if($rooli < 0){
+        jos_log("POST käyttäjää ei autentikoitu, token: " . $token);
+        exitWithError();
+    }
+    if($rooli != 0 && $rooli != 2){
+        jos_log($etunimi . " " . $sukunimi . " ei autentikoitu POST, rooli: " . $rooli);
+        exitWithError(); // Hyväksytään kaikki roolit, kunhan käyttäjä ylipäätään löytyy.
+    } 
 
+    jos_log($etunimi . " " . $sukunimi . " autentikoitu POST, rooli: " . $rooli);
 ?>

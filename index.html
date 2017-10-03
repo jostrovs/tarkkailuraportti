@@ -181,7 +181,7 @@
                     </div>
 
                     <h3>Tuomarit</h3>
-                    
+                    <p>Jos tuomaria ei löydy valintalistalta, niin valitse "Muu Tuomari" ja merkitse tuomarin nimi kehityssuosituksiin. Ylläpitäjä asettaa tuomarin nimen tietokantaan samalla kun luo ko. tuomarille tunnuksen.</p>
                     <div class="row">
                         <div class="col-xs-4">
                             <label for="pt">Päätuomari</label> <template v-if="jos">(valittu: {{uusi_raportti.pt_id}})</template>
@@ -308,7 +308,9 @@
 
                     <vue-kokonaisarvio :raportti="uusi_raportti" :jos="jos"></vue-kokonaisarvio>
 
-                    <div>
+                    <vue-otteluhuomautus :raportti="uusi_raportti" :jos="jos"></vue-otteluhuomautus>
+
+                    <div style="margin-bottom: 30px;">
                         <button type="submit" class="btn btn-default">Talleta raportti</button>
                     </div>
                 </form>

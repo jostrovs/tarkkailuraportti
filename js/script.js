@@ -40,10 +40,11 @@ $(document).ready(function () {
             raportit_options: 
             { 
                 columns: [
-                    { title: 'Ottelu', key: 'ottelu', template: function(row){ return row['koti'] + " - " + row['vieras']; } },
+                    { title: 'Ottelu', width: 340, key: 'ottelu', template: function(row){ return row['koti'] + " - " + row['vieras']; } },
                     { title: 'Päivämäärä', key: 'pvm'},
-                    { title: 'Tuomarit', key: 'tuomarit', template: (row)=>{ return row['pt_nimi'] + " - " + row['vt_nimi']} },
-                    { title: 'Tarkkailija', key: 'tark_nimi'},
+                    { title: 'Paikka', width: 250, key: 'paikka'},
+                    { title: 'Tuomarit', width: 420, key: 'tuomarit', template: (row)=>{ return row['pt_nimi'] + " - " + row['vt_nimi']} },
+                    { title: 'Tarkkailija', width: 230, key: 'tark_nimi'},
                     { title: 'id', key: 'id', hidden: true },
                 ], 
             }, 
@@ -382,6 +383,7 @@ $(document).ready(function () {
                     vaikeus: self.uusi_raportti.vaikeus,
                     pt_huom: self.uusi_raportti.pt_huom,
                     vt_huom: self.uusi_raportti.vt_huom,
+                    raportti_huom: self.uusi_raportti.raportti_huom,
                 };
 
                 let i_rivi=0;

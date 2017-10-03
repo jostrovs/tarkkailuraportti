@@ -1,6 +1,8 @@
 <?php
-    require 'dbConfig.php';
-    require 'dbAuthenticatePost.php';
+    require_once('log.php');
+    require_once('dbConfig.php');
+
+    require_once('dbAuthenticatePost.php');
 
     function obj($key){
         global $obj, $mysqli;
@@ -25,11 +27,12 @@
     $debug = array();
     //$debug["obj"] = $obj;
     $debug["phpFile"] = "insertReport.php";
-    
-    $sql = "INSERT INTO raportti (koti, vieras, paikka, pvm, miehet, tulos, kesto_h, kesto_min, vaikeus, pt_huom, vt_huom, pt_id, vt_id, tark_id, pt_score, vt_score)
+     
+
+    $sql = "INSERT INTO raportti (koti, vieras, paikka, pvm, miehet, tulos, kesto_h, kesto_min, vaikeus, pt_huom, vt_huom, raportti_huom, pt_id, vt_id, tark_id, pt_score, vt_score)
             VALUES ('".obj('koti')."', '".obj('vieras')."', '".obj('paikka')."', '".obj('pvm')."', '"
                       .obj('miehet')."', '".obj('tulos')."', '".obj('kesto_h')."', '".obj('kesto_min')."', '".obj('vaikeus')."', '"
-                      .obj('pt_huom')."', '".obj('vt_huom')."', '"
+                      .obj('pt_huom')."', '".obj('vt_huom')."', '".obj('raportti_huom')."', '"
                       .obj('pt_id')."', '".obj('vt_id')."', '".obj('tark_id')."', '".obj('pt_score')."', '".obj('vt_score')."')";
 
     if ($mysqli->query($sql) === TRUE) {
@@ -50,7 +53,7 @@
         $mysqli->query($sql1);
         $mysqli->query($sql2);
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        jos_log("InsertReport SQL Error: " . $sql . "<br>" . $conn->error);
     }
 
     $mysqli->close();
@@ -60,4 +63,5 @@
     $data = array();
     $data["debug"] = $debug;
     echo json_encode($data);
+    
 ?>

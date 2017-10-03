@@ -1,5 +1,8 @@
 <?php
-//require 'dbConfig.php';
+
+require_once('log.php');
+
+require 'dbConfig.php';
 require 'dbAuthenticateGet.php';
 	define (API_HAE_TUOMARIT, 1);
 	define (API_HAE_RAPORTIT, 2);
@@ -22,6 +25,8 @@ $cmd  = $_GET["cmd"];
 $arg1  = $_GET["arg1"];
 $token  = $_GET["token"];
 
+jos_log("getData.php?cmd=" . $cmd . "&arg1=" . $arg1 . "&token=" . $token);
+
 $cmd = $mysqli->real_escape_string($cmd);
 $arg1 = $mysqli->real_escape_string($arg1);
 
@@ -39,7 +44,7 @@ switch($cmd){
         $sql = "SELECT 
                   r.id, r.koti, r.vieras, r.paikka, r.pvm, r.pt_id, r.vt_id, r.tark_id, r.pt_score, r.vt_score,
                   r.miehet, r.tulos, r.kesto_h, r.kesto_min, r.vaikeus,
-                  r.pt_huom, r.vt_huom,
+                  r.pt_huom, r.vt_huom, r.raportti_huom,
                   pt.etunimi as pt_etunimi, pt.sukunimi as pt_sukunimi,
                   vt.etunimi as vt_etunimi, vt.sukunimi as vt_sukunimi,
                   tark.etunimi as tark_etunimi, tark.sukunimi as tark_sukunimi
@@ -63,6 +68,7 @@ switch($cmd){
         break;
     case API_HAE_PT_RAPORTIT:
         $sql = "SELECT  ra.id as raportti_id, ra.koti, ra.vieras, ra.pvm, ra.pt_id, ra.vt_id, ra.pt_score, ra.vt_score,
+                        ra.raportti_huom, ra.pt_huom, ra.vt_huom,
                         r.id, r.arvosana, r.aihe_id, r.huom, 
                         a.no
                 FROM raportti ra
@@ -72,6 +78,7 @@ switch($cmd){
         break;
     case API_HAE_VT_RAPORTIT:
         $sql = "SELECT  ra.id as raportti_id, ra.koti, ra.vieras, ra.pvm, ra.pt_id, ra.vt_id, ra.pt_score, ra.vt_score,
+                        ra.raportti_huom, ra.pt_huom, ra.vt_huom,
                         r.id, r.arvosana, r.aihe_id, r.huom, 
                         a.no
                 FROM raportti ra
@@ -111,5 +118,4 @@ $enc = json_encode($data, JSON_UNESCAPED_UNICODE);
 if(!$enc) echo "Enkoodaus feilasi, ";
 else echo $enc;
 
-file_put_contents('c:\\d\\omagit\\tark\\phpdebug\\my_debug_file.txt', json_encode($data));
 ?>

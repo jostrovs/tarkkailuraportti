@@ -114,7 +114,9 @@ h4 {
 	font-size: large;
 }
 .ruutuIsoYla {
-	width: 82px;
+	width: 15%;
+	min-width: 40px;
+	/* width: 82px; */
 	height: 38px;
 	display: inline-block;
 	margin-right: -4px;
@@ -124,7 +126,9 @@ h4 {
 	font-size: x-small;
 }
 .ruutuIsoAla {
-	width: 82px;
+	width: 15%;
+	min-width: 40px;
+	/* width: 82px; */
 	height: 38px;
 	display: inline-block;
 	border-left: 1px solid black;

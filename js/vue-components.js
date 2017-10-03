@@ -300,7 +300,7 @@ Vue.component('vue-kokonaisarvio', {
 
                     <div class="row">
                         <div class="col-xs-2" style="text-align: right; margin-top: 20px;">Muita huomioita</div>
-                        <pre class="col-xs-8" style="font-family: Arial,sans-serif; text-align: left; min-height: 30px; font-size: 16px; border: 1px solid black; margin: 20px;">{{raportti.huom}}</pre>
+                        <pre class="col-xs-8" style="font-family: Arial,sans-serif; text-align: left; min-height: 30px; font-size: 16px; border: 1px solid black; margin: 20px;">{{raportti.raportti_huom}}</pre>
                     </div>
                 </div>
             </div>

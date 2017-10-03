@@ -87,7 +87,7 @@ switch($cmd){
                 WHERE vt_id = $arg1";
         break;
     case API_LOGIN:
-        $sql = "SELECT etunimi, sukunimi, email, token, rooli FROM tuomari WHERE token='" . $token . "'";
+        $sql = "SELECT etunimi, sukunimi, email, token, rooli, id FROM tuomari WHERE token='" . $token . "'";
         break;
     case API_SAVE_EMAIL:
         $sql = "UPDATE tuomari SET email='" . $arg1 . "' WHERE token='" . $token . "'";

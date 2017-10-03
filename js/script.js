@@ -143,6 +143,7 @@ $(document).ready(function () {
                         email: d.email,
                         token: d.token,
                         rooli: d.rooli,
+                        id: d.id,
                         login: true,
                     };
 
@@ -327,7 +328,9 @@ $(document).ready(function () {
             newReport: function(){
                 this.uusi_raportti = new Raportti();
                 this.uusi_raportti.rivit = [];
-                
+                this.uusi_raportti.tark_id = this.user.id;
+
+
                 for(let aihe of this.aiheet){
                     this.uusi_raportti.rivit.push(new Rivi({
                         aihe_id: aihe.id,
@@ -373,7 +376,7 @@ $(document).ready(function () {
                     vieras: self.uusi_raportti.vieras,
                     pt_id: self.uusi_raportti.pt_id,
                     vt_id: self.uusi_raportti.vt_id,
-                    tark_id: self.uusi_raportti.tark_id,
+                    tark_id: self.user.id,
                     pt_score: self.uusi_raportti.pt_score,
                     vt_score: self.uusi_raportti.vt_score,
                     miehet: self.uusi_raportti.miehet,

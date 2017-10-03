@@ -205,10 +205,7 @@
                     <div class="row">
                         <div class="col-xs-4">
                             <label for="tark">Tarkkailija</label> <template v-if="jos">(valittu: {{uusi_raportti.tark_id}})</template>
-                            <select class="form-control" id="tark" v-model="uusi_raportti.tark_id">
-                                <option disabled value="-1">Valitse Tarkkailija</option>
-                                <option v-for="tuomari in tarkkailijat" :value="tuomari.id">{{tuomari.sukunimi}} {{tuomari.etunimi}}</option>
-                            </select>
+                            <pre style="font-family: Arial">{{user.name}}</pre>
                         </div>
                     </div>
 

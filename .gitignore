@@ -1,3 +1,4 @@
 phpdebug/*
 .vscode/ftp-sync*
 api/dbConfig.php
+api/log/log.txt

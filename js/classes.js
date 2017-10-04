@@ -228,7 +228,7 @@ class Raportti {
             this.koti = "";
             this.vieras = "";
             this.paikka = "";
-            this.pvm = "pvm";
+            this.pvm = "";
             
             this.pt_id = "0";
             this.pt_nimi = "";

@@ -16,6 +16,8 @@ $(document).ready(function () {
     var app = new Vue({
         el: '#app',
         data: {
+            pikada_ready: false,
+
             dummy: [1, 2, 3, 4, 5],
             kaikki_tuomarit: [],
             aiheet: [],
@@ -79,6 +81,26 @@ $(document).ready(function () {
             }
         },
         methods: {
+            pikada: function(){
+                if(this.pikada_ready) return;
+                var picker = new Pikaday(
+                    {
+                        field: document.getElementById('pvm'),
+                        firstDay: 1,
+                        minDate: new Date(2017, 1, 1),
+                        maxDate: new Date(2025, 12, 31),
+                        yearRange: [2017,2020],
+                        i18n: {
+                            previousMonth : 'Edellinen kk',
+                            nextMonth     : 'Seuraava kk',
+                            months        : ['Tammikuu','Helmikuu','Maaliskuu','Huhtikuu','Toukokuu','Kesäkuu','Heinäkuu','Elokuu','Syyskuu','Lokakuu','Marraskuu','Joulukuu'],
+                            weekdays      : ['Sunnuntai','Maanantai','Tiistai','Keskiviikko','Torstai','Perjantai','Lauantai'],
+                            weekdaysShort : ['Su','Ma','Ti','Ke','To','Pe','La']
+                        }
+                    });                
+            },
+            
+            
             afterLogin: function(){
                 toastr.info("Haetaan tietoja...");
                 this.loadTuomarit();

@@ -14,13 +14,15 @@
 
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/toastr.min.css">
+    <link rel="stylesheet" href="css/pikaday.css">
     <link rel="stylesheet" href="css/style.css">
 
     <script src="js/jquery-3.1.1.js"></script>
+    <script src="js/moment.js"></script>
+    <script src="js/pikaday.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/toastr.min.js"></script>
     <script src="js/vue.js"></script>
-    <script src="js/moment.js"></script>
     <script src="js/lockr.js"></script>
     <script src="js/vue-components.js"></script>
     <script src="js/classes.js"></script>
@@ -39,8 +41,8 @@
     <div id="app">
         <ul id="navbar" class="nav nav-tabs">
 			<li class="active"><a data-toggle="tab" href="#etusivu" id="etusivuLink">Etusivu</a>  </li>
-			<li v-if="user.login">
-                <a data-toggle="tab" href="#uusi">
+			<li v-show="user.login">
+                <a data-toggle="tab" href="#uusi" @click="pikada()">
                     Uusi
                 </a>
             </li>
@@ -57,6 +59,7 @@
 		</ul>
 
         <div id="debugDiv">
+            <button class="btn" @click="pikada()">Pikada</button>
             <button class="btn" @click="jos=!jos">Toggle debug</button>
             <button class="btn" @click="test_fill()">Täytä</button>
         </div>
@@ -128,6 +131,7 @@
                     </div>
                 </div>
 
+
                 <button class="btn btn-default" v-if="jos" id="test_fill" @click="test_fill()">Täytä</button>
                 <button class="btn btn-default" v-if="jos" id="newReport" @click="koklaa">Kokeile</button>
 
@@ -140,7 +144,7 @@
                     <div class="row">
                         <div class="col-xs-3">
                             <label for="pvm">Pvm</label>
-                            <input id="pvm" class="form-control" type="date" placeholder="pvm" required v-model="uusi_raportti.pvm">
+                            <input id="pvm" class="form-control" type="text" required v-model="uusi_raportti.pvm">
                         </div>
                         <div class="col-xs-3">
                             <label for="paikka">Paikka</label>
@@ -352,6 +356,8 @@
     </div>
 
     <!--div id="luonnos" onclick="$('#luonnos').hide()">Luonnos</div-->
-</body>
+
+
+    </body>
 
 </html>

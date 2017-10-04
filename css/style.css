@@ -339,3 +339,9 @@ th, td {
 }      
 
 /******** josGrid END ****/
+
+/* Pika */
+.pika-lendar  th {
+	background-color: #eef;
+
+}

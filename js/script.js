@@ -45,7 +45,7 @@ $(document).ready(function () {
                     { title: 'Ottelu', width: 340, key: 'ottelu', template: function(row){ return row['koti'] + " - " + row['vieras']; } },
                     { title: 'Päivämäärä', key: 'pvm'},
                     { title: 'Paikka', width: 250, key: 'paikka'},
-                    { title: 'Tuomarit', width: 420, key: 'tuomarit', template: (row)=>{ return row['pt_nimi'] + " - " + row['vt_nimi']} },
+                    { title: 'Tuomarit', width: 420, key: 'tuomarit', template: function(row){ return row['pt_nimi'] + " - " + row['vt_nimi']} },
                     { title: 'Tarkkailija', width: 230, key: 'tark_nimi'},
                     { title: 'id', key: 'id', hidden: true },
                 ], 
@@ -112,7 +112,8 @@ $(document).ready(function () {
             },
             
             modalReport: function(raportti_id){
-                for(let raportti of this.raportit){
+                for(let i=0;i<this.raportit.length;++i){
+                let raportti = this.raportit[i];
                     if(raportti.id == raportti_id){
                         this.modal_raportti = raportti;
                         this.modal_raportti.getRivit();
@@ -142,11 +143,11 @@ $(document).ready(function () {
             },
 
             uudenRivit: function(firstNo, lastNo){
-                return this.uusi_raportti.rivit.filter(rivi => rivi.aihe_no >= firstNo && rivi.aihe_no <= lastNo);
+                return this.uusi_raportti.rivit.filter(function(rivi){ return rivi.aihe_no >= firstNo && rivi.aihe_no <= lastNo});
             },
 
             valitunRivit: function(firstNo, lastNo){
-                return this.raportti.rivit.filter(rivi => rivi.aihe_no >= firstNo && rivi.aihe_no <= lastNo);
+                return this.raportti.rivit.filter(function(rivi){ return rivi.aihe_no >= firstNo && rivi.aihe_no <= lastNo});
             },
 
             login: function(){
@@ -236,7 +237,8 @@ $(document).ready(function () {
                          toastr.error("Tuomarien lataus epäonnistui.");
                          return;
                     }
-                    for(let tuomari of data.data){
+                    for(let i=0;i<data.data.length;++i){
+                    let tuomari=data.data[i];
                         self.kaikki_tuomarit.push(Tuomari(tuomari));
                     }
                     self.kaikki_tuomarit.sort(function(t1, t2){ 
@@ -259,7 +261,8 @@ $(document).ready(function () {
                          console.log("loadAiheet: data.data = null");
                          return;
                     }
-                    for(let aihe of data.data){
+                    for(let i=0;i<data.data.length;++i){
+                        let aihe = data.data[i];
                         self.aiheet.push(Aihe(aihe));
                     }
                     self.newReport();
@@ -274,7 +277,8 @@ $(document).ready(function () {
                          console.log("loadRaportit: data.data = null");
                          return;
                     }
-                    for(let raportti of data.data){
+                    for(let i=0;i< data.data.length;++i){
+                        let raportti = data.data[i];
                         self.raportit.push(Raportti(raportti));
                     }
 
@@ -290,8 +294,9 @@ $(document).ready(function () {
                          console.log("loadRivit: data.data = null");
                          return;
                     }
-                    for(let rivi of data.data){
-                        self.rivit.push(new Rivi(rivi));
+                    for(let i=0;i<data.data.length;++i){
+                        let rivi = data.data[i];
+                        self.rivit.push(Rivi(rivi));
                     }
                 })
             },
@@ -302,8 +307,9 @@ $(document).ready(function () {
                 this.getData(API_HAE_PT_RAPORTIT, function(data){
                     self.ptRivit = [];
                     if(data.data == null) return;
-                    for(let rivi of data.data){
-                        self.ptRivit.push(new Rivi(rivi));
+                    for(let i=0;i<data.data.length;++i){
+                        let rivi = data.data[i];
+                        self.ptRivit.push(Rivi(rivi));
                     }
                     self.asetaVanhatRivit();
                 }, self.uusi_raportti.pt_id);
@@ -315,8 +321,9 @@ $(document).ready(function () {
                 this.getData(API_HAE_VT_RAPORTIT, function(data){
                     self.vtRivit = [];
                     if(data.data == null) return;
-                    for(let rivi of data.data){
-                        self.vtRivit.push(new Rivi(rivi));
+                    for(let i=0;i<data.data.length;++i){
+                        let rivi = data.data[i];
+                        self.vtRivit.push(Rivi(rivi));
                     }
                     self.asetaVanhatRivit();
                 }, self.uusi_raportti.vt_id);
@@ -325,12 +332,13 @@ $(document).ready(function () {
             asetaVanhatRivit: function(){
                 // ptRivit- ja vtRivit-muuttujissa on nyt tiedot tuomareiden vanhoista peleistä.
                 // Asetetaan uuden raportin rivit-muuttujille näiden vanhojen arvot
-                for(let rivi of this.uusi_raportti.rivit){
+                for(let i=0;i<this.uusi_raportti.rivit.length;++i){
+                    let rivi = this.uusi_raportti.rivit[i];
                     if(rivi.aihe_no < 100){
-                        rivi.vanhat_rivit = this.ptRivit.filter(r => r.aihe_no == rivi.aihe_no);
+                        rivi.vanhat_rivit = this.ptRivit.filter(function(r){ return r.aihe_no == rivi.aihe_no});
                     }
                     else {
-                        rivi.vanhat_rivit = this.vtRivit.filter(r => r.aihe_no == rivi.aihe_no);
+                        rivi.vanhat_rivit = this.vtRivit.filter(function(r){ return r.aihe_no == rivi.aihe_no});
                     }
                 }
             },
@@ -339,7 +347,8 @@ $(document).ready(function () {
                 this.selectedReport = raportti_id;
                 if(this.selectedReport == undefined) return;
                 
-                for(let raportti of this.raportit){
+                for(let i=0;i<this.raportit.length;++i){
+                    let raportti = this.raportit[i];
                     if(raportti.id == this.selectedReport){
                         this.raportti = raportti;
                         this.raportti.getRivit();
@@ -353,7 +362,8 @@ $(document).ready(function () {
                 this.uusi_raportti.tark_id = this.user.id;
 
 
-                for(let aihe of this.aiheet){
+                for(let i=0;i<this.aiheet.length;++i){
+                    let aihe = this.aiheet[i];
                     this.uusi_raportti.rivit.push(new Rivi({
                         aihe_id: aihe.id,
                         nimi: aihe.nimi,

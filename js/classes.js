@@ -110,86 +110,89 @@ var localGetData=function(cmd, callback, arg1, token) {
     });
 }
 
-class Referee {
-      constructor(torneoReferee){
-          this.id = torneoReferee.referee_id;
-          this.name = torneoReferee.last_name + " " + torneoReferee.first_name;
-          this.torneoReferee = torneoReferee;
-          this.displayed = true;
-          this.showWorkLoad = true;
-          this.showDouble = true;
-          this.href="https://lentopallo.torneopal.fi/taso/ottelulista.php?tuomari=" + torneoReferee.referee_id; 
-    }  
-}
-
-class Tuomari {
-    constructor(data_item){
-        this.id = data_item.id;
-        this.etunimi = data_item.etunimi;
-        this.sukunimi = data_item.sukunimi;
-        this.rooli = data_item.rooli;
+function Referee(torneoReferee){
+    return {
+        id : torneoReferee.referee_id,
+        name : torneoReferee.last_name + " " + torneoReferee.first_name,
+        torneoReferee : torneoReferee,
+        displayed : true,
+        showWorkLoad : true,
+        showDouble : true,
+        href:"https://lentopallo.torneopal.fi/taso/ottelulista.php?tuomari=" + torneoReferee.referee_id,
     }
 }
 
-class Aihe {
-    constructor(data_item){
-        this.id = data_item.id;
-        this.nimi = data_item.nimi;
-        this.no = data_item.no;
-        this.otsikko = data_item.otsikko;
-        this.teksti = data_item.teksti;
+function Tuomari(data_item){
+    return {
+        id : data_item.id,
+        etunimi : data_item.etunimi,
+        sukunimi : data_item.sukunimi,
+        rooli : data_item.rooli,
     }
 }
 
-class Rivi {
-    constructor(data_item){
-        this.vanhat_rivit=[];
+function Aihe(data_item){
+    return {
+        id : data_item.id,
+        nimi : data_item.nimi,
+        no : data_item.no,
+        otsikko : data_item.otsikko,
+        teksti : data_item.teksti,
+    }
+}
 
-        if(data_item != null){
-            this.id = data_item.id;
-        } else {
-            this.id = 0;
+function Rivi(data_item){
+    ret = {
+        vanhat_rivit:[],
+        
+        aihe_id : data_item.aihe_id,
+        arvosana : data_item.arvosana,
+        huom : data_item.huom,
+        raportti_id : data_item.raportti_id,
+        otsikko : data_item.otsikko,
+        teksti : data_item.teksti,
+
+        aihe_nimi : data_item.nimi,
+        aihe_no : data_item.no,
+
+        raportti_pvm : data_item.pvm,
+        raportti_koti : data_item.koti,
+        raportti_vieras : data_item.vieras,
+        raportti_pt_score : data_item.pt_score,
+        raportti_vt_score : data_item.vt_score,
+
+        tekstiDisplayed: function(){
+            return this.teksti != undefined && this.teksti.length>0;
+        },
+        huomDisplayed: function(){
+            return this.huom != undefined && this.huom.length>0;
+        },
+        getOttelu: function(){
+            let pvm = "&lt;ei pvm&gt;";
+            if(this.raportti_pvm != undefined) pvm = this.raportti_pvm.split(" ")[0];
+            return {
+                pvm: pvm,
+                koti: this.raportti_koti,
+                vieras: this.raportti_vieras,
+                pt_score: this.raportti_pt_score,
+                vt_score: this.raportti_vt_score,
+            };
         }
-        this.aihe_id = data_item.aihe_id;
-        this.arvosana = data_item.arvosana;
-        this.huom = data_item.huom;
-        this.raportti_id = data_item.raportti_id;
-        this.otsikko = data_item.otsikko;
-        this.teksti = data_item.teksti;
-
-        this.aihe_nimi = data_item.nimi;
-        this.aihe_no = data_item.no;
-
-        this.raportti_pvm = data_item.pvm;
-        this.raportti_koti = data_item.koti;
-        this.raportti_vieras = data_item.vieras;
-        this.raportti_pt_score = data_item.pt_score;
-        this.raportti_vt_score = data_item.vt_score;
+    
+    };
+    if(data_item != null){
+        ret.id = data_item.id;
+    } else {
+        ret.id = 0;
     }
-    tekstiDisplayed(){
-        return this.teksti != undefined && this.teksti.length>0;
-    }
-    huomDisplayed(){
-        return this.huom != undefined && this.huom.length>0;
-    }
-    getOttelu(){
-        let pvm = "&lt;ei pvm&gt;";
-        if(this.raportti_pvm != undefined) pvm = this.raportti_pvm.split(" ")[0];
-        return {
-            pvm: pvm,
-            koti: this.raportti_koti,
-            vieras: this.raportti_vieras,
-            pt_score: this.raportti_pt_score,
-            vt_score: this.raportti_vt_score,
-        };
-    }
+    return ret;
 }
 
-class Huomautus {
-    constructor(rivi){
-        this.id = rivi.aihe_no;
-        this.aihe = rivi.otsikko;
-        this.teksti = rivi.huom;
+function Huomautus(rivi){
+    return {
+        id : rivi.aihe_no,
+        aihe : rivi.otsikko,
+        teksti : rivi.huom,
     }
 }
 
@@ -262,7 +265,7 @@ class Raportti {
         for(let rivi of this.palautaRivit(1, 17))
         {
             if(rivi.huomDisplayed()){
-                ret.push(new Huomautus(rivi));
+                ret.push(Huomautus(rivi));
             }
         }
         return ret;
@@ -272,7 +275,7 @@ class Raportti {
         for(let rivi of this.palautaRivit(101, 117))
         {
             if(rivi.huomDisplayed()){
-                ret.push(new Huomautus(rivi));
+                ret.push(Huomautus(rivi));
             }
         }
         return ret;

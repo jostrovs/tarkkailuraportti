@@ -237,7 +237,7 @@ $(document).ready(function () {
                          return;
                     }
                     for(let tuomari of data.data){
-                        self.kaikki_tuomarit.push(new Tuomari(tuomari));
+                        self.kaikki_tuomarit.push(Tuomari(tuomari));
                     }
                     self.kaikki_tuomarit.sort(function(t1, t2){ 
                         if(t1.sukunimi < t2.sukunimi) return -1;
@@ -260,7 +260,7 @@ $(document).ready(function () {
                          return;
                     }
                     for(let aihe of data.data){
-                        self.aiheet.push(new Aihe(aihe));
+                        self.aiheet.push(Aihe(aihe));
                     }
                     self.newReport();
                 })

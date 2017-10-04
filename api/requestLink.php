@@ -54,6 +54,7 @@ function sendEmail($to, $token){
 }
 
 $email  = $_GET["email"];
+$email = strtolower($email);
 
 jos_log("Linkkiä pyydetty osoitteelle: " . $email);
 

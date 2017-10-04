@@ -25,7 +25,7 @@ $cmd  = $_GET["cmd"];
 $arg1  = $_GET["arg1"];
 $token  = $_GET["token"];
 
-jos_log("getData.php?cmd=" . $cmd . "&arg1=" . $arg1 . "&token=" . $token);
+jos_log("getData.php?cmd=" . $cmd . "&arg1=" . $arg1);
 
 $cmd = $mysqli->real_escape_string($cmd);
 $arg1 = $mysqli->real_escape_string($arg1);

@@ -345,3 +345,11 @@ th, td {
 	background-color: #eef;
 
 }
+
+.jos-table-container,
+.jos-table
+{
+	max-height: 250px;
+	/* height: 250px; */
+	overflow-y: auto;
+}

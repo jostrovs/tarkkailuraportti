@@ -364,7 +364,7 @@ $(document).ready(function () {
 
                 for(let i=0;i<this.aiheet.length;++i){
                     let aihe = this.aiheet[i];
-                    this.uusi_raportti.rivit.push(new Rivi({
+                    this.uusi_raportti.rivit.push(Rivi({
                         aihe_id: aihe.id,
                         nimi: aihe.nimi,
                         no: aihe.no,

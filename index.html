@@ -31,7 +31,6 @@
 
 <body>
 
-    
     <div onclick="$('#loader').hide();" style="display: none; padding: 40px; font-size: 20px; height:80%; position: fixed; top: 10%; left: 10%; width: 80%; 
                                                background: linear-gradient(to top, #fefcea 0%,#efdd69 100%); 
                                                border: 3px solid #a00;" id="loader">
@@ -59,7 +58,6 @@
 		</ul>
 
         <div id="debugDiv">
-            <button class="btn" @click="pikada()">Pikada</button>
             <button class="btn" @click="jos=!jos">Toggle debug</button>
             <button class="btn" @click="test_fill()">Täytä</button>
         </div>
@@ -89,7 +87,7 @@
                         </div>
                     </form>
 
-                    <div style="max-height: 250px; overflow-y: auto;">
+                    <div style="-ms-overflow-style: auto; height: 250px; overflow-y: auto;">
                         <vue-jos-grid :options="raportit_options" :data="raportit" :jos="jos"></vue-jos-grid>
                     </div>
 

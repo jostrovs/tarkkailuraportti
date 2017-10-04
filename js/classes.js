@@ -332,5 +332,5 @@ function Raportti(data_item){
     
     ret.laske();
 
-
+    return ret;
 }

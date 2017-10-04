@@ -33,9 +33,9 @@ $(document).ready(function () {
             token: getUserToken(),
 
             selectedReport: null,
-            modal_raportti: new Raportti(),
-            raportti: new Raportti(),
-            uusi_raportti: new Raportti(),
+            modal_raportti: Raportti(),
+            raportti: Raportti(),
+            uusi_raportti: Raportti(),
 
             postResponse: "Tänne tulee response",
 
@@ -275,7 +275,7 @@ $(document).ready(function () {
                          return;
                     }
                     for(let raportti of data.data){
-                        self.raportit.push(new Raportti(raportti));
+                        self.raportit.push(Raportti(raportti));
                     }
 
                     bus.emit(EVENT_RAPORTIT_UPDATE, self.raportit);
@@ -348,7 +348,7 @@ $(document).ready(function () {
             },
 
             newReport: function(){
-                this.uusi_raportti = new Raportti();
+                this.uusi_raportti = Raportti();
                 this.uusi_raportti.rivit = [];
                 this.uusi_raportti.tark_id = this.user.id;
 

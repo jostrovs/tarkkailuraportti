@@ -84,7 +84,7 @@ switch($cmd){
         $data = 1;
         break;
     default:
-        $sql = "Ei mitään, väärä komento annettu.";
+        $sql = "Ei mit&auml;&auml;n, v&auml;&auml;r&auml; komento annettu.";
 }
 
 $debug["sql"] = $sql;

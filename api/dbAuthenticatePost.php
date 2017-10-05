@@ -31,7 +31,7 @@
     }
     $sqli->close();
     if($rooli < 0){
-        jos_log("POST käyttäjää ei autentikoitu " . $etunimi . " " . $sukunimi . " POST", JOS_LOG_IMPORTANT);
+        jos_log("POST ei autentikoitu " . $etunimi . " " . $sukunimi . " POST,   token: " . $token, JOS_LOG_IMPORTANT);
         exitWithError();
     }
     if($rooli != 0 && $rooli != 2){

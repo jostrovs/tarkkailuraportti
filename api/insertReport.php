@@ -58,7 +58,7 @@
 
     $mysqli->close();
 
-    jos_log($etunimi . " " . $sukunimi . " lisäsi raportin " . $report_id, JOS_LOG_NORMAL);
+    jos_log($etunimi . " " . $sukunimi . " lis&auml;si raportin " . $report_id, JOS_LOG_NORMAL);
 
     $data = array();
     $data["debug"] = $debug;

@@ -37,6 +37,6 @@
     } 
 
     if($cmd == API_LOGIN){
-        jos_log($etunimi . " " . $sukunimi . " loggasi sisään, rooli: " . $rooli . "     browser: " . $browser, JOS_LOG_NORMAL);
+        jos_log($etunimi . " " . $sukunimi . " login, rooli: " . $rooli . "     browser: " . $browser, JOS_LOG_NORMAL);
     }
 ?>

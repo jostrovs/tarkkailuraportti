@@ -1,31 +1,21 @@
 <?php
 
+$cmd  = $_GET["cmd"];
+$arg1  = $_GET["arg1"];
+$token  = $_GET["token"];
+
+
 require_once('log.php');
 
 require 'dbConfig.php';
 require 'dbAuthenticateGet.php';
-	define (API_HAE_TUOMARIT, 1);
-	define (API_HAE_RAPORTIT, 2);
-	define (API_HAE_RIVIT, 3);
-	define (API_HAE_AIHEET, 4);
-	
-    define (API_HAE_RAPORTIN_RIVIT, 5);
-   
-    define (API_HAE_PT_RAPORTIT, 6);
-    define (API_HAE_VT_RAPORTIT, 7);
-    
-    define (API_LOGIN, 8);
-    define (API_SAVE_EMAIL, 9);
+
 	
 // Tänne argumenttien mukaan datan hakua eri tauluista ja eri tarkoituksiin jne.
 $debug = array();
 $debug["phpFile"] = "getData.php";
 
-$cmd  = $_GET["cmd"];
-$arg1  = $_GET["arg1"];
-$token  = $_GET["token"];
-
-jos_log("getData.php?cmd=" . $cmd . "&arg1=" . $arg1);
+jos_log("getData.php?cmd=" . $cmd . "&arg1=" . $arg1, JOS_LOG_DEBUG);
 
 $cmd = $mysqli->real_escape_string($cmd);
 $arg1 = $mysqli->real_escape_string($arg1);

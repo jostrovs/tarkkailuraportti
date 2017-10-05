@@ -126,7 +126,7 @@ $(document).ready(function () {
                 $.ajax({
                     dataType: 'json',
                     url: GET_DATA,
-                    data: {cmd:cmd, arg1:arg1, token: self.token}
+                    data: {cmd:cmd, arg1:arg1, token: self.token, browser: BROWSER}
                 }).done(function(data){
                     if(data.error == 1){
                         toastr.error("Käyttäjää ei ole autentikoitu. (2)");
@@ -194,7 +194,7 @@ $(document).ready(function () {
                 $.ajax({
                     dataType: 'json',
                     url: GET_DATA,
-                    data: {cmd:API_SAVE_EMAIL, arg1:user.email, token: self.token}
+                    data: {cmd:API_SAVE_EMAIL, arg1:user.email, token: self.token, browser: BROWSER}
                 }).done(function(data){
                     if(data.error == 1){
                         toastr.error("Käyttäjää ei ole autentikoitu. (2)");
@@ -213,7 +213,7 @@ $(document).ready(function () {
                 $.ajax({
                     dataType: 'json',
                     url: REQUEST_LINK,
-                    data: {email:email}
+                    data: {email:email, browser: BROWSER}
                 }).done(function(data){
                     toastr.clear();
                     if(data.error == 1){
@@ -438,7 +438,7 @@ $(document).ready(function () {
                     dataType: 'json',
                     //url: './../api/setData.php',
                     url: INSERT_REPORT,
-                    data: {data: JSON.stringify(formdata), token: self.token},
+                    data: {data: JSON.stringify(formdata), token: self.token, browser: BROWSER},
                 }).done(function(data){
                     toastr.clear();
                     if(data.error == 1){

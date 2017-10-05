@@ -27,7 +27,7 @@
     $debug = array();
     //$debug["obj"] = $obj;
     $debug["phpFile"] = "insertReport.php";
-     
+    $report_id = 0; 
 
     $sql = "INSERT INTO raportti (koti, vieras, paikka, pvm, miehet, tulos, kesto_h, kesto_min, vaikeus, pt_huom, vt_huom, raportti_huom, pt_id, vt_id, tark_id, pt_score, vt_score)
             VALUES ('".obj('koti')."', '".obj('vieras')."', '".obj('paikka')."', '".obj('pvm')."', '"
@@ -53,13 +53,13 @@
         $mysqli->query($sql1);
         $mysqli->query($sql2);
     } else {
-        jos_log("InsertReport SQL Error: " . $sql . "<br>" . $conn->error);
+        jos_log("InsertReport SQL Error: " . $sql . "<br>" . $conn->error, JOS_LOG_IMPORTANT);
     }
 
     $mysqli->close();
 
-    //$debug["sql1"] = $sql1;
-    //$debug["sql2"] = $sql2;
+    jos_log($etunimi . " " . $sukunimi . " lisäsi raportin " . $report_id, JOS_LOG_NORMAL);
+
     $data = array();
     $data["debug"] = $debug;
     echo json_encode($data);

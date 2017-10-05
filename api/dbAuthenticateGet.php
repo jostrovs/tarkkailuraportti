@@ -13,7 +13,9 @@
         exit();
     }
 
+    $cmd = $_GET["cmd"];
     $token = $_GET["token"];
+    $browser = $_GET["browser"];
     
     if($token == "0") exitWithError();
     
@@ -30,9 +32,11 @@
     }
     $sqli->close();
     if($rooli < 0){
-        jos_log($etunimi . " " . $sukunimi . " ei autentikoitu GET, rooli: " . $rooli);
+        jos_log($etunimi . " " . $sukunimi . " ei autentikoitu GET, rooli: " . $rooli, JOS_LOG_IMPORTANT);
         exitWithError(); // Hyväksytään kaikki roolit, kunhan käyttäjä ylipäätään löytyy.
     } 
 
-    jos_log($etunimi . " " . $sukunimi . " autentikoitu GET, rooli: " . $rooli);
+    if($cmd == API_LOGIN){
+        jos_log($etunimi . " " . $sukunimi . " loggasi sisään, rooli: " . $rooli . "     browser: " . $browser, JOS_LOG_NORMAL);
+    }
 ?>

@@ -56,7 +56,7 @@ function sendEmail($to, $token){
 $email  = $_GET["email"];
 $email = strtolower($email);
 
-jos_log("Linkkiä pyydetty osoitteelle: " . $email);
+jos_log("Linkkiä pyydetty osoitteelle: " . $email, JOS_LOG_IMPORTANT);
 
 $sql = "SELECT token, email FROM tuomari WHERE email='" . $email . "'";
 $result = $mysqli->query($sql);

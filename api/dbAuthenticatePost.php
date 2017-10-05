@@ -14,6 +14,7 @@
     }
 
     $token = $_POST["token"];
+    $browser = $_GET["browser"];
     
     if($token == "0") exitWithError();
     
@@ -30,13 +31,13 @@
     }
     $sqli->close();
     if($rooli < 0){
-        jos_log("POST käyttäjää ei autentikoitu " . $etunimi . " " . $sukunimi . " POST");
+        jos_log("POST käyttäjää ei autentikoitu " . $etunimi . " " . $sukunimi . " POST", JOS_LOG_IMPORTANT);
         exitWithError();
     }
     if($rooli != 0 && $rooli != 2){
-        jos_log($etunimi . " " . $sukunimi . " ei autentikoitu POST, rooli: " . $rooli);
+        jos_log($etunimi . " " . $sukunimi . " ei autentikoitu POST, rooli: " . $rooli, JOS_LOG_IMPORTANT);
         exitWithError(); // Hyväksytään kaikki roolit, kunhan käyttäjä ylipäätään löytyy.
     } 
 
-    jos_log($etunimi . " " . $sukunimi . " autentikoitu POST, rooli: " . $rooli);
+    jos_log($etunimi . " " . $sukunimi . " autentikoitu POST, rooli: " . $rooli . "     browser: " . $browser, JOS_LOG_NORMAL);
 ?>

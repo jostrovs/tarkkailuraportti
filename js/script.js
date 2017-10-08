@@ -18,6 +18,8 @@ $(document).ready(function () {
         data: {
             pikada_ready: false,
 
+            keskeytynyt: localStorage.tark_save_report && localStorage.tark_save_report!== 'undefined',
+
             dummy: [1, 2, 3, 4, 5],
             kaikki_tuomarit: [],
             aiheet: [],
@@ -78,7 +80,49 @@ $(document).ready(function () {
             joukkueet: function(){
                 if(this.uusi_raportti.miehet) return MIEHET;
                 return NAISET;
-            }
+            },
+
+            uuden_1_5: function(){
+                if(this.uusi_raportti.rivit.length < 34) return [];
+                return [ this.uusi_raportti.rivit[0], this.uusi_raportti.rivit[1], this.uusi_raportti.rivit[2], this.uusi_raportti.rivit[3], this.uusi_raportti.rivit[4]];
+            },
+
+            uuden_6_10: function(){
+                if(this.uusi_raportti.rivit.length < 34) return [];
+                return [ this.uusi_raportti.rivit[5], this.uusi_raportti.rivit[6], this.uusi_raportti.rivit[7], this.uusi_raportti.rivit[8], this.uusi_raportti.rivit[9]];
+            },
+
+            uuden_11_13: function(){
+                if(this.uusi_raportti.rivit.length < 34) return [];
+                return [ this.uusi_raportti.rivit[10], this.uusi_raportti.rivit[11], this.uusi_raportti.rivit[12]];
+            },
+
+            uuden_14_17: function(){
+                if(this.uusi_raportti.rivit.length < 34) return [];
+                return [ this.uusi_raportti.rivit[13], this.uusi_raportti.rivit[14], this.uusi_raportti.rivit[15], this.uusi_raportti.rivit[16]];
+            },
+
+            uuden_101_106: function(){
+                if(this.uusi_raportti.rivit.length < 34) return [];
+                return [ this.uusi_raportti.rivit[17], this.uusi_raportti.rivit[18], this.uusi_raportti.rivit[19], this.uusi_raportti.rivit[20], this.uusi_raportti.rivit[21], this.uusi_raportti.rivit[22]];
+            },
+
+            uuden_107_111: function(){
+                if(this.uusi_raportti.rivit.length < 34) return [];
+                return [ this.uusi_raportti.rivit[23], this.uusi_raportti.rivit[24], this.uusi_raportti.rivit[25], this.uusi_raportti.rivit[26], this.uusi_raportti.rivit[27]];
+            },
+
+            uuden_112_113: function(){
+                if(this.uusi_raportti.rivit.length < 34) return [];
+                return [ this.uusi_raportti.rivit[28], this.uusi_raportti.rivit[29]];
+            },
+
+            uuden_114_117: function(){
+                if(this.uusi_raportti.rivit.length < 34) return [];
+                return [ this.uusi_raportti.rivit[30], this.uusi_raportti.rivit[31], this.uusi_raportti.rivit[32], this.uusi_raportti.rivit[33]];
+            },
+
+            
         },
         methods: {
             pikada: function(){
@@ -356,12 +400,8 @@ $(document).ready(function () {
                 }
             },
 
-            clear: function(){
-                localStorage.tark_save_report = undefined;
-                this.newReport();
-            },
-            
             newReport: function(){
+               
                 this.uusi_raportti = Raportti();
                 this.uusi_raportti.rivit = [];
                 this.uusi_raportti.tark_id = this.user.id;
@@ -378,6 +418,7 @@ $(document).ready(function () {
                         huom: "",
                     }))
                 }
+
             },
 
             test_fill: function(){
@@ -408,8 +449,48 @@ $(document).ready(function () {
             },
 
             load_temp: function(){
-                if(localStorage.tark_save_report){
-                    this.uusi_raportti = JSON.parse(localStorage.tark_save_report);
+                var self = this;
+                if(localStorage.tark_save_report && localStorage.tark_save_report!== 'undefined'){
+                    let r = JSON.parse(localStorage.tark_save_report);
+
+                    this.uusi_raportti.pvm = r.pvm;
+                    this.uusi_raportti.paikka = r.paikka;
+                    
+                    this.uusi_raportti.miehet = r.miehet;
+                    if(r.miehet) $("#miehet").prop("checked", true);
+                    else $("#naiset").prop("checked", true);
+
+                    self.uusi_raportti.koti = r.koti;
+                    self.uusi_raportti.vieras = r.vieras;
+
+                    this.uusi_raportti.pt_id = r.pt_id;
+                    this.uusi_raportti.vt_id = r.vt_id;
+
+                    this.uusi_raportti.tulos = r.tulos;
+                    this.uusi_raportti.kesto_h = r.kesto_h;
+                    this.uusi_raportti.kesto_min = r.kesto_min;
+
+                    if(r.vaikeus == 0) $("#helppo").prop("checked", true);
+                    if(r.vaikeus == 1) $("#normaali").prop("checked", true);
+                    if(r.vaikeus == 2) $("#vaikea").prop("checked", true);
+
+                    this.uusi_raportti.pt_huom = r.pt_huom;
+                    this.uusi_raportti.vt_huom = r.vt_huom;
+                    this.uusi_raportti.raportti_huom = r.raportti_huom;
+
+                    for(let i=0;i<r.rivit.length;++i){
+                        let rivi = r.rivit[i];
+
+                        if(typeof(rivi) !== 'undefined' && typeof(rivi.arvosana) !== 'undefined'){
+                            let id = "#" + rivi.aihe_no + "_" + rivi.arvosana;
+                            $(id).prop("checked", true);
+                            bus.emit(EVENT_CHANGE, rivi.aihe_no);
+                        }
+
+                        this.uusi_raportti.rivit[i].huom = rivi.huom;
+                    }
+
+                    this.keskeytynyt = false;
                     return true;
                 } 
                 return false;
@@ -467,6 +548,9 @@ $(document).ready(function () {
                     self.debug = JSON.stringify(data.debug, undefined, 2);
                     self.newReport();
                     toastr.success("Raportti on talletettu tietokantaan.");
+                    
+                    localStorage.tark_save_report = undefined;
+                    
                     setTimeout(function(){location.reload();}, 2000);
 
                 }).fail(function(){

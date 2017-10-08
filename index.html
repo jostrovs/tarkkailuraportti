@@ -132,10 +132,16 @@
 
                 <button class="btn btn-default" v-if="jos" id="test_fill" @click="test_fill()">Täytä</button>
                 <button class="btn btn-default" v-if="jos" id="newReport" @click="koklaa">Kokeile</button>
+                
+                <div class="well" style=" border: 1px solid #999;" v-if="keskeytynyt">
+                    <p>Selaimen muistista löytyi keskeytynyt raportti, jota ei ole vielä talletettu. Jos haluat jatkaa sen muokkaamista, klikkaa 'Lataa keskeytynyt'-painiketta.</p>
+                    <button class="btn btn-primary" v-if="keskeytynyt" @click="load_temp()">Lataa keskeytynyt</button>
+                </div>
+
 
                 <form id="formi" action="javascript:0" @submit="postData()">
                     <div>
-                        <button type="submit" class="btn btn-default">Talleta raportti</button>
+                        <button type="submit" class="btn btn-default" @click="save_temp()">Talleta raportti</button>
                     </div>
 
                     <h3>Ottelu</h3>
@@ -218,9 +224,9 @@
                     <h3>Ottelun vaikeusaste</h3>
                     <div class="row">
                         <div class="col-xs-5">
-                            <label class="radio-inline"><input type="radio" required type="radio" name="vaikeus" value="1">Helppo</label>
-                            <label class="radio-inline"><input type="radio" required type="radio" name="vaikeus" value="2">Normaali</label>
-                            <label class="radio-inline"><input type="radio" required type="radio" name="vaikeus" value="3">Vaikea</label>
+                            <label class="radio-inline"><input id="helppo" type="radio" required type="radio" name="vaikeus" value="1">Helppo</label>
+                            <label class="radio-inline"><input id="normaali" type="radio" required type="radio" name="vaikeus" value="2">Normaali</label>
+                            <label class="radio-inline"><input id="vaikea" type="radio" required type="radio" name="vaikeus" value="3">Vaikea</label>
                         </div>
                     </div>                    
 
@@ -234,28 +240,28 @@
                         <div class="panel panel-primary">
                             <div class="panel-heading">Tuomaritekniikka ja suoritustaito</div>
                             <div class="panel-body">
-                                <vue-rivi-edit v-for="rivi in uudenRivit(1,5)" :key="rivi.id" :raportti="uusi_raportti" :rivi="rivi" :jos="jos"></vue-rivi>
+                                <vue-rivi-edit v-for="rivi in uuden_1_5" :key="rivi.id" :raportti="uusi_raportti" :rivi="rivi" :jos="jos"></vue-rivi>
                             </div>
                         </div>
                         
                         <div class="panel panel-primary">
                             <div class="panel-heading">Sääntöjen sekä ohjeiden ja tulkintojen soveltaminen</div>
                             <div class="panel-body">
-                                <vue-rivi-edit v-for="rivi in uudenRivit(6,10)" :key="rivi.id" :raportti="uusi_raportti" :rivi="rivi" :jos="jos"></vue-rivi-edit>
+                                <vue-rivi-edit v-for="rivi in uuden_6_10" :key="rivi.id" :raportti="uusi_raportti" :rivi="rivi" :jos="jos"></vue-rivi-edit>
                             </div>
                         </div>
 
                         <div class="panel panel-primary">
                             <div class="panel-heading">Vuorovaikutus joukkueiden kanssa</div>
                             <div class="panel-body">
-                                <vue-rivi-edit v-for="rivi in uudenRivit(11,13)" :key="rivi.id" :raportti="uusi_raportti" :rivi="rivi" :jos="jos"></vue-rivi-edit>
+                                <vue-rivi-edit v-for="rivi in uuden_11_13" :key="rivi.id" :raportti="uusi_raportti" :rivi="rivi" :jos="jos"></vue-rivi-edit>
                             </div>
                         </div>
 
                         <div class="panel panel-primary">
                             <div class="panel-heading">Ottelun johtaminen ja persoonallisuus</div>
                             <div class="panel-body">
-                                <vue-rivi-edit v-for="rivi in uudenRivit(14,17)" :key="rivi.id" :raportti="uusi_raportti" :rivi="rivi" :jos="jos"></vue-rivi>
+                                <vue-rivi-edit v-for="rivi in uuden_14_17" :key="rivi.id" :raportti="uusi_raportti" :rivi="rivi" :jos="jos"></vue-rivi>
                             </div>
                         </div>
 
@@ -276,28 +282,28 @@
                         <div class="panel panel-primary">
                             <div class="panel-heading">Tuomaritekniikka ja suoritustaito</div>
                             <div class="panel-body">
-                                <vue-rivi-edit v-for="rivi in uudenRivit(101,106)" :key="rivi.id" :raportti="uusi_raportti" :rivi="rivi" :jos="jos"></vue-rivi-edit>
+                                <vue-rivi-edit v-for="rivi in uuden_101_106" :key="rivi.id" :raportti="uusi_raportti" :rivi="rivi" :jos="jos"></vue-rivi-edit>
                             </div>
                         </div>
                         
                         <div class="panel panel-primary">
                             <div class="panel-heading">x</div>
                             <div class="panel-body">
-                                <vue-rivi-edit v-for="rivi in uudenRivit(107,111)" :key="rivi.id" :raportti="uusi_raportti" :rivi="rivi" :jos="jos"></vue-rivi>
+                                <vue-rivi-edit v-for="rivi in uuden_107_111" :key="rivi.id" :raportti="uusi_raportti" :rivi="rivi" :jos="jos"></vue-rivi>
                             </div>
                         </div>
 
                         <div class="panel panel-primary">
                             <div class="panel-heading">Vuorovaikutus joukkueiden kanssa</div>
                             <div class="panel-body">
-                                <vue-rivi-edit v-for="rivi in uudenRivit(112,113)" :key="rivi.id" :raportti="uusi_raportti" :rivi="rivi" :jos="jos"></vue-rivi>
+                                <vue-rivi-edit v-for="rivi in uuden_112_113" :key="rivi.id" :raportti="uusi_raportti" :rivi="rivi" :jos="jos"></vue-rivi>
                             </div>
                         </div>
 
                         <div class="panel panel-primary">
                             <div class="panel-heading">Ottelun johtaminen ja persoonallisuus</div>
                             <div class="panel-body">
-                                <vue-rivi-edit v-for="rivi in uudenRivit(114,117)" :key="rivi.id" :raportti="uusi_raportti" :rivi="rivi" :jos="jos"></vue-rivi-edit>
+                                <vue-rivi-edit v-for="rivi in uuden_114_117" :key="rivi.id" :raportti="uusi_raportti" :rivi="rivi" :jos="jos"></vue-rivi-edit>
                             </div>
                         </div>
 
@@ -314,7 +320,7 @@
                     <vue-otteluhuomautus :raportti="uusi_raportti" :jos="jos"></vue-otteluhuomautus>
 
                     <div style="margin-bottom: 30px;">
-                        <button type="submit" class="btn btn-default">Talleta raportti</button>
+                        <button type="submit" class="btn btn-default" @click="save_temp()">Talleta raportti</button>
                     </div>
                 </form>
 

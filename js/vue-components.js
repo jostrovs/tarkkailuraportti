@@ -449,7 +449,7 @@ Vue.component('vue-rivi-edit', {
                   '          <input class="form-control"                                                   ' +
                   '                :placeholder="inputPlaceholder"                                         ' +
                   '                :style="{\'background-color\': inputBG}"                                ' +
-                  '                v-model="rivi.huom" type="text">                                        ' +
+                  '                :id="id" v-model="rivi.huom" type="text">                                        ' +
                   '      </div>                                                                            ' +
                   '                                                                                        ' +
                   '      <div class="col-xs-2">                                                            ' +
@@ -461,6 +461,7 @@ Vue.component('vue-rivi-edit', {
                 props: ['raportti', 'rivi', 'jos'],
                 data: function () {
                     return {
+                        id: "huom_" + this.rivi.aihe_no,
                         randomId: this._uid,
                         initialRivi: this.rivi,
                         valittu: 0,
@@ -477,6 +478,10 @@ Vue.component('vue-rivi-edit', {
                     },
                     inputId: function(no){
                         return this.rivi.aihe_no + '_' + no;
+                    },
+
+                    external_change: function(aihe_no){
+                        if(this.rivi.aihe_no == aihe_no) this.onInput();
                     }
                 },
                 computed: {
@@ -506,6 +511,10 @@ Vue.component('vue-rivi-edit', {
                             }
                         }
                     }, 10);
+
+                    bus.on(EVENT_CHANGE, function(aihe_no){
+                        self.external_change(aihe_no);
+                    });
                 }
 });
 

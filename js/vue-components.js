@@ -575,6 +575,7 @@ Vue.component('vue-raportti', {
                 '            Ottelu: {{raportti.koti}}-{{raportti.vieras}},                                                                                                                  ' +
                 '            <span v-if="raportti.miehet">Miehet</span><br>                                                                                                                  ' +
                 '            <span v-if="!raportti.miehet">Naiset</span><br>                                                                                                                 ' +
+                '            Tulos: {{raportti.tulos}}<br>                                                                                                                                   ' +
                 '            Kesto: {{raportti.kesto_h}} h {{raportti.kesto_min}} min<br>                                                                                                    ' +
                 '            Vaikeusaste: <span v-if="raportti.vaikeus==1">Helppo</span>                                                                                                     ' +
                 '                         <span v-if="raportti.vaikeus==2">Normaali</span>                                                                                                   ' +

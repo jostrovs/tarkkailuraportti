@@ -356,6 +356,11 @@ $(document).ready(function () {
                 }
             },
 
+            clear: function(){
+                localStorage.tark_save_report = undefined;
+                this.newReport();
+            },
+            
             newReport: function(){
                 this.uusi_raportti = Raportti();
                 this.uusi_raportti.rivit = [];
@@ -397,6 +402,20 @@ $(document).ready(function () {
 
 
             },
+
+            save_temp: function(){
+                localStorage.tark_save_report = JSON.stringify(this.uusi_raportti);
+            },
+
+            load_temp: function(){
+                if(localStorage.tark_save_report){
+                    this.uusi_raportti = JSON.parse(localStorage.tark_save_report);
+                    return true;
+                } 
+                return false;
+            },
+
+
 
             postData: function(){
                 toastr.info("Talletetaan raporttia...");

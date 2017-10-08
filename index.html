@@ -142,7 +142,7 @@
                     <div class="row">
                         <div class="col-xs-3">
                             <label for="pvm">Pvm</label>
-                            <input id="pvm" class="form-control" type="text" required v-model="uusi_raportti.pvm">
+                            <input id="pvm" class="form-control" type="text" required v-model.lazy="uusi_raportti.pvm">
                         </div>
                         <div class="col-xs-3">
                             <label for="paikka">Paikka</label>
@@ -172,6 +172,10 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-xs-2">
+                            <label for="tulos">Tulos</label>
+                            <input id="tulos" class="form-control" type="text" required v-model="uusi_raportti.tulos">
+                        </div>
                         <div class="col-xs-1">
                             <label for="kesto_h">Kesto h</label>
                             <input id="kesto_h" class="form-control" type="number" min=0 max=9 required v-model="uusi_raportti.kesto_h">

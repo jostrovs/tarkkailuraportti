@@ -268,7 +268,7 @@
                         <div class="panel panel-primary">
                             <div class="panel-heading">Yksittäiset kommentit</div>
                             <div class="panel-body">
-                                <vue-koontihuomautus v-for="huomautus in uusi_raportti.palauta_pt_huomautukset()" :key="huomautus.id" :huomautus="huomautus" :jos="jos"></vue-koontihuomautus>
+                                <vue-koontihuomautus v-for="huomautus in pt_huomautukset" :key="huomautus.id" :huomautus="huomautus" :jos="jos"></vue-koontihuomautus>
                             </div>
                         </div>
                      </div>

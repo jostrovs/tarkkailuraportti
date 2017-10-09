@@ -122,7 +122,14 @@ $(document).ready(function () {
                 return [ this.uusi_raportti.rivit[30], this.uusi_raportti.rivit[31], this.uusi_raportti.rivit[32], this.uusi_raportti.rivit[33]];
             },
 
-            
+            pt_huomautukset: function(){
+                return this.raportti.palauta_pt_huomautukset();
+            },
+
+            vt_huomautukset: function(){
+                return this.raportti.palauta_vt_huomautukset();
+            }
+
         },
         methods: {
             pikada: function(){

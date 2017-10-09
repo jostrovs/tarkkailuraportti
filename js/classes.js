@@ -214,7 +214,7 @@ function Huomautus(rivi){
 }
 
 function Raportti(data_item){
-    ret = {
+    let ret = {
         id : "0",
         koti : "",
         vieras : "",

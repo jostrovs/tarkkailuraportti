@@ -603,28 +603,28 @@ Vue.component('vue-raportti', {
                 '            <div class="panel panel-primary">                                                                                                                               ' +
                 '                <div class="panel-heading">Tuomaritekniikka ja suoritustaito</div>                                                                                          ' +
                 '                <div class="panel-body">                                                                                                                                    ' +
-                '                    <vue-rivi v-for="rivi in raportti.palautaRivit(1,5)" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :jos="jos" :tila="\'pieni\'"></vue-rivi>         ' +
+                '                    <vue-rivi v-for="rivi in rivit_1_5" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :jos="jos" :tila="\'pieni\'"></vue-rivi>         ' +
                 '                </div>                                                                                                                                                      ' +
                 '            </div>                                                                                                                                                          ' +
                 '                                                                                                                                                                            ' +
                 '            <div class="panel panel-primary">                                                                                                                               ' +
                 '                <div class="panel-heading">Sääntöjen sekä ohjeiden ja tulkintojen soveltaminen</div>                                                                        ' +
                 '                <div class="panel-body">                                                                                                                                    ' +
-                '                    <vue-rivi v-for="rivi in raportti.palautaRivit(6,10)" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :tila="\'pieni\'" :jos="jos"></vue-rivi>        ' +
+                '                    <vue-rivi v-for="rivi in rivit_6_10" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :tila="\'pieni\'" :jos="jos"></vue-rivi>        ' +
                 '                </div>                                                                                                                                                      ' +
                 '            </div>                                                                                                                                                          ' +
                 '                                                                                                                                                                            ' +
                 '            <div class="panel panel-primary">                                                                                                                               ' +
                 '                <div class="panel-heading">Vuorovaikutus joukkueiden kanssa</div>                                                                                           ' +
                 '                <div class="panel-body">                                                                                                                                    ' +
-                '                    <vue-rivi v-for="rivi in raportti.palautaRivit(11,13)" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :tila="\'pieni\'" :jos="jos"></vue-rivi>       ' +
+                '                    <vue-rivi v-for="rivi in rivit_11_13" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :tila="\'pieni\'" :jos="jos"></vue-rivi>       ' +
                 '                </div>                                                                                                                                                      ' +
                 '            </div>                                                                                                                                                          ' +
                 '                                                                                                                                                                            ' +
                 '            <div class="panel panel-primary">                                                                                                                               ' +
                 '                <div class="panel-heading">Ottelun johtaminen ja persoonallisuus</div>                                                                                      ' +
                 '                <div class="panel-body">                                                                                                                                    ' +
-                '                    <vue-rivi v-for="rivi in raportti.palautaRivit(14,17)" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :tila="\'pieni\'" :jos="jos"></vue-rivi>       ' +
+                '                    <vue-rivi v-for="rivi in rivit_14_17" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :tila="\'pieni\'" :jos="jos"></vue-rivi>       ' +
                 '                </div>                                                                                                                                                      ' +
                 '            </div>                                                                                                                                                          ' +
                 '                                                                                                                                                                            ' +
@@ -643,28 +643,28 @@ Vue.component('vue-raportti', {
                 '            <div class="panel panel-primary">                                                                                                                               ' +
                 '                <div class="panel-heading">Tuomaritekniikka ja suoritustaito</div>                                                                                          ' +
                 '                <div class="panel-body">                                                                                                                                    ' +
-                '                    <vue-rivi v-for="rivi in raportti.palautaRivit(101,106)" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :tila="\'pieni\'" :jos="jos"></vue-rivi>     ' +
+                '                    <vue-rivi v-for="rivi in rivit_101_106" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :tila="\'pieni\'" :jos="jos"></vue-rivi>     ' +
                 '                </div>                                                                                                                                                      ' +
                 '            </div>                                                                                                                                                          ' +
                 '                                                                                                                                                                            ' +
                 '            <div class="panel panel-primary">                                                                                                                               ' +
                 '                <div class="panel-heading">x</div>                                                                                                                          ' +
                 '                <div class="panel-body">                                                                                                                                    ' +
-                '                    <vue-rivi v-for="rivi in raportti.palautaRivit(107,111)" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :tila="\'pieni\'" :jos="jos"></vue-rivi>     ' +
+                '                    <vue-rivi v-for="rivi in rivit_107_111" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :tila="\'pieni\'" :jos="jos"></vue-rivi>     ' +
                 '                </div>                                                                                                                                                      ' +
                 '            </div>                                                                                                                                                          ' +
                 '                                                                                                                                                                            ' +
                 '            <div class="panel panel-primary">                                                                                                                               ' +
                 '                <div class="panel-heading">Vuorovaikutus joukkueiden kanssa</div>                                                                                           ' +
                 '                <div class="panel-body">                                                                                                                                    ' +
-                '                    <vue-rivi v-for="rivi in raportti.palautaRivit(112,113)" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :tila="\'pieni\'" :jos="jos"></vue-rivi>     ' +
+                '                    <vue-rivi v-for="rivi in rivit_112_113" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :tila="\'pieni\'" :jos="jos"></vue-rivi>     ' +
                 '                </div>                                                                                                                                                      ' +
                 '            </div>                                                                                                                                                          ' +
                 '                                                                                                                                                                            ' +
                 '            <div class="panel panel-primary">                                                                                                                               ' +
                 '                <div class="panel-heading">Ottelun johtaminen ja persoonallisuus</div>                                                                                      ' +
                 '                <div class="panel-body">                                                                                                                                    ' +
-                '                    <vue-rivi v-for="rivi in raportti.palautaRivit(114,117)" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :tila="\'pieni\'" :jos="jos"></vue-rivi>     ' +
+                '                    <vue-rivi v-for="rivi in rivit_114_117" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :tila="\'pieni\'" :jos="jos"></vue-rivi>     ' +
                 '                </div>                                                                                                                                                      ' +
                 '            </div>                                                                                                                                                          ' +
                 '                                                                                                                                                                            ' +
@@ -681,8 +681,52 @@ Vue.component('vue-raportti', {
                 data: function () {
                     return {
                         randomId: this._uid,
+                        pt_huomautukset: this.raportti.palauta_pt_huomautukset(),
+                        vt_huomautukset: this.raportti.palauta_vt_huomautukset(),
                         initialRaportti: this.raportti,
                     }
+                },
+                computed: {
+                    rivit_1_5: function(){
+                        if(this.raportti.rivit.length < 34) return [];
+                        return [ this.raportti.rivit[0], this.raportti.rivit[1], this.raportti.rivit[2], this.raportti.rivit[3], this.raportti.rivit[4]];
+                    },
+        
+                    rivit_6_10: function(){
+                        if(this.raportti.rivit.length < 34) return [];
+                        return [ this.raportti.rivit[5], this.raportti.rivit[6], this.raportti.rivit[7], this.raportti.rivit[8], this.raportti.rivit[9]];
+                    },
+        
+                    rivit_11_13: function(){
+                        if(this.raportti.rivit.length < 34) return [];
+                        return [ this.raportti.rivit[10], this.raportti.rivit[11], this.raportti.rivit[12]];
+                    },
+        
+                    rivit_14_17: function(){
+                        if(this.raportti.rivit.length < 34) return [];
+                        return [ this.raportti.rivit[13], this.raportti.rivit[14], this.raportti.rivit[15], this.raportti.rivit[16]];
+                    },
+        
+                    rivit_101_106: function(){
+                        if(this.raportti.rivit.length < 34) return [];
+                        return [ this.raportti.rivit[17], this.raportti.rivit[18], this.raportti.rivit[19], this.raportti.rivit[20], this.raportti.rivit[21], this.raportti.rivit[22]];
+                    },
+        
+                    rivit_107_111: function(){
+                        if(this.raportti.rivit.length < 34) return [];
+                        return [ this.raportti.rivit[23], this.raportti.rivit[24], this.raportti.rivit[25], this.raportti.rivit[26], this.raportti.rivit[27]];
+                    },
+        
+                    rivit_112_113: function(){
+                        if(this.raportti.rivit.length < 34) return [];
+                        return [ this.raportti.rivit[28], this.raportti.rivit[29]];
+                    },
+        
+                    rivit_114_117: function(){
+                        if(this.raportti.rivit.length < 34) return [];
+                        return [ this.raportti.rivit[30], this.raportti.rivit[31], this.raportti.rivit[32], this.raportti.rivit[33]];
+                    },
+        
                 },
                 updated: function(){
                     let title = this.raportti.title();

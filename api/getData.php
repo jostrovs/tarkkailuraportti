@@ -42,6 +42,7 @@ switch($cmd){
                 JOIN tuomari pt   ON r.pt_id = pt.id 
                 JOIN tuomari vt   ON r.vt_id = vt.id 
                 JOIN tuomari tark ON r.tark_id = tark.id 
+                WHERE r.deleted=0
                 ";
         break;
     case API_HAE_RIVIT:
@@ -64,7 +65,7 @@ switch($cmd){
                 FROM raportti ra
                 JOIN rivi r ON r.raportti_id = ra.id
                 JOIN aihe a ON r.aihe_id = a.id
-                WHERE pt_id = $arg1";
+                WHERE ra.deleted=0 AND pt_id = $arg1";
         break;
     case API_HAE_VT_RAPORTIT:
         $sql = "SELECT  ra.id as raportti_id, ra.koti, ra.vieras, ra.pvm, ra.pt_id, ra.vt_id, ra.pt_score, ra.vt_score,
@@ -74,7 +75,7 @@ switch($cmd){
                 FROM raportti ra
                 JOIN rivi r ON r.raportti_id = ra.id
                 JOIN aihe a ON r.aihe_id = a.id
-                WHERE vt_id = $arg1";
+                WHERE ra.deleted=0 AND vt_id = $arg1";
         break;
     case API_LOGIN:
         $sql = "SELECT etunimi, sukunimi, email, token, rooli, id FROM tuomari WHERE token='" . $token . "'";

@@ -404,7 +404,6 @@ $(document).ready(function () {
                         raportti.getRivit(function(){
                             self.raportti = raportti;
                             self.selectedReport = raportti_id;
-                            autosize($('textarea'));
                         });
                     }
                 }

@@ -620,8 +620,6 @@ Vue.component('vue-raportti', {
                 '        VT: {{raportti.vt_nimi}}<br>                                                                                                                                        ' +
                 '        Tarkkailija: {{raportti.tark_nimi}}</p>                                                                                                                             ' +
                 '                                                                                                                                                                            ' +
-                '        PT-huomautukset: {{raportti.pt_huomautukset.length}}                                                                                                           ' +
-                '                                                                                                                                                                            ' +
                 '        <vue-kokonaisarvio :raportti="raportti"></vue-kokonaisarvio>                                                                                                        ' +
                 '                                                                                                                                                                            ' +
                 '        <h2>Päätuomari {{raportti.pt_nimi}}</h2>                                                                                                                            ' +
@@ -715,6 +713,9 @@ Vue.component('vue-raportti', {
                         //vt_huomautukset: palauta_vt_huomautukset(this.raportti),
                         initialRaportti: this.raportti,
                     }
+                },
+                mounted: function(){
+                    autosize($('textarea'));
                 },
                 computed: {
                     rivit_1_5: function(){

@@ -127,7 +127,7 @@ Vue.component('vue-jos-grid', {
 
                             if(v1 < v2) r=-1;    
                             else if(v1 > v2) r=1;
-                            return r*this.sortOrder;
+                            return r*self.sortOrder;
                         });    
                     }
                 }
@@ -182,15 +182,16 @@ Vue.component('vue-jos-grid', {
             return entry;
         },
         filterByColumn: function(column, data){
+            let self=this;
             let filter = this.filters[column.key];
             if(filter == undefined || filter.length < 1) return data;
             let ret = data; 
           
             ret = ret.filter(function(item){
-                let val = this.getVal(column, item[column.key]);
+                let val = self.getVal(column, item[column.key]);
                 if(val == undefined) val = "";
                 val=val.toString();
-                return val.indexOf(this.filters[column.key]) > -1;
+                return val.indexOf(self.filters[column.key]) > -1;
             });
             return ret;
         }

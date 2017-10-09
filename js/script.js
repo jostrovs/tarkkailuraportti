@@ -164,8 +164,10 @@ $(document).ready(function () {
                 for(let i=0;i<this.raportit.length;++i){
                 let raportti = this.raportit[i];
                     if(raportti.id == raportti_id){
+                        this.raportti.getRivit();
                         this.modal_raportti = raportti;
-                        this.modal_raportti.getRivit();
+
+                        autosize($('textarea'));
                     }
                 }
                 $("#myModal").modal();
@@ -402,6 +404,7 @@ $(document).ready(function () {
                         raportti.getRivit(function(){
                             self.raportti = raportti;
                             self.selectedReport = raportti_id;
+                            autosize($('textarea'));
                         });
                     }
                 }

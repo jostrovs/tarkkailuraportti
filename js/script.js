@@ -20,6 +20,9 @@ $(document).ready(function () {
 
             keskeytynyt: localStorage.tark_save_report && localStorage.tark_save_report!== 'undefined',
 
+            pt_huomautukset: [],
+            vt_huomautukset: [],
+
             dummy: [1, 2, 3, 4, 5],
             kaikki_tuomarit: [],
             aiheet: [],
@@ -122,17 +125,12 @@ $(document).ready(function () {
                 return [ this.uusi_raportti.rivit[30], this.uusi_raportti.rivit[31], this.uusi_raportti.rivit[32], this.uusi_raportti.rivit[33]];
             },
 
-            pt_huomautukset: function(){
-                return this.raportti.palauta_pt_huomautukset();
-            },
-
-            vt_huomautukset: function(){
-                return this.raportti.palauta_vt_huomautukset();
-            }
-
         },
         methods: {
             pikada: function(){
+                autosize($('textarea'));
+
+                
                 if(this.pikada_ready) return;
                 var picker = new Pikaday(
                     {
@@ -395,14 +393,16 @@ $(document).ready(function () {
             },
 
             reportSelected: function(raportti_id){
-                this.selectedReport = raportti_id;
-                if(this.selectedReport == undefined) return;
+                let self = this;
+                if(raportti_id == undefined) return;
                 
                 for(let i=0;i<this.raportit.length;++i){
                     let raportti = this.raportit[i];
-                    if(raportti.id == this.selectedReport){
-                        this.raportti = raportti;
-                        this.raportti.getRivit();
+                    if(raportti.id == raportti_id){
+                        raportti.getRivit(function(){
+                            self.raportti = raportti;
+                            self.selectedReport = raportti_id;
+                        });
                     }
                 }
             },
@@ -423,7 +423,7 @@ $(document).ready(function () {
                         otsikko: aihe.otsikko,
                         teksti: aihe.teksti,
                         huom: "",
-                    }))
+                    }));
                 }
 
             },
@@ -572,6 +572,7 @@ $(document).ready(function () {
                 // $("#etusivuLink").trigger('click');
                 // selectLastReport();
             },
+
         }
     });
 });

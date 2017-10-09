@@ -24,6 +24,7 @@
 	<script src="js/toastr.min.js"></script>
     <script src="js/vue.js"></script>
     <script src="js/lockr.js"></script>
+    <script src="js/autosize.min.js"></script>
     <script src="js/vue-components.js"></script>
     <script src="js/classes.js"></script>
     <script src="js/script.js"></script>
@@ -265,12 +266,6 @@
                             </div>
                         </div>
 
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Yksittäiset kommentit</div>
-                            <div class="panel-body">
-                                <vue-koontihuomautus v-for="huomautus in pt_huomautukset" :key="huomautus.id" :huomautus="huomautus" :jos="jos"></vue-koontihuomautus>
-                            </div>
-                        </div>
                      </div>
 
                     <h2>Verkkotuomari</h2>
@@ -304,13 +299,6 @@
                             <div class="panel-heading">Ottelun johtaminen ja persoonallisuus</div>
                             <div class="panel-body">
                                 <vue-rivi-edit v-for="rivi in uuden_114_117" :key="rivi.id" :raportti="uusi_raportti" :rivi="rivi" :jos="jos"></vue-rivi-edit>
-                            </div>
-                        </div>
-
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Yksittäiset kommentit</div>
-                            <div class="panel-body">
-                                <vue-koontihuomautus v-for="huomautus in uusi_raportti.palauta_vt_huomautukset()" :key="huomautus.id" :huomautus="huomautus" :jos="jos"></vue-koontihuomautus>
                             </div>
                         </div>
                     </div>

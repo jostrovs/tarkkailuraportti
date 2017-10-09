@@ -446,10 +446,10 @@ Vue.component('vue-rivi-edit', {
                   '          <div class="radio-div ruutu6" style="border-right: 0;">   <label class="radio-inline"><input :id="inputId(\'6\')" @change="onInput()" required type="radio" :name="radioname" value="6">F</label>   </div> ' +
                   '      </div>                                                                            ' +
                   '      <div class="col-xs-3">                                                            ' +
-                  '          <input class="form-control"                                                   ' +
+                  '          <textarea class="form-control"                                                ' +
                   '                :placeholder="inputPlaceholder"                                         ' +
                   '                :style="{\'background-color\': inputBG}"                                ' +
-                  '                :id="id" v-model="rivi.huom" type="text">                                        ' +
+                  '                :id="id" v-model="rivi.huom" type="text"></textarea>                    ' +
                   '      </div>                                                                            ' +
                   '                                                                                        ' +
                   '      <div class="col-xs-2">                                                            ' +
@@ -534,6 +534,7 @@ Vue.component('vue-koontihuomautus', {
         }
     },
 });
+
 Vue.component('vue-rivi', {
                 template: 
                     ' <div class="form-group row"">                                                                                             ' +
@@ -570,6 +571,30 @@ Vue.component('vue-rivi', {
                 },
 });
 
+Vue.component('vue-rivi-otsikko', {
+                template: 
+                    ' <div class="form-group row"">                                                                                             ' +
+                    '     <div class="col-xs-1" style="max-width: 20px;">                                                                       ' +
+                    '     </div>                                                                                                                 ' +
+                    '     <div class="col-xs-4">                                                                                                 ' +
+                    '     </div>                                                                                                                 ' +
+                    '     <div class="col-xs-3">                                                                                                 ' +
+                    '         <div class="ruutu ruutu1"> a </div>                                                                                 ' +
+                    '         <div class="ruutu ruutu2"> b </div>                                                                                 ' +
+                    '         <div class="ruutu ruutu3"> c </div>                                                                                 ' +
+                    '         <div class="ruutu ruutu4"> d </div>                                                                                 ' +
+                    '         <div class="ruutu ruutu5"> e </div>                                                                                 ' +
+                    '         <div class="ruutu ruutu6"> f </div>                                                                                 ' +
+                    '     </div>                                                                                                                 ' +
+                    ' </div>                                                                                                                     '
+                ,
+                props: [],
+                data: function () {
+                    return {
+                    }
+                },
+});
+
 
 Vue.component('vue-raportti', {
                 template: 
@@ -595,6 +620,8 @@ Vue.component('vue-raportti', {
                 '        VT: {{raportti.vt_nimi}}<br>                                                                                                                                        ' +
                 '        Tarkkailija: {{raportti.tark_nimi}}</p>                                                                                                                             ' +
                 '                                                                                                                                                                            ' +
+                '        PT-huomautukset: {{raportti.pt_huomautukset.length}}                                                                                                           ' +
+                '                                                                                                                                                                            ' +
                 '        <vue-kokonaisarvio :raportti="raportti"></vue-kokonaisarvio>                                                                                                        ' +
                 '                                                                                                                                                                            ' +
                 '        <h2>Päätuomari {{raportti.pt_nimi}}</h2>                                                                                                                            ' +
@@ -603,6 +630,7 @@ Vue.component('vue-raportti', {
                 '            <div class="panel panel-primary">                                                                                                                               ' +
                 '                <div class="panel-heading">Tuomaritekniikka ja suoritustaito</div>                                                                                          ' +
                 '                <div class="panel-body">                                                                                                                                    ' +
+                '                    <vue-rivi-otsikko></vue-rivi-otsikko>                                                                                                                   ' +
                 '                    <vue-rivi v-for="rivi in rivit_1_5" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :jos="jos" :tila="\'pieni\'"></vue-rivi>         ' +
                 '                </div>                                                                                                                                                      ' +
                 '            </div>                                                                                                                                                          ' +
@@ -631,7 +659,7 @@ Vue.component('vue-raportti', {
                 '            <div class="panel panel-primary">                                                                                                                               ' +
                 '                <div class="panel-heading">Yksittäiset kommentit</div>                                                                                                      ' +
                 '                <div class="panel-body">                                                                                                                                    ' +
-                '                    <vue-koontihuomautus v-for="huomautus in raportti.palauta_pt_huomautukset()" :key="huomautus.id" :huomautus="huomautus" :jos="jos"></vue-koontihuomautus>    ' +
+                '                    <vue-koontihuomautus v-for="huomautus in raportti.pt_huomautukset" :key="huomautus.id" :huomautus="huomautus" :jos="jos"></vue-koontihuomautus>    ' +
                 '                </div>                                                                                                                                                      ' +                                             
                 '            </div>                                                                                                                                                          ' +
                 '        </div>                                                                                                                                                              ' +
@@ -643,6 +671,7 @@ Vue.component('vue-raportti', {
                 '            <div class="panel panel-primary">                                                                                                                               ' +
                 '                <div class="panel-heading">Tuomaritekniikka ja suoritustaito</div>                                                                                          ' +
                 '                <div class="panel-body">                                                                                                                                    ' +
+                '                    <vue-rivi-otsikko></vue-rivi-otsikko>                                                                                                                   ' +
                 '                    <vue-rivi v-for="rivi in rivit_101_106" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :tila="\'pieni\'" :jos="jos"></vue-rivi>     ' +
                 '                </div>                                                                                                                                                      ' +
                 '            </div>                                                                                                                                                          ' +
@@ -671,7 +700,7 @@ Vue.component('vue-raportti', {
                 '            <div class="panel panel-primary">                                                                                                                               ' +
                 '                <div class="panel-heading">Yksittäiset kommentit</div>                                                                                                      ' +
                 '                <div class="panel-body">                                                                                                                                    ' +
-                '                    <vue-koontihuomautus v-for="huomautus in raportti.palauta_vt_huomautukset()" :key="huomautus.id" :huomautus="huomautus" :jos="jos"></vue-koontihuomautus>    ' +
+                '                    <vue-koontihuomautus v-for="huomautus in raportti.vt_huomautukset" :key="huomautus.id" :huomautus="huomautus" :jos="jos"></vue-koontihuomautus>    ' +
                 '                </div>                                                                                                                                                      ' +
                 '            </div>                                                                                                                                                          ' +
                 '        </div>                                                                                                                                                              ' +
@@ -679,10 +708,11 @@ Vue.component('vue-raportti', {
                 ,
                 props: ['raportti', 'jos'],
                 data: function () {
+                    let a=0;
                     return {
                         randomId: this._uid,
-                        pt_huomautukset: this.raportti.palauta_pt_huomautukset(),
-                        vt_huomautukset: this.raportti.palauta_vt_huomautukset(),
+                        //pt_huomautukset: palauta_pt_huomautukset(this.raportti),
+                        //vt_huomautukset: palauta_vt_huomautukset(this.raportti),
                         initialRaportti: this.raportti,
                     }
                 },

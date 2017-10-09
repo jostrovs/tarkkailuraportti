@@ -207,10 +207,34 @@ function Rivi(data_item){
 
 function Huomautus(rivi){
     return {
-        id : rivi.aihe_no,
+        id : rivi.no,
         aihe : rivi.otsikko,
         teksti : rivi.huom,
     }
+}
+
+function palauta_pt_huomautukset(raportti){
+    let ret = [];
+    let rivit = raportti.palautaRivit(1, 17);
+    for(let i=0;i<rivit.length;i++){
+        let rivi=rivit[i];
+        if(rivi.huomDisplayed()){
+            ret.push(Huomautus(rivi));
+        }
+    }
+    return ret;
+}
+
+function palauta_vt_huomautukset(raportti){
+    let ret = [];
+    let rivit = raportti.palautaRivit(100, 117);
+    for(let i=0;i<rivit.length;i++){
+        let rivi=rivit[i];
+        if(rivi.huomDisplayed()){
+            ret.push(Huomautus(rivi));
+        }
+    }
+    return ret;
 }
 
 function Raportti(data_item){
@@ -243,33 +267,13 @@ function Raportti(data_item){
         pt_score: -1,
         vt_score: -1,
     
+        pt_huomautukset: [],
+        vt_huomautukset: [],
+
         rivit: [],
 
         palautaRivit: function(firstNo, lastNo){
             return this.rivit.filter(function(rivi){rivi.aihe_no >= firstNo && rivi.aihe_no <= lastNo});
-        },
-    
-        palauta_pt_huomautukset: function(){
-            let ret = [];
-            let rivit = this.palautaRivit(1, 17);
-            for(let i=0;i<rivit.length;i++){
-                let rivi=rivit[i];
-                if(rivi.huomDisplayed()){
-                    ret.push(Huomautus(rivi));
-                }
-            }
-            return ret;
-        },
-        palauta_vt_huomautukset: function(){
-            let ret = [];
-            let rivit = this.palautaRivit(100, 117);
-            for(let i=0;i<rivit.length;i++){
-                let rivi=rivit[i];
-                if(rivi.huomDisplayed()){
-                    ret.push(Huomautus(rivi));
-                }
-            }
-            return ret;
         },
     
         laske: function(){
@@ -298,7 +302,7 @@ function Raportti(data_item){
             if(this.rivit.length < 1 || this.vt_score > 200) this.vt_score = "<puuttuu>";
         },
     
-        getRivit: function(){
+        getRivit: function(callback){
             let self = this;
             localGetData(API_HAE_RAPORTIN_RIVIT, function(data){
                 self.rivit = [];
@@ -306,11 +310,26 @@ function Raportti(data_item){
                         console.log("getRivit: data.data = null");
                         return;
                 }
+
+                self.pt_huomautukset = [];
+                self.vt_huomautukset = [];
+
                 for(let i=0;i<data.data.length;++i){
                     let rivi=data.data[i];
-                    self.rivit.push(Rivi(rivi));
+                    
+                    if(rivi.no < 100 && rivi.huom.length > 0){
+                        self.pt_huomautukset.push(Huomautus(rivi));
+                    }
+                    if(rivi.no > 100 && rivi.huom.length > 0){
+                        self.vt_huomautukset.push(Huomautus(rivi));
+                    }
+                    
+                    let uusiRivi = Rivi(rivi);
+                    self.rivit.push(uusiRivi);
                 }
                 self.laske();
+
+                if(typeof(callback) !== 'undefined') callback();
             }, self.id);
         },
     

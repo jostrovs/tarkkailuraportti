@@ -26,10 +26,10 @@
 
     function emailNotify($tark, $ottelu, $to, $token){
         
-        $to = "jori.ostrovskij@gmail.com";
+        //$to = "jori.ostrovskij@gmail.com";
         
         $subject = "Uusi tarkkailuraportti";
-        $body = "Hei!\r\n" .
+        $body = "Hei!\r\n\r\n" .
                  $tark . " on lisännyt tarkkailuraportin ottelusta " . $ottelu . ".\r\n" . 
                  "Tässä on vielä kirjautumislinkkisi:\r\n" .
                  "http://www.lentopalloerotuomarit.fi/tark2343/tark/?token=" . $token . 
@@ -110,8 +110,6 @@
         jos_log("InsertReport SQL Error: " . $sql . "<br>" . $conn->error, JOS_LOG_IMPORTANT);
     }
 
-    $mysqli->close();
-
     jos_log($etunimi . " " . $sukunimi . " lis&auml;si raportin " . $report_id, JOS_LOG_NORMAL);
 
     // Sähköpostin lähetys
@@ -120,7 +118,8 @@
     $data["debug"] = $debug;
     echo json_encode($data);
     
-    if(stripos($actual_link, 'localhost')<0){
+    if(stripos($actual_link, 'localhost')){
+    } else {
         // Haetaan tietoja
         $sql = "SELECT ra.pvm, ra.koti, ra.vieras, " .
         "       pt.email as pt_email, pt.token as pt_token, " .
@@ -151,5 +150,8 @@
         emailNotify($tarkkailija, $ottelu, $pt_email, $pt_token);
         emailNotify($tarkkailija, $ottelu, $vt_email, $vt_token);
     }
+
+    $mysqli->close();
     
+        
 ?>

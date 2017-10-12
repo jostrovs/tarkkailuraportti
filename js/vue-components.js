@@ -439,12 +439,12 @@ Vue.component('vue-rivi-edit', {
                   '          <template v-if="initialRivi.tekstiDisplayed()"><br>{{initialRivi.teksti}}</template>          ' +
                   '      </div>                                                                                            ' +
                   '      <div class="col-xs-3" style="max-width: 265px; min-width: 265px;">                                ' +
-                  '          <div class="radio-div ruutu1">   <label class="radio-inline"><input :id="inputId(\'1\')" @change="onInput()" required type="radio" :name="radioname" value="1">A</label>   </div> ' +
-                  '          <div class="radio-div ruutu2">   <label class="radio-inline"><input :id="inputId(\'2\')" @change="onInput()" required type="radio" :name="radioname" value="2">B</label>   </div> ' +
-                  '          <div class="radio-div ruutu3">   <label class="radio-inline"><input :id="inputId(\'3\')" @change="onInput()" required type="radio" :name="radioname" value="3">C</label>   </div> ' +
-                  '          <div class="radio-div ruutu4">   <label class="radio-inline"><input :id="inputId(\'4\')" @change="onInput()" required type="radio" :name="radioname" value="4">D</label>   </div> ' +
-                  '          <div class="radio-div ruutu5">   <label class="radio-inline"><input :id="inputId(\'5\')" @change="onInput()" required type="radio" :name="radioname" value="5">E</label>   </div> ' +
-                  '          <div class="radio-div ruutu6" style="border-right: 0;">   <label class="radio-inline"><input :id="inputId(\'6\')" @change="onInput()" required type="radio" :name="radioname" value="6">F</label>   </div> ' +
+                  '          <div class="radio-div ruutu1" :title="a">   <label class="radio-inline"><input :id="inputId(\'1\')" @change="onInput()" required type="radio" :name="radioname" value="1">A</label>   </div> ' +
+                  '          <div class="radio-div ruutu2" :title="b">   <label class="radio-inline"><input :id="inputId(\'2\')" @change="onInput()" required type="radio" :name="radioname" value="2">B</label>   </div> ' +
+                  '          <div class="radio-div ruutu3" :title="c">   <label class="radio-inline"><input :id="inputId(\'3\')" @change="onInput()" required type="radio" :name="radioname" value="3">C</label>   </div> ' +
+                  '          <div class="radio-div ruutu4" :title="d">   <label class="radio-inline"><input :id="inputId(\'4\')" @change="onInput()" required type="radio" :name="radioname" value="4">D</label>   </div> ' +
+                  '          <div class="radio-div ruutu5" :title="e">   <label class="radio-inline"><input :id="inputId(\'5\')" @change="onInput()" required type="radio" :name="radioname" value="5">E</label>   </div> ' +
+                  '          <div class="radio-div ruutu6" :title="f" style="border-right: 0;">   <label class="radio-inline"><input :id="inputId(\'6\')" @change="onInput()" required type="radio" :name="radioname" value="6">F</label>   </div> ' +
                   '      </div>                                                                            ' +
                   '      <div class="col-xs-3">                                                            ' +
                   '          <textarea class="form-control"                                                ' +
@@ -468,6 +468,13 @@ Vue.component('vue-rivi-edit', {
                         valittu: 0,
                         radioname: "opt" + this.rivi.aihe_no,
                         inputPlaceholder: "",
+
+                        a: TITLES.a,
+                        b: TITLES.b,
+                        c: TITLES.c,
+                        d: TITLES.d,
+                        e: TITLES.e,
+                        f: TITLES.f,
                     }
                 },
                 methods: {

@@ -399,16 +399,17 @@ Vue.component('vue-edellinen-label', {
                             ret += '<p>VT pisteet: ' + ottelu.vt_score + '</p>';
                         }
 
+                        ret += "<p>" + this.rivi.aihe_no + " " + this.rivi.otsikko + ": " + this.selite + "</p>";
+
                         let huom = "&lt;ei huomautusta&gt;";
                         if(this.rivi.huom != undefined && this.rivi.huom.length > 0){
                             huom = this.rivi.huom;
                             
                             let no = this.rivi.aihe_no;
                             if(no > 100) no -= 100;
-                            ret += '<p>' + no + ' Huomautus: ' + huom + '</p>';
+                            ret += '<p>Huomautus: ' + huom + '</p>';
                         }
 
-                        ret += "<p>" + this.rivi.aihe_no + " " + this.rivi.otsikko + ": " + this.selite + "</p>";
                         return ret;
                     }
                 },

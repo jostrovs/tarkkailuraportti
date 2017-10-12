@@ -1,9 +1,13 @@
 <?php
+
+    $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
     require_once('log.php');
     require_once('dbConfig.php');
 
     require_once('dbAuthenticatePost.php');
-
+    require_once('./PHPMailer/PHPMailerAutoload.php');
+    
     function obj($key){
         global $obj, $mysqli;
         $item = $obj[$key];
@@ -20,6 +24,56 @@
         return "(".$id.", ".$arvosana.", ".$report_id.", '".$huom."')";
     }
 
+    function emailNotify($tark, $ottelu, $to, $token){
+        
+        $to = "jori.ostrovskij@gmail.com";
+        
+        $subject = "Uusi tarkkailuraportti";
+        $body = "Hei!\r\n" .
+                 $tark . " on lisännyt tarkkailuraportin ottelusta " . $ottelu . ".\r\n" . 
+                 "Tässä on vielä kirjautumislinkkisi:\r\n" .
+                 "http://www.lentopalloerotuomarit.fi/tark2343/tark/?token=" . $token . 
+                 "\r\n\r\nÄlä vastaa tähän viestiin, vaan ongelmatapauksissa ota yhteyttä jostrovs@gmail.com.\r\n-Jori\r\n";
+         
+        $mail = new PHPMailer();
+        
+        $mail->IsSMTP();                       // telling the class to use SMTP
+         
+        $mail->SMTPDebug = 0;                  
+        // 0 = no output, 1 = errors and messages, 2 = messages only.
+         
+        $mail->SMTPAuth = true;                // enable SMTP authentication 
+        $mail->SMTPSecure = "tls";              // sets the prefix to the servier
+        $mail->Host = "mail.zoner.fi";        // sets Gmail as the SMTP server
+        $mail->Port = 587;                     // set the SMTP port for the GMAIL 
+         
+        $mail->Username = "jori@lentopalloerotuomarit.fi";  // Gmail username
+        $mail->Password = "kaksoiskosketus";      // Gmail password
+         
+        $mail->CharSet = 'utf-8';
+        $mail->SetFrom ('jori@lentopalloerotuomarit.fi', 'Jori');
+        $mail->AddBCC ( 'jostrovs@gmail.com', 'Jori'); 
+        $mail->Subject = $subject;
+        $mail->ContentType = 'text/plain'; 
+        $mail->IsHTML(false);
+         
+        $mail->Body = $body; 
+        // you may also use $mail->Body = file_get_contents('your_mail_template.html');
+         
+        $mail->AddAddress ($to, 'Automaattinen vastaanottaja');     
+        // you may also use this format $mail->AddAddress ($recipient);
+         
+        if(!$mail->Send()) 
+        {
+            $error_message = "Mailer Error: " . $mail->ErrorInfo;
+            echo $error_message;        
+        } else 
+        {
+            $error_message = "Successfully sent!";
+        } 
+        return $error_message;
+    }
+    
     // Sitten tehdään oikeita hommia
 
     $obj = json_decode($_POST["data"], true);
@@ -60,8 +114,42 @@
 
     jos_log($etunimi . " " . $sukunimi . " lis&auml;si raportin " . $report_id, JOS_LOG_NORMAL);
 
+    // Sähköpostin lähetys
+    
     $data = array();
     $data["debug"] = $debug;
     echo json_encode($data);
+    
+    if(stripos($actual_link, 'localhost')<0){
+        // Haetaan tietoja
+        $sql = "SELECT ra.pvm, ra.koti, ra.vieras, " .
+        "       pt.email as pt_email, pt.token as pt_token, " .
+        "       vt.email as vt_email, vt.token as vt_token, " .
+        "       ta.etunimi as ta_etunimi, ta.sukunimi as ta_sukunimi " .
+        "FROM raportti ra  " . 
+        "JOIN tuomari pt ON pt.id = ra.pt_id " .
+        "JOIN tuomari vt ON vt.id = ra.vt_id " .
+        "JOIN tuomari ta ON ta.id = ra.tark_id " .
+        "WHERE ra.id=" . $report_id;
+        
+        $result = $mysqli->query($sql);
+        $row = $result->fetch_assoc();
+        
+        $pvm = $row['pvm'];
+        $koti = $row['koti'];
+        $vieras = $row['vieras'];
+        $pt_email = $row['pt_email'];
+        $pt_token = $row['pt_token'];
+        $vt_email = $row['vt_email'];
+        $vt_token = $row['vt_token'];
+        $ta_etunimi = $row['ta_etunimi'];
+        $ta_sukunimi = $row['ta_sukunimi'];
+        
+        $tarkkailija = $ta_etunimi . " " . $ta_sukunimi;
+        $ottelu = $koti . " - " . $vieras;
+        
+        emailNotify($tarkkailija, $ottelu, $pt_email, $pt_token);
+        emailNotify($tarkkailija, $ottelu, $vt_email, $vt_token);
+    }
     
 ?>

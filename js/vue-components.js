@@ -178,13 +178,15 @@ Vue.component('vue-jos-grid', {
             this.sortIndicators[key] = this.sortOrder;
         },
         getVal: function(column, entry){
-            if(column.type == 'link') return entry.text;
-            return entry;
+            if(entry == null || entry == undefined) entry = "";
+            if(column.type == 'link') return entry.text.toLowerCase();
+            return entry.toLowerCase();
         },
         filterByColumn: function(column, data){
             let self=this;
             let filter = this.filters[column.key];
             if(filter == undefined || filter.length < 1) return data;
+            filter = filter.toLowerCase();
             let ret = data; 
           
             ret = ret.filter(function(item){

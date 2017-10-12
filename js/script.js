@@ -157,7 +157,6 @@ $(document).ready(function () {
                 //this.loadRivit();
                 this.loadRaportit();
                 this.newReport();
-                toastr.clear();
             },
             
             modalReport: function(raportti_id){
@@ -334,6 +333,7 @@ $(document).ready(function () {
                     }
 
                     bus.emit(EVENT_RAPORTIT_UPDATE, self.raportit);
+                    toastr.clear();
                 })
             },
 
@@ -395,6 +395,7 @@ $(document).ready(function () {
             },
 
             reportSelected: function(raportti_id){
+                toastr.info("Haetaan raportin tietoja...");
                 let self = this;
                 if(raportti_id == undefined) return;
                 
@@ -404,6 +405,7 @@ $(document).ready(function () {
                         raportti.getRivit(function(){
                             self.raportti = raportti;
                             self.selectedReport = raportti_id;
+                            toastr.clear();
                         });
                     }
                 }

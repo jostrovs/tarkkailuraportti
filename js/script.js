@@ -355,6 +355,7 @@ $(document).ready(function () {
             ptChanged: function(){
                 let self=this;
                 if(self.uusi_raportti == undefined || self.uusi_raportti.pt_id == undefined) return;
+                toastr.info("Haetaan päätuomarin edellisiä otteluita...");
                 this.getData(API_HAE_PT_RAPORTIT, function(data){
                     self.ptRivit = [];
                     if(data.data == null) return;
@@ -363,12 +364,14 @@ $(document).ready(function () {
                         self.ptRivit.push(Rivi(rivi));
                     }
                     self.asetaVanhatRivit();
+                    toastr.clear();
                 }, self.uusi_raportti.pt_id);
             },
 
             vtChanged: function(){
                 let self=this;
                 if(self.uusi_raportti == undefined || self.uusi_raportti.vt_id == undefined) return;
+                toastr.info("Haetaan verkkotuomarin edellisiä otteluita...");
                 this.getData(API_HAE_VT_RAPORTIT, function(data){
                     self.vtRivit = [];
                     if(data.data == null) return;
@@ -377,6 +380,7 @@ $(document).ready(function () {
                         self.vtRivit.push(Rivi(rivi));
                     }
                     self.asetaVanhatRivit();
+                    toastr.clear();
                 }, self.uusi_raportti.vt_id);
             },
 

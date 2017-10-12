@@ -338,17 +338,47 @@ Vue.component('vue-kokonaisarvio', {
 Vue.component('vue-edellinen-label', {
                 template: 
                     ' <div :id="randomId" class="label" @click="onClick()" data-toggle="tooltip" :title="html">   ' +
-                    '     <span v-if="initialRivi.arvosana==\'6\'" class="label-dark-red">{{rivi.arvosana}}</span>  ' +
-                    '     <span v-if="initialRivi.arvosana==\'5\'" class="label-red">{{rivi.arvosana}}</span>       ' +
-                    '     <span v-if="initialRivi.arvosana==\'4\'" class="label-orange">{{rivi.arvosana}}</span>    ' +
-                    '     <span v-if="initialRivi.arvosana==\'3\'" class="label-yellow">{{rivi.arvosana}}</span>    ' +
-                    '     <span v-if="initialRivi.arvosana==\'2\'" class="label-white">{{rivi.arvosana}}</span>     ' +
-                    '     <span v-if="initialRivi.arvosana==\'1\'" class="label-green">{{rivi.arvosana}}</span>     ' +
+                    '     <span v-if="initialRivi.arvosana==\'6\'" class="label-dark-red">{{arvosana}}</span>  ' +
+                    '     <span v-if="initialRivi.arvosana==\'5\'" class="label-red">{{arvosana}}</span>       ' +
+                    '     <span v-if="initialRivi.arvosana==\'4\'" class="label-orange">{{arvosana}}</span>    ' +
+                    '     <span v-if="initialRivi.arvosana==\'3\'" class="label-yellow">{{arvosana}}</span>    ' +
+                    '     <span v-if="initialRivi.arvosana==\'2\'" class="label-white">{{arvosana}}</span>     ' +
+                    '     <span v-if="initialRivi.arvosana==\'1\'" class="label-green">{{arvosana}}</span>     ' +
                     ' </div>'
                 ,
                 props: ['rivi', 'jos'],
                 data: function () {
+                    let arvosana=this.rivi.arvosana;
+                    let selite = "";
+                    switch(arvosana){
+                        case "1":
+                            arvosana = 'a';
+                            selite = TITLES.a;
+                            break;
+                        case "2":
+                            arvosana = 'b';
+                            selite = TITLES.b;
+                            break;
+                        case "3":
+                            arvosana = 'c';
+                            selite = TITLES.c;
+                            break;
+                        case "4":
+                            arvosana = 'd';
+                            selite = TITLES.d;
+                            break;
+                        case "5":
+                            arvosana = 'e';
+                            selite = TITLES.e;
+                            break;
+                        case "6":
+                            arvosana = 'f';
+                            selite = TITLES.f;
+                            break;
+                    }
                     return {
+                        arvosana: arvosana,
+                        selite: selite,
                         randomId: "label" + this._uid,
                         initialRivi: this.rivi,
                     }
@@ -378,6 +408,7 @@ Vue.component('vue-edellinen-label', {
                             ret += '<p>' + no + ' Huomautus: ' + huom + '</p>';
                         }
 
+                        ret += "<p>" + this.rivi.aihe_no + " " + this.rivi.otsikko + ": " + this.selite + "</p>";
                         return ret;
                     }
                 },

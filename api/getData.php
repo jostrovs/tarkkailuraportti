@@ -61,7 +61,7 @@ switch($cmd){
         $sql = "SELECT  ra.id as raportti_id, ra.koti, ra.vieras, ra.pvm, ra.pt_id, ra.vt_id, ra.pt_score, ra.vt_score,
                         ra.raportti_huom, ra.pt_huom, ra.vt_huom, ra.tulos,
                         r.id, r.arvosana, r.aihe_id, r.huom, 
-                        a.no
+                        a.no, a.otsikko
                 FROM raportti ra
                 JOIN rivi r ON r.raportti_id = ra.id
                 JOIN aihe a ON r.aihe_id = a.id
@@ -71,7 +71,7 @@ switch($cmd){
         $sql = "SELECT  ra.id as raportti_id, ra.koti, ra.vieras, ra.pvm, ra.pt_id, ra.vt_id, ra.pt_score, ra.vt_score,
                         ra.raportti_huom, ra.pt_huom, ra.vt_huom, ra.tulos,
                         r.id, r.arvosana, r.aihe_id, r.huom, 
-                        a.no
+                        a.no, a.otsikko
                 FROM raportti ra
                 JOIN rivi r ON r.raportti_id = ra.id
                 JOIN aihe a ON r.aihe_id = a.id

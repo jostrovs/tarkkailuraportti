@@ -16,6 +16,7 @@ $(document).ready(function () {
     var app = new Vue({
         el: '#app',
         data: {
+            RADIO_MUU: RADIO_MUU,
             pikada_ready: false,
 
             keskeytynyt: localStorage.tark_save_report && localStorage.tark_save_report!== 'undefined',
@@ -472,8 +473,9 @@ $(document).ready(function () {
                     this.uusi_raportti.paikka = r.paikka;
                     
                     this.uusi_raportti.miehet = r.miehet;
-                    if(r.miehet) $("#miehet").prop("checked", true);
-                    else $("#naiset").prop("checked", true);
+                    if(r.miehet == RADIO_MIEHET) $("#miehet").prop("checked", true);
+                    else if(r.miehet == RADIO_NAISET) $("#naiset").prop("checked", true);
+                    else $("#muu").prop("checked", true);
 
                     self.uusi_raportti.koti = r.koti;
                     self.uusi_raportti.vieras = r.vieras;
@@ -502,6 +504,7 @@ $(document).ready(function () {
                             bus.emit(EVENT_CHANGE, rivi.aihe_no);
                         }
 
+                        console.log("i: " + i + "  uusi_rivit: " + this.uusi_raportti.rivit.length + "     rivit: " + r.rivit.length);
                         this.uusi_raportti.rivit[i].huom = rivi.huom;
                     }
 

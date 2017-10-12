@@ -46,6 +46,10 @@ const API_HAE_VT_RAPORTIT = 7;
 const API_LOGIN = 8;
 const API_SAVE_EMAIL = 9;
 
+const RADIO_MIEHET = 1;
+const RADIO_NAISET = 2;
+const RADIO_MUU    = 3;
+
 TITLES = {
     a: "erinomainen, esimerkillinen",
     b: "ei parannettavaa",
@@ -267,7 +271,7 @@ function Raportti(data_item){
         tark_id : "0",
         tark_nimi : '',
 
-        miehet : true,
+        miehet : RADIO_MIEHET,
         tulos : "",
         kesto_h : 0,
         kesto_min : 0,

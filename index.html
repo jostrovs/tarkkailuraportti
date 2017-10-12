@@ -166,17 +166,19 @@
                     <div class="row">
                         <div class="col-xs-3">
                             <label for="koti">Kotijoukkue</label>
-                            <select class="form-control" id="koti" v-model="uusi_raportti.koti">
+                            <select v-if="uusi_raportti.miehet !== RADIO_MUU" class="form-control" id="koti" v-model="uusi_raportti.koti">
                                 <option disabled value="-1">Valitse kotijoukkue</option>
                                 <option v-for="joukkue in joukkueet" :value="joukkue">{{joukkue}}</option>
                             </select>
+                            <input v-if="uusi_raportti.miehet === RADIO_MUU" type="text" class="form-control" id="koti_text" v-model="uusi_raportti.koti"> 
                         </div>
                         <div class="col-xs-3">
-                            <label for="koti">Vierasjoukkue</label>
-                            <select class="form-control" id="vieras" v-model="uusi_raportti.vieras">
+                            <label for="vieras">Vierasjoukkue</label>
+                            <select v-if="uusi_raportti.miehet !== RADIO_MUU" class="form-control" id="vieras" v-model="uusi_raportti.vieras">
                                 <option disabled value="-1">Valitse vierasjoukkue</option>
                                 <option v-for="joukkue in joukkueet" :value="joukkue">{{joukkue}}</option>
                             </select>
+                            <input v-if="uusi_raportti.miehet === RADIO_MUU" type="text" class="form-control" id="vieras_text" v-model="uusi_raportti.vieras"> 
                         </div>
                     </div>
                     <div class="row">

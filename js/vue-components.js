@@ -421,8 +421,9 @@ Vue.component('vue-edellinen-label', {
 Vue.component('vue-radio-miehet', {
     template: 
         ' <div> ' +
-        '     <div> <label class="radio-inline"><input id="miehet" @change="onInput()" required type="radio" :name="radioname" value="true">Miehet</label>   </div>  ' +
-        '     <div> <label class="radio-inline"><input id="naiset" @change="onInput()" required type="radio" :name="radioname" value="false">Naiset</label>   </div> ' +
+        '     <div> <label class="radio-inline"><input id="miehet" @change="onInput()" required type="radio" :name="radioname" value=RADIO_MIEHET>Miehet</label>   </div>  ' +
+        '     <div> <label class="radio-inline"><input id="naiset" @change="onInput()" required type="radio" :name="radioname" value=RADIO_NAISET>Naiset</label>   </div> ' +
+        '     <div> <label class="radio-inline"><input id="muu"    @change="onInput()" required type="radio" :name="radioname" value=RADIO_MUU>Muu</label>         </div> ' +
         ' </div>'
     ,
     props: ['raportti', 'jos'],
@@ -438,7 +439,8 @@ Vue.component('vue-radio-miehet', {
     methods: {
         onInput: function () {
             let val = $('input[name=' + this.radioname + ']:checked').val();
-            this.raportti.miehet = (val=="true");
+            val = eval(val);
+            this.raportti.miehet = val;
             this.valittu = val;
         },
     },
@@ -449,10 +451,13 @@ Vue.component('vue-radio-miehet', {
             let radios = $.makeArray($radios);
             for(let i=0;i<radios.length;++i){
                 let radio = radios[i];
-                if(radio.value == "true" && self.initialRaportti.miehet){
+                if(radio.value == RADIO_MIEHET && self.initialRaportti.miehet == RADIO_MIEHET){
                     $(radio).prop("checked", true);
                 }
-                if(radio.value == "false" && !self.initialRaportti.miehet){
+                if(radio.value == RADIO_NAISET && !self.initialRaportti.miehet == RADIO_NAISET){
+                    $(radio).prop("checked", true);
+                }
+                if(radio.value == RADIO_MUU && !self.initialRaportti.miehet == RADIO_MUU){
                     $(radio).prop("checked", true);
                 }
             }

@@ -204,8 +204,8 @@ Vue.component('vue-kokonaishuomautus', {
     template: 
     '   <div class="panel-group">                                                                         ' +                 
     '       <div class="panel panel-primary">                                                             ' + 
-    '           <div class="panel-heading" v-if="isPT">Kehityssuositukset (PT)</div>                      ' + 
-    '           <div class="panel-heading" v-else>Kehityssuositukset (VT)</div>                           ' + 
+    '           <div class="panel-heading" v-if="isPT">Kehityssuositukset ja huomautukset (PT)</div>      ' + 
+    '           <div class="panel-heading" v-else>Kehityssuositukset ja huomautukset (VT)</div>           ' + 
     '           <div class="panel-body" style="font-size: 18px;">                                         ' + 
     '               <textarea class="form-control" v-if="isPT" v-model="raportti.pt_huom"></textarea>     ' + 
     '               <textarea class="form-control" v-else v-model="raportti.vt_huom"></textarea>          ' + 
@@ -302,7 +302,7 @@ Vue.component('vue-kokonaisarvio', {
      '               </div>                                                                                                          ' +                             
      '                                                                                                                               ' +                                                                                                  
      '               <div class="row">                                                                                               ' +                                                                                     
-     '                   <div class="col-xs-2" style="text-align: right; margin-top: 20px;">Kehityssuositukset</div>                 ' +                                                                         
+     '                   <div class="col-xs-2" style="text-align: right; margin-top: 20px;">Kehityssuositukset ja huomautukset</div>                 ' +                                                                         
      '                   <textarea readonly class="col-xs-4" style="text-align: left; min-height: 30px; font-size: 16px; border: 1px solid black; margin: 20px;">{{raportti.pt_huom}}</textarea>                               ' +              
      '                   <textarea readonly class="col-xs-4" style="text-align: left; min-height: 30px; font-size: 16px; border: 1px solid black; margin: 20px;">{{raportti.vt_huom}}</textarea>                               ' +              
      '               </div>                                                                                                                                                                                                                ' +
@@ -700,8 +700,9 @@ Vue.component('vue-raportti', {
                 '        <p  >Pvm: {{raportti.pvm}}<br>                                                                                                                                      ' +
                 '            Paikka: {{raportti.paikka}}<br>                                                                                                                                 ' +
                 '            Ottelu: {{raportti.koti}}-{{raportti.vieras}},                                                                                                                  ' +
-                '            <span v-if="raportti.miehet">Miehet</span><br>                                                                                                                  ' +
-                '            <span v-if="!raportti.miehet">Naiset</span><br>                                                                                                                 ' +
+                '            <span v-if="raportti.miehet==\'1\'">Miehet</span>                                                                                                               ' +
+                '            <span v-if="raportti.miehet==\'2\'">Naiset</span>                                                                                                               ' +
+                '            <span v-if="raportti.miehet==\'3\'">Muu</span><br>                                                                                                              ' +
                 '            Tulos: {{raportti.tulos}}<br>                                                                                                                                   ' +
                 '            Kesto: {{raportti.kesto_h}} h {{raportti.kesto_min}} min<br>                                                                                                    ' +
                 '            Vaikeusaste: <span v-if="raportti.vaikeus==1">Helppo</span>                                                                                                     ' +

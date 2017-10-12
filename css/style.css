@@ -112,6 +112,7 @@ h4 {
 	vertical-align: bottom;
 	text-align: center;
 	font-size: large;
+	cursor: help;
 }
 .ruutuIsoYla {
 	width: 15%;
@@ -124,6 +125,7 @@ h4 {
 	padding-top: 30px;
 	text-align: center;
 	font-size: x-small;
+	cursor: default;
 }
 .ruutuIsoAla {
 	width: 15%;
@@ -138,6 +140,7 @@ h4 {
 	vertical-align: bottom;
 	text-align: center;
 	font-size: xx-large;
+	cursor: default;
 }
 
 .radio-div {

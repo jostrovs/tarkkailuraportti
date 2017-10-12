@@ -547,12 +547,12 @@ Vue.component('vue-rivi', {
                     '         <template v-if="tila!=\'pieni\' && initialRivi.tekstiDisplayed()"><br>{{initialRivi.teksti}}</template>              ' +
                     '     </div>                                                                                                                 ' +
                     '     <div class="col-xs-3">                                                                                                 ' +
-                    '         <div class="ruutu ruutu1"> <span v-if="initialRivi.arvosana==\'1\'">X</span> <span v-else>&nbsp;</span></div>        ' +
-                    '         <div class="ruutu ruutu2"> <span v-if="initialRivi.arvosana==\'2\'">X</span> <span v-else>&nbsp;</span> </div>       ' +
-                    '         <div class="ruutu ruutu3"> <span v-if="initialRivi.arvosana==\'3\'">X</span> <span v-else>&nbsp;</span> </div>       ' +
-                    '         <div class="ruutu ruutu4"> <span v-if="initialRivi.arvosana==\'4\'">X</span> <span v-else>&nbsp;</span> </div>       ' +
-                    '         <div class="ruutu ruutu5"> <span v-if="initialRivi.arvosana==\'5\'">X</span> <span v-else>&nbsp;</span> </div>       ' +
-                    '         <div class="ruutu ruutu6"> <span v-if="initialRivi.arvosana==\'6\'">X</span> <span v-else>&nbsp;</span> </div>       ' +
+                    '         <div class="ruutu ruutu1" :title="a"> <span v-if="initialRivi.arvosana==\'1\'">X</span> <span v-else>&nbsp;</span></div>        ' +
+                    '         <div class="ruutu ruutu2" :title="b"> <span v-if="initialRivi.arvosana==\'2\'">X</span> <span v-else>&nbsp;</span> </div>       ' +
+                    '         <div class="ruutu ruutu3" :title="c"> <span v-if="initialRivi.arvosana==\'3\'">X</span> <span v-else>&nbsp;</span> </div>       ' +
+                    '         <div class="ruutu ruutu4" :title="d"> <span v-if="initialRivi.arvosana==\'4\'">X</span> <span v-else>&nbsp;</span> </div>       ' +
+                    '         <div class="ruutu ruutu5" :title="e"> <span v-if="initialRivi.arvosana==\'5\'">X</span> <span v-else>&nbsp;</span> </div>       ' +
+                    '         <div class="ruutu ruutu6" :title="f"> <span v-if="initialRivi.arvosana==\'6\'">X</span> <span v-else>&nbsp;</span> </div>       ' +
                     '     </div>                                                                                                                 ' +
                     '                                                                                                                            ' +
                     '     <div class="col-xs-3" v-if="initialRivi.huomDisplayed()">                                                              ' +
@@ -568,6 +568,46 @@ Vue.component('vue-rivi', {
                         valittu: 0,
                         radioname: "opt" + this.rivi.aihe_no,
                         inputPlaceholder: "",
+                        a: TITLES.a,
+                        b: TITLES.b,
+                        c: TITLES.c,
+                        d: TITLES.d,
+                        e: TITLES.e,
+                        f: TITLES.f,
+                    }
+                },
+});
+
+Vue.component('vue-arvosanojen-selitykset', {
+                template: 
+                '            <div class="panel panel-primary">                                      ' +
+                '                <div class="panel-heading">Arvosanojen selitteet</div>             ' +
+                '                <div class="panel-body">                                           ' +
+                '                    <div class="row">                                              ' +
+                '                        <div class="col-xs-4"><b>a:</b> {{a}}</div>                ' +
+                '                        <div class="col-xs-4"><b>d:</b> {{d}}</div>                ' +
+                '                    </div>                                                         ' +
+                '                    <div class="row">                                              ' +
+                '                        <div class="col-xs-4"><b>b:</b> {{b}}</div>                ' +
+                '                        <div class="col-xs-4"><b>e:</b> {{e}}</div>                ' +
+                '                    </div>                                                         ' +
+                '                    <div class="row">                                              ' +
+                '                        <div class="col-xs-4"><b>c:</b> {{c}}</div>                ' +
+                '                        <div class="col-xs-4"><b>f:</b> {{f}}</div>                ' +
+                '                    </div>                                                         ' +
+                '                </div>                                                             ' +
+                '            </div>                                                                 ' 
+                ,
+                props: ['jos'],
+                data: function () {
+                    return {
+                        randomId: this._uid,
+                        a: TITLES.a,
+                        b: TITLES.b,
+                        c: TITLES.c,
+                        d: TITLES.d,
+                        e: TITLES.e,
+                        f: TITLES.f,
                     }
                 },
 });
@@ -580,18 +620,24 @@ Vue.component('vue-rivi-otsikko', {
                     '     <div class="col-xs-4">                                                                                                 ' +
                     '     </div>                                                                                                                 ' +
                     '     <div class="col-xs-3">                                                                                                 ' +
-                    '         <div class="ruutu ruutu1"> a </div>                                                                                 ' +
-                    '         <div class="ruutu ruutu2"> b </div>                                                                                 ' +
-                    '         <div class="ruutu ruutu3"> c </div>                                                                                 ' +
-                    '         <div class="ruutu ruutu4"> d </div>                                                                                 ' +
-                    '         <div class="ruutu ruutu5"> e </div>                                                                                 ' +
-                    '         <div class="ruutu ruutu6"> f </div>                                                                                 ' +
+                    '         <div class="ruutu ruutu1" :title="a"> a </div>                                                                     ' +
+                    '         <div class="ruutu ruutu2" :title="b"> b </div>                                                                     ' +
+                    '         <div class="ruutu ruutu3" :title="c"> c </div>                                                                     ' +
+                    '         <div class="ruutu ruutu4" :title="d"> d </div>                                                                     ' +
+                    '         <div class="ruutu ruutu5" :title="e"> e </div>                                                                     ' +
+                    '         <div class="ruutu ruutu6" :title="f"> f </div>                                                                     ' +
                     '     </div>                                                                                                                 ' +
                     ' </div>                                                                                                                     '
                 ,
                 props: [],
                 data: function () {
                     return {
+                        a: TITLES.a,
+                        b: TITLES.b,
+                        c: TITLES.c,
+                        d: TITLES.d,
+                        e: TITLES.e,
+                        f: TITLES.f,
                     }
                 },
 });
@@ -626,6 +672,9 @@ Vue.component('vue-raportti', {
                 '        <h2>Päätuomari {{raportti.pt_nimi}}</h2>                                                                                                                            ' +
                 '        <p>Pisteet: {{raportti.pt_score}}</p>                                                                                                                               ' +
                 '        <div class="panel-group">                                                                                                                                           ' +
+                '                                                                                                                                                                            ' +
+                '            <vue-arvosanojen-selitykset></vue-arvosanojen-selitykset>                                                                                                       ' +
+                '                                                                                                                                                                            ' +
                 '            <div class="panel panel-primary">                                                                                                                               ' +
                 '                <div class="panel-heading">Tuomaritekniikka ja suoritustaito</div>                                                                                          ' +
                 '                <div class="panel-body">                                                                                                                                    ' +
@@ -633,7 +682,6 @@ Vue.component('vue-raportti', {
                 '                    <vue-rivi v-for="rivi in rivit_1_5" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :jos="jos" :tila="\'pieni\'"></vue-rivi>         ' +
                 '                </div>                                                                                                                                                      ' +
                 '            </div>                                                                                                                                                          ' +
-                '                                                                                                                                                                            ' +
                 '            <div class="panel panel-primary">                                                                                                                               ' +
                 '                <div class="panel-heading">Sääntöjen sekä ohjeiden ja tulkintojen soveltaminen</div>                                                                        ' +
                 '                <div class="panel-body">                                                                                                                                    ' +
@@ -666,6 +714,8 @@ Vue.component('vue-raportti', {
                 '        <h2>Verkkotuomari {{raportti.vt_nimi}}</h2>                                                                                                                         ' +
                 '        <p>Pisteet: {{raportti.vt_score}}</p>                                                                                                                               ' +
                 '        <div class="panel-group">                                                                                                                                           ' +
+                '                                                                                                                                                                            ' +
+                '            <vue-arvosanojen-selitykset></vue-arvosanojen-selitykset>                                                                                                       ' +
                 '                                                                                                                                                                            ' +
                 '            <div class="panel panel-primary">                                                                                                                               ' +
                 '                <div class="panel-heading">Tuomaritekniikka ja suoritustaito</div>                                                                                          ' +

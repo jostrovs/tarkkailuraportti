@@ -46,6 +46,15 @@ const API_HAE_VT_RAPORTIT = 7;
 const API_LOGIN = 8;
 const API_SAVE_EMAIL = 9;
 
+TITLES = {
+    a: "erinomainen, esimerkillinen",
+    b: "ei parannettavaa",
+    c: "vähäisiä parannettavita asioita suoritettava",
+    d: "useampia parannettavita asioita suoritettava",
+    e: "alle keskiarvon, huomattavia parannettavie asioita suoritettava",
+    f: "perustasioissaa tarve huomattaviin parannuksiin",
+};
+
 var kertoimet = [];
 kertoimet["1"]  = [20000, 5,  0,  -5, -10, -20, -100];
 kertoimet["2"]  = [20000, 2,  0,  -5, -10, -30, -100];

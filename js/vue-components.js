@@ -602,13 +602,17 @@ Vue.component('vue-rivi', {
                     '     </div>                                                                                                                 ' +
                     '                                                                                                                            ' +
                     '     <div class="col-xs-3" v-if="initialRivi.huomDisplayed()">                                                              ' +
-                    '         <span class="rivi-label">Huom{{rivi.aihe_no}}: </span> {{rivi.huom}}                                               ' +
+                    '         <span class="rivi-label">Huom {{huom_no}}: </span> {{rivi.huom}}                                               ' +
                     '     </div>                                                                                                                 ' +
                     ' </div>                                                                                                                     '
                 ,
                 props: ['rivi', 'tila', 'jos'],
                 data: function () {
+                    let huom_no = 0;
+                    if(typeof(this.rivi) !== 'undefined') huom_no = this.rivi.aihe_no;
+                    if(huom_no > 100) huom_no -= 100;
                     return {
+                        huom_no: huom_no,
                         randomId: this._uid,
                         initialRivi: this.rivi,
                         valittu: 0,

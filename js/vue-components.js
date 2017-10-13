@@ -584,13 +584,19 @@ Vue.component('vue-koontihuomautus', {
 
 Vue.component('vue-rivi', {
                 template: 
-                    ' <div class="form-group row"">                                                                                             ' +
-                    '     <div class="col-xs-1" style="max-width: 20px;">                                                                       ' +
+                    ' <div class="form-group row"">                                                                                              ' +
+                    '     <div class="col-xs-1" style="max-width: 20px;">                                                                        ' +
                     '         {{initialRivi.aihe_no>100?initialRivi.aihe_no-100:initialRivi.aihe_no}}                                            ' +
                     '     </div>                                                                                                                 ' +
                     '     <div class="col-xs-4">                                                                                                 ' +
-                    '         <span class="rivi-label">{{initialRivi.otsikko}}</span>                                                            ' +
-                    '         <template v-if="tila!=\'pieni\' && initialRivi.tekstiDisplayed()"><br>{{initialRivi.teksti}}</template>              ' +
+                    '         <template v-if="tila!=\'pieni\' && initialRivi.tekstiDisplayed()">                                                 ' +
+                    '             <span class="rivi-label">{{initialRivi.otsikko}}</span>                                                        ' +
+                    '             <br>{{initialRivi.teksti}}</template>                                                                          ' +
+                    '         </template>                                                                                                        ' +
+                    '         <template v-else>                                                                                                  ' +
+                    '             <span class="rivi-label">{{initialRivi.otsikko}}</span>                            ' +
+                    '             <br><small>{{initialRivi.teksti}}</small></template>                                                                          ' +
+                    '         </template>                                                                                                        ' +
                     '     </div>                                                                                                                 ' +
                     '     <div class="col-xs-3">                                                                                                 ' +
                     '         <div class="ruutu ruutu1" :title="a"> <span v-if="initialRivi.arvosana==\'1\'">X</span> <span v-else>&nbsp;</span></div>        ' +

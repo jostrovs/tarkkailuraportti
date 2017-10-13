@@ -12,7 +12,7 @@ require_once('./PHPMailer/PHPMailerAutoload.php');
 
 function sendEmail($to, $token){
     $subject = "Kirjautumislinkki tarkkailuraporttisivulle";
-    $body = "Hei!\r\nTässä on kirjautumislinkkisi tarkkailuraporttisivulle:\r\nhttp://www.lentopalloerotuomarit.fi/tark2343/tark/?token=" . $token . "\r\n\r\nÄlä vastaa tähän viestiin, vaan ongelmatapauksissa ota yhteyttä jostrovs@gmail.com.\r\n-Jori\r\n";
+    $body = "Hei!\r\nTässä on kirjautumislinkkisi tarkkailuraporttisivulle:\r\nhttp://www.lentopalloerotuomarit.fi/tuomaritarkkailu/?token=" . $token . "\r\n\r\nÄlä vastaa tähän viestiin, vaan ongelmatapauksissa ota yhteyttä jostrovs@gmail.com.\r\n-Jori\r\n";
      
     $mail = new PHPMailer();
     

@@ -878,7 +878,7 @@ Vue.component('vue-user', {
     '          <div style="display: inline-block; width: 150px;">               ' +
     '              <b>Kirjautumislinkki:</b>                                    ' +
     '          </div>                                                           ' +
-    '          <a :href="href">www.lentopalloerotuomarit.fi/tark2343/tark/?token={{user.token}}</a>    ' +
+    '          <a :href="href">www.lentopalloerotuomarit.fi/tuomaritarkkailu/?token={{user.token}}</a>    ' +
     '      </p>                                                                 ' +
     '      <p>                                                                  ' +
     '          <div style="display: inline-block; width: 150px;">               ' +
@@ -901,7 +901,7 @@ Vue.component('vue-user', {
     },
     data: function () {
         let href="";
-        if(this.user != undefined) href= "http://www.lentopalloerotuomarit.fi/tark2343/tark/?token=" + this.user.token;
+        if(this.user != undefined) href= "http://www.lentopalloerotuomarit.fi/tuomaritarkkailu/?token=" + this.user.token;
         return {
             changed: false,
             href: href,  

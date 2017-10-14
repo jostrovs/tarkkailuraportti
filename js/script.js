@@ -57,7 +57,7 @@ $(document).ready(function () {
                 ], 
             }, 
 
-            jos: false, // debug-flägi
+            jos: true, // debug-flägi
             debug: "Ei debuggia",
         },
         

@@ -356,3 +356,61 @@ th, td {
 	/* height: 250px; */
 	overflow-y: auto;
 }
+
+
+/******** PRINT **************************/
+@media print{
+#app {
+	margin-left: 0%;
+	margin-right: 0%;
+}
+#navbar {
+	display: none;
+}
+.no-print {
+	display: none;
+}
+.print-label {
+	margin-left: 25px;
+	display: inline-block;
+	width: 120px;
+	font-weight: bold;
+}
+.print-value {
+	display: inline-block;
+	font-weight: normal;
+}
+
+.print-col-1 {
+	width: 20%;
+	display: inline-block;
+	text-align: center;
+    vertical-align: top;
+
+	border: 1px dashed green;
+}
+.print-col-2 {
+	width: 37%;
+	display: inline-block;
+	text-align: center;
+    vertical-align: top;
+	
+	border: 1px dashed blue;
+}
+.print-col-3 {
+	width: 37%;
+	display: inline-block;
+	text-align: center;
+    vertical-align: top;
+	
+	border: 1px dashed red;
+}
+.print-col-23 {
+	width: 75%;
+	display: inline-block;
+	text-align: center;
+    vertical-align: top;
+	
+	border: 1px dashed red;
+}
+}

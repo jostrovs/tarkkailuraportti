@@ -27,6 +27,7 @@
     <script src="js/lockr.js"></script>
     <script src="js/autosize.min.js"></script>
     <script src="js/vue-components.js"></script>
+    <script src="js/vue-components-print.js"></script>
     <script src="js/classes.js"></script>
     <script src="js/script.js"></script>
 </head>
@@ -52,6 +53,11 @@
                     Debug
                 </a>
             </li>
+			<li>
+                <a v-if="selectedReport && jos" data-toggle="tab" href="#print">
+                    Tulostus
+                </a>
+            </li>
 			<li style="float: right;">
                 <a data-toggle="tab" href="#user">
                     {{user.name}}
@@ -65,6 +71,12 @@
         </div>
 
 		<div class="tab-content">
+            <div id="print" class="tab-pane fade in">
+                <div v-if="parseInt(selectedReport,10) > 0">
+                    <vue-report-print :raportti="raportti" :jos="jos"></vue-report-print>                
+                </div>
+            </div>
+
             <div id="user" class="tab-pane fade in">
                 <vue-user :user="user" :jos="jos"></vue-user>
                 

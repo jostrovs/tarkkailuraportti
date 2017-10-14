@@ -223,16 +223,16 @@ Vue.component('vue-kokonaishuomautus', {
 });
 
 Vue.component('vue-otteluhuomautus', {
-    template: 
-    '  <div class="panel-group">                                                                    ' +    
-    '      <div class="panel panel-primary">                                                        ' +    
-    '          <div class="panel-heading">Muita huomioita ottelusta</div>                           ' +         
-    '          <div class="panel-body" style="font-size: 18px;">                                    ' +        
-    '              <textarea class="form-control" v-model="raportti.raportti_huom"></textarea>      ' +      
-    '          </div>                                                                               ' +     
-    '      </div>                                                                                   ' +       
-    '  </div>                                                                                       '   
-    ,
+    template:` 
+    <div class="panel-group">                                                                        
+        <div class="panel panel-primary">                                                            
+            <div class="panel-heading">Muita huomioita ottelusta</div>                                    
+            <div class="panel-body" style="font-size: 18px;">                                            
+                <textarea class="form-control" v-model="raportti.raportti_huom"></textarea>            
+            </div>                                                                                    
+        </div>                                                                                          
+    </div>                                                                                          
+    `,
     props: ['raportti', 'jos'],
     data: function(){
         return {
@@ -243,78 +243,78 @@ Vue.component('vue-otteluhuomautus', {
 
 
 Vue.component('vue-kokonaisarvio', {
-    template: 
-     '   <div class="panel-group">                                                                                                   ' +  
-     '       <div class="panel panel-primary">                                                                                       ' +   
-     '           <div class="panel-heading">Lopullinen tuomariarvio</div>                                                            ' +          
-     '           <div class="panel-body" style="font-size: 18px;">                                                                   ' +             
-     '               <div class="row">                                                                                               ' +     
-     '                   <div class="col-xs-2"></div>                                                                                ' +          
-     '                   <div class="col-xs-4" style="text-align: center; font-size: 24px;">Päätuomari</div>                         ' +               
-     '                   <div class="col-xs-4" style="text-align: center; font-size: 24px;">Verkkotuomari</div>                      ' +                  
-     '               </div>                                                                                                          ' +              
-     '               <div class="row">                                                                                               ' +               
-     '                   <div class="col-xs-2" style="text-align: right;">Pisteet</div>                                              ' +    
-     '                   <div class="col-xs-4" style="text-align: center">                                                           ' +           
-     '                       <div v-show="raportti.pt_score!=\'<puuttuu>\'" style="min-width: 65px;" class="ruutuIsoAla ruutuVika">    ' +      
-     '                           {{raportti.pt_score}}                                                                               ' +           
-     '                        </div>                                                                                                 ' +             
-     '                   </div>                                                                                                      ' +                  
-     '                   <div class="col-xs-4" style="text-align: center">                                                           ' +           
-     '                       <div v-show="raportti.pt_score!=\'<puuttuu>\'" style="min-width: 65px;" class="ruutuIsoAla ruutuVika">    ' +                
-     '                           {{raportti.vt_score}}                                                                               ' +           
-     '                       </div>                                                                                                  ' +            
-     '                   </div>                                                                                                      ' +        
-     '               </div>                                                                                                          ' +    
-     '               <div class="row">                                                                                               ' +     
-     '                   <div class="col-xs-2" style="text-align: right;">&nbsp;</div>                                               ' +             
-     '                   <div class="col-xs-4" style="text-align: center">                                                           ' +           
-     '                       <div class="ruutuIsoYla"> Erinomainen</div>                                                             ' +                             
-     '                       <div class="ruutuIsoYla"> Erittäin hyvä</div>                                                           ' +                               
-     '                       <div class="ruutuIsoYla"> Hyvä</div>                                                                    ' +                      
-     '                       <div class="ruutuIsoYla"> Välttävä</div>                                                                ' +                          
-     '                       <div class="ruutuIsoYla"> Huono</div>                                                                   ' +                       
-     '                   </div>                                                                                                      ' +                                 
-     '                   <div class="col-xs-4" style="text-align: center">                                                           ' +                               
-     '                       <div class="ruutuIsoYla"> Erinomainen</div>                                                             ' +                             
-     '                       <div class="ruutuIsoYla"> Erittäin hyvä</div>                                                           ' +                               
-     '                       <div class="ruutuIsoYla"> Hyvä</div>                                                                    ' +                      
-     '                       <div class="ruutuIsoYla"> Välttävä</div>                                                                ' +                          
-     '                       <div class="ruutuIsoYla"> Huono</div>                                                                   ' +                       
-     '                   </div>                                                                                                      ' +                                 
-     '               </div>                                                                                                          ' +                             
-     '               <div class="row">                                                                                               ' +                                        
-     '                   <div class="col-xs-2" style="text-align: right;">Lopullinen arvio</div>                                     ' +                                                     
-     '                   <div class="col-xs-4" style="text-align: center">                                                           ' +                               
-     '                       <div class="ruutuIsoAla ruutu1"> <span v-if="pt1">X</span> <span v-else>&nbsp;</span></div>             ' +                                
-     '                       <div class="ruutuIsoAla ruutu2"> <span v-if="pt2">X</span> <span v-else>&nbsp;</span></div>             ' +                                
-     '                       <div class="ruutuIsoAla ruutu3"> <span v-if="pt3">X</span> <span v-else>&nbsp;</span></div>             ' +                                
-     '                       <div class="ruutuIsoAla ruutu4"> <span v-if="pt4">X</span> <span v-else>&nbsp;</span></div>             ' +                                
-     '                       <div class="ruutuIsoAla ruutu5 ruutuVika"> <span v-if="pt5">X</span> <span v-else>&nbsp;</span></div>   ' +                                          
-     '                   </div>                                                                                                      ' +                                 
-     '                   <div class="col-xs-4" style="text-align: center">                                                           ' +                               
-     '                       <div class="ruutuIsoAla ruutu1"> <span v-if="vt1">X</span> <span v-else>&nbsp;</span></div>             ' +                                
-     '                       <div class="ruutuIsoAla ruutu2"> <span v-if="vt2">X</span> <span v-else>&nbsp;</span></div>             ' +                                
-     '                       <div class="ruutuIsoAla ruutu3"> <span v-if="vt3">X</span> <span v-else>&nbsp;</span></div>             ' +                                
-     '                       <div class="ruutuIsoAla ruutu4"> <span v-if="vt4">X</span> <span v-else>&nbsp;</span></div>             ' +                                
-     '                       <div class="ruutuIsoAla ruutu5 ruutuVika"> <span v-if="vt5">X</span> <span v-else>&nbsp;</span></div>   ' +                                          
-     '                   </div>                                                                                                      ' +                                 
-     '               </div>                                                                                                          ' +                             
-     '                                                                                                                               ' +                                                                                                  
-     '               <div class="row">                                                                                               ' +                                                                                     
-     '                   <div class="col-xs-2" style="text-align: right; margin-top: 20px;">Kehityssuositukset ja huomautukset</div>                 ' +                                                                         
-     '                   <textarea readonly class="col-xs-4" style="text-align: left; min-height: 30px; font-size: 16px; border: 1px solid black; margin: 20px;">{{raportti.pt_huom}}</textarea>                               ' +              
-     '                   <textarea readonly class="col-xs-4" style="text-align: left; min-height: 30px; font-size: 16px; border: 1px solid black; margin: 20px;">{{raportti.vt_huom}}</textarea>                               ' +              
-     '               </div>                                                                                                                                                                                                                ' +
-     '                                                                                                                                                                                                                                     ' +
-     '               <div class="row">                                                                                                                                                                                                     ' +                            
-     '                   <div class="col-xs-2" style="text-align: right; margin-top: 20px;">Muita huomioita</div>                                                                                                                          ' +             
-     '                   <textarea readonly class="col-xs-8" style="text-align: left; min-height: 30px; font-size: 16px; border: 1px solid black; margin: 20px;">{{raportti.raportti_huom}}</textarea>                         ' +                    
-     '               </div>                         ' +                                                                                                                                                                
-     '           </div>                             ' +                                                                                                                                                    
-     '       </div>                                 ' +                                                         
-     '   </div>                                     '
-    ,
+    template:` 
+    <div class="panel-group">                                                                               
+        <div class="panel panel-primary">                                                                    
+            <div class="panel-heading">Lopullinen tuomariarvio</div>                                                
+            <div class="panel-body" style="font-size: 18px;">                                                          
+                <div class="row">                                                                              
+                    <div class="col-xs-2"></div>                                                                    
+                    <div class="col-xs-4" style="text-align: center; font-size: 24px;">Päätuomari</div>                  
+                    <div class="col-xs-4" style="text-align: center; font-size: 24px;">Verkkotuomari</div>                  
+                </div>                                                                                                  
+                <div class="row">                                                                                        
+                    <div class="col-xs-2" style="text-align: right;">Pisteet</div>                            
+                    <div class="col-xs-4" style="text-align: center">                                                
+                        <div v-show="raportti.pt_score!=\'<puuttuu>\'" style="min-width: 65px;" class="ruutuIsoAla ruutuVika">      
+                            {{raportti.pt_score}}                                                                                        
+                         </div>                                                                                                            
+                    </div>                                                                                                                      
+                    <div class="col-xs-4" style="text-align: center">                                                                    
+                        <div v-show="raportti.pt_score!=\'<puuttuu>\'" style="min-width: 65px;" class="ruutuIsoAla ruutuVika">                
+                            {{raportti.vt_score}}                                                                                        
+                        </div>                                                                                                            
+                    </div>                                                                                                            
+                </div>                                                                                                            
+                <div class="row">                                                                                                  
+                    <div class="col-xs-2" style="text-align: right;">&nbsp;</div>                                                          
+                    <div class="col-xs-4" style="text-align: center">                                                                    
+                        <div class="ruutuIsoYla"> Erinomainen</div>                                                                                        
+                        <div class="ruutuIsoYla"> Erittäin hyvä</div>                                                                                        
+                        <div class="ruutuIsoYla"> Hyvä</div>                                                                                        
+                        <div class="ruutuIsoYla"> Välttävä</div>                                                                                        
+                        <div class="ruutuIsoYla"> Huono</div>                                                                                        
+                    </div>                                                                                                                                     
+                    <div class="col-xs-4" style="text-align: center">                                                                                        
+                        <div class="ruutuIsoYla"> Erinomainen</div>                                                                                        
+                        <div class="ruutuIsoYla"> Erittäin hyvä</div>                                                                                        
+                        <div class="ruutuIsoYla"> Hyvä</div>                                                                                        
+                        <div class="ruutuIsoYla"> Välttävä</div>                                                                                        
+                        <div class="ruutuIsoYla"> Huono</div>                                                                                        
+                    </div>                                                                                                                                     
+                </div>                                                                                                                                     
+                <div class="row">                                                                                                                                     
+                    <div class="col-xs-2" style="text-align: right;">Lopullinen arvio</div>                                                                                        
+                    <div class="col-xs-4" style="text-align: center">                                                                                        
+                        <div class="ruutuIsoAla ruutu1"> <span v-if="pt1">X</span> <span v-else>&nbsp;</span></div>                                           
+                        <div class="ruutuIsoAla ruutu2"> <span v-if="pt2">X</span> <span v-else>&nbsp;</span></div>                                           
+                        <div class="ruutuIsoAla ruutu3"> <span v-if="pt3">X</span> <span v-else>&nbsp;</span></div>                                           
+                        <div class="ruutuIsoAla ruutu4"> <span v-if="pt4">X</span> <span v-else>&nbsp;</span></div>                                           
+                        <div class="ruutuIsoAla ruutu5 ruutuVika"> <span v-if="pt5">X</span> <span v-else>&nbsp;</span></div>                                           
+                    </div>                                                                                                                                     
+                    <div class="col-xs-4" style="text-align: center">                                                                                        
+                        <div class="ruutuIsoAla ruutu1"> <span v-if="vt1">X</span> <span v-else>&nbsp;</span></div>                                           
+                        <div class="ruutuIsoAla ruutu2"> <span v-if="vt2">X</span> <span v-else>&nbsp;</span></div>                                           
+                        <div class="ruutuIsoAla ruutu3"> <span v-if="vt3">X</span> <span v-else>&nbsp;</span></div>                                           
+                        <div class="ruutuIsoAla ruutu4"> <span v-if="vt4">X</span> <span v-else>&nbsp;</span></div>                                           
+                        <div class="ruutuIsoAla ruutu5 ruutuVika"> <span v-if="vt5">X</span> <span v-else>&nbsp;</span></div>                                           
+                    </div>                                                                                                                   
+                </div>                                                                                                                   
+                                                                                                                                                              
+                <div class="row">                                                                                                                                                                
+                    <div class="col-xs-2" style="text-align: right; margin-top: 20px;">Kehityssuositukset ja huomautukset</div>   
+                    <textarea readonly class="col-xs-4" style="text-align: left; min-height: 30px; font-size: 16px; border: 1px solid black; margin: 20px;">{{raportti.pt_huom}}</textarea>               
+                    <textarea readonly class="col-xs-4" style="text-align: left; min-height: 30px; font-size: 16px; border: 1px solid black; margin: 20px;">{{raportti.vt_huom}}</textarea>               
+                </div>                                                                                                                                                                     
+                                                                                                                                                            
+                <div class="row">                                                                                                                                                                                      
+                    <div class="col-xs-2" style="text-align: right; margin-top: 20px;">Muita huomioita</div>                                                                                            
+                    <textarea readonly class="col-xs-8" style="text-align: left; min-height: 30px; font-size: 16px; border: 1px solid black; margin: 20px;">{{raportti.raportti_huom}}</textarea> 
+                </div>                                                                                                                                                                
+            </div>                                                                                                                                                        
+        </div>                                                                 
+    </div>            
+    `,
     props: ['raportti', 'jos'],
     data: function(){
         return {
@@ -583,35 +583,35 @@ Vue.component('vue-koontihuomautus', {
 });
 
 Vue.component('vue-rivi', {
-                template: 
-                    ' <div class="form-group row"">                                                                                              ' +
-                    '     <div class="col-xs-1" style="max-width: 20px;">                                                                        ' +
-                    '         {{initialRivi.aihe_no>100?initialRivi.aihe_no-100:initialRivi.aihe_no}}                                            ' +
-                    '     </div>                                                                                                                 ' +
-                    '     <div class="col-xs-4">                                                                                                 ' +
-                    '         <template v-if="tila!=\'pieni\' && initialRivi.tekstiDisplayed()">                                                 ' +
-                    '             <span class="rivi-label">{{initialRivi.otsikko}}</span>                                                        ' +
-                    '             <br>{{initialRivi.teksti}}</template>                                                                          ' +
-                    '         </template>                                                                                                        ' +
-                    '         <template v-else>                                                                                                  ' +
-                    '             <span class="rivi-label">{{initialRivi.otsikko}}</span>                            ' +
-                    '             <br><small>{{initialRivi.teksti}}</small></template>                                                                          ' +
-                    '         </template>                                                                                                        ' +
-                    '     </div>                                                                                                                 ' +
-                    '     <div class="col-xs-3">                                                                                                 ' +
-                    '         <div class="ruutu ruutu1" :title="a"> <span v-if="initialRivi.arvosana==\'1\'">X</span> <span v-else>&nbsp;</span></div>        ' +
-                    '         <div class="ruutu ruutu2" :title="b"> <span v-if="initialRivi.arvosana==\'2\'">X</span> <span v-else>&nbsp;</span> </div>       ' +
-                    '         <div class="ruutu ruutu3" :title="c"> <span v-if="initialRivi.arvosana==\'3\'">X</span> <span v-else>&nbsp;</span> </div>       ' +
-                    '         <div class="ruutu ruutu4" :title="d"> <span v-if="initialRivi.arvosana==\'4\'">X</span> <span v-else>&nbsp;</span> </div>       ' +
-                    '         <div class="ruutu ruutu5" :title="e"> <span v-if="initialRivi.arvosana==\'5\'">X</span> <span v-else>&nbsp;</span> </div>       ' +
-                    '         <div class="ruutu ruutu6" :title="f"> <span v-if="initialRivi.arvosana==\'6\'">X</span> <span v-else>&nbsp;</span> </div>       ' +
-                    '     </div>                                                                                                                 ' +
-                    '                                                                                                                            ' +
-                    '     <div class="col-xs-3" v-if="initialRivi.huomDisplayed()">                                                              ' +
-                    '         <span class="rivi-label">Huom {{huom_no}}: </span> {{rivi.huom}}                                               ' +
-                    '     </div>                                                                                                                 ' +
-                    ' </div>                                                                                                                     '
-                ,
+                template: ` 
+                     <div class="form-group row"">                                                                                              
+                         <div class="col-xs-1" style="max-width: 20px;">                                                                        
+                             {{initialRivi.aihe_no>100?initialRivi.aihe_no-100:initialRivi.aihe_no}}                                            
+                         </div>                                                                                                                 
+                         <div class="col-xs-4">                                                       
+                             <template v-if="tila!=\'pieni\' && initialRivi.tekstiDisplayed()">       
+                                 <span class="rivi-label">{{initialRivi.otsikko}}</span>              
+                                 <br>{{initialRivi.teksti}}</template>                                
+                             </template>                                                              
+                             <template v-else>                                                        
+                                 <span class="rivi-label">{{initialRivi.otsikko}}</span>                            
+                                 <br><small>{{initialRivi.teksti}}</small></template>                               
+                             </template>                                                                            
+                         </div>                                                                                     
+                         <div class="col-xs-3">                                                                     
+                             <div class="ruutu ruutu1" :title="a"> <span v-if="initialRivi.arvosana==\'1\'">X</span> <span v-else>&nbsp;</span></div> 
+                             <div class="ruutu ruutu2" :title="b"> <span v-if="initialRivi.arvosana==\'2\'">X</span> <span v-else>&nbsp;</span> </div>
+                             <div class="ruutu ruutu3" :title="c"> <span v-if="initialRivi.arvosana==\'3\'">X</span> <span v-else>&nbsp;</span> </div>
+                             <div class="ruutu ruutu4" :title="d"> <span v-if="initialRivi.arvosana==\'4\'">X</span> <span v-else>&nbsp;</span> </div>
+                             <div class="ruutu ruutu5" :title="e"> <span v-if="initialRivi.arvosana==\'5\'">X</span> <span v-else>&nbsp;</span> </div>
+                             <div class="ruutu ruutu6" :title="f"> <span v-if="initialRivi.arvosana==\'6\'">X</span> <span v-else>&nbsp;</span> </div>
+                         </div>                                                                                                                 
+                                                                                                                                                
+                         <div class="col-xs-3" v-if="initialRivi.huomDisplayed()">                                                              
+                             <span class="rivi-label">Huom {{huom_no}}: </span> {{rivi.huom}}                                                   
+                         </div>                                                                                                                 
+                     </div>                                                                                                                     
+                     `,
                 props: ['rivi', 'tila', 'jos'],
                 data: function () {
                     let huom_no = 0;
@@ -700,178 +700,178 @@ Vue.component('vue-rivi-otsikko', {
 
 
 Vue.component('vue-raportti', {
-                template: 
-                '    <div>                                                                                                                                                                   ' +
-                '        <hr>                                                                                                                                                                ' +
-                '        <h1>Valittu raportti</h1>                                                                                                                                           ' +
-                '        <span v-if="jos">Id: {{raportti.id}}</span>                                                                                                                         ' +
-                '                                                                                                                                                                            ' +
-                '        <h3>Ottelu:</h3>                                                                                                                                                    ' +
-                '        <p  >Pvm: {{raportti.pvm}}<br>                                                                                                                                      ' +
-                '            Paikka: {{raportti.paikka}}<br>                                                                                                                                 ' +
-                '            Ottelu: {{raportti.koti}}-{{raportti.vieras}},                                                                                                                  ' +
-                '            <span v-if="raportti.miehet==\'1\'">Miehet</span>                                                                                                               ' +
-                '            <span v-if="raportti.miehet==\'2\'">Naiset</span>                                                                                                               ' +
-                '            <span v-if="raportti.miehet==\'3\'">Muu</span><br>                                                                                                              ' +
-                '            Tulos: {{raportti.tulos}}<br>                                                                                                                                   ' +
-                '            Kesto: {{raportti.kesto_h}} h {{raportti.kesto_min}} min<br>                                                                                                    ' +
-                '            Vaikeusaste: <span v-if="raportti.vaikeus==1">Helppo</span>                                                                                                     ' +
-                '                         <span v-if="raportti.vaikeus==2">Normaali</span>                                                                                                   ' +
-                '                         <span v-if="raportti.vaikeus==4">Vaikea</span>                                                                                                     ' +
-                '        </pre>                                                                                                                                                              ' +
-                '        <h3>Tuomarit:</h3>                                                                                                                                                  ' +
-                '        <p>PT: {{raportti.pt_nimi}}<br>                                                                                                                                     ' +
-                '        VT: {{raportti.vt_nimi}}<br>                                                                                                                                        ' +
-                '        Tarkkailija: {{raportti.tark_nimi}}</p>                                                                                                                             ' +
-                '                                                                                                                                                                            ' +
-                '        <vue-kokonaisarvio :raportti="raportti"></vue-kokonaisarvio>                                                                                                        ' +
-                '                                                                                                                                                                            ' +
-                '        <h2>Päätuomari {{raportti.pt_nimi}}</h2>                                                                                                                            ' +
-                '        <p>Pisteet: {{raportti.pt_score}}</p>                                                                                                                               ' +
-                '        <div class="panel-group">                                                                                                                                           ' +
-                '                                                                                                                                                                            ' +
-                '            <vue-arvosanojen-selitykset></vue-arvosanojen-selitykset>                                                                                                       ' +
-                '                                                                                                                                                                            ' +
-                '            <div class="panel panel-primary">                                                                                                                               ' +
-                '                <div class="panel-heading">Tuomaritekniikka ja suoritustaito</div>                                                                                          ' +
-                '                <div class="panel-body">                                                                                                                                    ' +
-                '                    <vue-rivi-otsikko></vue-rivi-otsikko>                                                                                                                   ' +
-                '                    <vue-rivi v-for="rivi in rivit_1_5" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :jos="jos" :tila="\'pieni\'"></vue-rivi>         ' +
-                '                </div>                                                                                                                                                      ' +
-                '            </div>                                                                                                                                                          ' +
-                '            <div class="panel panel-primary">                                                                                                                               ' +
-                '                <div class="panel-heading">Sääntöjen sekä ohjeiden ja tulkintojen soveltaminen</div>                                                                        ' +
-                '                <div class="panel-body">                                                                                                                                    ' +
-                '                    <vue-rivi v-for="rivi in rivit_6_10" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :tila="\'pieni\'" :jos="jos"></vue-rivi>        ' +
-                '                </div>                                                                                                                                                      ' +
-                '            </div>                                                                                                                                                          ' +
-                '                                                                                                                                                                            ' +
-                '            <div class="panel panel-primary">                                                                                                                               ' +
-                '                <div class="panel-heading">Vuorovaikutus joukkueiden kanssa</div>                                                                                           ' +
-                '                <div class="panel-body">                                                                                                                                    ' +
-                '                    <vue-rivi v-for="rivi in rivit_11_13" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :tila="\'pieni\'" :jos="jos"></vue-rivi>       ' +
-                '                </div>                                                                                                                                                      ' +
-                '            </div>                                                                                                                                                          ' +
-                '                                                                                                                                                                            ' +
-                '            <div class="panel panel-primary">                                                                                                                               ' +
-                '                <div class="panel-heading">Ottelun johtaminen ja persoonallisuus</div>                                                                                      ' +
-                '                <div class="panel-body">                                                                                                                                    ' +
-                '                    <vue-rivi v-for="rivi in rivit_14_17" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :tila="\'pieni\'" :jos="jos"></vue-rivi>       ' +
-                '                </div>                                                                                                                                                      ' +
-                '            </div>                                                                                                                                                          ' +
-                '                                                                                                                                                                            ' +
-                // '            <div class="panel panel-primary">                                                                                                                               ' +
-                // '                <div class="panel-heading">Yksittäiset kommentit</div>                                                                                                      ' +
-                // '                <div class="panel-body">                                                                                                                                    ' +
-                // '                    <vue-koontihuomautus v-for="huomautus in raportti.pt_huomautukset" :key="huomautus.id" :huomautus="huomautus" :jos="jos"></vue-koontihuomautus>    ' +
-                // '                </div>                                                                                                                                                      ' +                                             
-                // '            </div>                                                                                                                                                          ' +
-                '        </div>                                                                                                                                                              ' +
-                '                                                                                                                                                                            ' +
-                '        <h2>Verkkotuomari {{raportti.vt_nimi}}</h2>                                                                                                                         ' +
-                '        <p>Pisteet: {{raportti.vt_score}}</p>                                                                                                                               ' +
-                '        <div class="panel-group">                                                                                                                                           ' +
-                '                                                                                                                                                                            ' +
-                '            <vue-arvosanojen-selitykset></vue-arvosanojen-selitykset>                                                                                                       ' +
-                '                                                                                                                                                                            ' +
-                '            <div class="panel panel-primary">                                                                                                                               ' +
-                '                <div class="panel-heading">Tuomaritekniikka ja suoritustaito</div>                                                                                          ' +
-                '                <div class="panel-body">                                                                                                                                    ' +
-                '                    <vue-rivi-otsikko></vue-rivi-otsikko>                                                                                                                   ' +
-                '                    <vue-rivi v-for="rivi in rivit_101_106" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :tila="\'pieni\'" :jos="jos"></vue-rivi>     ' +
-                '                </div>                                                                                                                                                      ' +
-                '            </div>                                                                                                                                                          ' +
-                '                                                                                                                                                                            ' +
-                '            <div class="panel panel-primary">                                                                                                                               ' +
-                '                <div class="panel-heading">x</div>                                                                                                                          ' +
-                '                <div class="panel-body">                                                                                                                                    ' +
-                '                    <vue-rivi v-for="rivi in rivit_107_111" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :tila="\'pieni\'" :jos="jos"></vue-rivi>     ' +
-                '                </div>                                                                                                                                                      ' +
-                '            </div>                                                                                                                                                          ' +
-                '                                                                                                                                                                            ' +
-                '            <div class="panel panel-primary">                                                                                                                               ' +
-                '                <div class="panel-heading">Vuorovaikutus joukkueiden kanssa</div>                                                                                           ' +
-                '                <div class="panel-body">                                                                                                                                    ' +
-                '                    <vue-rivi v-for="rivi in rivit_112_113" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :tila="\'pieni\'" :jos="jos"></vue-rivi>     ' +
-                '                </div>                                                                                                                                                      ' +
-                '            </div>                                                                                                                                                          ' +
-                '                                                                                                                                                                            ' +
-                '            <div class="panel panel-primary">                                                                                                                               ' +
-                '                <div class="panel-heading">Ottelun johtaminen ja persoonallisuus</div>                                                                                      ' +
-                '                <div class="panel-body">                                                                                                                                    ' +
-                '                    <vue-rivi v-for="rivi in rivit_114_117" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :tila="\'pieni\'" :jos="jos"></vue-rivi>     ' +
-                '                </div>                                                                                                                                                      ' +
-                '            </div>                                                                                                                                                          ' +
-                '                                                                                                                                                                            ' +
-                // '            <div class="panel panel-primary">                                                                                                                               ' +
-                // '                <div class="panel-heading">Yksittäiset kommentit</div>                                                                                                      ' +
-                // '                <div class="panel-body">                                                                                                                                    ' +
-                // '                    <vue-koontihuomautus v-for="huomautus in raportti.vt_huomautukset" :key="huomautus.id" :huomautus="huomautus" :jos="jos"></vue-koontihuomautus>    ' +
-                // '                </div>                                                                                                                                                      ' +
-                // '            </div>                                                                                                                                                          ' +
-                '        </div>                                                                                                                                                              ' +
-                '    </div>                                                                                                                                                                  '
-                ,
-                props: ['raportti', 'jos'],
-                data: function () {
-                    let a=0;
-                    return {
-                        randomId: this._uid,
-                        //pt_huomautukset: palauta_pt_huomautukset(this.raportti),
-                        //vt_huomautukset: palauta_vt_huomautukset(this.raportti),
-                        initialRaportti: this.raportti,
-                    }
-                },
-                mounted: function(){
-                    autosize($('textarea'));
-                },
-                computed: {
-                    rivit_1_5: function(){
-                        if(this.raportti.rivit.length < 34) return [];
-                        return [ this.raportti.rivit[0], this.raportti.rivit[1], this.raportti.rivit[2], this.raportti.rivit[3], this.raportti.rivit[4]];
-                    },
-        
-                    rivit_6_10: function(){
-                        if(this.raportti.rivit.length < 34) return [];
-                        return [ this.raportti.rivit[5], this.raportti.rivit[6], this.raportti.rivit[7], this.raportti.rivit[8], this.raportti.rivit[9]];
-                    },
-        
-                    rivit_11_13: function(){
-                        if(this.raportti.rivit.length < 34) return [];
-                        return [ this.raportti.rivit[10], this.raportti.rivit[11], this.raportti.rivit[12]];
-                    },
-        
-                    rivit_14_17: function(){
-                        if(this.raportti.rivit.length < 34) return [];
-                        return [ this.raportti.rivit[13], this.raportti.rivit[14], this.raportti.rivit[15], this.raportti.rivit[16]];
-                    },
-        
-                    rivit_101_106: function(){
-                        if(this.raportti.rivit.length < 34) return [];
-                        return [ this.raportti.rivit[17], this.raportti.rivit[18], this.raportti.rivit[19], this.raportti.rivit[20], this.raportti.rivit[21], this.raportti.rivit[22]];
-                    },
-        
-                    rivit_107_111: function(){
-                        if(this.raportti.rivit.length < 34) return [];
-                        return [ this.raportti.rivit[23], this.raportti.rivit[24], this.raportti.rivit[25], this.raportti.rivit[26], this.raportti.rivit[27]];
-                    },
-        
-                    rivit_112_113: function(){
-                        if(this.raportti.rivit.length < 34) return [];
-                        return [ this.raportti.rivit[28], this.raportti.rivit[29]];
-                    },
-        
-                    rivit_114_117: function(){
-                        if(this.raportti.rivit.length < 34) return [];
-                        return [ this.raportti.rivit[30], this.raportti.rivit[31], this.raportti.rivit[32], this.raportti.rivit[33]];
-                    },
-        
-                },
-                updated: function(){
-                    let title = this.raportti.title();
-                    console.log(title);
-                    $("#modal-title").text(title);
-                }
+    template:` 
+    <div>                                                                                                                                                    
+        <hr>                                                                                                                                                 
+        <h1>Valittu raportti</h1>                                                                                                                            
+        <span v-if="jos">Id: {{raportti.id}}</span>                                                                                                          
+                                                                                                                
+        <h3>Ottelu:</h3>                                                                                                                                     
+        <p  >Pvm: {{raportti.pvm}}<br>                                                                                                                       
+            Paikka: {{raportti.paikka}}<br>                                                                                                                  
+            Ottelu: {{raportti.koti}}-{{raportti.vieras}},                                                                                                   
+            <span v-if="raportti.miehet==\'1\'">Miehet</span>                                                                                                
+            <span v-if="raportti.miehet==\'2\'">Naiset</span>                                                                                                
+            <span v-if="raportti.miehet==\'3\'">Muu</span><br>                                                                                               
+            Tulos: {{raportti.tulos}}<br>                                                                                                                    
+            Kesto: {{raportti.kesto_h}} h {{raportti.kesto_min}} min<br>                                                                                     
+            Vaikeusaste: <span v-if="raportti.vaikeus==1">Helppo</span>                                                                                      
+                            <span v-if="raportti.vaikeus==2">Normaali</span>                                                                      
+                            <span v-if="raportti.vaikeus==4">Vaikea</span>                                                                        
+        </p>                                                                                                                                      
+        <h3>Tuomarit:</h3>                                                                                                                        
+        <p>PT: {{raportti.pt_nimi}}<br>                                                                                                           
+        VT: {{raportti.vt_nimi}}<br>                                                                                                              
+        Tarkkailija: {{raportti.tark_nimi}}</p>                                                                                                   
+                                                                                                            
+        <vue-kokonaisarvio :raportti="raportti"></vue-kokonaisarvio>                                                                              
+                                                                                                            
+        <h2>Päätuomari {{raportti.pt_nimi}}</h2>                                                                                                  
+        <p>Pisteet: {{raportti.pt_score}}</p>                                                                                                     
+        <div class="panel-group">                                                                                                                 
+                                                                                                    
+            <vue-arvosanojen-selitykset></vue-arvosanojen-selitykset>                                                                 
+                                                                                                    
+            <div class="panel panel-primary">                                                                                         
+                <div class="panel-heading">Tuomaritekniikka ja suoritustaito</div>                                                    
+                <div class="panel-body">                                                                                              
+                    <vue-rivi-otsikko></vue-rivi-otsikko>                                                                             
+                    <vue-rivi v-for="rivi in rivit_1_5" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :jos="jos" :tila="\'pieni\'"></vue-rivi>       
+                </div>                                                                              
+            </div>                                                                                  
+            <div class="panel panel-primary">                                                       
+                <div class="panel-heading">Sääntöjen sekä ohjeiden ja tulkintojen soveltaminen</div>
+                <div class="panel-body">                                                            
+                    <vue-rivi v-for="rivi in rivit_6_10" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :tila="\'pieni\'" :jos="jos"></vue-rivi>
+                </div>                                                                                                               
+            </div>                                                                                                                   
+                                                                                            
+            <div class="panel panel-primary">                                                                                        
+                <div class="panel-heading">Vuorovaikutus joukkueiden kanssa</div>                                                    
+                <div class="panel-body">                                                                                             
+                    <vue-rivi v-for="rivi in rivit_11_13" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :tila="\'pieni\'" :jos="jos"></vue-rivi> 
+                </div>                                                                                                                   
+            </div>                                                                                                                       
+                                                                                                        
+            <div class="panel panel-primary">                                                                                            
+                <div class="panel-heading">Ottelun johtaminen ja persoonallisuus</div>                                                   
+                <div class="panel-body">                                                                                                 
+                    <vue-rivi v-for="rivi in rivit_14_17" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :tila="\'pieni\'" :jos="jos"></vue-rivi>
+                </div>                                                                                                                              
+            </div>                                                                                                                                
+                                                                                                                                                  
+                <div class="panel panel-primary">                                                                                                 
+                    <div class="panel-heading">Yksittäiset kommentit</div>                                                                        
+                    <div class="panel-body">                                                                                                      
+                        <vue-koontihuomautus v-for="huomautus in raportti.pt_huomautukset" :key="huomautus.id" :huomautus="huomautus" :jos="jos"></vue-koontihuomautus>
+                    </div>                                                                                                                                                                          
+                </div>                                                                                                                                 
+        </div>                                                                                                                                         
+                                                                                                        
+        <h2>Verkkotuomari {{raportti.vt_nimi}}</h2>                                                                                                    
+        <p>Pisteet: {{raportti.vt_score}}</p>                                                                                                          
+        <div class="panel-group">                                                                                                                      
+                                                                                                        
+            <vue-arvosanojen-selitykset></vue-arvosanojen-selitykset>                                                                                  
+                                                                                                        
+            <div class="panel panel-primary">                                                                                                          
+                <div class="panel-heading">Tuomaritekniikka ja suoritustaito</div>                                                                     
+                <div class="panel-body">                                                                                                               
+                    <vue-rivi-otsikko></vue-rivi-otsikko>                                                                                              
+                    <vue-rivi v-for="rivi in rivit_101_106" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :tila="\'pieni\'" :jos="jos"></vue-rivi>
+                </div>                                                                                                                 
+            </div>                                                                                                                     
+                                                                                            
+            <div class="panel panel-primary">                                                                                          
+                <div class="panel-heading">x</div>                                                                                     
+                <div class="panel-body">                                                                                               
+                    <vue-rivi v-for="rivi in rivit_107_111" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :tila="\'pieni\'" :jos="jos"></vue-rivi> 
+                </div>                                                                                                                  
+            </div>                                                                                                                      
+                                                                                            
+            <div class="panel panel-primary">                                                                                           
+                <div class="panel-heading">Vuorovaikutus joukkueiden kanssa</div>                                                       
+                <div class="panel-body">                                                                                                
+                    <vue-rivi v-for="rivi in rivit_112_113" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :tila="\'pieni\'" :jos="jos"></vue-rivi>
+                </div>                                                                                                      
+            </div>                                                                                                          
+                                                                                                                            
+            <div class="panel panel-primary">                                                                               
+                <div class="panel-heading">Ottelun johtaminen ja persoonallisuus</div>                                      
+                <div class="panel-body">                                                                                    
+                    <vue-rivi v-for="rivi in rivit_114_117" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :tila="\'pieni\'" :jos="jos"></vue-rivi> 
+                </div>                                                                                                                
+            </div>                                                                                                                    
+                                                                                    
+                <div class="panel panel-primary">                                          
+                    <div class="panel-heading">Yksittäiset kommentit</div>                 
+                    <div class="panel-body">                                               
+                        <vue-koontihuomautus v-for="huomautus in raportti.vt_huomautukset" :key="huomautus.id" :huomautus="huomautus" :jos="jos"></vue-koontihuomautus> 
+                    </div>                                                                                                                                              
+                </div>                                                                                                                                                  
+        </div>                                                                                                                                                          
+    </div>                                                                                                                                                               
+    `,
+    props: ['raportti', 'jos'],
+    data: function () {
+        let a=0;
+        return {
+            randomId: this._uid,
+            //pt_huomautukset: palauta_pt_huomautukset(this.raportti),
+            //vt_huomautukset: palauta_vt_huomautukset(this.raportti),
+            initialRaportti: this.raportti,
+        }
+    },
+    mounted: function(){
+        autosize($('textarea'));
+    },
+    computed: {
+        rivit_1_5: function(){
+            if(this.raportti.rivit.length < 34) return [];
+            return [ this.raportti.rivit[0], this.raportti.rivit[1], this.raportti.rivit[2], this.raportti.rivit[3], this.raportti.rivit[4]];
+        },
+
+        rivit_6_10: function(){
+            if(this.raportti.rivit.length < 34) return [];
+            return [ this.raportti.rivit[5], this.raportti.rivit[6], this.raportti.rivit[7], this.raportti.rivit[8], this.raportti.rivit[9]];
+        },
+
+        rivit_11_13: function(){
+            if(this.raportti.rivit.length < 34) return [];
+            return [ this.raportti.rivit[10], this.raportti.rivit[11], this.raportti.rivit[12]];
+        },
+
+        rivit_14_17: function(){
+            if(this.raportti.rivit.length < 34) return [];
+            return [ this.raportti.rivit[13], this.raportti.rivit[14], this.raportti.rivit[15], this.raportti.rivit[16]];
+        },
+
+        rivit_101_106: function(){
+            if(this.raportti.rivit.length < 34) return [];
+            return [ this.raportti.rivit[17], this.raportti.rivit[18], this.raportti.rivit[19], this.raportti.rivit[20], this.raportti.rivit[21], this.raportti.rivit[22]];
+        },
+
+        rivit_107_111: function(){
+            if(this.raportti.rivit.length < 34) return [];
+            return [ this.raportti.rivit[23], this.raportti.rivit[24], this.raportti.rivit[25], this.raportti.rivit[26], this.raportti.rivit[27]];
+        },
+
+        rivit_112_113: function(){
+            if(this.raportti.rivit.length < 34) return [];
+            return [ this.raportti.rivit[28], this.raportti.rivit[29]];
+        },
+
+        rivit_114_117: function(){
+            if(this.raportti.rivit.length < 34) return [];
+            return [ this.raportti.rivit[30], this.raportti.rivit[31], this.raportti.rivit[32], this.raportti.rivit[33]];
+        },
+
+    },
+    updated: function(){
+        let title = this.raportti.title();
+        console.log(title);
+        $("#modal-title").text(title);
+    }
 });
 
 Vue.component('vue-user', {
@@ -942,19 +942,19 @@ Vue.component('vue-user', {
 });
 
 Vue.component('vue-login', {
-    template: 
-        '  <div>                                                                                                                                                                             ' +
-        '      <h2>Kirjaudu sisään</h2>                                                                                                                                                      ' +
-        '      <p>Sisäänkirjautuminen tapahtuu kunkin tuomarin tai tarkkailijan henkilökohtaisella linkillä.</p>                                                                             ' +
-        '                                                                                                                                                                                    ' +  
-        '      <p>Tässä voit tilata uuden linkin. Syötä oheiseen kenttään sähköpostiosoitteesi. Jos osoite on liitetty käyttäjälle, niin ko. osoitteeseen lähetetään kirjautumislinkki.</p>  ' +
-        '      <p>                                                                                                                                                                           ' +
-        '          <b>Email:</b>                                                                                                                                                             ' +
-        '          <input style="width: 250px; display: inline-block;" class="form-control" type="email" v-model="email"">                                                                   ' +
-        '          <button class="btn" @click="requestLink">Tilaa linkki</button>                                                                                                            ' +
-        '      </p>                                                                                                                                                                          ' +
-        '  </div>                                                                                                                                                                            '
-        ,
+    template:` 
+        <div>                                                                                                                                                                             
+            <h2>Kirjaudu sisään</h2>                                                                                                                                                      
+            <p>Sisäänkirjautuminen tapahtuu kunkin tuomarin tai tarkkailijan henkilökohtaisella linkillä.</p>                                                                             
+                                                                                                                                                                                            
+            <p>Tässä voit tilata uuden linkin. Syötä oheiseen kenttään sähköpostiosoitteesi. Jos osoite on liitetty käyttäjälle, niin ko. osoitteeseen lähetetään kirjautumislinkki.</p>  
+            <p>                                                                                                                                                                           
+                <b>Email:</b>                                                                                                                                                             
+                <input style="width: 250px; display: inline-block;" class="form-control" type="email" v-model="email"">                                                                   
+                <button class="btn" @click="requestLink">Tilaa linkki</button>                                                                                                            
+            </p>                                                                                                                                                                          
+        </div>                                                                                                                                                                            
+        `,
     props: ['jos'],
     data: function(){
         return {

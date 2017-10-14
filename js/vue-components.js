@@ -1,40 +1,40 @@
 
 
 Vue.component('vue-jos-grid', {
-    template: 
-      '  <div class="jos-table-container">                                                                                 ' + 
-      '  <table :class="options.luokka">                                                                                   ' + 
-      '      <thead>                                                                                                       ' + 
-      '          <tr>                                                                                                      ' + 
-      '              <th v-for="column in shownColumns" :class="{active: sortCol == column.key}" :width="column.width">    ' + 
-      '                  <span @click="column.sortable != false && sortBy(column.key)">{{column.title}}</span>             ' + 
-      '                  <span v-if="sortIndicators[column.key]==1">Up</span>                                              ' + 
-      '                  <span v-if="sortIndicators[column.key]==-1">Down</span>                                           ' + 
-      '                                                                                                                    ' + 
-      '                  <template v-if="column.filterable != false">                                                      ' + 
-      '                      <br><input style="width: 80%;" type="text" v-model="filters[column.key]">                     ' + 
-      '                  </template>                                                                                       ' + 
-      '              </th>                                                                                                 ' + 
-      '          </tr>                                                                                                     ' + 
-      '      </thead>                                                                                                      ' + 
-      '      <tbody>                                                                                                       ' + 
-      '          <tr v-for="entry in filteredSortedData" :key="entry.josOrder" @click="rowClick(entry.id)">                ' + 
-      '              <td v-for="column in shownColumns">                                                                   ' + 
-      '                  <template v-if="column.type == \'text\'">                                                         ' + 
-      '                      {{entry[column.key]}}                                                                         ' + 
-      '                  </template>                                                                                       ' + 
-      '                  <template v-if="column.type == \'number\'">                                                       ' + 
-      '                      {{entry[column.key]}}                                                                         ' +                      
-      '                  </template>                                                                                       ' +  
-      '                  <template v-if="column.type == \'link\'">                                                         ' + 
-      '                      <a :href="entry[column.key].href">{{entry[column.key].text}}</a>                              ' + 
-      '                  </template>                                                                                       ' + 
-      '              </td>                                                                                                 ' + 
-      '          </tr>                                                                                                     ' + 
-      '      </tbody>                                                                                                      ' + 
-      '  </table>                                                                                                          ' + 
-      '  </div>                                                                                                            '
-    ,
+    template: `
+    <div class="jos-table-container">                                                                             
+    <table :class="options.luokka">                                                                               
+        <thead>                                                                                                   
+            <tr>                                                                                                  
+                <th v-for="column in shownColumns" :class="{active: sortCol == column.key}" :width="column.width">
+                    <span @click="column.sortable != false && sortBy(column.key)">{{column.title}}</span>         
+                    <span v-if="sortIndicators[column.key]==1">Up</span>                                          
+                    <span v-if="sortIndicators[column.key]==-1">Down</span>                                       
+                                                                                                        
+                    <template v-if="column.filterable != false">                                                  
+                        <br><input style="width: 80%;" type="text" v-model="filters[column.key]">                 
+                    </template>                                                                                   
+                </th>                                                                                             
+            </tr>                                                                                                 
+        </thead>                                                                                                  
+        <tbody>                                                                                                   
+            <tr v-for="entry in filteredSortedData" :key="entry.josOrder" @click="rowClick(entry.id)">            
+                <td v-for="column in shownColumns">                                                               
+                    <template v-if="column.type == \'text\'">                                                     
+                        {{entry[column.key]}}                                                                     
+                    </template>                                                                                   
+                    <template v-if="column.type == \'number\'">                                                   
+                        {{entry[column.key]}}                                                                                          
+                    </template>                                                                                    
+                    <template v-if="column.type == \'link\'">                                                     
+                        <a :href="entry[column.key].href">{{entry[column.key].text}}</a>                          
+                    </template>                                                                                   
+                </td>                                                                                             
+            </tr>                                                                                                 
+        </tbody>                                                                                                  
+    </table>                                                                                                      
+    </div>                
+    `,
     props: ['data', 'options'],
 
     // columnSetting:
@@ -192,8 +192,8 @@ Vue.component('vue-jos-grid', {
             ret = ret.filter(function(item){
                 let val = self.getVal(column, item[column.key]);
                 if(val == undefined) val = "";
-                val=val.toString();
-                return val.indexOf(self.filters[column.key]) > -1;
+                val=val.toString().toLowerCase();
+                return val.indexOf(filter) > -1;
             });
             return ret;
         }

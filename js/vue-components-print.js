@@ -235,34 +235,34 @@ Vue.component('vue-report-print', {
 
 Vue.component('vue-rivi-print', {
     template: ` 
-         <div class="form-group row"">                                                                                              
-             <div class="col-xs-1" style="max-width: 20px;">                                                                        
-                 {{initialRivi.aihe_no>100?initialRivi.aihe_no-100:initialRivi.aihe_no}}                                            
-             </div>                                                                                                                 
-             <div class="col-xs-4">                                                       
-                 <template v-if="tila!=\'pieni\' && initialRivi.tekstiDisplayed()">       
-                     <span class="rivi-label">{{initialRivi.otsikko}}</span>              
-                     <br>{{initialRivi.teksti}}</template>                                
-                 </template>                                                              
-                 <template v-else>                                                        
-                     <span class="rivi-label">{{initialRivi.otsikko}}</span>                            
-                     <br><small>{{initialRivi.teksti}}</small></template>                               
-                 </template>                                                                            
-             </div>                                                                                     
-             <div class="col-xs-3">                                                                     
-                 <div class="ruutu ruutu1" :title="a"> <span v-if="initialRivi.arvosana==\'1\'">a</span> <span v-else>&nbsp;</span></div> 
-                 <div class="ruutu ruutu2" :title="b"> <span v-if="initialRivi.arvosana==\'2\'">b</span> <span v-else>&nbsp;</span> </div>
-                 <div class="ruutu ruutu3" :title="c"> <span v-if="initialRivi.arvosana==\'3\'">c</span> <span v-else>&nbsp;</span> </div>
-                 <div class="ruutu ruutu4" :title="d"> <span v-if="initialRivi.arvosana==\'4\'">d</span> <span v-else>&nbsp;</span> </div>
-                 <div class="ruutu ruutu5" :title="e"> <span v-if="initialRivi.arvosana==\'5\'">e</span> <span v-else>&nbsp;</span> </div>
-                 <div class="ruutu ruutu6" :title="f"> <span v-if="initialRivi.arvosana==\'6\'">f</span> <span v-else>&nbsp;</span> </div>
-             </div>                                                                                                                 
-                                                                                                                                    
-             <div class="col-xs-3" v-if="initialRivi.huomDisplayed()">                                                              
-                 <span class="rivi-label">Huom {{huom_no}}: </span> {{rivi.huom}}                                                   
-             </div>                                                                                                                 
-         </div>                                                                                                                     
-         `,
+    <div class="form-group row"">                                                                                              
+        <div class="col-xs-1" style="max-width: 20px;">                                                                        
+            {{initialRivi.aihe_no>100?initialRivi.aihe_no-100:initialRivi.aihe_no}}                                            
+        </div>                                                                                                                 
+        <div class="col-xs-4">                                                       
+            <template v-if="tila!=\'pieni\' && initialRivi.tekstiDisplayed()">       
+                <span class="rivi-label">{{initialRivi.otsikko}}</span>              
+                <br>{{initialRivi.teksti}}</template>                                
+            </template>                                                              
+            <template v-else>                                                        
+                <span class="rivi-label">{{initialRivi.otsikko}}</span>                            
+                <br><small>{{initialRivi.teksti}}</small></template>                               
+            </template>                                                                            
+        </div>                                                                                     
+        <div class="col-xs-3">                                                                     
+            <div class="ruutu ruutu1" :title="a"> <span v-if="initialRivi.arvosana==\'1\'">a</span> <span v-else>&nbsp;</span></div> 
+            <div class="ruutu ruutu2" :title="b"> <span v-if="initialRivi.arvosana==\'2\'">b</span> <span v-else>&nbsp;</span> </div>
+            <div class="ruutu ruutu3" :title="c"> <span v-if="initialRivi.arvosana==\'3\'">c</span> <span v-else>&nbsp;</span> </div>
+            <div class="ruutu ruutu4" :title="d"> <span v-if="initialRivi.arvosana==\'4\'">d</span> <span v-else>&nbsp;</span> </div>
+            <div class="ruutu ruutu5" :title="e"> <span v-if="initialRivi.arvosana==\'5\'">e</span> <span v-else>&nbsp;</span> </div>
+            <div class="ruutu ruutu6" :title="f"> <span v-if="initialRivi.arvosana==\'6\'">f</span> <span v-else>&nbsp;</span> </div>
+        </div>                                                                                                                 
+                                                                                                                               
+        <div class="col-xs-3" v-if="initialRivi.huomDisplayed()">                                                              
+            <span class="rivi-label">Huom {{huom_no}}: </span> {{rivi.huom}}                                                   
+        </div>                                                                                                                 
+    </div>                                                                                                                     
+    `,
     props: ['rivi', 'tila', 'jos'],
     data: function () {
         let huom_no = 0;

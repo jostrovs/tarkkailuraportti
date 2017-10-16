@@ -28,6 +28,13 @@ h4 {
     padding: 4px;
 }
 
+.help-kuva {
+	margin-left: 30px;
+	border: 1px solid #bbb;
+	padding: 25px;
+	border-radius: 5px;
+}
+
 #debugDiv{
 	position: absolute;
 	top: 0;
@@ -414,3 +421,4 @@ th, td {
 	border: 1px dashed red;
 }
 }
+

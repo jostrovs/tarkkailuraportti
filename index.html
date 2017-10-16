@@ -28,6 +28,7 @@
     <script src="js/autosize.min.js"></script>
     <script src="js/vue-components.js"></script>
     <script src="js/vue-components-print.js"></script>
+    <script src="js/vue-components-help.js"></script>
     <script src="js/classes.js"></script>
     <script src="js/script.js"></script>
 </head>
@@ -46,6 +47,11 @@
 			<li v-show="user.login">
                 <a data-toggle="tab" href="#uusi" @click="pikada()">
                     Uusi
+                </a>
+            </li>
+			<li>
+                <a data-toggle="tab" href="#help">
+                    Ohje
                 </a>
             </li>
 			<li>
@@ -80,6 +86,10 @@
             <div id="user" class="tab-pane fade in">
                 <vue-user :user="user" :jos="jos"></vue-user>
                 
+            </div>
+
+            <div id="help" class="tab-pane fade in">
+                <vue-help></vue-help>
             </div>
 
             <div id="etusivu" class="tab-pane fade in active">

@@ -82,8 +82,9 @@ $(document).ready(function () {
                 });
             },
             joukkueet: function(){
-                if(this.uusi_raportti.miehet) return MIEHET;
-                return NAISET;
+                if(this.uusi_raportti.miehet===RADIO_MIEHET) return MIEHET;
+                if(this.uusi_raportti.miehet===RADIO_NAISET) return NAISET;
+                return [];
             },
 
             uuden_1_5: function(){

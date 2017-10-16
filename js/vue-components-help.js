@@ -27,7 +27,7 @@ Vue.component('vue-help', {
             <a href="http://www.lentopalloerotuomarit.fi/tuomaritarkkailu">http://www.lentopalloerotuomarit.fi/tuomaritarkkailu</a><br>
             avautuu ao. näköinen ikkuna:</p>
 
-        <p><img class="help-kuva" src="./../kuvat/help_kirjaudu.png"></p>
+        <p><img class="help-kuva" src="./kuvat/help_kirjaudu.png"></p>
         
         <p>Ensimmäinen tehtävänne on syöttää sähköpostiosoitteenne ja tilata järjestelmän käyttölinkki!</p>
 
@@ -51,7 +51,7 @@ Vue.component('vue-help', {
 
         <p>Kun olette klikanneet ko. linkkiä teille avautuu sivu jossa olette kirjautuneena sisälle:</p>
 
-        <p><img class="help-kuva" src="./../kuvat/help_kirjautunut.png"></p>
+        <p><img class="help-kuva" src="./kuvat/help_kirjautunut.png"></p>
 
         <p>Oikealla ylhäällä näkyy nimenne ja oletuksena olette etusivulla jossa näette kaikki syötetyt
            tarkkailuraportit. Voitte hakea niitä syöttämällä hakulaatikoihin haluamianne hakuehtoja.
@@ -62,7 +62,7 @@ Vue.component('vue-help', {
            käytäntöjen mukainen mutta tiettyjä toiminteita on automatisoitu.
         </p>
 
-        <p><img class="help-kuva" src="./../kuvat/help_uusi.jpg"></p>
+        <p><img class="help-kuva" src="./kuvat/help_uusi.jpg"></p>
         
         <ol>
             <li>Painamalla PVM-laatikkoa pääsette valitsemaan ottelupäivämäärän.</li>
@@ -75,7 +75,7 @@ Vue.component('vue-help', {
 
         <p>Tämän jälkeen voitte alkaa syöttämään erotuomariarviointia:</p>
 
-        <p><img class="help-kuva" src="./../kuvat/help_arvostelu.jpg"></p>
+        <p><img class="help-kuva" src="./kuvat/help_arvostelu.jpg"></p>
         
         <ol>
             <li>Arviointi on perinteinen jossa ”b” kohta tarkoittaa ”ei parannettavaa” ja mikäli kaikissa kohdissa 
@@ -95,14 +95,14 @@ Vue.component('vue-help', {
         <p>Lopuksi voitte kirjoittaa halutessanne ja/tai annettujen ohjeiden mukaisesti muita huomioita ottelusta 
            ko. laatikkoon. Kirjoitettu teksti kopioituu varsinaiseen raporttiin yläpuolelle.</p>
 
-        <p><img class="help-kuva" src="./../kuvat/help_huomio.png"></p>
+        <p><img class="help-kuva" src="./kuvat/help_huomio.png"></p>
 
         <p>Lopuksi tarkistakaa raportin ”oikeellisuus” ja mahdolliset virheet ja <b>varmistuttuanne sen olevan kunnossa</b>
            painakaa sivun alalaidassa olevaa ”Talleta raportti” nappia.</p>
 
         <p>Alla esimerkki valmiista raportista:</p>
         
-        <p><img class="help-kuva" src="./../kuvat/help_valmis.png"></p>   
+        <p><img class="help-kuva" src="./kuvat/help_valmis.png"></p>   
 
         <p>Mikäli erehdyksessä tallennat raportin virheellisenä ja haluat siihen korjauksia tai haluat sen kokonaan 
            poistettavaksi tietokannasta niin laita asiasta Jorille: jostrovs@gmail.com. Kerro ongelma, mistä pelistä 

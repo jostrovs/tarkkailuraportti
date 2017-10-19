@@ -24,7 +24,7 @@
         return "(".$id.", ".$arvosana.", ".$report_id.", '".$huom."')";
     }
 
-    function emailNotify($tark, $ottelu, $to, $token){
+    function emailNotify($tark, $ottelu, $to, $token, $nimi){
         
         //$to = "jori.ostrovskij@gmail.com";
         
@@ -60,7 +60,7 @@
         $mail->Body = $body; 
         // you may also use $mail->Body = file_get_contents('your_mail_template.html');
          
-        $mail->AddAddress ($to, 'Automaattinen vastaanottaja');     
+        $mail->AddAddress ($to, $nimi);     
         // you may also use this format $mail->AddAddress ($recipient);
          
         if(!$mail->Send()) 
@@ -122,8 +122,8 @@
     } else {
         // Haetaan tietoja
         $sql = "SELECT ra.pvm, ra.koti, ra.vieras, " .
-        "       pt.email as pt_email, pt.token as pt_token, " .
-        "       vt.email as vt_email, vt.token as vt_token, " .
+        "       pt.etunimi as pt_etunimi, pt.sukunimi as pt_sukunimi, pt.email as pt_email, pt.token as pt_token, " .
+        "       vt.etunimi as vt_etunimi, vt.sukunimi as vt_sukunimi, vt.email as vt_email, vt.token as vt_token, " .
         "       ta.etunimi as ta_etunimi, ta.sukunimi as ta_sukunimi " .
         "FROM raportti ra  " . 
         "JOIN tuomari pt ON pt.id = ra.pt_id " .
@@ -143,12 +143,18 @@
         $vt_token = $row['vt_token'];
         $ta_etunimi = $row['ta_etunimi'];
         $ta_sukunimi = $row['ta_sukunimi'];
+        $pt_etunimi = $row['pt_etunimi'];
+        $pt_sukunimi = $row['pt_sukunimi'];
+        $vt_etunimi = $row['vt_etunimi'];
+        $vt_sukunimi = $row['vt_sukunimi'];
         
         $tarkkailija = $ta_etunimi . " " . $ta_sukunimi;
+        $pt_nimi = $pt_etunimi . " " . $pt_sukunimi;
+        $vt_nimi = $vt_etunimi . " " . $vt_sukunimi;
         $ottelu = $koti . " - " . $vieras;
         
-        emailNotify($tarkkailija, $ottelu, $pt_email, $pt_token);
-        emailNotify($tarkkailija, $ottelu, $vt_email, $vt_token);
+        emailNotify($tarkkailija, $ottelu, $pt_email, $pt_token, $pt_nimi);
+        emailNotify($tarkkailija, $ottelu, $vt_email, $vt_token, $vt_nimi);
     }
 
     $mysqli->close();

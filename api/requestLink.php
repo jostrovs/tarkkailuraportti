@@ -10,7 +10,7 @@ require 'dbConfig.php';
 
 require_once('./PHPMailer/PHPMailerAutoload.php');
 
-function sendEmail($to, $token){
+function sendEmail($to, $token, $name){
     $subject = "Kirjautumislinkki tarkkailuraporttisivulle";
     $body = "Hei!\r\nTässä on kirjautumislinkkisi tarkkailuraporttisivulle:\r\nhttp://www.lentopalloerotuomarit.fi/tuomaritarkkailu/?token=" . $token . "\r\n\r\nÄlä vastaa tähän viestiin, vaan ongelmatapauksissa ota yhteyttä jostrovs@gmail.com.\r\n-Jori\r\n";
      
@@ -39,7 +39,7 @@ function sendEmail($to, $token){
     $mail->Body = $body; 
     // you may also use $mail->Body = file_get_contents('your_mail_template.html');
      
-    $mail->AddAddress ($to, 'Automaattinen vastaanottaja');     
+    $mail->AddAddress ($to, $name);     
     // you may also use this format $mail->AddAddress ($recipient);
      
     if(!$mail->Send()) 
@@ -58,16 +58,20 @@ $email = strtolower($email);
 
 jos_log("Linkkiä pyydetty osoitteelle: " . $email, JOS_LOG_IMPORTANT);
 
-$sql = "SELECT token, email FROM tuomari WHERE email='" . $email . "'";
+$sql = "SELECT token, email, etunimi, sukunimi FROM tuomari WHERE email='" . $email . "'";
 $result = $mysqli->query($sql);
 
 $token = "0";
+$nimi = "Vastaanottaja";
 while($row = $result->fetch_assoc()){
     $token = $row['token'];
+    $etunimi = $row['etunimi'];
+    $sukunimi = $row['sukunimi'];
+    $nimi = $etunimi . " " . $sukunimi;
 }
 
 if($token != "0"){
-    sendEmail($email, $token);
+    sendEmail($email, $token, $nimi);
     $data = "1";
     
     $enc = json_encode($data, JSON_UNESCAPED_UNICODE);

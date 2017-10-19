@@ -23,6 +23,11 @@ var BROWSER= (function(){
     return M.join(' ');
 })();
 
+if(BROWSER.toLowerCase().indexOf("ie ") > -1){
+    alert("Tuomaritarkkailusivun käyttö ei ole mahdollista Internet Explorer -selaimella.\r\n\r\nSuosittelemme käytettäväksi Chromea. Klikkaa Ok, niin sinut ohjataan suoraan lataussivulle.");
+    window.location.href = "https://www.google.fi/chrome/browser/desktop/index.html";
+}
+
 const EVENT_AVAA_RAPORTTI = "EVENT_AVAA_RAPORTTI";
 const EVENT_RAPORTTI_VALITTU = "EVENT_RAPORTTI_VALITTU";
 const EVENT_RAPORTIT_UPDATE = "EVENT_RAPORTIT_UPDATE";

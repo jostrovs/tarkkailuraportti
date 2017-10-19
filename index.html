@@ -44,7 +44,7 @@
     <div id="app">
         <ul id="navbar" class="nav nav-tabs">
 			<li class="active"><a data-toggle="tab" href="#etusivu" id="etusivuLink">Etusivu</a>  </li>
-			<li v-show="user.login">
+			<li v-show="user.login && user.reportAuthorized">
                 <a data-toggle="tab" href="#uusi" @click="pikada()">
                     Uusi
                 </a>

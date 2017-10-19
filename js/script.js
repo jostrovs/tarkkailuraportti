@@ -220,6 +220,7 @@ $(document).ready(function () {
                         rooli: d.rooli,
                         id: d.id,
                         login: true,
+                        reportAuthorized: d.rooli == ROOLI_TARKKAILIJA || d.rooli == ROOLI_ADMIN,
                     };
 
                     self.afterLogin();

@@ -933,6 +933,7 @@ Vue.component('vue-user', {
     computed: {
         rooli: function(){
             let rooli = "EI MITÄÄN";
+            if(this.user.rooli == ROOLI_TUOMARI_JA_TARKKAILIJA.toString()) rooli = "Tuomari ja tarkkailija";
             if(this.user.rooli == ROOLI_TARKKAILIJA.toString()) rooli = "Tarkkailija";
             if(this.user.rooli == ROOLI_TUOMARI.toString()) rooli = "Tuomari";
             if(this.user.rooli == ROOLI_ADMIN.toString()) rooli = "Admin";

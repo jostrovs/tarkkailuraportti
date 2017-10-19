@@ -34,7 +34,7 @@
         jos_log("POST ei autentikoitu " . $etunimi . " " . $sukunimi . " POST,   token: " . $token, JOS_LOG_IMPORTANT);
         exitWithError();
     }
-    if($rooli != 0 && $rooli != 2){
+    if($rooli != 0 && $rooli != 2 && $rooli != 3){
         jos_log($etunimi . " " . $sukunimi . " ei autentikoitu POST, rooli: " . $rooli, JOS_LOG_IMPORTANT);
         exitWithError(); // Hyväksytään kaikki roolit, kunhan käyttäjä ylipäätään löytyy.
     } 

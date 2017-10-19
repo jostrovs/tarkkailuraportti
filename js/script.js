@@ -35,6 +35,7 @@ $(document).ready(function () {
             user: {
                 name: "Ei kirjauduttu",
                 email: "",
+                reportAuthorized: false,
             },
             token: getUserToken(),
 
@@ -73,12 +74,12 @@ $(document).ready(function () {
         computed: {
             tuomarit: function(){
                 return this.kaikki_tuomarit.filter(function(tuomari){
-                    return tuomari.rooli == ROOLI_TUOMARI;
+                    return tuomari.rooli == ROOLI_TUOMARI || tuomari.rooli == ROOLI_TUOMARI_JA_TARKKAILIJA;
                 });
             },
             tarkkailijat: function(){
                 return this.kaikki_tuomarit.filter(function(tuomari){
-                    return tuomari.rooli == ROOLI_TARKKAILIJA;
+                    return tuomari.rooli == ROOLI_TARKKAILIJA || tuomari.rooli == ROOLI_TUOMARI_JA_TARKKAILIJA;
                 });
             },
             joukkueet: function(){
@@ -220,7 +221,7 @@ $(document).ready(function () {
                         rooli: d.rooli,
                         id: d.id,
                         login: true,
-                        reportAuthorized: d.rooli == ROOLI_TARKKAILIJA || d.rooli == ROOLI_ADMIN,
+                        reportAuthorized: d.rooli == ROOLI_TARKKAILIJA || d.rooli == ROOLI_ADMIN || d.rooli == ROOLI_TUOMARI_JA_TARKKAILIJA,
                     };
 
                     self.afterLogin();

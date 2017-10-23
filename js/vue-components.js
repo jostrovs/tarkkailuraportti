@@ -92,7 +92,7 @@ Vue.component('vue-jos-grid', {
         return {
             localData: localData,
             sortCol: 'pvm',
-            sortOrder: 1,
+            sortOrder: -1,
             columns: columns,
             sortIndicators: sortIndicators,
             filters: filters,

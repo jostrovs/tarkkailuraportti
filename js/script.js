@@ -77,7 +77,7 @@ $(document).ready(function () {
                     let m1 = moment(r1.pvm);
                     let m2 = moment(r2.pvm);
                     let r = m1.isSameOrBefore(m2);
-                    console.log(m1.format("DD.MM.YYYY") + " <-> " + m2.format("DD.MM.YYYY") + "    " + r);
+                    //console.log(m1.format("DD.MM.YYYY") + " <-> " + m2.format("DD.MM.YYYY") + "    " + r);
                     return r;
                 });
                 return ret;
@@ -163,7 +163,15 @@ $(document).ready(function () {
                     });                
             },
             
-            
+            onPrint: function(){
+                let title1 = this.raportti.pvm + " ";
+                    title1 += this.raportti.koti + "-" + this.raportti.vieras + " ";
+                    title1 += this.raportti.pt_nimi.split(" ")[1] + "-";
+                    title1 += this.raportti.vt_nimi.split(" ")[1] + "-"; 
+                    title1 += this.raportti.tark_nimi.split(" ")[1];
+                document.title = title1;
+            },
+
             afterLogin: function(){
                 toastr.info("Haetaan tietoja...");
                 this.loadTuomarit();

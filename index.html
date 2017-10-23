@@ -60,7 +60,7 @@
                 </a>
             </li>
 			<li>
-                <a v-if="selectedReport && jos" data-toggle="tab" href="#print">
+                <a v-if="selectedReport && jos" data-toggle="tab" @click="onPrint()" href="#print">
                     Tulostus
                 </a>
             </li>

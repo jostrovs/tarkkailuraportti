@@ -307,7 +307,7 @@ h4 {
   /******** josGrid  ****/
 
 .jos-table-container {
-	max-width: 800px;
+	max-width: 1000px;
 }
 .jos-table {
     max-width: 800px !important;
@@ -393,16 +393,18 @@ th, td {
 	display: inline-block;
 	text-align: center;
     vertical-align: top;
+    padding-right: 20px;
 
-	border: 1px dashed green;
+	/* border: 1px dashed green; */
 }
 .print-col-2 {
 	width: 37%;
 	display: inline-block;
 	text-align: center;
     vertical-align: top;
+    padding-right: 20px;
 	
-	border: 1px dashed blue;
+	/* border: 1px dashed blue; */
 }
 .print-col-3 {
 	width: 37%;
@@ -410,7 +412,7 @@ th, td {
 	text-align: center;
     vertical-align: top;
 	
-	border: 1px dashed red;
+	/* border: 1px dashed red; */
 }
 .print-col-23 {
 	width: 75%;
@@ -418,7 +420,7 @@ th, td {
 	text-align: center;
     vertical-align: top;
 	
-	border: 1px dashed red;
+	/* border: 1px dashed red; */
 }
 }
 

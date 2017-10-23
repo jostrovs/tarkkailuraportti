@@ -87,8 +87,8 @@ Vue.component('vue-report-print', {
                 </div>
                 <div class="row">
                     <div class="print-col-1">Kehityssuositukset ja huomautukset</div>
-                    <div class="print-col-2" style="text-align: left">{{raportti.pt_huom}}</div>
-                    <div class="print-col-3" style="text-align: left">{{raportti.vt_huom}}</div>
+                    <div class="print-col-2" style="text-align: left;">{{raportti.pt_huom}}</div>
+                    <div class="print-col-3" style="text-align: left;">{{raportti.vt_huom}}</div>
                 </div>
                 <div class="row">
                     <div class="print-col-1">Muita huomioita</div>
@@ -258,7 +258,7 @@ Vue.component('vue-rivi-print', {
             <div class="ruutu ruutu6" :title="f"> <span v-if="initialRivi.arvosana==\'6\'">f</span> <span v-else>&nbsp;</span> </div>
         </div>                                                                                                                 
                                                                                                                                
-        <div class="col-xs-3" v-if="initialRivi.huomDisplayed()">                                                              
+        <div class="col-xs-4" v-if="initialRivi.huomDisplayed()" style="font-size: small">                                                              
             <span class="rivi-label">Huom {{huom_no}}: </span> {{rivi.huom}}                                                   
         </div>                                                                                                                 
     </div>                                                                                                                     

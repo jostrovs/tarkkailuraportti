@@ -50,7 +50,7 @@ $(document).ready(function () {
             { 
                 columns: [
                     { title: 'Ottelu', width: 340, key: 'ottelu', template: function(row){ return row['koti'] + " - " + row['vieras']; } },
-                    { title: 'Päivämäärä', key: 'pvm'},
+                    { title: 'Pvm', key: 'pvm', width: 120,},
                     { title: 'Paikka', width: 250, key: 'paikka'},
                     { title: 'Tuomarit', width: 420, key: 'tuomarit', template: function(row){ return row['pt_nimi'] + " - " + row['vt_nimi']} },
                     { title: 'Tarkkailija', width: 230, key: 'tark_nimi'},
@@ -72,6 +72,17 @@ $(document).ready(function () {
             bus.on(EVENT_REQUEST_LINK, this.requestLink);
         },
         computed: {
+            gridin_raportit: function(){
+                let ret = this.raportit.sort(function(r1, r2){
+                    let m1 = moment(r1.pvm);
+                    let m2 = moment(r2.pvm);
+                    let r = m1.isSameOrBefore(m2);
+                    console.log(m1.format("DD.MM.YYYY") + " <-> " + m2.format("DD.MM.YYYY") + "    " + r);
+                    return r;
+                });
+                return ret;
+            },
+
             tuomarit: function(){
                 return this.kaikki_tuomarit.filter(function(tuomari){
                     return tuomari.rooli == ROOLI_TUOMARI || tuomari.rooli == ROOLI_TUOMARI_JA_TARKKAILIJA;

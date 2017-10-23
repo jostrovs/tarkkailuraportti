@@ -8,8 +8,8 @@ Vue.component('vue-jos-grid', {
             <tr>                                                                                                  
                 <th v-for="column in shownColumns" :class="{active: sortCol == column.key}" :width="column.width">
                     <span @click="column.sortable != false && sortBy(column.key)">{{column.title}}</span>         
-                    <span v-if="sortIndicators[column.key]==1">Up</span>                                          
-                    <span v-if="sortIndicators[column.key]==-1">Down</span>                                       
+                    <span v-if="sortIndicators[column.key]==1"></span>                                          
+                    <span v-if="sortIndicators[column.key]==-1"></span>                                       
                                                                                                         
                     <template v-if="column.filterable != false">                                                  
                         <br><input style="width: 80%;" type="text" v-model="filters[column.key]">                 
@@ -91,8 +91,8 @@ Vue.component('vue-jos-grid', {
 
         return {
             localData: localData,
-            sortCol: '',
-            sortOrder: 0,
+            sortCol: 'pvm',
+            sortOrder: 1,
             columns: columns,
             sortIndicators: sortIndicators,
             filters: filters,

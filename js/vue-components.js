@@ -760,12 +760,12 @@ Vue.component('vue-raportti', {
                 </div>                                                                                                                              
             </div>                                                                                                                                
                                                                                                                                                   
-                <div class="panel panel-primary">                                                                                                 
-                    <div class="panel-heading">Yksittäiset kommentit</div>                                                                        
-                    <div class="panel-body">                                                                                                      
-                        <vue-koontihuomautus v-for="huomautus in raportti.pt_huomautukset" :key="huomautus.id" :huomautus="huomautus" :jos="jos"></vue-koontihuomautus>
-                    </div>                                                                                                                                                                          
-                </div>                                                                                                                                 
+            // <div class="panel panel-primary">                                                                                                 
+            //     <div class="panel-heading">Yksittäiset kommentit</div>                                                                        
+            //     <div class="panel-body">                                                                                                      
+            //         <vue-koontihuomautus v-for="huomautus in raportti.pt_huomautukset" :key="huomautus.id" :huomautus="huomautus" :jos="jos"></vue-koontihuomautus>
+            //     </div>                                                                                                                                                                          
+            // </div>                                                                                                                                 
         </div>                                                                                                                                         
                                                                                                         
         <h2>Verkkotuomari {{raportti.vt_nimi}}</h2>                                                                                                    
@@ -803,12 +803,12 @@ Vue.component('vue-raportti', {
                 </div>                                                                                                                
             </div>                                                                                                                    
                                                                                     
-                <div class="panel panel-primary">                                          
-                    <div class="panel-heading">Yksittäiset kommentit</div>                 
-                    <div class="panel-body">                                               
-                        <vue-koontihuomautus v-for="huomautus in raportti.vt_huomautukset" :key="huomautus.id" :huomautus="huomautus" :jos="jos"></vue-koontihuomautus> 
-                    </div>                                                                                                                                              
-                </div>                                                                                                                                                  
+            // <div class="panel panel-primary">                                          
+            //     <div class="panel-heading">Yksittäiset kommentit</div>                 
+            //     <div class="panel-body">                                               
+            //         <vue-koontihuomautus v-for="huomautus in raportti.vt_huomautukset" :key="huomautus.id" :huomautus="huomautus" :jos="jos"></vue-koontihuomautus> 
+            //     </div>                                                                                                                                              
+            // </div>                                                                                                                                                  
         </div>                                                                                                                                                          
     </div>                                                                                                                                                               
     `,

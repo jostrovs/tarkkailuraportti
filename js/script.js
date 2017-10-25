@@ -163,6 +163,11 @@ $(document).ready(function () {
                     });                
             },
             
+            test_pdf: function(){
+                let p = new printReport(this.raportti);
+                p.pdf();
+            },
+
             onPrint: function(){
                 let title1 = this.raportti.pvm + " ";
                     title1 += this.raportti.koti + "-" + this.raportti.vieras + " ";

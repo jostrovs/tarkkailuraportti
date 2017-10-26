@@ -1,5 +1,10 @@
+function n(val){
+    if(val == null || typeof(val) === 'undefined') return "";
+    return val;
+}
 class printReport {
     constructor(report){
+        this.initImages();
         this.report = report;
 
         this.content = [
@@ -7,18 +12,26 @@ class printReport {
             { text: `${report.title()}`, fontSize: 15 },
         ];
 
-        this.content = [this.content, ...this.ottelunTiedot()];
-        this.content = [this.content, ...this.lopullinenTuomariarvio()];
-        this.content = [this.content, ...this.arvosanojenSelitteet()];
+        for(let o of this.ottelunTiedot()) this.content.push(o);
+        for(let o of this.lopullinenTuomariarvio()) this.content.push(o);
+        for(let o of this.arvosanojenSelitteet()) this.content.push(o);
+        for(let o of this.osio("Eka", [report.rivit[3], report.rivit[4], ])) this.content.push(o);
         //this.content = [this.content, ...this.rivi(report.rivit[0])];
         //this.content = [this.content, ...this.rivi(report.rivit[1])];
-
-        this.content = [this.content, ...this.osio("Eka", [report.rivit[3], report.rivit[4], ])]
 
         this.dd = {
             content: this.content,
             styles: this.styles(),
         }
+    }
+
+    initImages(){
+        this.IMAGE_DARK_GREY = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMTczbp9jAAAADElEQVQYV2Owt7cHAAF+AL6Nd+jYAAAAAElFTkSuQmCC";
+        this.IMAGE_BLACK     = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMTczbp9jAAAADElEQVQYV2NgYGAAAAAEAAFczf9pAAAAAElFTkSuQmCC";
+        this.IMAGE_BLUE      = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMTczbp9jAAAADElEQVQYV2NgUv0DAAFQASQSuMo0AAAAAElFTkSuQmCC";
+        this.IMAGE_GREEN     = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMTczbp9jAAAADElEQVQYV2Pw/sMEAALfAUqSQCtyAAAAAElFTkSuQmCC";
+        this.IMAGE_GREY      = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMTczbp9jAAAADElEQVQYV2Oor68HAAL+AX4Q/7cZAAAAAElFTkSuQmCC";
+        this.IMAGE_RED       = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMTczbp9jAAAADElEQVQYV2P4z8AAAAMBAQBjJFXTAAAAAElFTkSuQmCC";
     }
 
     ottelunTiedot(){
@@ -127,28 +140,43 @@ class printReport {
     }
 
     rivi(rivi){
+        rivi.huom = "Jotain hemmetin pitkää tekstiä Jotain hemmetin pitkää tekstiä Jotain hemmetin pitkää tekstiä Jotain hemmetin pitkää tekstiä Jotain hemmetin pitkää tekstiä ";
         return {
             table: {
-                widths: [14, 160, 50, '*'],
+                widths: [14, 160, 50, 'auto'],
                 body: [
                     [
-                        {text: rivi.aihe_no, style: ['bold', 'left']}, 
-                        {text: rivi.otsikko, style: ['normal', 'left']}, 
-                        {text: "abcdef",},
-                        {text: rivi.huom, style: ['normal', 'left'], rowspan: 2}
+                        n(rivi.aihe_no), 
+                        n(rivi.otsikko), 
+                        "abcdef",
+                        {rowSpan: 2, text: n(rivi.huom), }
                     ],
                     [
-                        ' ', 
-                        {text: rivi.teksti, style: ['normal', 'left', 'smaller']}, 
-                        ' ',
-                        ' '
+                        '', 
+                        n("rivi.teksti"), 
+                        '', 
+                        '', 
                     ],
                 ],
-                layout: 'noBorders',
             },
+            layout: 'noBorders',
         };           
     }
             
+           
+    osio(name, rivit){
+        let ret = [
+            { text: `name`, style: 'h3', },
+            { image: this.IMAGE_DARK_GREY, width: 500, height: 1,},
+        ];
+
+        let r1 = this.rivi(rivit[0]);
+
+        ret.push(r1);
+        //ret = [ret, this.rivi(rivit[1])];
+        return ret;
+    }
+
     pdf(){
         pdfMake.createPdf(this.dd).download("testreport.pdf");
     }

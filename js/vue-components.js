@@ -759,13 +759,6 @@ Vue.component('vue-raportti', {
                     <vue-rivi v-for="rivi in rivit_14_17" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :tila="\'pieni\'" :jos="jos"></vue-rivi>
                 </div>                                                                                                                              
             </div>                                                                                                                                
-                                                                                                                                                  
-            // <div class="panel panel-primary">                                                                                                 
-            //     <div class="panel-heading">Yksittäiset kommentit</div>                                                                        
-            //     <div class="panel-body">                                                                                                      
-            //         <vue-koontihuomautus v-for="huomautus in raportti.pt_huomautukset" :key="huomautus.id" :huomautus="huomautus" :jos="jos"></vue-koontihuomautus>
-            //     </div>                                                                                                                                                                          
-            // </div>                                                                                                                                 
         </div>                                                                                                                                         
                                                                                                         
         <h2>Verkkotuomari {{raportti.vt_nimi}}</h2>                                                                                                    
@@ -802,13 +795,6 @@ Vue.component('vue-raportti', {
                     <vue-rivi v-for="rivi in rivit_114_117" :key="rivi.id" :raportti:="raportti" :rivi="rivi" :tila="\'pieni\'" :jos="jos"></vue-rivi> 
                 </div>                                                                                                                
             </div>                                                                                                                    
-                                                                                    
-            // <div class="panel panel-primary">                                          
-            //     <div class="panel-heading">Yksittäiset kommentit</div>                 
-            //     <div class="panel-body">                                               
-            //         <vue-koontihuomautus v-for="huomautus in raportti.vt_huomautukset" :key="huomautus.id" :huomautus="huomautus" :jos="jos"></vue-koontihuomautus> 
-            //     </div>                                                                                                                                              
-            // </div>                                                                                                                                                  
         </div>                                                                                                                                                          
     </div>                                                                                                                                                               
     `,

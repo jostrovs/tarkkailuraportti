@@ -10,6 +10,10 @@ class printReport {
         this.content = [this.content, ...this.ottelunTiedot()];
         this.content = [this.content, ...this.lopullinenTuomariarvio()];
         this.content = [this.content, ...this.arvosanojenSelitteet()];
+        //this.content = [this.content, ...this.rivi(report.rivit[0])];
+        //this.content = [this.content, ...this.rivi(report.rivit[1])];
+
+        this.content = [this.content, ...this.osio("Eka", [report.rivit[3], report.rivit[4], ])]
 
         this.dd = {
             content: this.content,
@@ -122,6 +126,29 @@ class printReport {
         ];
     }
 
+    rivi(rivi){
+        return {
+            table: {
+                widths: [14, 160, 50, '*'],
+                body: [
+                    [
+                        {text: rivi.aihe_no, style: ['bold', 'left']}, 
+                        {text: rivi.otsikko, style: ['normal', 'left']}, 
+                        {text: "abcdef",},
+                        {text: rivi.huom, style: ['normal', 'left'], rowspan: 2}
+                    ],
+                    [
+                        ' ', 
+                        {text: rivi.teksti, style: ['normal', 'left', 'smaller']}, 
+                        ' ',
+                        ' '
+                    ],
+                ],
+                layout: 'noBorders',
+            },
+        };           
+    }
+            
     pdf(){
         pdfMake.createPdf(this.dd).download("testreport.pdf");
     }
@@ -147,6 +174,9 @@ class printReport {
             },
             center: {
                 alignment: 'center',
+            },
+            smaller: {
+                fontSize: 8,
             },
         }
     }

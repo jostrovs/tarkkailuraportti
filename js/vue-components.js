@@ -2,14 +2,15 @@
 
 Vue.component('vue-jos-grid', {
     template: `
-    <div class="jos-table-container">                                                                             
+    <div class="jos-table-container">   
+
     <table :class="options.luokka">                                                                               
         <thead>                                                                                                   
             <tr>                                                                                                  
                 <th v-for="column in shownColumns" :class="{active: sortCol == column.key}" :width="column.width">
                     <span @click="column.sortable != false && sortBy(column.key)">{{column.title}}</span>         
-                    <span v-if="sortIndicators[column.key]==1"></span>                                          
-                    <span v-if="sortIndicators[column.key]==-1"></span>                                       
+                    <span v-if="sortIndicators[column.key]==1" class="glyphicon glyphicon-triangle-top"></span>                                          
+                    <span v-if="sortIndicators[column.key]==-1" class="glyphicon glyphicon-triangle-bottom"></span>                                       
                                                                                                         
                     <template v-if="column.filterable != false">                                                  
                         <br><input style="width: 80%;" type="text" v-model="filters[column.key]">                 
@@ -28,6 +29,9 @@ Vue.component('vue-jos-grid', {
                     </template>                                                                                    
                     <template v-if="column.type == \'link\'">                                                     
                         <a :href="entry[column.key].href">{{entry[column.key].text}}</a>                          
+                    </template>                                                                                   
+                    <template v-if="column.type == \'date\'">                                                     
+                        {{formatDate(entry[column.key])}}
                     </template>                                                                                   
                 </td>                                                                                             
             </tr>                                                                                                 
@@ -88,6 +92,8 @@ Vue.component('vue-jos-grid', {
         bus.on(EVENT_RAPORTIT_UPDATE, function(data){
             self.setData(data);
         })
+
+        sortIndicators['pvm']=-1;
 
         return {
             localData: localData,
@@ -196,6 +202,9 @@ Vue.component('vue-jos-grid', {
                 return val.indexOf(filter) > -1;
             });
             return ret;
+        },
+        formatDate: function(string){
+            return moment(string).format("DD.MM.YYYY");
         }
     },
 });

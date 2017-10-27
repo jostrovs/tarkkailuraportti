@@ -50,7 +50,7 @@ $(document).ready(function () {
             { 
                 columns: [
                     { title: 'Ottelu', width: 340, key: 'ottelu', template: function(row){ return row['koti'] + " - " + row['vieras']; } },
-                    { title: 'Pvm', key: 'pvm', width: 120,},
+                    { title: 'Pvm', key: 'pvm', width: 120, type: 'date'},
                     { title: 'Paikka', width: 250, key: 'paikka'},
                     { title: 'Tuomarit', width: 420, key: 'tuomarit', template: function(row){ return row['pt_nimi'] + " - " + row['vt_nimi']} },
                     { title: 'Tarkkailija', width: 230, key: 'tark_nimi'},
@@ -438,9 +438,12 @@ $(document).ready(function () {
                             self.raportti = raportti;
                             self.selectedReport = raportti_id;
                             toastr.clear();
+                            
+                            self.test_pdf();
                         });
                     }
                 }
+
             },
 
             newReport: function(){

@@ -439,7 +439,7 @@ $(document).ready(function () {
                             self.selectedReport = raportti_id;
                             toastr.clear();
                             
-                            self.test_pdf();
+                            if(self.jos) self.test_pdf();
                         });
                     }
                 }

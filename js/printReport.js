@@ -165,22 +165,19 @@ class printReport {
             
            
     osio(name, rivit){
-        let r1 = this.rivi(rivit[0]);
-        let r2 = this.rivi(rivit[1]);
+        let r = [];
+        for(let rivi of rivit) r.push(this.rivi(rivi));
+
         let ret = [
             { 
                 table: {
                     body: [
                         [ 'name'],
-                        [   [r1, r2]    ],
+                        [   r   ],
                     ]
                 }
             },
         ];
-
-
-        //ret.push(r1);
-        //ret = [ret, this.rivi(rivit[1])];
         return ret;
     }
 

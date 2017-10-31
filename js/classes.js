@@ -353,7 +353,7 @@ function Raportti(data_item){
         },
     
         title: function(){
-            return this.koti + " - " + this.vieras + "   " + this.pvm;
+            return this.koti + " - " + this.vieras + "   " + moment(this.pvm).format("DD.MM.YYYY");
         }
     };
 

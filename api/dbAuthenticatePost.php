@@ -14,7 +14,7 @@
     }
 
     $token = $_POST["token"];
-    $browser = $_GET["browser"];
+    $browser = $_POST["browser"];
     
     if($token == "0") exitWithError();
     

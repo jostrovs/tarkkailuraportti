@@ -2,9 +2,9 @@
 
 Vue.component('vue-jos-grid', {
     template: `
-    <div class="jos-table-container">   
+    <div class="jos-table-container" style="padding: 5px;">   
 
-    <table :class="options.luokka">                                                                               
+    <table :class="options.luokka" id="jos-grid" style="display: block">                                                                               
         <thead>                                                                                                   
             <tr>                                                                                                  
                 <th v-for="column in shownColumns" :class="{active: sortCol == column.key}" :width="column.width">
@@ -619,7 +619,7 @@ Vue.component('vue-rivi', {
         <div class="col-xs-3" v-if="initialRivi.huomDisplayed()">                                                              
             <span class="rivi-label">Huom {{huom_no}}: </span> {{rivi.huom}}                                                   
         </div>                                                                                                                 
-    </div>                                                                                                                     
+    </div>      
     `,
     props: ['rivi', 'tila', 'jos'],
     data: function () {
@@ -712,11 +712,11 @@ Vue.component('vue-raportti', {
     template:` 
     <div>                                                                                                                                                    
         <hr>                                                                                                                                                 
-        <h1>Valittu raportti</h1>                                                                                                                            
+        <h1>{{title}} <button class="btn" @click="sulje">Sulje</button></h1>                                                                                                                            
         <span v-if="jos">Id: {{raportti.id}}</span>                                                                                                          
                                                                                                                 
-        <h3>Ottelu:</h3>                                                                                                                                     
-        <p  >Pvm: {{raportti.pvm}}<br>                                                                                                                       
+        <h3>Ottelun tiedot:</h3>                                                                                                                                     
+        <p  >Pvm: {{pvm}}<br>                                                                                                                       
             Paikka: {{raportti.paikka}}<br>                                                                                                                  
             Ottelu: {{raportti.koti}}-{{raportti.vieras}},                                                                                                   
             <span v-if="raportti.miehet==\'1\'">Miehet</span>                                                                                                
@@ -810,8 +810,11 @@ Vue.component('vue-raportti', {
     props: ['raportti', 'jos'],
     data: function () {
         let a=0;
+        let title = this.raportti.title();
         return {
             randomId: this._uid,
+            title: title,
+            pvm: moment(this.raportti.pvm).format("DD.MM.YYYY"),
             //pt_huomautukset: palauta_pt_huomautukset(this.raportti),
             //vt_huomautukset: palauta_vt_huomautukset(this.raportti),
             initialRaportti: this.raportti,
@@ -861,6 +864,11 @@ Vue.component('vue-raportti', {
             return [ this.raportti.rivit[30], this.raportti.rivit[31], this.raportti.rivit[32], this.raportti.rivit[33]];
         },
 
+    },
+    methods: {
+        sulje(){
+            bus.emit(EVENT_CLOSE_REPORT);
+        }
     },
     updated: function(){
         let title = this.raportti.title();

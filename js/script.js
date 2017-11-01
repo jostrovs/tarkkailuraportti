@@ -70,6 +70,7 @@ $(document).ready(function () {
             bus.on(EVENT_LOGOUT, this.logout);
             bus.on(EVENT_SAVE_EMAIL, this.saveEmail);
             bus.on(EVENT_REQUEST_LINK, this.requestLink);
+            bus.on(EVENT_CLOSE_REPORT, this.closeReport);
         },
         computed: {
             gridin_raportit: function(){
@@ -428,22 +429,27 @@ $(document).ready(function () {
 
             reportSelected: function(raportti_id){
                 toastr.info("Haetaan raportin tietoja...");
+                $("#reportGrid").hide(400)
                 let self = this;
                 if(raportti_id == undefined) return;
                 
                 for(let i=0;i<this.raportit.length;++i){
                     let raportti = this.raportit[i];
                     if(raportti.id == raportti_id){
+                        self.raportti = raportti;
+                        self.selectedReport = raportti_id;
+                        
                         raportti.getRivit(function(){
-                            self.raportti = raportti;
-                            self.selectedReport = raportti_id;
                             toastr.clear();
-                            
-                            if(self.jos) self.test_pdf();
                         });
                     }
                 }
 
+            },
+
+            closeReport: function(){
+                this.selectedReport = 0;
+                $("#reportGrid").show(400);
             },
 
             newReport: function(){

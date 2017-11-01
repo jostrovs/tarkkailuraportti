@@ -321,8 +321,6 @@ tr {
 }
 
 th {
-    border-top: 1px solid navy;
-	border-bottom: 1px solid navy;
 	vertical-align: top;
 }
 
@@ -333,8 +331,8 @@ th, td {
             border-bottom: 1px solid #ddd;
         }
         th {
-            background-color: #4CAF50;
-            color: white;
+			background: #337ab7;
+			color: white;
         }
 
         th > a { color: white; }
@@ -356,13 +354,19 @@ th, td {
 
 }
 
-.jos-table-container,
-.jos-table
+#jos-grid
 {
-	max-height: 250px;
+	/* max-height: 700px; */
 	/* height: 250px; */
 	overflow-y: auto;
 }
+
+.fade-enter-active, .fade-leave-active {
+	transition: opacity .5s
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+	opacity: 0
+  }
 
 
 /******** PRINT **************************/

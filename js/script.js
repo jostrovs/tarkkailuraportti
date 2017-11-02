@@ -87,13 +87,6 @@ $(document).ready(function () {
                     return r;
                 });
 
-                if(this.report_user_filter == 'MY'){
-                    let self = this;
-                    
-                    //ret = ret.filter(item => { return item.tark_name == self.user.name || item.pt_name == self.user.name || item.vt_name == self.user.name});
-                    ret = ret.filter(item => { return item.pt_name == "Pasi Hakkarainen"});
-                }
-
                 return ret;
             },
 

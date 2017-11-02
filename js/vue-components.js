@@ -39,7 +39,7 @@ Vue.component('vue-jos-grid', {
     </table>                                                                                                      
     </div>                
     `,
-    props: ['data', 'options'],
+    props: ['data', 'options', 'user', 'user_filter', 'date_filter'],
 
     // columnSetting:
     // {
@@ -113,6 +113,26 @@ Vue.component('vue-jos-grid', {
         filteredSortedData: function(){
             let self = this;
             let ret = this.localData;
+            
+            if(this.user_filter=="MY"){
+                ret = ret.filter(item => {
+                    return item.tuomarit.indexOf(this.user.name) > -1 || item.tark_nimi.indexOf(this.user.name) > -1;
+                });
+            }
+
+            if(this.date_filter != "ALL"){
+                let limit = moment();
+                if(this.date_filter == "WEEK"){
+                    limit.subtract(8, 'days');
+                }
+                if(this.date_filter == "MONTH"){
+                    limit.subtract(1, 'month');
+                }
+                ret = ret.filter(item => {
+                    return moment(item.pvm).isAfter(limit);
+                });
+            }
+
             for(let i=0;i<this.columns.length;++i){
                 let column = this.columns[i];
                 ret = this.filterByColumn(column, ret);
@@ -949,25 +969,23 @@ Vue.component('vue-grid-filters', {
     template:` 
     <div v-if="jos" style="margin-left: 5px; margin-top: 5px;">
         <div class="btn-group">                                                                                                                                                                             
-            <button type="button" @click="dateFilter('ALL')" :class="luokka.all">Kaikki</button>                                                                                                                                                                                   
-            <button type="button" @click="dateFilter('MONTH')" :class="luokka.kk">Kuukausi</button>                                                                                                                                                                                   
-            <button type="button" @click="dateFilter('WEEK')" :class="luokka.vko">Viikko</button>                                                                                                                                                                                   
+            <button type="button" @click="dateFilter('ALL')" :class="classes.all">Kaikki</button>                                                                                                                                                                                   
+            <button type="button" @click="dateFilter('MONTH')" :class="classes.kk">Kuukausi</button>                                                                                                                                                                                   
+            <button type="button" @click="dateFilter('WEEK')" :class="classes.vko">Viikko</button>                                                                                                                                                                                   
         </div>                                                                                                                                                                            
         <div class="btn-group">                                                                                                                                                                             
-            <button type="button" @click="userFilter('MY')" :class="luokka.omat">Omat</button>                                                                                                                                                                                   
-            <button type="button" @click="userFilter('ALL')" :class="luokka.kaikkien">Kaikkien</button>                                                                                                                                                                                   
+            <button type="button" @click="userFilter('MY')" :class="classes.omat">Omat</button>                                                                                                                                                                                   
+            <button type="button" @click="userFilter('ALL')" :class="classes.kaikkien">Kaikkien</button>                                                                                                                                                                                   
         </div>                
     </div>                                                                                                                                                            
     `,
     props: ['date_filter', 'user_filter', 'jos'],
     data: function(){
-        let luokka = this.getClasses();
         return {
-            luokka: luokka,
         }
     },
-    methods: {
-        getClasses(){
+    computed: {
+        classes(){
             let all=false;
             let month = false;
             let week = false;
@@ -1005,10 +1023,10 @@ Vue.component('vue-grid-filters', {
                     'btn-primary': !my,
                 },
             };
-            this.luokka = ret;
             return ret;
         },
-
+    },
+    methods: {
         dateFilter(f){
             bus.emit(EVENT_DATE_FILTER, f);
         },

@@ -32,6 +32,9 @@ $(document).ready(function () {
             rivit: [],
             raportit: [],
             
+            report_date_filter:"ALL",
+            report_user_filter:"ALL",
+
             user: {
                 name: "Ei kirjauduttu",
                 email: "",
@@ -58,7 +61,7 @@ $(document).ready(function () {
                 ], 
             }, 
 
-            jos: false, // debug-flägi
+            jos: true, // debug-flägi
             debug: "Ei debuggia",
         },
         
@@ -71,6 +74,8 @@ $(document).ready(function () {
             bus.on(EVENT_SAVE_EMAIL, this.saveEmail);
             bus.on(EVENT_REQUEST_LINK, this.requestLink);
             bus.on(EVENT_CLOSE_REPORT, this.closeReport);
+            bus.on(EVENT_DATE_FILTER, this.setReportDateFilter);
+            bus.on(EVENT_USER_FILTER, this.setReportUserFilter);
         },
         computed: {
             gridin_raportit: function(){
@@ -81,6 +86,14 @@ $(document).ready(function () {
                     //console.log(m1.format("DD.MM.YYYY") + " <-> " + m2.format("DD.MM.YYYY") + "    " + r);
                     return r;
                 });
+
+                if(this.report_user_filter == 'MY'){
+                    let self = this;
+                    
+                    //ret = ret.filter(item => { return item.tark_name == self.user.name || item.pt_name == self.user.name || item.vt_name == self.user.name});
+                    ret = ret.filter(item => { return item.pt_name == "Pasi Hakkarainen"});
+                }
+
                 return ret;
             },
 
@@ -164,6 +177,14 @@ $(document).ready(function () {
                     });                
             },
             
+            setReportDateFilter(f){
+                this.report_date_filter = f;
+            },
+
+            setReportUserFilter(f){
+                this.report_user_filter = f;
+            },
+
             test_pdf: function(){
                 let p = new printReport(this.raportti);
                 p.pdf();

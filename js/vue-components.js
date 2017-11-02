@@ -945,6 +945,80 @@ Vue.component('vue-user', {
     }
 });
 
+Vue.component('vue-grid-filters', {
+    template:` 
+    <div v-if="jos" style="margin-left: 5px; margin-top: 5px;">
+        <div class="btn-group">                                                                                                                                                                             
+            <button type="button" @click="dateFilter('ALL')" :class="luokka.all">Kaikki</button>                                                                                                                                                                                   
+            <button type="button" @click="dateFilter('MONTH')" :class="luokka.kk">Kuukausi</button>                                                                                                                                                                                   
+            <button type="button" @click="dateFilter('WEEK')" :class="luokka.vko">Viikko</button>                                                                                                                                                                                   
+        </div>                                                                                                                                                                            
+        <div class="btn-group">                                                                                                                                                                             
+            <button type="button" @click="userFilter('MY')" :class="luokka.omat">Omat</button>                                                                                                                                                                                   
+            <button type="button" @click="userFilter('ALL')" :class="luokka.kaikkien">Kaikkien</button>                                                                                                                                                                                   
+        </div>                
+    </div>                                                                                                                                                            
+    `,
+    props: ['date_filter', 'user_filter', 'jos'],
+    data: function(){
+        let luokka = this.getClasses();
+        return {
+            luokka: luokka,
+        }
+    },
+    methods: {
+        getClasses(){
+            let all=false;
+            let month = false;
+            let week = false;
+            let my = false;
+            if(this.date_filter == 'ALL') all = true;
+            if(this.date_filter == 'MONTH') month = true;
+            if(this.date_filter == 'WEEK') week = true;
+            if(this.user_filter == 'MY') my = true;
+
+            let ret = {
+                all: {
+                    'btn': true,
+                    'btn-default': !all,
+                    'btn-primary': all,
+                },
+                kk: {
+                    'btn': true,
+                    'btn-default': !month,
+                    'btn-primary': month,
+                },
+                vko: {
+                    'btn': true,
+                    'btn-default': !week,
+                    'btn-primary': week,
+                },
+    
+                omat: {
+                    'btn': true,
+                    'btn-default': !my,
+                    'btn-primary': my,
+                },
+                kaikkien: {
+                    'btn': true,
+                    'btn-default': my,
+                    'btn-primary': !my,
+                },
+            };
+            this.luokka = ret;
+            return ret;
+        },
+
+        dateFilter(f){
+            bus.emit(EVENT_DATE_FILTER, f);
+        },
+
+        userFilter(f){
+            bus.emit(EVENT_USER_FILTER, f);
+        },
+    }
+});
+
 Vue.component('vue-login', {
     template:` 
     <div>                                                                                                                                                                             
@@ -972,3 +1046,4 @@ Vue.component('vue-login', {
         }
     }
 });
+

@@ -98,6 +98,10 @@ if($cmd != API_SAVE_EMAIL){
     }
 }
 
+if($cmd == API_HAE_RAPORTIN_RIVIT){
+    jos_log($etunimi . " " . $sukunimi . " pyysi raporttia " . $arg1, JOS_LOG_NORMAL);    
+}
+
 $data['data'] = $json;
 
 $result =  mysqli_query($mysqli,$sqlTotal);

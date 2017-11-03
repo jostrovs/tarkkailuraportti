@@ -814,7 +814,6 @@ Vue.component('vue-rivi-otsikko', {
     },
 });
 
-
 Vue.component('vue-raportti', {
     template:` 
     <div>                                                                                                                                                    
@@ -1165,6 +1164,40 @@ Vue.component('vue-login', {
         requestLink: function(){
             toastr.info("Tilataan linkkiä...");
             bus.emit(EVENT_REQUEST_LINK, this.email);
+        }
+    }
+});
+
+Vue.component('vue-news', {
+    template:` 
+    <div v-if="show" style="position: fixed; border: 2px solid #a33; top: 20px; left: 20px; right: 20px; bottom: 20px; z-index: 2000;">                                                                                                                                                                             
+        <button class="btn" style="top: 20px; float: right;" @click="sulje()">X</button>
+        <slot>
+        </slot>         
+        <div>
+            <input type="checkbox" v-model="dontShow"> Älä näytä tätä enää
+        </div>
+    </div>                                                                                                                                                                            
+    `,
+    props: ['jos', 'news_moment'],
+    data: function(){
+        return {
+            dontShow: false,
+        }
+    },
+    methods: {
+        sulje(){
+            if(this.dontShow) localStorage.tark_news = this.news_moment;
+        }
+    },
+    computed: {
+        show(){
+            if(localStorage.tark_news){
+                let m = moment(localStorage.tark_news);
+                if(m.isBefore(this.news_moment)) return true;
+
+            } return false;
+            return true;
         }
     }
 });

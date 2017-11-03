@@ -110,8 +110,8 @@ class printReport {
         let ret = [
             { columns: [
                 { width: 100, text: " ", style: ['bold', 'left'] },
-                { width: 200, text: "Päätuomari", style: ['bold', 'center'], marginLeft: 9  },
-                { width: 200, text: "Verkkotuomari", style: ['bold', 'center'], marginLeft: 9  },
+                { width: 200, text: "Päätuomari " + raportti.pt_nimi, style: ['bold', 'center'], marginLeft: 9  },
+                { width: 200, text: "Verkkotuomari " + raportti.vt_nimi, style: ['bold', 'center'], marginLeft: 9  },
             ]},
             { columns: [
                 { width: 100, text: "Pisteet", style: ['bold', 'left'], marginTop: 7 },
@@ -142,15 +142,23 @@ class printReport {
         let raportti = this.report;
         let tuomari = "";
         if(pt_tai_vt == 'PT'){
-            return [
-                { text: `Päätuomari ${this.report.pt_nimi}`, style: 'h1', pageBreak: 'before'},
-                { text: `Arvosana: ${this.report.pt_score}`, style: 'h3'},
-            ];
+            return [{ 
+                text: [ 
+                    { text: `Päätuomari ${this.report.pt_nimi}`, style: 'h1'},
+                    '          ',
+                    { text: `Pisteet: ${this.report.pt_score}`, style: 'h3',} 
+                ],
+                pageBreak: 'before',
+            }];
         } else {
-            return [
-                { text: `Verkkotuomari ${this.report.vt_nimi}`, style: 'h1', pageBreak: 'before'},
-                { text: `Arvosana: ${this.report.vt_score}`, style: 'h3'},
-            ];
+            return [{ 
+                text: [ 
+                    { text: `Verkkotuomari ${this.report.vt_nimi}`, style: 'h1'},
+                    '          ',
+                    { text: `Pisteet: ${this.report.vt_score}`, style: 'h3',} 
+                ],
+                pageBreak: 'before',
+            }];
         }
     }
 

@@ -267,7 +267,8 @@ function Raportti(data_item){
         vieras : "",
         paikka : "",
         pvm : "",
-        
+        updated: moment("2000-01-01 00:00:00"),
+
         pt_id : "0",
         pt_nimi : "",
 
@@ -367,7 +368,8 @@ function Raportti(data_item){
         ret.vieras = data_item.vieras;
         ret.paikka = data_item.paikka;
         ret.pvm = data_item.pvm;
-        
+        ret.updated = data_item.updated;
+
         ret.pt_id = data_item.pt_id;
         ret.pt_nimi = data_item.pt_etunimi + ' ' + data_item.pt_sukunimi;
 

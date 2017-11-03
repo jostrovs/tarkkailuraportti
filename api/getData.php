@@ -23,7 +23,7 @@ $arg1 = $mysqli->real_escape_string($arg1);
 $debug["komento"] = $cmd;
 $debug["arg1"] = $arg1;
 
-$sqlTotal = "SELECT * FROM tuomari";
+$sqlTotal = "SELECT email, etunimi, id, rooli, sukunimi FROM tuomari";
 $sql = "SELECT * FROM tuomari"; 
 
 switch($cmd){
@@ -34,7 +34,7 @@ switch($cmd){
         $sql = "SELECT 
                   r.id, r.koti, r.vieras, r.paikka, r.pvm, r.pt_id, r.vt_id, r.tark_id, r.pt_score, r.vt_score,
                   r.miehet, r.tulos, r.kesto_h, r.kesto_min, r.vaikeus, r.tulos,
-                  r.pt_huom, r.vt_huom, r.raportti_huom,
+                  r.pt_huom, r.vt_huom, r.raportti_huom, r.updated,
                   pt.etunimi as pt_etunimi, pt.sukunimi as pt_sukunimi,
                   vt.etunimi as vt_etunimi, vt.sukunimi as vt_sukunimi,
                   tark.etunimi as tark_etunimi, tark.sukunimi as tark_sukunimi
@@ -59,7 +59,7 @@ switch($cmd){
         break;
     case API_HAE_PT_RAPORTIT:
         $sql = "SELECT  ra.id as raportti_id, ra.koti, ra.vieras, ra.pvm, ra.pt_id, ra.vt_id, ra.pt_score, ra.vt_score,
-                        ra.raportti_huom, ra.pt_huom, ra.vt_huom, ra.tulos,
+                        ra.raportti_huom, ra.pt_huom, ra.vt_huom, ra.tulos, ra.updated,
                         r.id, r.arvosana, r.aihe_id, r.huom, 
                         a.no, a.otsikko
                 FROM raportti ra
@@ -69,7 +69,7 @@ switch($cmd){
         break;
     case API_HAE_VT_RAPORTIT:
         $sql = "SELECT  ra.id as raportti_id, ra.koti, ra.vieras, ra.pvm, ra.pt_id, ra.vt_id, ra.pt_score, ra.vt_score,
-                        ra.raportti_huom, ra.pt_huom, ra.vt_huom, ra.tulos,
+                        ra.raportti_huom, ra.pt_huom, ra.vt_huom, ra.tulos, ra.updated,
                         r.id, r.arvosana, r.aihe_id, r.huom, 
                         a.no, a.otsikko
                 FROM raportti ra

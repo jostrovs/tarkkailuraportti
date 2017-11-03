@@ -76,6 +76,7 @@ $(document).ready(function () {
             bus.on(EVENT_CLOSE_REPORT, this.closeReport);
             bus.on(EVENT_DATE_FILTER, this.setReportDateFilter);
             bus.on(EVENT_USER_FILTER, this.setReportUserFilter);
+            bus.on(EVENT_DOWNLOAD, this.pdf);
         },
         computed: {
             gridin_raportit: function(){
@@ -178,7 +179,7 @@ $(document).ready(function () {
                 this.report_user_filter = f;
             },
 
-            test_pdf: function(){
+            pdf: function(){
                 let p = new printReport(this.raportti);
                 p.pdf();
             },

@@ -819,7 +819,11 @@ Vue.component('vue-raportti', {
     template:` 
     <div>                                                                                                                                                    
         <hr>                                                                                                                                                 
-        <h1>{{title}} <button class="btn" @click="sulje">Sulje</button></h1>                                                                                                                            
+        <h1>
+            {{title}} 
+            <button class="btn btn-default" @click="sulje" style="margin-left: 30px;">Sulje raportti</button>
+            <button v-if="raportti.rivit.length > 0" class="btn" @click="print" style="float: right;"  title="Lataa raportti pdf-tiedostona"><i class="glyphicon glyphicon-download-alt"/> PDF</button>
+        </h1>                                                                                                                            
         <span v-if="jos">Id: {{raportti.id}}</span>                                                                                                          
                                                                                                                 
         <div class="panel-group">                                                                                                                 
@@ -980,6 +984,9 @@ Vue.component('vue-raportti', {
     methods: {
         sulje(){
             bus.emit(EVENT_CLOSE_REPORT);
+        },
+        print(){
+            bus.emit(EVENT_DOWNLOAD);
         }
     },
     updated: function(){

@@ -576,12 +576,15 @@ Vue.component('vue-rivi-edit', {
             <template v-if="initialRivi.tekstiDisplayed()"><br>{{initialRivi.teksti}}</template>
         </div>                                                                                  
         <div class="col-xs-3" style="max-width: 265px; min-width: 265px;">                      
-            <div class="radio-div ruutu1" :title="a">   <label class="radio-inline"><input :id="inputId(\'1\')" @change="onInput()" required type="radio" :name="radioname" value="1">a</label>   </div>
-            <div class="radio-div ruutu2" :title="b">   <label class="radio-inline"><input :id="inputId(\'2\')" @change="onInput()" required type="radio" :name="radioname" value="2">b</label>   </div>
-            <div class="radio-div ruutu3" :title="c">   <label class="radio-inline"><input :id="inputId(\'3\')" @change="onInput()" required type="radio" :name="radioname" value="3">c</label>   </div>
-            <div class="radio-div ruutu4" :title="d">   <label class="radio-inline"><input :id="inputId(\'4\')" @change="onInput()" required type="radio" :name="radioname" value="4">d</label>   </div>
-            <div class="radio-div ruutu5" :title="e">   <label class="radio-inline"><input :id="inputId(\'5\')" @change="onInput()" required type="radio" :name="radioname" value="5">e</label>   </div>
-            <div class="radio-div ruutu6" :title="f" style="border-right: 0;">   <label class="radio-inline"><input :id="inputId(\'6\')" @change="onInput()" required type="radio" :name="radioname" value="6">f</label>   </div>
+            <input style="width: 1px; border: 0px; opacity: 0.01;" type="text" required v-model="validator">
+            <div class="btn-group">
+                <button type="button" :class="luokka.a" @click="select('1')" :title="a">a</button>
+                <button type="button" :class="luokka.b" @click="select('2')" :title="b">b</button>
+                <button type="button" :class="luokka.c" @click="select('3')" :title="c">c</button>
+                <button type="button" :class="luokka.d" @click="select('4')" :title="d">d</button>
+                <button type="button" :class="luokka.e" @click="select('5')" :title="e">e</button>
+                <button type="button" :class="luokka.f" @click="select('6')" :title="f">f</button>
+            </div>            
         </div>                                                        
         <div class="col-xs-3">                                        
             <textarea class="form-control"                            
@@ -602,9 +605,10 @@ Vue.component('vue-rivi-edit', {
             id: "huom_" + this.rivi.aihe_no,
             randomId: this._uid,
             initialRivi: this.rivi,
-            valittu: 0,
-            radioname: "opt" + this.rivi.aihe_no,
             inputPlaceholder: "",
+            valittu: 0,
+             
+            validator: "",
 
             a: TITLES.a,
             b: TITLES.b,
@@ -615,18 +619,18 @@ Vue.component('vue-rivi-edit', {
         }
     },
     methods: {
-        onInput: function () {
-            let val = $('input[name=' + this.radioname + ']:checked').val();
+        select(val){
             this.rivi.arvosana = val;
-            this.valittu = val;
             this.raportti.laske();
-        },
-        inputId: function(no){
-            return this.rivi.aihe_no + '_' + no;
+            this.valittu=val;
+            if(val != "0") this.validator = val;
+            else this.validator="";
         },
 
-        external_change: function(aihe_no){
-            if(this.rivi.aihe_no == aihe_no) this.onInput();
+        external_change: function(data){
+            if(this.rivi.aihe_no == data.aihe_no){
+                this.select(data.arvosana);
+            }
         }
     },
     computed: {
@@ -641,24 +645,38 @@ Vue.component('vue-rivi-edit', {
             }
             this.inputPlaceholder = "";
             return "white";
-        }
+        },
+        luokka(){
+            let a = false;
+            let b = false;
+            let c = false;
+            let d = false;
+            let e = false;
+            let f = false;
+            if(this.rivi.arvosana == "1") a = true;
+            if(this.rivi.arvosana == "2") b = true;
+            if(this.rivi.arvosana == "3") c = true;
+            if(this.rivi.arvosana == "4") d = true;
+            if(this.rivi.arvosana == "5") e = true;
+            if(this.rivi.arvosana == "6") f = true;
+
+            let ret = {
+                a: {'btn': true, 'btn-default': !a, 'btn-primary': a },
+                b: {'btn': true, 'btn-default': !b, 'btn-primary': b },
+                c: {'btn': true, 'btn-default': !c, 'btn-primary': c },
+                d: {'btn': true, 'btn-default': !d, 'btn-primary': d },
+                e: {'btn': true, 'btn-default': !e, 'btn-primary': e },
+                f: {'btn': true, 'btn-default': !f, 'btn-primary': f },
+            };
+            return ret;
+        },
+        
     },
 
     created: function(){
         let self=this;
-        setTimeout(function(){
-            let $radios = $('input[name=' + self.radioname + ']');
-            let radios = $.makeArray($radios);
-            for(let i=0;i<radios.length;++i){
-                let radio = radios[i];
-                if(radio.value == self.initialRivi.arvosana){
-                    $(radio).prop("checked", true);
-                }
-            }
-        }, 10);
-
-        bus.on(EVENT_CHANGE, function(aihe_no){
-            self.external_change(aihe_no);
+        bus.on(EVENT_CHANGE, function(data){
+            self.external_change(data);
         });
     }
 });

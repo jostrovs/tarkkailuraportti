@@ -549,12 +549,10 @@ $(document).ready(function () {
                         let rivi = r.rivit[i];
 
                         if(typeof(rivi) !== 'undefined' && typeof(rivi.arvosana) !== 'undefined'){
-                            let id = "#" + rivi.aihe_no + "_" + rivi.arvosana;
-                            $(id).prop("checked", true);
-                            bus.emit(EVENT_CHANGE, rivi.aihe_no);
+                            bus.emit(EVENT_CHANGE, { aihe_no: rivi.aihe_no, arvosana: rivi.arvosana});
                         }
 
-                        console.log("i: " + i + "  uusi_rivit: " + this.uusi_raportti.rivit.length + "     rivit: " + r.rivit.length);
+                        //console.log("i: " + i + "  uusi_rivit: " + this.uusi_raportti.rivit.length + "     rivit: " + r.rivit.length);
                         this.uusi_raportti.rivit[i].huom = rivi.huom;
                     }
 

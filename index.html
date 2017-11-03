@@ -186,22 +186,24 @@
                                 <div class="row">
                                     <div class="col-xs-3">
                                         <label for="koti">Kotijoukkue</label>
+                                        <template v-if="jos">(valittu: {{uusi_raportti.koti}})</template>
                                         <transition name="fade">
-                                            <select v-if="uusi_raportti.miehet !== RADIO_MUU" class="form-control" id="koti" v-model="uusi_raportti.koti">
+                                            <select v-if="uusi_raportti.miehet !== RADIO_MUU" class="form-control" id="koti" v-model="uusi_raportti.koti" required>
                                                 <option disabled value="-1">Valitse kotijoukkue</option>
                                                 <option v-for="joukkue in joukkueet" :value="joukkue">{{joukkue}}</option>
                                             </select>
-                                            <input v-if="uusi_raportti.miehet === RADIO_MUU" type="text" class="form-control" id="koti_text" v-model="uusi_raportti.koti"> 
+                                            <input v-if="uusi_raportti.miehet === RADIO_MUU" type="text" class="form-control" id="koti_text" v-model="uusi_raportti.koti" required> 
                                         </transition>
                                     </div>
                                     <div class="col-xs-3">
                                         <label for="vieras">Vierasjoukkue</label>
+                                        <template v-if="jos">(valittu: {{uusi_raportti.vieras}})</template>
                                         <transition name="fade">
-                                            <select v-if="uusi_raportti.miehet !== RADIO_MUU" class="form-control" id="vieras" v-model="uusi_raportti.vieras">
+                                            <select v-if="uusi_raportti.miehet !== RADIO_MUU" class="form-control" id="vieras" v-model="uusi_raportti.vieras" required>
                                                 <option disabled value="-1">Valitse vierasjoukkue</option>
                                                 <option v-for="joukkue in joukkueet" :value="joukkue">{{joukkue}}</option>
                                             </select>
-                                            <input v-if="uusi_raportti.miehet === RADIO_MUU" type="text" class="form-control" id="vieras_text" v-model="uusi_raportti.vieras"> 
+                                            <input v-if="uusi_raportti.miehet === RADIO_MUU" type="text" class="form-control" id="vieras_text" v-model="uusi_raportti.vieras" required> 
                                         </transition>
                                     </div>
                                 </div>
@@ -231,7 +233,7 @@
                                 <div class="row">
                                     <div class="col-xs-4">
                                         <label for="pt">Päätuomari</label> <template v-if="jos">(valittu: {{uusi_raportti.pt_id}})</template>
-                                        <select class="form-control" id="pt" v-model="uusi_raportti.pt_id" @change="ptChanged()">
+                                        <select class="form-control" id="pt" v-model="uusi_raportti.pt_id" @change="ptChanged()" required>
                                             <option disabled value="-1">Valitse PT</option>
                                             <option v-for="tuomari in tuomarit" :value="tuomari.id">{{tuomari.sukunimi}} {{tuomari.etunimi}}</option>
                                         </select>
@@ -241,7 +243,7 @@
                                 <div class="row">
                                     <div class="col-xs-4">
                                         <label for="vt">Verkkotuomari</label> <template v-if="jos">(valittu: {{uusi_raportti.vt_id}})</template>
-                                        <select class="form-control" id="vt" v-model="uusi_raportti.vt_id" @change="vtChanged()">
+                                        <select class="form-control" id="vt" v-model="uusi_raportti.vt_id" @change="vtChanged()" required>
                                             <option disabled value="-1">Valitse VT</option>
                                             <option v-for="tuomari in tuomarit" :value="tuomari.id">{{tuomari.sukunimi}} {{tuomari.etunimi}}</option>
                                         </select>

@@ -1,0 +1,88 @@
+<!doctype html>
+
+<html lang="fi">
+
+<head>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <LINK REL="SHORTCUT ICON" HREF="http://www.lentopalloerotuomarit.fi/tuomaritarkkailu/favicon.ico" />
+    
+    <title>Lokiluki</title>
+    <meta name="description" content="Tarkkailuraportit">
+    <meta name="author" content="Jori Ostrovskij">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/toastr.min.css">
+    <link rel="stylesheet" href="css/pikaday.css">
+
+    <script src="js/lib/jquery-3.1.1.js"></script>
+    <script src="js/lib/moment.js"></script>
+    <script src="js/lib/pikaday.js"></script>
+	<script src="js/lib/bootstrap.min.js"></script>
+	<script src="js/lib/toastr.min.js"></script>
+    <script src="js/lib/vue.js"></script>
+
+
+    <script>
+
+    $(document).ready(function(){
+
+        let arr = [];
+
+        let app="";
+
+        var initApp = function(){
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    data: arr,
+                },
+                methods: {
+
+                }
+            });
+        };
+
+        $.ajax({
+            url: "./api/log/log.json",
+            dataType: "text",
+            success: function (data){
+                data = data.substring(0, data.length-2);
+                arr = JSON.parse("[" + data + "]");
+
+                initApp();                
+            },
+        });
+    });
+
+    
+    </script>
+</head>
+
+<body>
+    <div id="app">
+        <table class="table table-bordered">
+            <tr>
+                <th>Date</th>
+                <th>Name</th>
+                <th>Role</th>
+                <th>Ip</th>
+                <th>Browser</th>
+                <th>Msg</th>
+            </tr>
+            <tr v-for="r in data">
+                <td>{{r.date}}</td>                
+                <td>{{r.name}}</td>                
+                <td>{{r.role}}</td>                
+                <td>{{r.ip}}</td>                
+                <td>{{r.browser}}</td>                
+                <td>{{r.msg}}</td>                
+            </tr>
+        </table>
+
+    </div>
+</body>
+
+</html>

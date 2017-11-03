@@ -451,10 +451,13 @@ Vue.component('vue-edellinen-label', {
 
 Vue.component('vue-radio-miehet', {
     template: `
-    <div>
-        <div> <label class="radio-inline"><input id="miehet" class="radio-inline" @change="onInput()" required type="radio" :name="radioname" value=RADIO_MIEHET>Miehet</label>   </div>
-        <div> <label class="radio-inline"><input id="naiset" class="radio-inline" @change="onInput()" required type="radio" :name="radioname" value=RADIO_NAISET>Naiset</label>   </div>
-        <div> <label class="radio-inline"><input id="muu"    class="radio-inline" @change="onInput()" required type="radio" :name="radioname" value=RADIO_MUU>Muu</label>         </div>
+    <div style="margin-bottom: 10px;">
+        <label>Sarja</label><br>
+        <div class="btn-group">
+            <button type="button" :class="luokka.miehet" @click="select(RADIO_MIEHET)">Miehet</button>
+            <button type="button" :class="luokka.naiset" @click="select(RADIO_NAISET)">Naiset</button>
+            <button type="button" :class="luokka.muu"    @click="select(RADIO_MUU)">Muu</button>
+        </div>
     </div>
     `,
     props: ['raportti', 'jos'],
@@ -462,38 +465,104 @@ Vue.component('vue-radio-miehet', {
         return {
             randomId: this._uid,
             initialRaportti: this.raportti,
-            valittu: 0,
-            radioname: "optMiehet",
+            valittu: null,
             inputPlaceholder: "",
+            RADIO_MIEHET: RADIO_MIEHET,
+            RADIO_NAISET: RADIO_NAISET,
+            RADIO_MUU: RADIO_MUU,
         }
     },
     methods: {
-        onInput: function () {
-            let val = $('input[name=' + this.radioname + ']:checked').val();
-            val = eval(val);
+        select(val){
             this.raportti.miehet = val;
-            this.valittu = val;
         },
     },
-    created: function(){
-        let self=this;
-        setTimeout(function(){
-            let $radios = $('input[name=' + self.radioname + ']');
-            let radios = $.makeArray($radios);
-            for(let i=0;i<radios.length;++i){
-                let radio = radios[i];
-                if(radio.value == RADIO_MIEHET && self.initialRaportti.miehet == RADIO_MIEHET){
-                    $(radio).prop("checked", true);
-                }
-                if(radio.value == RADIO_NAISET && !self.initialRaportti.miehet == RADIO_NAISET){
-                    $(radio).prop("checked", true);
-                }
-                if(radio.value == RADIO_MUU && !self.initialRaportti.miehet == RADIO_MUU){
-                    $(radio).prop("checked", true);
-                }
-            }
-        }, 10);
-    }
+    computed: {
+        luokka(){
+            let miehet=false;
+            let naiset = false;
+            let muu = false;
+            if(this.raportti.miehet == RADIO_MIEHET) miehet = true;
+            if(this.raportti.miehet == RADIO_NAISET) naiset = true;
+            if(this.raportti.miehet == RADIO_MUU) muu = true;
+
+            let ret = {
+                miehet: {
+                    'btn': true,
+                    'btn-default': !miehet,
+                    'btn-primary': miehet,
+                },
+                naiset: {
+                    'btn': true,
+                    'btn-default': !naiset,
+                    'btn-primary': naiset,
+                },
+                muu: {
+                    'btn': true,
+                    'btn-default': !muu,
+                    'btn-primary': muu,
+                },
+            };
+            return ret;
+        },
+    },
+});
+Vue.component('vue-vaikeusaste', {
+    template: `
+    <div style="margin-bottom: 10px;">
+        <label>Ottelun vaikeusaste</label><br>
+        <div class="btn-group">
+            <button type="button" :class="luokka.helppo" @click="select(HELPPO)">Helppo</button>
+            <button type="button" :class="luokka.normaali" @click="select(NORMAALI)">Normaali</button>
+            <button type="button" :class="luokka.vaikea"    @click="select(VAIKEA)">Vaikea</button>
+        </div>
+    </div>
+    `,
+    props: ['raportti', 'jos'],
+    data: function () {
+        return {
+            randomId: this._uid,
+            initialRaportti: this.raportti,
+            inputPlaceholder: "",
+            HELPPO: HELPPO,
+            VAIKEA: VAIKEA,
+            NORMAALI: NORMAALI,
+        }
+    },
+    methods: {
+        select(val){
+            this.raportti.vaikeus = val;
+        },
+    },
+    computed: {
+        luokka(){
+            let helppo=false;
+            let vaikea = false;
+            let normaali = false;
+            if(this.raportti.vaikeus == HELPPO) helppo = true;
+            if(this.raportti.vaikeus == VAIKEA) vaikea = true;
+            if(this.raportti.vaikeus == NORMAALI) normaali = true;
+
+            let ret = {
+                helppo: {
+                    'btn': true,
+                    'btn-default': !helppo,
+                    'btn-primary': helppo,
+                },
+                vaikea: {
+                    'btn': true,
+                    'btn-default': !vaikea,
+                    'btn-primary': vaikea,
+                },
+                normaali: {
+                    'btn': true,
+                    'btn-default': !normaali,
+                    'btn-primary': normaali,
+                },
+            };
+            return ret;
+        },
+    },
 });
 
 Vue.component('vue-rivi-edit', {

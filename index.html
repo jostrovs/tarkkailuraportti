@@ -205,6 +205,7 @@
                                         </transition>
                                     </div>
                                 </div>
+                                <br>
                                 <div class="row">
                                     <div class="col-xs-2">
                                         <label for="tulos">Tulos</label>
@@ -236,7 +237,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                    
+                                <br>    
                                 <div class="row">
                                     <div class="col-xs-4">
                                         <label for="vt">Verkkotuomari</label> <template v-if="jos">(valittu: {{uusi_raportti.vt_id}})</template>
@@ -246,7 +247,7 @@
                                         </select>
                                     </div>
                                 </div>
-
+                                <br>    
                                 <div class="row">
                                     <div class="col-xs-4">
                                         <label for="tark">Tarkkailija</label> <template v-if="jos">(valittu: {{uusi_raportti.tark_id}})</template>
@@ -254,14 +255,7 @@
                                     </div>
                                 </div>
 
-                                <label>Ottelun vaikeusaste</label>
-                                <div class="row">
-                                    <div class="col-xs-5">
-                                        <label class="radio-inline"><input id="helppo" type="radio" required type="radio" name="vaikeus" value="1">Helppo</label>
-                                        <label class="radio-inline"><input id="normaali" type="radio" required type="radio" name="vaikeus" value="2">Normaali</label>
-                                        <label class="radio-inline"><input id="vaikea" type="radio" required type="radio" name="vaikeus" value="3">Vaikea</label>
-                                    </div>
-                                </div>                    
+                                <vue-vaikeusaste :raportti="uusi_raportti" :jos="jos"></vue-vaikeusaste>
                             </div>
                         </div>
                         

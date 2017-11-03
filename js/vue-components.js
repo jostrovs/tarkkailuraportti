@@ -4,7 +4,7 @@ Vue.component('vue-jos-grid', {
     template: `
     <div class="jos-table-container" style="padding: 5px;">   
 
-    <table :class="options.luokka" id="jos-grid" style="display: block">                                                                               
+    <table :class="options.luokka" id="jos-grid" style="display: block; cursor: pointer;">                                                                               
         <thead>                                                                                                   
             <tr>                                                                                                  
                 <th v-for="column in shownColumns" :class="{active: sortCol == column.key}" :width="column.width">
@@ -279,8 +279,8 @@ Vue.component('vue-kokonaisarvio', {
             <div class="panel-body" style="font-size: 18px;">                                                          
                 <div class="row">                                                                              
                     <div class="col-xs-2"></div>                                                                    
-                    <div class="col-xs-4" style="text-align: center; font-size: 24px;">Päätuomari</div>                  
-                    <div class="col-xs-4" style="text-align: center; font-size: 24px;">Verkkotuomari</div>                  
+                    <div class="col-xs-4" style="text-align: center;">Päätuomari {{raportti.pt_nimi}}</div>                  
+                    <div class="col-xs-4" style="text-align: center;">Verkkotuomari {{raportti.vt_nimi}}</div>                  
                 </div>                                                                                                  
                 <div class="row">                                                                                        
                     <div class="col-xs-2" style="text-align: right;">Pisteet</div>                            
@@ -452,9 +452,9 @@ Vue.component('vue-edellinen-label', {
 Vue.component('vue-radio-miehet', {
     template: `
     <div>
-        <div> <label class="radio-inline"><input id="miehet" @change="onInput()" required type="radio" :name="radioname" value=RADIO_MIEHET>Miehet</label>   </div>
-        <div> <label class="radio-inline"><input id="naiset" @change="onInput()" required type="radio" :name="radioname" value=RADIO_NAISET>Naiset</label>   </div>
-        <div> <label class="radio-inline"><input id="muu"    @change="onInput()" required type="radio" :name="radioname" value=RADIO_MUU>Muu</label>         </div>
+        <div> <label class="radio-inline"><input id="miehet" class="radio-inline" @change="onInput()" required type="radio" :name="radioname" value=RADIO_MIEHET>Miehet</label>   </div>
+        <div> <label class="radio-inline"><input id="naiset" class="radio-inline" @change="onInput()" required type="radio" :name="radioname" value=RADIO_NAISET>Naiset</label>   </div>
+        <div> <label class="radio-inline"><input id="muu"    class="radio-inline" @change="onInput()" required type="radio" :name="radioname" value=RADIO_MUU>Muu</label>         </div>
     </div>
     `,
     props: ['raportti', 'jos'],
@@ -735,29 +735,34 @@ Vue.component('vue-raportti', {
         <h1>{{title}} <button class="btn" @click="sulje">Sulje</button></h1>                                                                                                                            
         <span v-if="jos">Id: {{raportti.id}}</span>                                                                                                          
                                                                                                                 
-        <h3>Ottelun tiedot:</h3>                                                                                                                                     
-        <p  >Pvm: {{pvm}}<br>                                                                                                                       
-            Paikka: {{raportti.paikka}}<br>                                                                                                                  
-            Ottelu: {{raportti.koti}}-{{raportti.vieras}},                                                                                                   
-            <span v-if="raportti.miehet==\'1\'">Miehet</span>                                                                                                
-            <span v-if="raportti.miehet==\'2\'">Naiset</span>                                                                                                
-            <span v-if="raportti.miehet==\'3\'">Muu</span><br>                                                                                               
-            Tulos: {{raportti.tulos}}<br>                                                                                                                    
-            Kesto: {{raportti.kesto_h}} h {{raportti.kesto_min}} min<br>                                                                                     
-            Vaikeusaste: <span v-if="raportti.vaikeus==1">Helppo</span>                                                                                      
-                            <span v-if="raportti.vaikeus==2">Normaali</span>                                                                      
-                            <span v-if="raportti.vaikeus==4">Vaikea</span>                                                                        
-        </p>                                                                                                                                      
-        <h3>Tuomarit:</h3>                                                                                                                        
-        <p>PT: {{raportti.pt_nimi}}<br>                                                                                                           
-        VT: {{raportti.vt_nimi}}<br>                                                                                                              
-        Tarkkailija: {{raportti.tark_nimi}}</p>                                                                                                   
-                                                                                                            
-        <vue-kokonaisarvio :raportti="raportti"></vue-kokonaisarvio>                                                                              
-                                                                                                            
-        <h2>Päätuomari {{raportti.pt_nimi}}</h2>                                                                                                  
-        <p>Pisteet: {{raportti.pt_score}}</p>                                                                                                     
         <div class="panel-group">                                                                                                                 
+            <div class="panel panel-primary">                                                                                         
+                <div class="panel-heading">Ottelun tiedot</div>                                                    
+                <div class="panel-body">                                                                                              
+                    Pvm: {{pvm}}<br>                                                                                                                       
+                    Paikka: {{raportti.paikka}}<br>                                                                                                                  
+                    Ottelu: {{raportti.koti}}-{{raportti.vieras}},                                                                                                   
+                    <span v-if="raportti.miehet==\'1\'">Miehet</span>                                                                                                
+                    <span v-if="raportti.miehet==\'2\'">Naiset</span>                                                                                                
+                    <span v-if="raportti.miehet==\'3\'">Muu</span><br>                                                                                               
+                    Tulos: {{raportti.tulos}}<br>                                                                                                                    
+                    Kesto: {{raportti.kesto_h}} h {{raportti.kesto_min}} min<br>                                                                                     
+                    Vaikeusaste: <span v-if="raportti.vaikeus==1">Helppo</span>                                                                                      
+                                    <span v-if="raportti.vaikeus==2">Normaali</span>                                                                      
+                                    <span v-if="raportti.vaikeus==4">Vaikea</span>                                                                        
+
+                    <br><br>
+                    Päätuomari: {{raportti.pt_nimi}}<br>                                                                                                           
+                    Verkkotuomari: {{raportti.vt_nimi}}<br>                                                                                                              
+                    Tarkkailija: {{raportti.tark_nimi}}
+                </div>
+            </div>
+            
+            <br>
+            
+            <vue-kokonaisarvio :raportti="raportti"></vue-kokonaisarvio>                                                                              
+                                                                                                                
+            <h2>Päätuomari {{raportti.pt_nimi}} <small>Pisteet: {{raportti.pt_score}}</small></h2>                                                                                                  
                                                                                                     
             <vue-arvosanojen-selitykset></vue-arvosanojen-selitykset>                                                                 
                                                                                                     
@@ -790,8 +795,8 @@ Vue.component('vue-raportti', {
             </div>                                                                                                                                
         </div>                                                                                                                                         
                                                                                                         
-        <h2>Verkkotuomari {{raportti.vt_nimi}}</h2>                                                                                                    
-        <p>Pisteet: {{raportti.vt_score}}</p>                                                                                                          
+        <h2>Verkkotuomari {{raportti.vt_nimi}} <small>Pisteet: {{raportti.vt_score}}</small></h2>                                                                                                    
+        
         <div class="panel-group">                                                                                                                      
                                                                                                         
             <vue-arvosanojen-selitykset></vue-arvosanojen-selitykset>                                                                                  
@@ -967,8 +972,8 @@ Vue.component('vue-user', {
 
 Vue.component('vue-grid-filters', {
     template:` 
-    <div v-if="jos" style="margin-left: 5px; margin-top: 5px;">
-        <div class="btn-group">                                                                                                                                                                             
+    <div v-if="jos" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px; float: right;">
+        <div class="btn-group" style="margin-right: 15px;">                                                                                                                                                                             
             <button type="button" @click="dateFilter('ALL')" :class="classes.all">Kaikki</button>                                                                                                                                                                                   
             <button type="button" @click="dateFilter('MONTH')" :class="classes.kk">Kuukausi</button>                                                                                                                                                                                   
             <button type="button" @click="dateFilter('WEEK')" :class="classes.vko">Viikko</button>                                                                                                                                                                                   
@@ -1000,27 +1005,32 @@ Vue.component('vue-grid-filters', {
                     'btn': true,
                     'btn-default': !all,
                     'btn-primary': all,
+                    'btn-xs': true,
                 },
                 kk: {
                     'btn': true,
                     'btn-default': !month,
                     'btn-primary': month,
+                    'btn-xs': true,
                 },
                 vko: {
                     'btn': true,
                     'btn-default': !week,
                     'btn-primary': week,
+                    'btn-xs': true,
                 },
     
                 omat: {
                     'btn': true,
                     'btn-default': !my,
                     'btn-primary': my,
+                    'btn-xs': true,
                 },
                 kaikkien: {
                     'btn': true,
                     'btn-default': my,
                     'btn-primary': !my,
+                    'btn-xs': true,
                 },
             };
             return ret;

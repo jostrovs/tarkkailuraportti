@@ -331,8 +331,9 @@ th, td {
             border-bottom: 1px solid #ddd;
         }
         th {
-			background: #337ab7;
-			color: white;
+			background: #cde;
+			color: black;
+			font-weight: 125%;
         }
 
         th > a { color: white; }

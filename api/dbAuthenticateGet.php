@@ -32,7 +32,7 @@
     }
     $sqli->close();
     if($rooli < 0){
-        jos_log($etunimi . " " . $sukunimi . " ei autentikoitu GET, rooli: " . $rooli . "     browser: " . $browser, JOS_LOG_IMPORTANT);
+        jos_log($etunimi . " " . $sukunimi . " ei autentikoitu GET, rooli: " . $rooli . "     browser: " . $browser . "   token: " . $token, JOS_LOG_IMPORTANT);
         exitWithError(); // Hyväksytään kaikki roolit, kunhan käyttäjä ylipäätään löytyy.
     } 
 

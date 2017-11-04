@@ -28,18 +28,17 @@ function jos_log($line, $level=JOS_LOG_NORMAL){
     global $jos_log_level, $etunimi, $sukunimi, $rooli, $browser;
     if($level < $jos_log_level) return;
  
-    $all = "{'date':'datea', 'name':'etu suku', 'role':'rooli', 'ip':'ip', 'browser':'browser', 'msg':'messu line', 'level':' leveli'},\n";
 
-    $date = date('Y.m.d h:i:sa');
+    $date = date(DATE_ISO8601);
     $ip = getIp();
     $myfile = fopen("./log/log.txt", "a") or die("Unable to open file!");
     $myfile2 = fopen("./log/log.json", "a") or die("Unable to open file!");
     fwrite($myfile, $date . " - " . $ip . " - " . $line . "\n");
     fclose($myfile);
 
-    fwrite($myfile2, "{'date':'" . $date  . "', 'name':'" . $etunimi . " " . $sukunimi . "', " .
-                      "'role':'" . $rooli . "', 'ip':'"   . $ip . "', 'browser':'" . $browser . "', " .
-                      "'msg':'" . $line . "', 'level':'" . $level . "'},\n");
+    fwrite($myfile2, "{\"date\":\"" . $date  . "\", \"name\":\"" . $etunimi . " " . $sukunimi . "\", " .
+                      "\"role\":\"" . $rooli . "\", \"ip\":\""   . $ip . "\", \"browser\":\"" . $browser . "\", " .
+                      "\"msg\":\"" . $line . "\", \"level\":\"" . $level . "\"},\n");
     fclose($myfile2);
 }
 

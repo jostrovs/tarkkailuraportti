@@ -99,7 +99,7 @@ if($cmd != API_SAVE_EMAIL){
 }
 
 if($cmd == API_HAE_RAPORTIN_RIVIT){
-    jos_log($etunimi . " " . $sukunimi . " pyysi raporttia " . $arg1, JOS_LOG_NORMAL);    
+    jos_log($etunimi . " " . $sukunimi . " pyysi raporttia " . $arg1 . " " . $json['koti'] . "-" . $json['vieras'], JOS_LOG_NORMAL);    
 }
 
 $data['data'] = $json;

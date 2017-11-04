@@ -16,6 +16,7 @@
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/toastr.min.css">
     <link rel="stylesheet" href="css/pikaday.css">
+    <link rel="stylesheet" href="css/log.css">
 
     <script src="js/lib/jquery-3.1.1.js"></script>
     <script src="js/lib/moment.js"></script>
@@ -23,28 +24,24 @@
 	<script src="js/lib/bootstrap.min.js"></script>
 	<script src="js/lib/toastr.min.js"></script>
     <script src="js/lib/vue.js"></script>
+    <script src="js/vue-components.js"></script>
 
 
     <script>
+    var EVENT_RAPORTIT_UPDATE="";
+    var EVENT_RAPORTTI_VALITTU = "EVENT_RAPORTTI_VALITTU";
+    var bus = new Vue({
+        methods: {
+            on: function(event, callback){
+                this.$on(event, callback);
+            },
+            emit: function(event, payload){
+                this.$emit(event, payload);
+            }
+        }
+    });
 
-    $(document).ready(function(){
-
-        let arr = [];
-
-        let app="";
-
-        var initApp = function(){
-            var app = new Vue({
-                el: '#app',
-                data: {
-                    data: arr,
-                },
-                methods: {
-
-                }
-            });
-        };
-
+    var fetchData = function(){
         $.ajax({
             url: "./api/log/log.json",
             dataType: "text",
@@ -52,35 +49,45 @@
                 data = data.substring(0, data.length-2);
                 arr = JSON.parse("[" + data + "]");
 
-                initApp();                
+                for(let i=0;i<arr.length;++i) arr[i].id=i+1;
+                arr.reverse();
+                initApp(arr);
             },
         });
-    });
+    };
 
+    var initApp = function(data_in){
+        var app = new Vue({
+            el: '#app',
+            data: {
+                data: data_in,
+                options: 
+                { 
+                    columns: [
+                        { title: 'Date', key: 'date', width: 150, template: function(row){ return moment(row['date']).format("YYYY-MM-DD HH:mm:ss")}},
+                        { title: 'Level', key: 'level', width: 30},
+                        { title: 'Name', width: 180, key: 'name'},
+                        { title: 'Role', width: 2, key: 'role', template: function(row){ return row['role']} },
+                        { title: 'Ip', width: 150, key: 'ip'},
+                        { title: 'Browser', key: 'browser', width: 120 },
+                        { title: 'Msg', key: 'msg' },
+                        { title: 'id', key: 'id', hidden: true },
+                    ], 
+                }, 
+            },
+        });
+
+    }
+
+    $(document).ready(fetchData);
     
     </script>
 </head>
 
 <body>
     <div id="app">
-        <table class="table table-bordered">
-            <tr>
-                <th>Date</th>
-                <th>Name</th>
-                <th>Role</th>
-                <th>Ip</th>
-                <th>Browser</th>
-                <th>Msg</th>
-            </tr>
-            <tr v-for="r in data">
-                <td>{{r.date}}</td>                
-                <td>{{r.name}}</td>                
-                <td>{{r.role}}</td>                
-                <td>{{r.ip}}</td>                
-                <td>{{r.browser}}</td>                
-                <td>{{r.msg}}</td>                
-            </tr>
-        </table>
+
+        <vue-jos-grid :options="options" :data="data" jos="false" date_filter="ALL" user_filter="ALL"></vue-jos-grid>
 
     </div>
 </body>

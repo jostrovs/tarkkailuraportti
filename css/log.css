@@ -5,7 +5,7 @@
 .table {
     border-collapse: collapse;
     border: 1px solid #ddd;
-    min-width: 100%;
+	min-width: 100%;
 }
 
 @media screen and (max-width: 1200px){
@@ -34,6 +34,7 @@
   /******** josGrid  ****/
 
 .jos-table {
+	white-space: nowrap;
     border-collapse: collapse;
     border: 1px solid #ddd;
     min-width: 100%;
@@ -71,84 +72,4 @@ th, td {
 }      
 
 /******** josGrid END ****/
-
-/* Pika */
-.pika-lendar  th {
-	background-color: #eef;
-
-}
-
-#jos-grid
-{
-	/* max-height: 700px; */
-	/* height: 250px; */
-	overflow-y: auto;
-}
-
-.fade-enter-active, .fade-leave-active {
-	transition: opacity .5s
-  }
-  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-	opacity: 0
-  }
-
-
-/******** PRINT **************************/
-@media print{
-#app {
-	margin-left: 0%;
-	margin-right: 0%;
-}
-#navbar {
-	display: none;
-}
-.no-print {
-	display: none;
-}
-.print-label {
-	margin-left: 25px;
-	display: inline-block;
-	width: 120px;
-	font-weight: bold;
-}
-.print-value {
-	display: inline-block;
-	font-weight: normal;
-}
-
-.print-col-1 {
-	width: 20%;
-	display: inline-block;
-	text-align: center;
-    vertical-align: top;
-    padding-right: 20px;
-
-	/* border: 1px dashed green; */
-}
-.print-col-2 {
-	width: 37%;
-	display: inline-block;
-	text-align: center;
-    vertical-align: top;
-    padding-right: 20px;
-	
-	/* border: 1px dashed blue; */
-}
-.print-col-3 {
-	width: 37%;
-	display: inline-block;
-	text-align: center;
-    vertical-align: top;
-	
-	/* border: 1px dashed red; */
-}
-.print-col-23 {
-	width: 75%;
-	display: inline-block;
-	text-align: center;
-    vertical-align: top;
-	
-	/* border: 1px dashed red; */
-}
-}
 

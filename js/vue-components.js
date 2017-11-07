@@ -1170,7 +1170,7 @@ Vue.component('vue-login', {
 
 Vue.component('vue-news', {
     template:` 
-    <div v-if="show" style="position: fixed; padding: 20px; background: #fed; border: 2px solid #a33; top: 30px; left: 30px; z-index: 2000; min-width: 500px; max-width: 80%; min-height: 250px;">                                                                                                                                                                             
+    <div v-if="show" style="position: fixed; padding: 20px; background: #def; border: 2px solid #a33; top: 30px; left: 30px; z-index: 2000; min-width: 500px; max-width: 80%; min-height: 250px;">                                                                                                                                                                             
         <button class="btn btn-default" style="top: 10px; float: right; color: red;" @click="sulje()">X</button>
         <div style="margin-bottom: 40px">
             <slot>

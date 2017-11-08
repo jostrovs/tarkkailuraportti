@@ -74,6 +74,10 @@
                 arr.reverse();
                 initApp(arr);
             },
+            error: function(){
+                toastr.error("Datan haku epäonnistui. Tiedostoa ei ole?<br><br>Mennään takaisin.");
+                setTimeout(function(){window.history.back()}, 3000);  
+            },
         });
     };
 

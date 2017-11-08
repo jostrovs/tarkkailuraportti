@@ -24,12 +24,11 @@
 	<script src="js/lib/bootstrap.min.js"></script>
 	<script src="js/lib/toastr.min.js"></script>
     <script src="js/lib/vue.js"></script>
+    <script src="js/classes.js"></script>
     <script src="js/vue-components.js"></script>
 
 
     <script>
-    var EVENT_RAPORTIT_UPDATE="";
-    var EVENT_RAPORTTI_VALITTU = "EVENT_RAPORTTI_VALITTU";
     var bus = new Vue({
         methods: {
             on: function(event, callback){
@@ -41,9 +40,31 @@
         }
     });
 
+    var qs = getQueryString();
+    var loc = location;
+
+    var getLogMoment = function(){
+        let year = getQueryString()['year'];
+        let month = getQueryString()['month'];
+
+        let mo = moment();
+        if(typeof(year) !== 'undefined') mo.year(year);
+        if(typeof(month) !== 'undefined') mo.month(month-1);
+
+        return mo;
+    }
+    
+    var getFileName = function(m=null){
+        let mo = getLogMoment();
+        let year = mo.format("YYYY");
+        let month = mo.format("MM");
+
+        return `./api/log/log_${year}_${month}.json`;
+    }
+
     var fetchData = function(){
         $.ajax({
-            url: "./api/log/log.json",
+            url: getFileName(),
             dataType: "text",
             success: function (data){
                 data = data.substring(0, data.length-2);
@@ -60,6 +81,9 @@
         var app = new Vue({
             el: '#app',
             data: {
+                prevTitle: getLogMoment().subtract(1, 'month').format("MMMM YYYY"),
+                currTitle: getLogMoment().format("MMMM YYYY"),
+                nextTitle: getLogMoment().add(1, 'month').format("MMMM YYYY"),
                 data: data_in,
                 options: 
                 { 
@@ -75,6 +99,18 @@
                     ], 
                 }, 
             },
+            methods: {
+                next(){
+                    let m = getLogMoment().add(1, 'month');
+                    let url = location.origin + location.pathname + "?year=" + m.format("YYYY") + "&month=" + m.format("MM");
+                    location.assign(url);
+                },
+                prev(){
+                    let m = getLogMoment().subtract(1, 'month');
+                    let url = location.origin + location.pathname + "?year=" + m.format("YYYY") + "&month=" + m.format("MM");
+                    location.assign(url);
+                },
+            }
         });
 
     }
@@ -86,6 +122,10 @@
 
 <body>
     <div id="app">
+
+        <button class="btn btn-lg btn-default" @click="prev()">{{prevTitle}}</button>
+        <button class="btn btn-lg btn-primary">{{currTitle}}</button>
+        <button class="btn btn-lg btn-default" @click="next()">{{nextTitle}}</button>
 
         <vue-jos-grid :options="options" :data="data" jos="false" date_filter="ALL" user_filter="ALL"></vue-jos-grid>
 

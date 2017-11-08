@@ -1,6 +1,7 @@
 phpdebug/*
 .vscode/ftp-sync*
 api/dbConfig.php
+api/credentials.php
 api/log/*
 node_modules/*
 dist/*

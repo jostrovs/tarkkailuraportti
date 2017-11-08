@@ -2,6 +2,7 @@
 
     $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
+    require_once('credentials.php');
     require_once('log.php');
     require_once('dbConfig.php');
 
@@ -25,7 +26,8 @@
     }
 
     function emailNotify($tark, $ottelu, $to, $token, $nimi){
-        
+        global $mailUsername, $mailPassword; // Nämä on pakko olla
+
         //$to = "jori.ostrovskij@gmail.com";
         
         $subject = "Uusi tarkkailuraportti";
@@ -47,11 +49,11 @@
         $mail->Host = "mail.zoner.fi";        // sets Gmail as the SMTP server
         $mail->Port = 587;                     // set the SMTP port for the GMAIL 
          
-        $mail->Username = "jori@lentopalloerotuomarit.fi";  // Gmail username
-        $mail->Password = "kaksoiskosketus";      // Gmail password
+        $mail->Username = $mailUsername;
+        $mail->Password = $mailPassword;
          
         $mail->CharSet = 'utf-8';
-        $mail->SetFrom ('jori@lentopalloerotuomarit.fi', 'Jori');
+        $mail->SetFrom ('tarkkailu@lentopalloerotuomarit.fi', 'Tarkkailuraportit');
         $mail->AddBCC ( 'jostrovs@gmail.com', 'Jori'); 
         $mail->Subject = $subject;
         $mail->ContentType = 'text/plain'; 

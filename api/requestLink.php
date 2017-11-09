@@ -3,7 +3,7 @@
 $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
 require_once('log.php');
-
+require_once('credentials.php');
 
 
 require 'dbConfig.php';
@@ -11,6 +11,7 @@ require 'dbConfig.php';
 require_once('./PHPMailer/PHPMailerAutoload.php');
 
 function sendEmail($to, $token, $name){
+    global $mailUsername, $mailPassword; // Nämä on pakko olla
     $subject = "Kirjautumislinkki tarkkailuraporttisivulle";
     $body = "Hei!\r\nTässä on kirjautumislinkkisi tarkkailuraporttisivulle:\r\nhttp://www.lentopalloerotuomarit.fi/tuomaritarkkailu/?token=" . $token . "\r\n\r\nÄlä vastaa tähän viestiin, vaan ongelmatapauksissa ota yhteyttä jostrovs@gmail.com.\r\n-Jori\r\n";
      
@@ -26,11 +27,11 @@ function sendEmail($to, $token, $name){
     $mail->Host = "mail.zoner.fi";        // sets Gmail as the SMTP server
     $mail->Port = 587;                     // set the SMTP port for the GMAIL 
      
-    $mail->Username = "jori@lentopalloerotuomarit.fi";  // Gmail username
-    $mail->Password = "kaksoiskosketus";      // Gmail password
-     
+    $mail->Username = $mailUsername;
+    $mail->Password = $mailPassword;
+ 
     $mail->CharSet = 'utf-8';
-    $mail->SetFrom ('jori@lentopalloerotuomarit.fi', 'Jori');
+    $mail->SetFrom ('tarkkailu@lentopalloerotuomarit.fi', 'Jori');
     $mail->AddBCC ( 'jostrovs@gmail.com', 'Jori'); 
     $mail->Subject = $subject;
     $mail->ContentType = 'text/plain'; 

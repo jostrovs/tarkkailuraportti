@@ -30,11 +30,14 @@ function jos_log($line, $level=JOS_LOG_NORMAL){
  
 
     $date = date(DATE_ISO8601);
+
+    $filename = "./log/log_" . date("Y_m") . ".json";
+
     $ip = getIp();
-    $myfile = fopen("./log/log.txt", "a") or die("Unable to open file!");
-    $myfile2 = fopen("./log/log.json", "a") or die("Unable to open file!");
-    fwrite($myfile, $date . " - " . $ip . " - " . $line . "\n");
-    fclose($myfile);
+    //$myfile = fopen("./log/log.txt", "a") or die("Unable to open file!");
+    $myfile2 = fopen($filename, "a") or die("Unable to open file!");
+    //fwrite($myfile, $date . " - " . $ip . " - " . $line . "\n");
+    //fclose($myfile);
 
     fwrite($myfile2, "{\"date\":\"" . $date  . "\", \"name\":\"" . $etunimi . " " . $sukunimi . "\", " .
                       "\"role\":\"" . $rooli . "\", \"ip\":\""   . $ip . "\", \"browser\":\"" . $browser . "\", " .

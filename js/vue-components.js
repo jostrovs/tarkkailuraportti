@@ -1065,7 +1065,7 @@ Vue.component('vue-user', {
 
 Vue.component('vue-grid-filters', {
     template:` 
-    <div v-if="jos" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px; float: right;">
+    <div style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px; float: right;">
         <div class="btn-group" style="margin-right: 15px;">                                                                                                                                                                             
             <button type="button" @click="dateFilter('ALL')" :class="classes.all">Kaikki</button>                                                                                                                                                                                   
             <button type="button" @click="dateFilter('MONTH')" :class="classes.kk">Kuukausi</button>                                                                                                                                                                                   
@@ -1170,11 +1170,13 @@ Vue.component('vue-login', {
 
 Vue.component('vue-news', {
     template:` 
-    <div v-if="show" style="position: fixed; border: 2px solid #a33; top: 20px; left: 20px; right: 20px; bottom: 20px; z-index: 2000;">                                                                                                                                                                             
-        <button class="btn" style="top: 20px; float: right;" @click="sulje()">X</button>
-        <slot>
-        </slot>         
-        <div>
+    <div v-if="show" style="position: fixed; padding: 20px; background: #def; border: 2px solid #a33; top: 30px; left: 30px; z-index: 2000; min-width: 500px; max-width: 80%; min-height: 250px;">                                                                                                                                                                             
+        <button class="btn btn-default" style="top: 10px; float: right; color: red;" @click="sulje()">X</button>
+        <div style="margin-bottom: 40px">
+            <slot>
+            </slot>
+        </div>         
+        <div style="position: absolute; bottom: 20px; margin-top: 10px;">
             <input type="checkbox" v-model="dontShow"> Älä näytä tätä enää
         </div>
     </div>                                                                                                                                                                            
@@ -1182,21 +1184,33 @@ Vue.component('vue-news', {
     props: ['jos', 'news_moment'],
     data: function(){
         return {
+            suljeHeti: false,
             dontShow: false,
         }
     },
     methods: {
         sulje(){
             if(this.dontShow) localStorage.tark_news = this.news_moment;
+            this.suljeHeti = true;
         }
     },
     computed: {
         show(){
-            if(localStorage.tark_news){
+            if(this.suljeHeti) return false;
+            if(localStorage.tark_news === "undefined") localStorage.tark_news = false;
+            if(localStorage.tark_news && localStorage.tark_news != "false"){
                 let m = moment(localStorage.tark_news);
-                if(m.isBefore(this.news_moment)) return true;
-
-            } return false;
+                // console.log("localStorage: " + m.format("DD.MM.YYYY"));
+                // console.log("News:         " + moment(this.news_moment).format("DD.MM.YYYY"));
+                if(m.isBefore(moment(this.news_moment))){
+                    //console.log("News: true");
+                    return true;
+                } 
+                // console.log("News: false");
+                return false;
+            } 
+            // console.log("News unset: true");
+            
             return true;
         }
     }

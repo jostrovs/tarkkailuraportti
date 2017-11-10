@@ -19,7 +19,7 @@ Vue.component('vue-jos-grid', {
             </tr>                                                                                                 
         </thead>                                                                                                  
         <tbody>                                                                                                   
-            <tr v-for="entry in filteredSortedData" :key="entry.josOrder" @click="rowClick(entry.id)">            
+            <tr v-for="entry in filteredSortedData" :key="entry.josOrder" @click="rowClick(entry)">            
                 <td v-for="column in shownColumns">                                                               
                     <template v-if="column.type == \'text\'">                                                     
                         {{entry[column.key]}}                                                                     
@@ -151,6 +151,7 @@ Vue.component('vue-jos-grid', {
     },
     methods: {
         rowClick: function(row_item){
+            if(this.options.onRowClick) this.options.onRowClick(row_item);
             bus.emit(EVENT_RAPORTTI_VALITTU, row_item)
         },
         

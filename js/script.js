@@ -67,6 +67,10 @@ $(document).ready(function () {
                         component.setData(data);
                     })
                 },
+
+                onRowClick: function(row_item){
+                    bus.emit(EVENT_RAPORTTI_VALITTU, row_item.id)
+                }
             }, 
 
             jos: false, // debug-flägi

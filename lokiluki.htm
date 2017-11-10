@@ -94,13 +94,17 @@
                     columns: [
                         { title: 'Date', key: 'date', width: 150, template: function(row){ return moment(row['date']).format("YYYY-MM-DD HH:mm:ss")}},
                         { title: 'Level', key: 'level', width: 30},
-                        { title: 'Name', width: 180, key: 'name'},
                         { title: 'Role', width: 2, key: 'role', template: function(row){ return row['role']} },
                         { title: 'Ip', width: 150, key: 'ip'},
                         { title: 'Browser', key: 'browser', width: 120 },
+                        { title: 'Name', width: 180, key: 'name'},
                         { title: 'Msg', key: 'msg', width: 500 },
                         { title: 'id', key: 'id', hidden: true },
-                    ], 
+                    ],
+                    initialSort: {
+                        key: 'date',
+                        order: -1,
+                    } 
                 }, 
             },
             methods: {
@@ -131,7 +135,7 @@
         <button class="btn btn-lg btn-primary">{{currTitle}}</button>
         <button class="btn btn-lg btn-default" @click="next()">{{nextTitle}}</button>
 
-        <vue-jos-grid :options="options" :data="data" jos="false" date_filter="ALL" user_filter="ALL"></vue-jos-grid>
+        <vue-jos-grid :options="options" :data="data" jos="false"></vue-jos-grid>
 
     </div>
 </body>

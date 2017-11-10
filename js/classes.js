@@ -7,6 +7,8 @@ if(location.href.indexOf("localhost")>-1){
     REQUEST_LINK = './../api/requestLink.php';
 }
 
+moment.locale("fi");
+
 var BROWSER= (function(){
     var ua= navigator.userAgent, tem,
     M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];

@@ -126,6 +126,18 @@ $(document).ready(function () {
             bus.on(EVENT_DOWNLOAD, this.pdf);
         },
         computed: {
+            viimeisin_raportti: function(){
+                if(this.raportit.length < 1) return "";
+                let ret = [];
+                for(let r of this.raportit) ret.push(r);
+                ret = ret.sort((i1, i2)=>{
+                    return moment(i1.updated).isSameOrAfter(moment(i2.updated)) ? -1:1;
+                });
+
+                let m = moment(ret[0].updated);
+                return "Viimeisin raportti lisätty " + m.format("dd DD.MM.YYYY") + ": " + ret[0].koti + "-" + ret[0].vieras;
+            },
+
             tuomarit: function(){
                 return this.kaikki_tuomarit.filter(function(tuomari){
                     return tuomari.rooli == ROOLI_TUOMARI || tuomari.rooli == ROOLI_TUOMARI_JA_TARKKAILIJA;

@@ -129,6 +129,8 @@
 
                     <div v-if="jos"> Valittu: {{selectedReport}}</div>
 
+                    <div v-if="!selectedReport" style="font-size: 12px">{{viimeisin_raportti}}</div>
+                    
                     <transition name="fade">
                         <div v-if="parseInt(selectedReport,10) > 0">
                             <vue-raportti :raportti="raportti"></vue-raportti>

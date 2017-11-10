@@ -89,11 +89,15 @@ Vue.component('vue-jos-grid', {
             });
         }
 
-        sortIndicators['pvm']=-1;
+        let sortKey = '';
+        if(this.options.initialSort){
+            sortIndicators[this.options.initialSort.key] = this.options.initialSort.order; //sortIndicators['pvm']=-1;
+            sortKey = this.options.initialSort.key;
+        }
 
         return {
             localData: localData,
-            sortCol: 'pvm',
+            sortCol:  sortKey,
             sortOrder: -1,
             columns: columns,
             sortIndicators: sortIndicators,
@@ -152,7 +156,6 @@ Vue.component('vue-jos-grid', {
     methods: {
         rowClick: function(row_item){
             if(this.options.onRowClick) this.options.onRowClick(row_item);
-            bus.emit(EVENT_RAPORTTI_VALITTU, row_item)
         },
         
         setData: function(data){

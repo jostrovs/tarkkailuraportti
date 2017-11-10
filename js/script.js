@@ -59,6 +59,11 @@ $(document).ready(function () {
                     { title: 'Tarkkailija', width: 230, key: 'tark_nimi'},
                     { title: 'id', key: 'id', hidden: true },
                 ],
+               
+                initialSort: {
+                    key: "pvm",
+                    order: -1,
+                },
                 
                 externalFilters: [], // Aseta uudestaan created-osuudessa; this-viittaukset toimivat vasta silloin.
 
@@ -121,18 +126,6 @@ $(document).ready(function () {
             bus.on(EVENT_DOWNLOAD, this.pdf);
         },
         computed: {
-            gridin_raportit: function(){
-                let ret = this.raportit.sort(function(r1, r2){
-                    let m1 = moment(r1.pvm);
-                    let m2 = moment(r2.pvm);
-                    let r = m1.isSameOrBefore(m2);
-                    //console.log(m1.format("DD.MM.YYYY") + " <-> " + m2.format("DD.MM.YYYY") + "    " + r);
-                    return r;
-                });
-
-                return ret;
-            },
-
             tuomarit: function(){
                 return this.kaikki_tuomarit.filter(function(tuomari){
                     return tuomari.rooli == ROOLI_TUOMARI || tuomari.rooli == ROOLI_TUOMARI_JA_TARKKAILIJA;

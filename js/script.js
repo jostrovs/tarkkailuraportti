@@ -60,6 +60,9 @@ $(document).ready(function () {
                     { title: 'id', key: 'id', hidden: true },
                 ],
                
+                generalFilter: true,
+                columnFilters: true,
+
                 initialSort: {
                     key: "pvm",
                     order: -1,

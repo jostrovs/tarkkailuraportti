@@ -2,8 +2,9 @@
 
 Vue.component('vue-jos-grid', {
     template: `
-    <div class="jos-table-container" style="padding: 5px;">   
+    <div class="jos-table-container" style="padding: 0px;">   
 
+    <input v-if="options.generalFilter" style="margin-top: 16px;" type="text" v-model="general_filter" placeholder="Hae">
     <table :class="options.luokka" id="jos-grid" style="display: block; cursor: pointer;">                                                                               
         <thead>                                                                                                   
             <tr>                                                                                                  
@@ -12,7 +13,7 @@ Vue.component('vue-jos-grid', {
                     <span v-if="sortIndicators[column.key]==1" class="glyphicon glyphicon-triangle-top"></span>                                          
                     <span v-if="sortIndicators[column.key]==-1" class="glyphicon glyphicon-triangle-bottom"></span>                                       
                                                                                                         
-                    <template v-if="column.filterable != false">                                                  
+                    <template v-if="options.columnFilters && column.filterable != false">                                                  
                         <br><input style="width: 80%;" type="text" v-model="filters[column.key]">                 
                     </template>                                                                                   
                 </th>                                                                                             
@@ -39,7 +40,7 @@ Vue.component('vue-jos-grid', {
     </table>                                                                                                      
     </div>                
     `,
-    props: ['data', 'options', 'user', 'user_filter', 'date_filter'],
+    props: ['data', 'options'],
 
     // columnSetting:
     // {
@@ -96,6 +97,7 @@ Vue.component('vue-jos-grid', {
         }
 
         return {
+            general_filter: "",
             localData: localData,
             sortCol:  sortKey,
             sortOrder: -1,
@@ -149,6 +151,8 @@ Vue.component('vue-jos-grid', {
                     }
                 }
             }
+
+            ret = this.generalFilter(ret);
 
             return ret;
         },
@@ -211,6 +215,28 @@ Vue.component('vue-jos-grid', {
                 if(val == undefined) val = "";
                 val=val.toString().toLowerCase();
                 return val.indexOf(filter) > -1;
+            });
+            return ret;
+        },
+        generalFilter: function(data){
+            if(this.general_filter.length < 1) return data;
+
+            let self=this;
+            let filter = this.general_filter.toLowerCase();
+            let ret = data; 
+          
+            ret = ret.filter(function(item){
+                let accept=false;
+                for(let col of self.columns){
+                    if(col.hidden) continue;
+                    let val = self.getVal(col, item[col.key]);
+                    val = val.toString().toLowerCase();
+                    if(val.indexOf(filter) > -1){
+                        accept=true;
+                        break;
+                    }
+                }
+                return accept;
             });
             return ret;
         },

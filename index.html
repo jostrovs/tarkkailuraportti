@@ -123,7 +123,7 @@
                         <div class="panel-heading" onclick="$('#reportGrid').slideToggle()" style="cursor: pointer">Raportin valinta <span style="float: right; font-size: small; padding-top: 2px; cursor: pointer;"><i>Klikkaa auki/kiinni</i></span></div>
                         <div id="reportGrid">
                             <vue-grid-filters :date_filter="report_date_filter" :user_filter="report_user_filter" :jos="jos"></vue-grid-filters>
-                            <vue-jos-grid :options="raportit_options" :user="user" :date_filter="report_date_filter" :user_filter="report_user_filter" :data="gridin_raportit" :jos="jos"></vue-jos-grid>
+                            <vue-jos-grid :options="raportit_options" :data="gridin_raportit" :jos="jos"></vue-jos-grid>
                         </div>
                     </div>
 

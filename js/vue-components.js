@@ -89,10 +89,6 @@ Vue.component('vue-jos-grid', {
             });
         }
 
-        bus.on(EVENT_RAPORTIT_UPDATE, function(data){
-            self.setData(data);
-        })
-
         sortIndicators['pvm']=-1;
 
         return {
@@ -105,6 +101,10 @@ Vue.component('vue-jos-grid', {
         }
     },
 
+    created: function(){
+        if(this.options.onCreated) this.options.onCreated(this);
+    },
+
     computed: {
         shownColumns: function(){
             return this.columns.filter(function(item){ return item.hidden != true});
@@ -114,23 +114,10 @@ Vue.component('vue-jos-grid', {
             let self = this;
             let ret = this.localData;
             
-            if(this.user_filter=="MY"){
-                ret = ret.filter(item => {
-                    return item.tuomarit.indexOf(this.user.name) > -1 || item.tark_nimi.indexOf(this.user.name) > -1;
-                });
-            }
-
-            if(this.date_filter != "ALL"){
-                let limit = moment();
-                if(this.date_filter == "WEEK"){
-                    limit.subtract(8, 'days');
+            if(this.options.externalFilters){
+                for(let extFilt of this.options.externalFilters){
+                    ret = extFilt(ret);
                 }
-                if(this.date_filter == "MONTH"){
-                    limit.subtract(1, 'month');
-                }
-                ret = ret.filter(item => {
-                    return moment(item.pvm).isAfter(limit);
-                });
             }
 
             for(let i=0;i<this.columns.length;++i){
@@ -163,8 +150,8 @@ Vue.component('vue-jos-grid', {
         },
     },
     methods: {
-        rowClick: function(raportti_id){
-            bus.emit(EVENT_RAPORTTI_VALITTU, raportti_id)
+        rowClick: function(row_item){
+            bus.emit(EVENT_RAPORTTI_VALITTU, row_item)
         },
         
         setData: function(data){

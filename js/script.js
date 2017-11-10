@@ -58,7 +58,15 @@ $(document).ready(function () {
                     { title: 'Tuomarit', width: 420, key: 'tuomarit', template: function(row){ return row['pt_nimi'] + " - " + row['vt_nimi']} },
                     { title: 'Tarkkailija', width: 230, key: 'tark_nimi'},
                     { title: 'id', key: 'id', hidden: true },
-                ], 
+                ],
+                
+                externalFilters: [], // Aseta uudestaan created-osuudessa; this-viittaukset toimivat vasta silloin.
+
+                onCreated: function(component){
+                    bus.on(EVENT_RAPORTIT_UPDATE, function(data){
+                        component.setData(data);
+                    })
+                },
             }, 
 
             jos: false, // debug-flägi
@@ -66,6 +74,36 @@ $(document).ready(function () {
         },
         
         created: function () {
+            let self=this;
+            this.raportit_options.externalFilters = [
+                function(data){
+                    let ret = data;
+                    if(self.report_user_filter=="MY"){
+                        ret = ret.filter(item => {
+                            return item.tuomarit.indexOf(self.user.name) > -1 || item.tark_nimi.indexOf(self.user.name) > -1;
+                        });
+                    }
+                    return ret;
+                },
+
+                function(data){
+                    let ret = data;
+                    if(self.report_date_filter != "ALL"){
+                        let limit = moment();
+                        if(self.report_date_filter == "WEEK"){
+                            limit.subtract(8, 'days');
+                        }
+                        if(self.report_date_filter == "MONTH"){
+                            limit.subtract(1, 'month');
+                        }
+                        ret = ret.filter(item => {
+                            return moment(item.pvm).isAfter(limit);
+                        });
+                    }
+                    return ret;
+                },
+            ];
+            
             this.login();
 
             bus.on(EVENT_AVAA_RAPORTTI, this.modalReport);

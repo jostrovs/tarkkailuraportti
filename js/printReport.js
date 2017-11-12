@@ -19,9 +19,9 @@ class printReport {
         for(let o of this.tuomariOtsikko("PT")) this.content.push(o);
         for(let o of this.arvosanojenSelitteet()) this.content.push(o);
         for(let o of this.osio("Tuomaritekniikka ja suoritustaito - PT", [report.rivit[0], report.rivit[1], report.rivit[2], report.rivit[3], report.rivit[4],], true)) this.content.push(o);
-        for(let o of this.osio("Sääntöjen sekä ohjeiden ja tulkintojen soveltaminen . VT", [report.rivit[5], report.rivit[6], report.rivit[7], report.rivit[8], report.rivit[9],])) this.content.push(o);
-        for(let o of this.osio("Vuorovaikutus joukkueiden kanssa - VT", [report.rivit[10], report.rivit[11], report.rivit[12]])) this.content.push(o);
-        for(let o of this.osio("Ottelun johtaminen ja persoonallisuus - VT", [report.rivit[13], report.rivit[14], report.rivit[15], report.rivit[16]])) this.content.push(o);
+        for(let o of this.osio("Sääntöjen sekä ohjeiden ja tulkintojen soveltaminen - PT", [report.rivit[5], report.rivit[6], report.rivit[7], report.rivit[8], report.rivit[9],])) this.content.push(o);
+        for(let o of this.osio("Vuorovaikutus joukkueiden kanssa - PT", [report.rivit[10], report.rivit[11], report.rivit[12]])) this.content.push(o);
+        for(let o of this.osio("Ottelun johtaminen ja persoonallisuus - PT", [report.rivit[13], report.rivit[14], report.rivit[15], report.rivit[16]])) this.content.push(o);
 
         for(let o of this.tuomariOtsikko("VT")) this.content.push(o);
         for(let o of this.arvosanojenSelitteet()) this.content.push(o);

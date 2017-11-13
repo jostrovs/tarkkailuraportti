@@ -47,6 +47,20 @@ class printReport {
 
     ottelunTiedot(){
         let report = this.report;
+        
+        let vaikeus = "Normaali";
+        switch(report.vaikeus){
+            case NORMAALI:
+                vaikeus = "Normaali";   
+                break;
+            case VAIKEA:
+                vaikeus = "Vaikea";   
+                break;
+            case HELPPO:
+                vaikeus = "Helppo";   
+                break;
+        }
+
         let ret =  [
 
             { columns: [
@@ -71,7 +85,7 @@ class printReport {
             ]},
             { columns: [
                 { width: 100, text: "Vaikeusaste:", style: 'bold', },
-                { width: 400, text: report.vaikeus, style: 'normal', }
+                { width: 400, text: vaikeus, style: 'normal', }
             ]},
             " ",
             { columns: [

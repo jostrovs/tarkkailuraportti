@@ -12,10 +12,11 @@ Vue.component('vue-jos-grid', {
                     <span @click="column.sortable != false && sortBy(column.key)">{{column.title}}</span>         
                     <span v-if="sortIndicators[column.key]==1" class="glyphicon glyphicon-triangle-top"></span>                                          
                     <span v-if="sortIndicators[column.key]==-1" class="glyphicon glyphicon-triangle-bottom"></span>                                       
-                                                                                                        
+                    <i v-if="column.isLast" style="float: right" class="glyphicon glyphicon-filter" @click="options.columnFilters = !options.columnFilters" />                                                                                  
+                    
                     <template v-if="options.columnFilters && column.filterable != false">                                                  
                         <br><input style="width: 80%;" type="text" v-model="filters[column.key]">                 
-                    </template>                                                                                   
+                    </template> 
                 </th>                                                                                             
             </tr>                                                                                                 
         </thead>                                                                                                  
@@ -65,6 +66,7 @@ Vue.component('vue-jos-grid', {
         let columns = [];
         let filters = {};
         let sortIndicators = {};
+        let cnt = 1;
         if(this.options && this.options.columns){
             this.options.columns.forEach(function (column) {
                 let localColumn = column;
@@ -73,6 +75,7 @@ Vue.component('vue-jos-grid', {
                 if(column.name == undefined) localColumn.name = column.key;
                 columns.push(localColumn);
                 sortIndicators[column.key]=0;
+                localColumn.isLast = (cnt++ == self.options.columns.length-1);
             });
         }
 
@@ -97,6 +100,7 @@ Vue.component('vue-jos-grid', {
         }
 
         return {
+            menu: false,
             general_filter: "",
             localData: localData,
             sortCol:  sortKey,
@@ -109,6 +113,7 @@ Vue.component('vue-jos-grid', {
 
     created: function(){
         if(this.options.onCreated) this.options.onCreated(this);
+
     },
 
     computed: {

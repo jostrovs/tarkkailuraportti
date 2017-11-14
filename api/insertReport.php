@@ -112,7 +112,7 @@
         jos_log("InsertReport SQL Error: " . $sql . "<br>" . $conn->error, JOS_LOG_IMPORTANT);
     }
 
-    jos_log("Lisasi raportin " . $report_id . " " . obj('koti') . "-" - obj('vieras'), JOS_LOG_NORMAL);
+    jos_log("Lisasi raportin " . $report_id . " " . obj('koti') . "-" . obj('vieras'), JOS_LOG_NORMAL);
 
     // Sähköpostin lähetys
     

@@ -12,9 +12,10 @@ Vue.component('vue-jos-grid', {
                     <span @click="column.sortable != false && sortBy(column.key)">{{column.title}}</span>         
                     <span v-if="sortIndicators[column.key]==1" class="glyphicon glyphicon-triangle-top"></span>                                          
                     <span v-if="sortIndicators[column.key]==-1" class="glyphicon glyphicon-triangle-bottom"></span>                                       
-                    <i v-if="column.isLast" style="float: right" class="glyphicon glyphicon-filter" @click="options.columnFilters = !options.columnFilters" />                                                                                  
+
+                    <i v-if="column.isLast" style="float: right" class="glyphicon glyphicon-filter" @click="toggleColumnFilters()" title="Sarakekohtaiset suodattimet päälle/pois" />                                                                                  
                     
-                    <template v-if="options.columnFilters && column.filterable != false">                                                  
+                    <template v-if="columnFilters && column.filterable != false">                                                  
                         <br><input style="width: 80%;" type="text" v-model="filters[column.key]">                 
                     </template> 
                 </th>                                                                                             
@@ -99,7 +100,12 @@ Vue.component('vue-jos-grid', {
             sortKey = this.options.initialSort.key;
         }
 
+        let columnFilters = this.options.columnFilters;
+        if(localStorage.josGridColumnFilters) columnFilters = localStorage.josGridColumnFilters;
+        if(typeof(columnFilters) === 'undefined') columnFilters = false;
+
         return {
+            columnFilters: columnFilters,
             menu: false,
             general_filter: "",
             localData: localData,
@@ -114,6 +120,8 @@ Vue.component('vue-jos-grid', {
     created: function(){
         if(this.options.onCreated) this.options.onCreated(this);
 
+        if(this.options.columnFilters != true) this.options.columnFilters = false;
+        if(this.options.generalFilter != true) this.options.generalFilter = false;
     },
 
     computed: {
@@ -163,6 +171,12 @@ Vue.component('vue-jos-grid', {
         },
     },
     methods: {
+        toggleColumnFilters(){
+            this.columnFilters = !this.columnFilters;
+            
+            localStorage.josGridColumnFilters = this.columnFilters;
+        },
+        
         rowClick: function(row_item){
             if(this.options.onRowClick) this.options.onRowClick(row_item);
         },
@@ -1194,12 +1208,14 @@ Vue.component('vue-news', {
     template:` 
     <div v-if="show" style="position: fixed; padding: 20px; background: #def; border: 2px solid #a33; top: 30px; left: 30px; z-index: 2000; min-width: 500px; max-width: 80%; min-height: 250px;">                                                                                                                                                                             
         <button class="btn btn-default" style="top: 10px; float: right; color: red;" @click="sulje()">X</button>
-        <div style="margin-bottom: 40px">
+        <div style="margin-bottom: 60px">
             <slot>
             </slot>
         </div>         
-        <div style="position: absolute; bottom: 20px; margin-top: 10px;">
+        
+        <div style="position: absolute; bottom: 16px; padding-top: 10px; width: 96%; border-top: 1px solid #aaa;">
             <input type="checkbox" v-model="dontShow"> Älä näytä tätä enää
+            <div style="float: right; font-size: 12px; padding-top: 5px;">Sulje oikean yläkulman ruksista</div>
         </div>
     </div>                                                                                                                                                                            
     `,

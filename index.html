@@ -45,19 +45,12 @@
     </div>
     
     <div id="app">
-        <vue-news news_moment="2017-11-07" :jos="jos">
+        <vue-news news_moment="2017-11-14" :jos="jos">
             <span class="glyphicon glyphicon-exclamation-sign" style="color: #35c; font-size: 36px"></span>
-            <p style="font-size: large; margin-top: 10px;"><b>Uutta 7.11.2017:</b></p>
+            <p style="font-size: large; margin-top: 10px;"><b>Uutta 14.11.2017:</b></p>
             <ul>
-                <li><b>Pdf-lataus:</b> Kun raportti on ladattu valmiiksi, sen voi ladata pdf-tiedostona. Painike löytyy raportin yläpuolelta oikealta. <button class="btn" style="margin-left: 20px;"><span class="glyphicon glyphicon-download-alt"></span> PDF</button></li>
-                <li><b>Ulkoasumuutoksia:</b> 
-                    <ul>
-                        <li>Raporttilistan kokoa on kasvatettu ja se on upotettu suljettavaan laatikkoon. Laatikko sulkeutuu automattisesti kun raportti valitaan. <b>Vinkki:</b> Jos haluat valita toisen raportin, käytä <button class="btn btn-default" style="margin-left: 3px;">Sulje raportti</button> painiketta; se avaa raporttilistan.</li>
-                        <li>Raporttilistan suodatuspainikkeet: <img src=kuvat/filter-bar.png> näillä voi nopeasti suodattaa taulukkoon näkyviin vain viimeaikaisia raportteja tai sellaisia, joissa on itse tuomarina tai tarkkailijana.</li>
-                        <li>Raportin lisäyksessä valintapainikkeet on korvattu laatikkomuotoisella valinnalla <input style="margin-left: 25px;" type="radio">a <input style="margin-left: 15px;" type="radio">b <span style="margin-left: 25px;" /> &rarr; 
-                            <div style="margin-left: 25px;" class="btn-group"><button class="btn btn-default">a</button><button class="btn btn-primary">b</button><button class="btn btn-default">c</button></div></li>
-                    </ul>
-                <li><b>Uutislaatikko:</b> Katsot sitä parhaillaan :) Sulje yläkulman ruksista.</li>
+                <li><b>Pikasuodatus:</b> Raporttilistan yläpuolelle vasempaan reunaan on lisätty pikasuodatuskenttä. Jos siihen kirjoitettu teksti löytyy <i>mistä tahansa</i> sarakkeesta, niin ko. rivi näytetään listalla.</li>
+                <li><b>Sarakekohtaiset suodattimet:</b> Raporttilistan sarakkeiden suodatuskentät voi näyttää/piilottaa listan otsikon oikeassa reunassa olevalla suodatuspainikkeella: <img src="kuvat/filter.png">.</li>
             </ul>
         </vue-news>
 

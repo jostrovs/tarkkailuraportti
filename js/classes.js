@@ -262,7 +262,7 @@ function palauta_vt_huomautukset(raportti){
     return ret;
 }
 
-function Raportti(data_item){
+function Raportti(data_item, last_login){
     let ret = {
         id : "0",
         koti : "",
@@ -391,6 +391,11 @@ function Raportti(data_item){
         ret.kesto_h = data_item.kesto_h;
         ret.kesto_min = data_item.kesto_min;
         ret.vaikeus = data_item.vaikeus;
+
+        ret.is_new = false;
+        if(typeof(last_login) !== 'undefined'){
+            if(moment(last_login).isBefore(moment(ret.updated))) ret.is_new = true;
+        }
     }
     
     ret.laske();

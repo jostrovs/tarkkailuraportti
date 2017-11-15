@@ -52,7 +52,11 @@ $(document).ready(function () {
             raportit_options: 
             { 
                 columns: [
-                    { title: 'Ottelu', width: 340, key: 'ottelu', template: function(row){ return row['koti'] + " - " + row['vieras']; } },
+                    { title: 'Ottelu', width: 340, key: 'ottelu', template: function(row){
+                        let ret = row['koti'] + " - " + row['vieras']; 
+                        if(row['is_new']) ret += " UUSI";
+                        return ret;
+                    } },
                     { title: 'Pvm', key: 'pvm', width: 120, type: 'date'},
                     { title: 'Paikka', width: 250, key: 'paikka'},
                     { title: 'Tuomarit', width: 420, key: 'tuomarit', template: function(row){ return row['pt_nimi'] + " - " + row['vt_nimi']} },
@@ -311,6 +315,8 @@ $(document).ready(function () {
                         rooli: d.rooli,
                         id: d.id,
                         login: true,
+                        login_time: d.login_time,
+                        last_login: d.last_login,
                         reportAuthorized: d.rooli == ROOLI_TARKKAILIJA || d.rooli == ROOLI_ADMIN || d.rooli == ROOLI_TUOMARI_JA_TARKKAILIJA,
                     };
 
@@ -423,7 +429,7 @@ $(document).ready(function () {
                     }
                     for(let i=0;i< data.data.length;++i){
                         let raportti = data.data[i];
-                        self.raportit.push(Raportti(raportti));
+                        self.raportit.push(Raportti(raportti, self.user.last_login));
                     }
 
                     bus.emit(EVENT_RAPORTIT_UPDATE, self.raportit);

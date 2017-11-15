@@ -78,7 +78,14 @@ switch($cmd){
                 WHERE ra.deleted=0 AND vt_id = $arg1";
         break;
     case API_LOGIN:
-        $sql = "SELECT etunimi, sukunimi, email, token, rooli, id FROM tuomari WHERE token='" . $token . "'";
+        $sql = "UPDATE tuomari SET last_login = login_time, login_time=NOW() WHERE token = '" . $token . "';";
+        
+        $mysqli->query($sql);
+        
+        // $sql = "UPDATE tuomari SET login = NOW() WHERE token='" . $token . "'";
+        // $result = $mysqli->query($sql);
+
+        $sql = "SELECT etunimi, sukunimi, email, token, rooli, id, login_time, last_login FROM tuomari WHERE token='" . $token . "'";
         break;
     case API_SAVE_EMAIL:
         $sql = "UPDATE tuomari SET email='" . $arg1 . "' WHERE token='" . $token . "'";

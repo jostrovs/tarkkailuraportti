@@ -1054,6 +1054,18 @@ Vue.component('vue-user', {
             <input style="width: 250px; display: inline-block;" class="form-control" type="email" v-model="user.email" @change="emailChanged()">
             <button v-if="changed" class="btn" @click="saveEmail">Talleta sähköposti</button>                                                   
         </p>                                                            
+        <p>                                                   
+            <div style="display: inline-block; width: 150px;">
+                <b>Sisäänkirjautuminen:</b>                                 
+            </div>                                            
+            {{login_time}}
+        </p>                                                            
+        <p>                                                   
+            <div style="display: inline-block; width: 150px;">
+                <b>Edellinen sisäänkirjautuminen:</b>                                 
+            </div>                                            
+            {{last_login}}
+        </p>                                                            
         <p>                                                             
             <button class="btn" @click="logout()">Kirjaudu ulos</button>
         </p>                                                            
@@ -1072,6 +1084,8 @@ Vue.component('vue-user', {
         return {
             changed: false,
             href: href,  
+            login_time: moment(this.user.login_time).format("dd DD.MM.YYYY H:mm:ss"),
+            last_login: moment(this.user.last_login).format("dd DD.MM.YYYY H:mm:ss"),
         }
     },
     methods: {

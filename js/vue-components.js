@@ -24,18 +24,21 @@ Vue.component('vue-jos-grid', {
         <tbody>                                                                                                   
             <tr v-for="entry in filteredSortedData" :key="entry.josOrder" @click="rowClick(entry)">            
                 <td v-for="column in shownColumns">                                                               
-                    <template v-if="column.type == \'text\'">                                                     
-                        {{entry[column.key]}}                                                                     
-                    </template>                                                                                   
-                    <template v-if="column.type == \'number\'">                                                   
-                        {{entry[column.key]}}                                                                                          
-                    </template>                                                                                    
-                    <template v-if="column.type == \'link\'">                                                     
-                        <a :href="entry[column.key].href">{{entry[column.key].text}}</a>                          
-                    </template>                                                                                   
-                    <template v-if="column.type == \'date\'">                                                     
-                        {{formatDate(entry[column.key])}}
-                    </template>                                                                                   
+                    <div v-if="column.template" style="display: inline-block" v-html="entry[column.key]"></div>
+                    <template v-else>
+                        <template v-if="column.type == \'text\'">                                                     
+                            {{entry[column.key]}}                                                                     
+                        </template>                                                                                   
+                        <template v-if="column.type == \'number\'">                                                   
+                            {{entry[column.key]}}                                                                                          
+                        </template>                                                                                    
+                        <template v-if="column.type == \'link\'">                                                     
+                            <a :href="entry[column.key].href">{{entry[column.key].text}}</a>                          
+                        </template>                                                                                   
+                        <template v-if="column.type == \'date\'">                                                     
+                            {{formatDate(entry[column.key])}}
+                        </template>                                                                                   
+                    </template>
                 </td>                                                                                             
             </tr>                                                                                                 
         </tbody>                                                                                                  
@@ -1081,11 +1084,13 @@ Vue.component('vue-user', {
     data: function () {
         let href="";
         if(this.user != undefined) href= "http://www.lentopalloerotuomarit.fi/tuomaritarkkailu/?token=" + this.user.token;
+        let last_login = "<ei tiedossa>";
+        if(this.user.last_login != null)  last_login = moment(this.user.last_login).format("dd DD.MM.YYYY H:mm:ss");
         return {
             changed: false,
             href: href,  
             login_time: moment(this.user.login_time).format("dd DD.MM.YYYY H:mm:ss"),
-            last_login: moment(this.user.last_login).format("dd DD.MM.YYYY H:mm:ss"),
+            last_login: last_login,
         }
     },
     methods: {

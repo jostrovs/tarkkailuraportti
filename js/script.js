@@ -54,7 +54,7 @@ $(document).ready(function () {
                 columns: [
                     { title: 'Ottelu', width: 340, key: 'ottelu', template: function(row){
                         let ret = row['koti'] + " - " + row['vieras']; 
-                        if(row['is_new']) ret += " UUSI";
+                        if(row['is_new']) ret += " <span class='uusi'>uusi</span>";
                         return ret;
                     } },
                     { title: 'Pvm', key: 'pvm', width: 120, type: 'date'},

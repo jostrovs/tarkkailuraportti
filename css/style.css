@@ -57,6 +57,15 @@ h4 {
 	font-weight: bold;
 }
 
+.uusi {
+	background: #fe6; 
+	color: #a20; 
+	border: 1px dotted #b94; 
+	border-radius: 3px; 
+	font-size: 10px; 
+	padding: 1px;
+}
+
 .label {
 	display: inline-block;
 	text-align: center;

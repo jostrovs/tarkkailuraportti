@@ -878,7 +878,7 @@ Vue.component('vue-raportti', {
                     Kesto: {{raportti.kesto_h}} h {{raportti.kesto_min}} min<br>                                                                                     
                     Vaikeusaste: <span v-if="raportti.vaikeus==1">Helppo</span>                                                                                      
                                     <span v-if="raportti.vaikeus==2">Normaali</span>                                                                      
-                                    <span v-if="raportti.vaikeus==4">Vaikea</span>                                                                        
+                                    <span v-if="raportti.vaikeus==3">Vaikea</span>                                                                        
 
                     <br><br>
                     Päätuomari: {{raportti.pt_nimi}}<br>                                                                                                           

@@ -1031,6 +1031,7 @@ Vue.component('vue-raportti', {
         let title = this.raportti.title();
         console.log(title);
         $("#modal-title").text(title);
+        this.title = title;
     }
 });
 

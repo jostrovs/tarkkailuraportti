@@ -11,7 +11,7 @@ Vue.component('vue-help', {
         </p>
 
         <p>Tarkkailuraporttien syöttäminen ja lukeminen tapahtuu osoitteessa:<br>
-            <a href="http://www.lentopalloerotuomarit.fi/tuomaritarkkailu">http://www.lentopalloerotuomarit.fi/tuomaritarkkailu</a>
+            <a href="https://www.lentopalloerotuomarit.fi/tuomaritarkkailu">https://www.lentopalloerotuomarit.fi/tuomaritarkkailu</a>
         </p>
 
         <p>Järjestelmän käyttö vaatii joko Google Chrome tai Mozilla Firefox www-selaimen. <b>Käyttö ei ole mahdollista 
@@ -24,7 +24,7 @@ Vue.component('vue-help', {
         <h3>Kirjautuminen</h3>
     
         <p>Ensimmäisellä kerralla mennessänne sähköiseen tarkkailujärjestelmään osoitteessa: <br>
-            <a href="http://www.lentopalloerotuomarit.fi/tuomaritarkkailu">http://www.lentopalloerotuomarit.fi/tuomaritarkkailu</a><br>
+            <a href="https://www.lentopalloerotuomarit.fi/tuomaritarkkailu">https://www.lentopalloerotuomarit.fi/tuomaritarkkailu</a><br>
             avautuu ao. näköinen ikkuna:</p>
 
         <p><img class="help-kuva" src="./kuvat/help_kirjaudu.png"></p>
@@ -44,7 +44,7 @@ Vue.component('vue-help', {
         <div style="border-left: 4px solid #ccc; padding-left: 20px;">
         Hei!<br><br>
         Tässä on kirjautumislinkkisi tarkkailuraporttisivulle:<br>
-        http://www.lentopalloerotuomarit.fi/tuomaritarkkailu/?token=iP0yxl03lZsM8Yj0s781mxxxxxxxxxx<br><br>
+        https://www.lentopalloerotuomarit.fi/tuomaritarkkailu/?token=iP0yxl03lZsM8Yj0s781mxxxxxxxxxx<br><br>
         </div>
         
         <p>jossa lopun kirjainrimpsusekamelska on henkilökohtainen koodinne. (yllä oleva on keksitty esimerkki eikä toimi).</p>

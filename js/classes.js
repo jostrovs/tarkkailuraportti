@@ -1,6 +1,6 @@
-var GET_DATA = 'http://www.lentopalloerotuomarit.fi/tuomaritarkkailu/api/getData.php';
-var INSERT_REPORT = 'http://www.lentopalloerotuomarit.fi/tuomaritarkkailu/api/insertReport.php';
-var REQUEST_LINK = 'http://www.lentopalloerotuomarit.fi/tuomaritarkkailu/api/requestLink.php';
+var GET_DATA = 'https://www.lentopalloerotuomarit.fi/tuomaritarkkailu/api/getData.php';
+var INSERT_REPORT = 'https://www.lentopalloerotuomarit.fi/tuomaritarkkailu/api/insertReport.php';
+var REQUEST_LINK = 'https://www.lentopalloerotuomarit.fi/tuomaritarkkailu/api/requestLink.php';
 if(location.href.indexOf("localhost")>-1){
     GET_DATA = './../api/getData.php';
     INSERT_REPORT = './../api/insertReport.php';

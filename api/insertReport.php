@@ -34,7 +34,7 @@
         $body = "Hei!\r\n\r\n" .
                  $tark . " on lisännyt tarkkailuraportin ottelusta " . $ottelu . ".\r\n" . 
                  "Tässä on vielä kirjautumislinkkisi:\r\n" .
-                 "http://www.lentopalloerotuomarit.fi/tuomaritarkkailu/?token=" . $token . 
+                 "https://www.lentopalloerotuomarit.fi/tuomaritarkkailu/?token=" . $token . 
                  "\r\n\r\nÄlä vastaa tähän viestiin, vaan ongelmatapauksissa ota yhteyttä jostrovs@gmail.com.\r\n-Jori\r\n";
          
         $mail = new PHPMailer();

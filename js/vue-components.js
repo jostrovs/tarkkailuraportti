@@ -1049,7 +1049,7 @@ Vue.component('vue-user', {
             <div style="display: inline-block; width: 150px;">
                 <b>Kirjautumislinkki:</b>                     
             </div>                                            
-            <a :href="href">www.lentopalloerotuomarit.fi/tuomaritarkkailu/?token={{user.token}}</a>
+            <a :href="href">https://www.lentopalloerotuomarit.fi/tuomaritarkkailu/?token={{user.token}}</a>
         </p>                                                  
         <p>                                                   
             <div style="display: inline-block; width: 150px;">
@@ -1084,7 +1084,7 @@ Vue.component('vue-user', {
     },
     data: function () {
         let href="";
-        if(this.user != undefined) href= "http://www.lentopalloerotuomarit.fi/tuomaritarkkailu/?token=" + this.user.token;
+        if(this.user != undefined) href= "https://www.lentopalloerotuomarit.fi/tuomaritarkkailu/?token=" + this.user.token;
         let last_login = "<ei tiedossa>";
         if(this.user.last_login != null)  last_login = moment(this.user.last_login).format("dd DD.MM.YYYY H:mm:ss");
         return {

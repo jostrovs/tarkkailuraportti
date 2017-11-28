@@ -366,7 +366,7 @@ th, td {
 
 #jos-grid
 {
-	/* max-height: 700px; */
+	max-height: 68vh;
 	/* height: 250px; */
 	overflow-y: auto;
 }

@@ -1,6 +1,6 @@
-var GET_DATA = 'https://www.lentopalloerotuomarit.fi/tuomaritarkkailu/api/getData.php';
-var INSERT_REPORT = 'https://www.lentopalloerotuomarit.fi/tuomaritarkkailu/api/insertReport.php';
-var REQUEST_LINK = 'https://www.lentopalloerotuomarit.fi/tuomaritarkkailu/api/requestLink.php';
+var GET_DATA = 'http://www.lentopalloerotuomarit.fi/tuomaritarkkailu/api/getData.php';
+var INSERT_REPORT = 'http://www.lentopalloerotuomarit.fi/tuomaritarkkailu/api/insertReport.php';
+var REQUEST_LINK = 'http://www.lentopalloerotuomarit.fi/tuomaritarkkailu/api/requestLink.php';
 if(location.href.indexOf("localhost")>-1){
     GET_DATA = './../api/getData.php';
     INSERT_REPORT = './../api/insertReport.php';
@@ -27,7 +27,7 @@ var BROWSER= (function(){
 
 if(BROWSER.toLowerCase().indexOf("ie ") > -1){
     alert("Tuomaritarkkailusivun käyttö ei ole mahdollista Internet Explorer -selaimella.\r\n\r\nSuosittelemme käytettäväksi Chromea. Klikkaa Ok, niin sinut ohjataan suoraan lataussivulle.");
-    window.location.href = "https://www.google.fi/chrome/browser/desktop/index.html";
+    window.location.href = "http://www.google.fi/chrome/browser/desktop/index.html";
 }
 
 const EVENT_AVAA_RAPORTTI = "EVENT_AVAA_RAPORTTI";
@@ -160,7 +160,7 @@ function Referee(torneoReferee){
         displayed : true,
         showWorkLoad : true,
         showDouble : true,
-        href:"https://lentopallo.torneopal.fi/taso/ottelulista.php?tuomari=" + torneoReferee.referee_id,
+        href:"http://lentopallo.torneopal.fi/taso/ottelulista.php?tuomari=" + torneoReferee.referee_id,
     }
 }
 

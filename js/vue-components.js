@@ -461,7 +461,7 @@ Vue.component('vue-edellinen-label', {
     computed: {
         html: function(){
             let ottelu = this.rivi.getOttelu();
-            let ret = '<p>' + ottelu.pvm + '</p>';
+            let ret = '<p>' + moment(ottelu.pvm).format("DD.MM.YYYY") + '</p>';
             ret += '<p>' + ottelu.koti + '-' + ottelu.vieras + '</p>';
             if(this.rivi.aihe_no < 100){
                 ret += '<p>PT pisteet: ' + ottelu.pt_score + '</p>';

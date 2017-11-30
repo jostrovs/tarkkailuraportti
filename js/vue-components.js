@@ -632,8 +632,9 @@ Vue.component('vue-rivi-edit', {
                   :id="id" v-model="rivi.huom" type="text"></textarea>
         </div>                                                        
                                                                       
-        <div class="col-xs-2">                                        
-            <vue-edellinen-label v-for="vanha_rivi in rivi.vanhat_rivit" :rivi="vanha_rivi" :jos="jos" :key="vanha_rivi.id"></vue-edellinen-label>
+        <div class="col-xs-2">      
+
+            <vue-edellinen-label v-for="(vanha_rivi, index) in rivi.vanhat_rivit" v-if="index<4" :rivi="vanha_rivi" :jos="jos" :key="vanha_rivi.id"></vue-edellinen-label>
         </div>                                                                    
         <span v-if="jos" style="margin-left: 23px;"> (valittu: {{valittu}})</span>
     </div>                                                                        

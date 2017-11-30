@@ -65,7 +65,8 @@ switch($cmd){
                 FROM raportti ra
                 JOIN rivi r ON r.raportti_id = ra.id
                 JOIN aihe a ON r.aihe_id = a.id
-                WHERE ra.deleted=0 AND pt_id = $arg1";
+                WHERE ra.deleted=0 AND pt_id = $arg1
+                ORDER BY ra.pvm DESC";
         break;
     case API_HAE_VT_RAPORTIT:
         $sql = "SELECT  ra.id as raportti_id, ra.koti, ra.vieras, ra.pvm, ra.pt_id, ra.vt_id, ra.pt_score, ra.vt_score,
@@ -75,7 +76,8 @@ switch($cmd){
                 FROM raportti ra
                 JOIN rivi r ON r.raportti_id = ra.id
                 JOIN aihe a ON r.aihe_id = a.id
-                WHERE ra.deleted=0 AND vt_id = $arg1";
+                WHERE ra.deleted=0 AND vt_id = $arg1
+                ORDER BY ra.pvm DESC";
         break;
     case API_LOGIN:
         $sql = "UPDATE tuomari SET last_login = login_time, login_time=NOW() WHERE token = '" . $token . "';";

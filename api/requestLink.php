@@ -1,6 +1,6 @@
 <?php
 
-$actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
 require_once('log.php');
 require_once('credentials.php');
@@ -13,7 +13,7 @@ require_once('./PHPMailer/PHPMailerAutoload.php');
 function sendEmail($to, $token, $name){
     global $mailUsername, $mailPassword; // Nämä on pakko olla
     $subject = "Kirjautumislinkki tarkkailuraporttisivulle";
-    $body = "Hei!\r\nTässä on kirjautumislinkkisi tarkkailuraporttisivulle:\r\nhttp://www.lentopalloerotuomarit.fi/tuomaritarkkailu/?token=" . $token . "\r\n\r\nÄlä vastaa tähän viestiin, vaan ongelmatapauksissa ota yhteyttä jostrovs@gmail.com.\r\n-Jori\r\n";
+    $body = "Hei!\r\nTässä on kirjautumislinkkisi tarkkailuraporttisivulle:\r\nhttps://www.lentopalloerotuomarit.fi/tuomaritarkkailu/?token=" . $token . "\r\n\r\nÄlä vastaa tähän viestiin, vaan ongelmatapauksissa ota yhteyttä jostrovs@gmail.com.\r\n-Jori\r\n";
      
     $mail = new PHPMailer();
     

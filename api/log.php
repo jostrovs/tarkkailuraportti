@@ -8,7 +8,7 @@ define (JOS_LOG_DEBUG, 0);
 $jos_log_level = JOS_LOG_NORMAL;
 
 function isLocalhost(){
-    $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    $actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
     if(stripos($actual_link)>-1) return true;
     return false; 
 }

@@ -4676,7 +4676,7 @@ var isBooleanAttr = makeMap(
   'truespeed,typemustmatch,visible'
 );
 
-var xlinkNS = 'http://www.w3.org/1999/xlink';
+var xlinkNS = 'https://www.w3.org/1999/xlink';
 
 var isXlink = function (name) {
   return name.charAt(5) === ':' && name.slice(0, 5) === 'xlink'
